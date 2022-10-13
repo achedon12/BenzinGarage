@@ -1,0 +1,71 @@
+body::before
+{
+    content: "";
+    position: fixed;
+    height: 100%; width: 100%;
+    background: url(../img/garage.jpg);
+    background-size: cover;
+    z-index: -1;   
+    -webkit-filter: blur(4px);
+    -webkit-background-size: cover;
+    -moz-background-size: cover; 
+    -o-background-size: cover; 
+    background-size: cover; 
+}
+
+body
+{
+    position: absolute;
+    top: 0; 
+    bottom: 0; 
+    left: 0; 
+    right: 0;
+    height: 100%;
+    margin:0;
+    padding:0;
+    background-size: 100% ;
+    width:100%;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+section
+{
+    background-color: var(--white-color);
+    width: 50%;
+    height: 50%;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+}
+section>article
+{
+    width: 47%;
+    height: 50%;
+}
+
+section>article
+{
+    display: flex;
+    justify-content: center;
+}
+
+section>article:nth-child(1)
+{
+    align-items: center;
+}
+
+section>article:nth-child(2)
+{
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+section>article:nth-child(2)>form>article>img
+{
+    width: 5%;
+}

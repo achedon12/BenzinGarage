@@ -1,0 +1,24 @@
+:root
+{
+    --white-color: #FFFFFF;
+    --black-color: #000000;
+    --grey-color: #C0C0C0;
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: var(--black-color);
+}
+
+a
+{
+    text-decoration: none;
+    color: var(--black-color);
+}
