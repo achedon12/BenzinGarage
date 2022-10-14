@@ -3,6 +3,7 @@
     --white-color: #FFFFFF;
     --black-color: #000000;
     --grey-color: #C0C0C0;
+    --green-color: #00C514;
 }
 
 *
@@ -15,6 +16,7 @@
     -ms-user-select: none;
     user-select: none;
     color: var(--black-color);
+    /* Mettre un font-family */
 }
 
 a

@@ -61,11 +61,73 @@ section>article:nth-child(1)
 
 section>article:nth-child(2)
 {
+    align-items: center;
     flex-direction: column;
     justify-content: space-around;
+}
+
+section>article:nth-child(2) form
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+section>article:nth-child(2)>h1,section>article:nth-child(2)>a
+{
+    width: auto;
+}
+
+section>article:nth-child(2)>form>article
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section>article:nth-child(2)>form>article>input, input.input-login
+{
+    margin: 1%;
+    padding: 3%;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    text-align: center;
+}
+
+section>article:nth-child(2)>form>article>input
+{
+    background-color: var(--grey-color);
+}
+input.input-login
+{
+    width: 25%;
+    background-color: var(--green-color);
+    color: var(--white-color);
+    border: 1px solid var(--green-color);
+}
+
+input.input-login:hover
+{
+    color: var(--green-color);
+    background-color: var(--white-color);
+    border: 1px solid var(--green-color); 
 }
 
 section>article:nth-child(2)>form>article>img
 {
     width: 5%;
+}
+
+section>article:nth-child(2)>a.password-forgot
+{
+    width: auto;
+    margin-left: 50%;
+    font-size: smaller;
+}
+section>article:nth-child(2)>a.password-forgot:hover
+{
+    color: var(--green-color);
 }
