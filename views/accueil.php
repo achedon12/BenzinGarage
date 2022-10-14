@@ -1,3 +1,15 @@
+<?php
+
+use app\users\Auth;
+
+session_start();
+
+if(!Auth::isConnected()){
+    render("connexion.php");
+    return;
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
