@@ -55,44 +55,48 @@ li.hover>a
 }
 
 main{
-    display:flex;
-    flex-direction: column;
-    height: 80%;
-    width: 80%;
-
-}
-
-
-main>section{
     display : flex;
-    width: 95%;
-    height: 55%;
-    margin-left: 10%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: 80%;
+    width: 90%;
 
 }
 
-main>section>a{
-    width: 60%;
-    background-color: var(--grey-color);
-    height: 60%;
-    margin: 10%;
-    align-items: center;
-    text-align: center;
-    border-radius: 20px;
+
+main>article{
     margin-top: 5%;
     margin-left: 2%;
+    width: 15%;
+    height: 40%;
+    margin-left: 5%;
+    background-color: var(--grey-color);
+    border-radius: 10px;
+
 }
 
-main>section>a>img{
-    height: 65%;
-    margin: 10px;
+main>article>a{
+    
+    height: auto;
+    align-items: center;
+    text-align: center;
+}
+
+main>article>a>img{
+    height: 70%;
+    padding: 11%;
+    
+}
+
+main>article>a>p{
+    margin-top: 5px;
 }
 
 
-main>section>a:hover{
+main>article:hover{
     background-color: var(--green-color);
 }
-main>section>a:hover>p{
+main>article:hover>a>p{
     color: var(--white-color);
 }
 
