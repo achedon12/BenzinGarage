@@ -54,65 +54,40 @@ li.hover>a
     color: var(--white-color);
 }
 
-main{
-    display : flex;
+main
+{
+    margin-top: 3%;
+    display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
+    width: 80%;
+    justify-content: center;
     height: 80%;
-    width: 90%;
-
 }
 
-
-main>article{
-    margin-top: 5%;
-    margin-left: 2%;
-    width: 15%;
-    height: 40%;
-    margin-left: 5%;
-    background-color: var(--grey-color);
-    border-radius: 10px;
-
-}
-
-main>article>a{
-    
-    height: auto;
+main>a{
+    margin: 1%;
+    width: 25%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content:space-evenly;
+    background-color: var(--grey-color);
+    border: 1px solid var(--grey-color);
+    border-radius: 25px;
     text-align: center;
 }
 
-main>article>a>img{
-    height: 70%;
-    padding: 11%;
-    
+main>a>img{
+    width: 25%;
 }
 
-main>article>a>p{
-    margin-top: 5px;
-}
-
-
-main>article:hover{
+main>a:hover{
     background-color: var(--green-color);
+    border: 1px solid var(--white-color);
 }
-main>article:hover>a>p{
+
+main>a:hover>h1
+{
     color: var(--white-color);
 }
-
-
-
-
-
-/*
-li:hover {
-    background-color: var(--green-color);
-    border-radius: 0px 0px 25px 25px;
-
-}
-
-li:hover>a {
-    padding-left: 1%;
-    color: var(--white-color);
-    text-align: center;
-}*/

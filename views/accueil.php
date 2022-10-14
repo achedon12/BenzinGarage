@@ -31,34 +31,24 @@ if(!Auth::isConnected()){
         </nav>
         <main>
             <a href="#">
-                <article>
-                    <h1>Planning</h1>
-                    <img src="../assets/img/planning.png" alt="planning">
-                </article>
+                <h1>Planning</h1>
+                <img src="../assets/img/planning.png" alt="planning">
             </a>
             <a href="#">
-                <article>
-                    <h1>Prise de rendez-vous</h1>
-                    <img src="../assets/img/add-clients.png" alt="planning">
-                </article>
+                <h1>Prise de rendez-vous</h1>
+                <img src="../assets/img/add-clients.png" alt="planning">
             </a>
             <a href="#">
-                <article>
-                    <h1>Clients</h1>
-                    <img src="../assets/img/add-clients.png" alt="planning">
-                </article>
+                <h1>Clients</h1>
+                <img src="../assets/img/add-clients.png" alt="planning">
             </a>
             <a href="#">
-                <article>
-                    <h1>Stock</h1>
-                    <img src="../assets/img/cartons.png" alt="planning">
-                </article>
+                <h1>Stock</h1>
+                <img src="../assets/img/cartons.png" alt="planning">
             </a>
             <a href="#">
-                <article>
-                    <h1>Tarifs</h1>
-                    <img src="../assets/img/caisse.png" alt="planning">
-                </article>
+                <h1>Tarifs</h1>
+                <img src="../assets/img/caisse.png" alt="planning">
             </a>
         </main>
     </body>
