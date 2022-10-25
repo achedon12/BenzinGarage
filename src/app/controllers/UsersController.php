@@ -14,6 +14,7 @@ class UsersController{
     public function accueilAdministrateurPage(): void {
         render('accueilAdmin.php');
     }
+
     public function utilisateurAdministrateur():void{
         render('UtilisateurAdministrateur.php');
     }
