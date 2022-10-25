@@ -23,4 +23,27 @@ This change will allow the garage to increase its reputation and also give a bet
 
 ----
 
+# Launching
+
+Before starting the project, check that you have the file DataBaseManager.php
+in the assets/php/database folder. If you do not have it, please create a file
+and put the following information
+
+```php
+<?php
+
+class DatabaseManager{
+
+    private static PDO|null $pdo;
+
+    public static function getInstance(): ?PDO{
+        if(self::$pdo === null){
+            self::$pdo = new PDO("mysql:host=gigondas;dbname=yourDatabaseName;charset=utf8","yourUserName","yourPassword");
+        }
+        return self::$pdo;
+    }
+}
+```
+
+
 Do not hesitate to give your opinion on the project and on what can be improved so that it can be refined as much as possible
