@@ -1,0 +1,130 @@
+nav
+{
+    display: flex;
+    width: 100%;
+    background-color: var(--grey-color);
+    align-items: center;
+    justify-content: center;
+}
+
+nav>img
+{
+    width: 5%;
+}
+
+nav>ul
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    padding-bottom: 1%;
+}
+
+nav>ul>li
+{
+    height: 100%;
+    vertical-align: middle;
+    list-style: none;
+    align-items: center;
+    display: flex;
+    align-content: center;
+
+}
+
+li.hover
+{
+    background-color: var(--green-color);
+    border-radius: 0px 0px 25px 25px;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+li.hover>a
+{
+    color: var(--white-color);
+}
+
+main
+{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+aside
+{
+    background-color: var(--grey-color);;
+    width: 15%;
+
+}
+
+section.main
+{
+    width: 85%;
+
+}
+
+aside ul {
+    margin-top: 40%;
+    list-style: none;
+
+}
+
+aside li{
+    height: 2em;
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+}
+
+aside li a{
+
+    margin-left: 10%;
+}
+
+
+
+.hoverli{
+    background-color: var(--green-color);
+}
+.hoverli>a{
+    color: white;
+
+}
+
+.main{
+    display :flex;
+    flex-wrap: wrap;
+    margin-top: 5%;
+}
+
+.main>a{
+    margin: 3%;
+    width: 25%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-evenly;
+    background-color: var(--grey-color);
+    border: 1px solid var(--grey-color);
+    border-radius: 25px;
+    text-align: center;
+}
+
+.main>a>img{
+    width: 25%;
+}
+
+.main>a:hover{
+    background-color: var(--green-color);
+    border: 1px solid var(--white-color);
+}
+
+.main>a:hover>h1
+{
+    color: var(--white-color);
+}
+
