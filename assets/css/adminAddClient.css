@@ -1,0 +1,63 @@
+.addClientWindow{
+    width: 85%;
+
+}
+
+.sectionCenterAddClient{
+    margin: 7%;
+    height: 70%;
+    background-color: blue;
+}
+
+.liste{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 30%;
+}
+
+.sousListe{
+    margin-top: 0;
+    margin-left: 20%;
+    font-size: 0.7em;
+}
+
+.sousListeSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 75px;
+
+}
+
+
+
+.sousListeSection p{
+    margin-top: 5px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.hoverliSousList{
+    background-color: #15FF39;
+
+}
+
+.hoverliSousList p{
+    color:white;
+}
+.liste .aListeOptionAdmin{
+    height: 20px;
+    margin-top: 40px;
+    font-size: 1.2em;
+
+}
+.aListeOptionAdmin p{
+    margin-left: 10px;
+}
+
+.hoverli p{
+    color: white;
+}

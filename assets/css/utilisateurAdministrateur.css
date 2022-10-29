@@ -88,7 +88,10 @@ aside li a{
 
 .hoverli{
     background-color: var(--green-color);
+    color: #FFFFFF;
 }
+
+
 .hoverli>a{
     color: white;
 

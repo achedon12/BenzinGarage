@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
         <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">

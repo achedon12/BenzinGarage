@@ -19,4 +19,7 @@ class UsersController{
         render('UtilisateurAdministrateur.php');
     }
 
+    public function adminAddClientPage():void{
+        render('adminAddClient.php');
+    }
 }
