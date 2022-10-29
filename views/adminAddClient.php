@@ -37,21 +37,27 @@
         <section class="sectionCenterAddClient">
             <form>
             <h1>Créer un client</h1>
-
-                <h2>Nom di client</h2>
-                <input type="text">
-
-                <h2>Prénom du client</h2>
-                <input type="text">
-
-                <h2>Age du client</h2>
-                <input type="text">
-
-                <h2>Téléphone du client</h2>
-                <input type="text">
-
-                <h2>Email du client</h2>
-                <input type="text">
+                <section class="inputAddClient">
+                    <h2>Nom du client : </h2>
+                    <input type="text">
+                </section>
+                <section class="inputAddClient">
+                    <h2>Prénom du client : </h2>
+                    <input type="text">
+                </section>
+                <section class="inputAddClient">
+                    <h2>Age du client : </h2>
+                    <input type="text">
+                </section>
+                <section class="inputAddClient">
+                    <h2>Téléphone du client : </h2>
+                    <input type="text">
+                </section>
+                <section class="inputAddClient">
+                    <h2>Email du client : </h2>
+                    <input type="text">
+                </section>
+                <input type="submit" class="submitFormAddClient" value="Créer un client">
             </form>
         </section>
     </section>
