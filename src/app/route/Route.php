@@ -11,3 +11,4 @@ SimpleRouter::get('/accueil/employe', [UsersController::class, 'accueilPage']);
 SimpleRouter::get('/accueil/admin', [UsersController::class, 'accueilAdministrateurPage']);
 SimpleRouter::get('/admin/utilisateur', [UsersController::class, 'utilisateurAdministrateur']);
 SimpleRouter::get('/admin/addClient', [UsersController::class, 'adminAddClientPage']);
+    SimpleRouter::get('/admin/addEmploye', [UsersController::class, 'adminAddEmployePage']);

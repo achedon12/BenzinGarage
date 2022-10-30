@@ -22,4 +22,9 @@ class UsersController{
     public function adminAddClientPage():void{
         render('adminAddClient.php');
     }
+
+    public function adminAddEmployePage():void{
+        render('adminAddEmploye.php');
+    }
+
 }
