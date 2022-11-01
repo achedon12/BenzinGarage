@@ -11,11 +11,11 @@
 <nav>
     <img src="../assets/img/logo.png" alt="logo">
     <ul>
-        <li><a href="#" >Accueil</a></li>
-        <li class="hover"><a href="#">Utilisateur</a></li>
+        <li><a href="/accueil/admin">Accueil</a></li>
+        <li class="hover"><a href="/admin/utilisateur">Utilisateur</a></li>
         <li><a href="#">Tarification</a></li>
         <li><a href="#">Stock</a></li>
-        <li><a href="#">Intervention</a></li>
+        <li ><a href="/admin/interventionPlanning">Intervention</a></li>
         <li><a href="#">Deconnexion</a></li>
     </ul>
 </nav>

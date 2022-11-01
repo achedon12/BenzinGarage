@@ -27,4 +27,8 @@ class UsersController{
         render('adminAddEmploye.php');
     }
 
+    public function adminInterventionPlanning():void{
+        render('adminInterventionPlanning.php');
+    }
+
 }

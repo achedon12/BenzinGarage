@@ -1,0 +1,41 @@
+.interventionWindow{
+    margin-top: 2%;
+    height: 90%;
+    width: 80%;
+    background-color: var(--grey-color);
+    border-radius: 15px;
+    display: flex;
+}
+
+.hours{
+    width: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.day{
+    margin-top: 3%;
+    width: 17%;
+    margin-left: 2%;
+    text-align: center;
+}
+
+.planningDayZone{
+    background-color: var(--green-color);
+
+    height: 90%;
+}
+
+.reservation{
+    background-color: var(--grey-color);
+    height: 12%;
+    width: 2%;
+    border-radius: 25px;
+    position: absolute;
+    margin-top: 1%;
+    margin-left: 1%;
+}

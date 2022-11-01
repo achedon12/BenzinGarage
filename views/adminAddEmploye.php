@@ -11,23 +11,23 @@
 <nav>
     <img src="../assets/img/logo.png" alt="logo">
     <ul>
-        <li><a href="#" >Accueil</a></li>
-        <li class="hover"><a href="#">Utilisateur</a></li>
+        <li><a href="/accueil/admin" >Accueil</a></li>
+        <li class="hover"><a href="/admin/utilisateur">Utilisateur</a></li>
         <li><a href="#">Tarification</a></li>
         <li><a href="#">Stock</a></li>
-        <li><a href="#">Intervention</a></li>
+        <li><a href="/admin/interventionPlanning">Intervention</a></li>
         <li><a href="#">Deconnexion</a></li>
     </ul>
 </nav>
 <main>
     <aside>
         <section class="liste">
-            <a href="#" class="aListeOptionAdmin"><p>Tableau de bord</p></a>
+            <a href="/admin/utilisateur" class="aListeOptionAdmin"><p>Tableau de bord</p></a>
 
-            <a href="#" class=" aListeOptionAdmin  "><p>Client</p></a>
-            <a href="#" class="aListeOptionAdmin hoverli"><p>Garage</p></a>
+            <a href="/admin/addClient" class=" aListeOptionAdmin  "><p>Client</p></a>
+            <a href="/admin/addEmploye" class="aListeOptionAdmin hoverli"><p>Garage</p></a>
             <section class="sousListeSection">
-                <a class="hoverliSousList" href="#"><p>Ajouter un employé</p></a>
+                <a class="hoverliSousList" href="/admin/addEmploye"><p>Ajouter un employé</p></a>
                 <a href=""><p>Modifier un employé</p></a>
                 <a href=""><p>Supprimer un employé</p></a>
             </section>

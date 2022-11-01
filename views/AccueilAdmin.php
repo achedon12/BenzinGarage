@@ -1,14 +1,4 @@
-<?php
 
-use app\users\Auth;
-
-session_start();
-
-if(!Auth::isConnected()){
-    render("connexion.php");
-    return;
-}
-?>
 
 <!DOCTYPE html>
 <html>
@@ -20,17 +10,16 @@ if(!Auth::isConnected()){
         <nav>
             <img src="../assets/img/logo.png" alt="logo">
             <ul>
-                <li class="hover"><a href="#" >Accueil</a></li>
-                <li><a href="#">Planning</a></li>
-                <li><a href="#">Prise de rendez-vous</a></li>
+                <li class="hover"><a href="/accueil/admin">Accueil</a></li>
+                <li ><a href="/admin/utilisateur">Utilisateur</a></li>
+                <li><a href="#">Tarification</a></li>
                 <li><a href="#">Stock</a></li>
-                <li><a href="#">Tarifs</a></li>
-                <li><a href="#">Clients</a></li>
+                <li ><a href="/admin/interventionPlanning">Intervention</a></li>
                 <li><a href="#">Deconnexion</a></li>
             </ul>
         </nav>
         <main>
-            <a href="#">
+            <a href="/admin/addClient">
                 <h1>Ajouter un client</h1>
                 <img src="../assets/img/add-clients.png" alt="">
             </a>
@@ -42,7 +31,7 @@ if(!Auth::isConnected()){
                 <h1>Supprimer un client</h1>
                 <img src="../assets/img/delete-clients.png" alt="">
             </a>
-            <a href="#">
+            <a href="/admin/addEmploye">
                 <h1>Ajouter un rôle à un employé</h1>
                 <img src="../assets/img/add-employe.png" alt="">
             </a>
@@ -62,7 +51,7 @@ if(!Auth::isConnected()){
                 <h1>Stock</h1>
                 <img src="../assets/img/cartons.png" alt="">
             </a>
-            <a href="#">
+            <a href="/admin/interventionPlanning">
                 <h1>Interventions</h1>
                 <img src="../assets/img/outils.png" alt="">
             </a>
