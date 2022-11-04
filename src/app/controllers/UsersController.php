@@ -31,4 +31,8 @@ class UsersController{
         render('adminInterventionPlanning.php');
     }
 
+    public function editClientPage(){
+        render('adminModifyClient.php');
+    }
+
 }

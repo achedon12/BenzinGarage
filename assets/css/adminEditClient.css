@@ -1,0 +1,39 @@
+.windowEditClient{
+    width: 85%;
+}
+.listClient{
+    white-space : nowrap;
+    background-color: var(--grey-color);
+    border-radius: 10px;
+    height: 7%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 3%;
+    overflow-x: auto;
+}
+.listClient a{
+    margin-top: 2%;
+    margin-left: 10%;
+    text-align: center;
+}
+
+.infoClient{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 3%;
+    height: 70%;
+    border-radius: 20px;
+    background-color: var(--grey-color);
+
+}
+.infoClient form{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.infoClient label{
+    background-color: var(--green-color);
+    height: 50px;
+    color: var(--white-color);
+    align-items: center;
+}

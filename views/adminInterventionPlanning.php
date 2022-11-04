@@ -25,11 +25,25 @@
     <section class="interventionWindow">
 
             <section class="hours"><p>8h</p><p>10h</p><p>12h</p><p>14h</p><p>16h</p><p>18h</p></section>
-            <section class="day "><p>Lundi</p><section class="planningDayZone"><section class="reservation"></section></section></section>
+            <section class="day "><p>Lundi</p><section class="planningDayZone"><a class="reservation" href="#popUpRDV"></a></section></section>
             <section class="day "><p>Mardi</p><section class="planningDayZone"></section></section>
             <section class="day "><p>Mercredi</p><section class="planningDayZone"></section></section>
             <section class="day "><p>Jeudi</p><section class="planningDayZone"></section></section>
             <section class="day "><p>Vendredi</p><section class="planningDayZone"></section></section>
+    </section>
+
+    <section id="popUpRDV">
+        <section id="intoPopUpRDV">
+            <h1 class="nomClientIntervention">Mr. Jean</h1>
+            <h1 class="heureIntervention">8h20 - 10h00 (1h40)</h1>
+            <section class="typeIntevrentionZone">
+                <section class="aIntervention"><p>Changement des pneux</p><img src="../assets/img/caisse.png" alt=""></section>
+
+            </section>
+            <a href="#" class="close">X</a>
+            <button class="validerIntervention">Valider l'intervention</button>
+        </section>
+
     </section>
 </main>
 
