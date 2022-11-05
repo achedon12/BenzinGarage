@@ -42,7 +42,7 @@
                 <section class="aIntervention"><p>Changement des pneux</p><img src="../assets/img/not%20done.png" alt=""></section>
                 <section class="aIntervention"><p>Changement des pneux</p><img src="../assets/img/not%20done.png" alt=""></section>
             </section>
-            <a href="#" class="close">X</a>
+            <a href="#" class="close"><img src="../assets/img/not%20done.png" alt=""></a>
             <button class="validerIntervention">Valider l'intervention</button>
         </section>
 
