@@ -37,8 +37,10 @@
             <h1 class="nomClientIntervention">Mr. Jean</h1>
             <h1 class="heureIntervention">8h20 - 10h00 (1h40)</h1>
             <section class="typeIntevrentionZone">
-                <section class="aIntervention"><p>Changement des pneux</p><img src="../assets/img/caisse.png" alt=""></section>
-
+                <section class="aIntervention"><p>Changement des pneux</p><img src="../assets/img/not%20done.png" alt=""></section>
+                <img class="plusAIntervention" src="../assets/img/plus.png" alt="">
+                <section class="aIntervention"><p>Changement des pneux</p><img src="../assets/img/not%20done.png" alt=""></section>
+                <section class="aIntervention"><p>Changement des pneux</p><img src="../assets/img/not%20done.png" alt=""></section>
             </section>
             <a href="#" class="close">X</a>
             <button class="validerIntervention">Valider l'intervention</button>
