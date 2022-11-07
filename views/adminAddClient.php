@@ -22,12 +22,12 @@
 <main>
     <aside>
         <section class="liste">
-            <a href="#" class="aListeOptionAdmin"><p>Tableau de bord</p></a>
+            <a href="/admin/utilisateur" class="aListeOptionAdmin"><p>Tableau de bord</p></a>
 
             <a href="#" class=" aListeOptionAdmin hoverli "><p>Client</p></a>
             <section class="sousListeSection">
                 <a class="hoverliSousList" href="#"><p>Ajouter un client</p></a>
-                <a href=""><p>Modifier un client</p></a>
+                <a href="/admin/editClient"><p>Modifier un client</p></a>
                 <a href=""><p>Supprimer un client</p></a>
             </section>
             <a href="#" class="aListeOptionAdmin"><p>Garage</p></a>

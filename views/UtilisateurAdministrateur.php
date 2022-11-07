@@ -21,7 +21,7 @@
    <main>
        <aside>
            <ul>
-               <li class="hoverli"><a href="#">Tableau de bord</a></li>
+               <li class="hoverli"><a href="/admin/utilisateur">Tableau de bord</a></li>
                <li><a href="/admin/addClient">Client</a></li>
                <li><a href="/admin/addEmploye">Garage</a></li>
            </ul>
@@ -31,7 +31,7 @@
                <h1>Ajouter un client</h1>
                <img src="/assets/img/add-clients.png" alt="">
            </a>
-           <a href="#">
+           <a href="/admin/editClient">
                <h1>modifier un client</h1>
                <img src="/assets/img/add-clients.png" alt="">
            </a>

@@ -23,9 +23,9 @@
 <main>
     <aside>
         <section class="liste">
-            <a href="#" class="aListeOptionAdmin"><p>Tableau de bord</p></a>
+            <a href="utilisateur" class="aListeOptionAdmin"><p>Tableau de bord</p></a>
 
-            <a href="#" class=" aListeOptionAdmin hoverli "><p>Client</p></a>
+            <a href="addClient" class=" aListeOptionAdmin hoverli "><p>Client</p></a>
             <section class="sousListeSection">
                 <a  href="/admin/addClient"><p>Ajouter un client</p></a>
                 <a class="hoverliSousList"  href="#"><p>Modifier un client</p></a>
@@ -47,10 +47,18 @@
         </section>
         <section class="infoClient">
             <form action="">
-                <label>Prénom<input type="text" id="prenomUser" name="prenom" /></label>
-
-
-
+                <section class="infoClientEdit">
+                    <label><p>Prénom : </p><input type="text" id="prenomUser" name="prenom" /></label>
+                    <label><p>Téléphone : </p><input type="text" id="telephoneUser" name="prenom" /></label>
+                    <label><p>Nom : </p><input type="text" id="nomUser" name="prenom" /></label>
+                    <label><p>Age : </p><input type="text" id="ageUser" name="prenom" /></label>
+                    <label><p>Voiture : </p><input type="text" id="voitureUser" name="prenom" /></label>
+                    <label><p>Plaque : </p><input type="text" id="plaqueUser" name="prenom" /></label>
+                </section>
+                <section class="validateButton">
+                    <input class="submitFormEditClient" type="button" value="Modifier le client">
+                    <input class="resetFormEditClient" type="reset" value="Réinitialiser les informations">
+                </section>
             </form>
         </section>
 

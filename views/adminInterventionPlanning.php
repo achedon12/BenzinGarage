@@ -24,8 +24,27 @@
 
     <section class="interventionWindow">
 
-            <section class="hours"><p>8h</p><p>10h</p><p>12h</p><p>14h</p><p>16h</p><p>18h</p></section>
-            <section class="day "><p>Lundi</p><section class="planningDayZone"><a class="reservation" href="#popUpRDV"></a></section></section>
+            <section class="hours">
+                <p>8h</p>
+                <p>9h</p>
+                <p>10h</p>
+                <p>11h</p>
+                <p>12h</p>
+                <p>13h</p>
+                <p>14h</p>
+                <p>15h</p>
+                <p>16h</p>
+                <p>17h</p>
+                <p>18h</p>
+            </section>
+            <section class="day "><p>Lundi</p>
+                <section class="planningDayZone">
+                    <section class="quinzeMinute"></section>
+                    <a class="reservation" id=""href="#popUpRDV"><p>Mr. Jean</p></a>
+                    <section class="trenteMinutes"> </section>
+                    <a class="reservation" id=""href="#popUpRDV"><p>Mr. Jean</p></a>
+                </section>
+            </section>
             <section class="day "><p>Mardi</p><section class="planningDayZone"></section></section>
             <section class="day "><p>Mercredi</p><section class="planningDayZone"></section></section>
             <section class="day "><p>Jeudi</p><section class="planningDayZone"></section></section>

@@ -23,7 +23,7 @@
                 <h1>Ajouter un client</h1>
                 <img src="../assets/img/add-clients.png" alt="">
             </a>
-            <a href="#">
+            <a href="/admin/editClient">
                 <h1>Modifier un client</h1>
                 <img src="../assets/img/modify-clients.png" alt="">
             </a>
