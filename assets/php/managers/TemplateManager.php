@@ -3,7 +3,7 @@
 class TemplateManager{
 
     public static function getDefaultNavBar(){
-        echo '<nav>
+        echo '<nav class="nav-bar">
             <img src="../assets/img/logo.png" alt="logo">
             <ul>
                 <li class="hover"><a href="#" >Accueil</a></li>

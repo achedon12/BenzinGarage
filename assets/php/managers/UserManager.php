@@ -11,66 +11,74 @@ class UserManager{
     }
 
     public function getAllAdministrateur(): array{
-
+        /** @var  $array Administrator[]*/
+        $array = [];
+        return $array;
     }
 
     public function getAllEmploye(): array{
-
+        /** @var  $array Employee[]*/
+        $array = [];
+        return $array;
     }
 
     public function getAllManager(): array{
-
+        /** @var  $array Manager[]*/
+        $array = [];
+        return $array;
     }
 
     public function getAllVehicle(): array{
+        /** @var  $array Vehicle[]*/
+        $array = [];
+        return $array;
+    }
+
+    public function createAdministrateur(): Administrator{
 
     }
 
-    public function createAdministrateur(): User{
+    public function removeAdministrateur(): Administrator{
 
     }
 
-    public function removeAdministrateur(): User{
+    public function modifyAdministrateur(): Administrator{
 
     }
 
-    public function modifyAdministrateur(): User{
-
-    }
-
-    public function createEmploye(): User{
+    public function createEmploye(): Employee{
         
     }
     
-    public function removeEmploye(): User{
+    public function removeEmploye(): Employee{
         
     }
     
-    public function modifyEmploye(): User{
+    public function modifyEmploye(): Employee{
         
     }
     
-    public function createManager(): User{
+    public function createManager(): Manager{
         
     }
     
-    public function removeManager(): User{
+    public function removeManager(): Manager{
         
     }
     
-    public function modifyManager(): User{
+    public function modifyManager(): Manager{
         
     }
 
-    public function existManager(User $manager): bool{
+    public function existManager(Manager $manager): bool{
 
     }
 
-    public function existEmploye(User $employe): bool{
+    public function existEmploye(Employee $employe): bool{
 
     }
 
-    public function existAdministrateur(User $administrateur): bool{
+    public function existAdministrateur(Administrator $administrateur): bool{
 
     }
 

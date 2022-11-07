@@ -8,10 +8,13 @@ class Piece{
 
     private float $price;
 
-    public function __construct(string $reference, int $stock, float $price){
+    private string $name;
+
+    public function __construct(string $name, string $reference, int $stock, float $price){
         $this->reference = $reference;
         $this->stock = $stock;
         $this->price = $price;
+        $this->name = $name;
     }
 
     public function getReference(): string{
@@ -26,4 +29,8 @@ class Piece{
         return $this->price;
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
 }

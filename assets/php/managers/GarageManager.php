@@ -7,7 +7,8 @@ class GarageManager{
     }
 
     public function getAllPieces(): array{
-
+        /** @var  $array Piece[]*/
+       $array = [];
     }
 
     public function getPiecePrice(Piece $piece): float{

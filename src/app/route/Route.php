@@ -14,3 +14,4 @@ SimpleRouter::get('/admin/addClient', [UsersController::class, 'adminAddClientPa
 SimpleRouter::get('/admin/addEmploye', [UsersController::class, 'adminAddEmployePage']);
 SimpleRouter::get('/admin/interventionPlanning', [UsersController::class, 'adminInterventionPlanning']);
 SimpleRouter::get('/admin/editClient', [UsersController::class, 'editClientPage']);
+SimpleRouter::get('/stock', [UsersController::class, 'stockPage']);

@@ -35,4 +35,8 @@ class UsersController{
         render('adminModifyClient.php');
     }
 
+    public function stockPage(){
+        render('stock.php');
+    }
+
 }
