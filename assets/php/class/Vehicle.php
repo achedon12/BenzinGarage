@@ -3,14 +3,16 @@
 class Vehicle{
 
     private int $id;
+    private int $numSerie;
+    private int $numModel;
+    private date $dateRoadRelease;
+    private int $client;
 
-    private string $numberPlate;
-
-    private Client $client;
-
-    public function __construct(int $id, string $numberPlate, Client $client){
+    public function __construct(int $id, int $numSerie, int $numModel, date $dateRoadRelease, int $client){
         $this->id = $id;
-        $this->numberPlate = $numberPlate;
+        $this->numSerie = $numSerie;
+        $this->numModel = $numModel;
+        $this->dateRoadRelease = $dateRoadRelease;
         $this->client = $client;
     }
 
@@ -18,12 +20,21 @@ class Vehicle{
         return $this->id;
     }
 
-    public function getNumberPlate(): string{
-        return $this->numberPlate;
+    public function getVehicleClient(int $client): int{
+
     }
 
-    public function getVehicleClient(): Client{
-        return $this->client;
+    public function getVehicleModel(): int{
+        return $this->model;
     }
+
+    public function getVehicleDateRoadRelease(): date{
+        return $this->dateRoadRelease;
+    }
+
+    public function getVehicleNumSerie(): int{
+        return $this->numSerie;
+    }
+
 
 }
