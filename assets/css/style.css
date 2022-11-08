@@ -51,6 +51,10 @@ body
     align-items: center;
 }
 
+a{
+    text-decoration: none;
+}
+
 nav.nav-bar a
 {
     text-decoration: none;

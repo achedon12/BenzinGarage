@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
-    <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
-    <link rel="stylesheet" href="../assets/css/adminAddClient.css">
-    <link rel="stylesheet" href="../assets/css/adminEditClient.css">
-</head>
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
+        <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
+        <link rel="stylesheet" href="../assets/css/adminAddClient.css">
+        <link rel="stylesheet" href="../assets/css/adminEditClient.css">
+    </head>
 <body>
 <nav>
     <img src="../assets/img/logo.png" alt="logo">
@@ -45,15 +45,17 @@
             <a href="#">Mme Loise</a>
             <a href="#">test</a>
         </section>
+
+
         <section class="infoClient">
-            <form action="">
+            <form action="" method="post">
                 <section class="infoClientEdit">
-                    <label><p>Prénom : </p><input type="text" id="prenomUser" name="prenom" /></label>
-                    <label><p>Téléphone : </p><input type="text" id="telephoneUser" name="prenom" /></label>
-                    <label><p>Nom : </p><input type="text" id="nomUser" name="prenom" /></label>
-                    <label><p>Age : </p><input type="text" id="ageUser" name="prenom" /></label>
-                    <label><p>Voiture : </p><input type="text" id="voitureUser" name="prenom" /></label>
-                    <label><p>Plaque : </p><input type="text" id="plaqueUser" name="prenom" /></label>
+                    <label><p>Prénom : </p><input type="text" class="inputEditClient" id="prenomUser" name="prenom" placeholder="test"/></label>
+                    <label><p>Téléphone : </p><input type="text" class="inputEditClient" id="telephoneUser" name="prenom" /></label>
+                    <label><p>Nom : </p><input type="text" class="inputEditClient" id="nomUser" name="prenom" /></label>
+                    <label><p>Age : </p><input type="text" class="inputEditClient" id="ageUser" name="prenom" /></label>
+                    <label><p>Voiture : </p><input type="text" class="inputEditClient" id="voitureUser" name="prenom" /></label>
+                    <label><p>Plaque : </p><input type="text" class="inputEditClient" id="plaqueUser" name="prenom" /></label>
                 </section>
                 <section class="validateButton">
                     <input class="submitFormEditClient" type="button" value="Modifier le client">
