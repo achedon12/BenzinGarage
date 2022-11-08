@@ -21,7 +21,7 @@ require_once("./assets/php/managers/TemplateManager.php");
     </head>
     <body>
         <?php
-            TemplateManager::getDefaultNavBar();
+            TemplateManager::getDefaultNavBar("accueil");
         ?>
         <main>
             <a href="#">
