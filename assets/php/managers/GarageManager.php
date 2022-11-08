@@ -1,6 +1,6 @@
 <?php
 
-class GarageManager{
+class GarageManager extends DatabaseManager {
 
     /**
      * Get available account of a given piece.
@@ -8,7 +8,10 @@ class GarageManager{
      * @return int
      */
     public function getAvailablePiece(Piece $piece): int{
-
+        /** */
+        $numberOfPiece = 0;
+        $stmt = $this->getInstance()->query("select * from article where codearticle = ? and qte_stock > 0;");
+        $numberOfPiece =
     }
 
     /**
@@ -17,7 +20,11 @@ class GarageManager{
      */
     public function getAllPieces(): array{
         /** @var  $array Piece[]*/
-       $array = [];
+        $res = [];
+        $stmt = $this->getInstance()->query("SELECT * FROM article;");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $res[] = new Piece($row['codearticle'], $row['libellearticle'], $row['qte_min'],$row['typearticle'],$row['prixunitactuelht'],$row['qte_stock']);
+        return $res;
     }
 
     /**
