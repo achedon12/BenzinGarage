@@ -1,6 +1,7 @@
 <?php
 
-class ClientManager{
+class ClientManager extends DatabaseManager{
+
 
     /**
      * Create a new Client.
@@ -14,7 +15,7 @@ class ClientManager{
      * @return Client
      */
     public function createClient(string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, Vehicle $vehicle): Client{
-
+        $this->getInstance()->prepare("");
     }
 
     /**
