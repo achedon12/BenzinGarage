@@ -4,10 +4,10 @@ use app\users\Auth;
 
 session_start();
 
-/*if(!Auth::isConnected()){
+if(!Auth::isConnected()){
     render("connexion.php");
     return;
-}*/
+}
 
 require_once("./assets/php/managers/TemplateManager.php");
 require_once("./assets/php/managers/GarageManager.php");
@@ -22,21 +22,20 @@ require_once("./assets/php/managers/GarageManager.php");
 </head>
     <body>
         <?php
-            TemplateManager::getDefaultNavBar();
+            TemplateManager::getDefaultNavBar("stock");
         ?>
         <main>
             <form method="post">
                 <input type="text" name="search" id="id-product" placeholder="Recherche d'un produit par son id">
             </form>
-            <section class="button"><button>Valider commande</button></section>
             <section>
                 <?php
 
                 $pieces = getAllPieces();
 
-                if($_POST["connected"] === UserManager::MANAGER){
+                if($_POST["role"] === UserManager::MANAGER){
                     foreach ($pieces as $piece){
-                        echo '<article>
+                        echo '<article class="ligne-product">
                                <section>
                                    <p class="product-name">'.$piece->getName().'</p>
                                    <p class="product-ref">Référence : '.$piece->getReference.'</p>
@@ -47,15 +46,15 @@ require_once("./assets/php/managers/GarageManager.php");
                     }
                 }else{
                     foreach ($pieces as $piece){
-                        echo '<article>
+                        echo '<article class="ligne-product">
                                <p class="product-name">'.$piece->getName().'</p>
                                <p class="product-ref">Référence : '.$piece->getReference.'</p>
                                <p class="piece-available">'.$piece->getStock().' pièce(s) restante(s)</p>
                             </article>';
                     }
                 }
-                if($_POST["connected"] === UserManager::MANAGER){
-                    echo '<button class="validate-command">Valider commande</button>';
+                if($_POST["role"] === UserManager::MANAGER){
+                    echo '<section class="button"><button>Valider commande</button></section>';
                 }
                 ?>
             </section>

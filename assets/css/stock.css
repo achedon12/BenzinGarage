@@ -51,7 +51,7 @@ main>section.button
 {
     width: 100%;
     display: flex;
-    align-items: end;
+    justify-content: end;
 }
 
 section.button>button
@@ -68,4 +68,37 @@ section.button>button:hover
 {
     border: 1px solid var(--white-color);
     text-align: center;
+}
+
+article.ligne-product
+{
+    display: flex;
+    width: 100%;
+    padding: 1%;
+}
+
+article.ligne-product>section
+{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    color: var(--white-color);
+    background-color: var(--green-color);
+}
+
+article.ligne-product>section>p
+{
+    padding: 1%;
+    width: 30%;
+}
+
+article.ligne-product>img
+{
+    width: 20%;
+}
+
+article.ligne-product>img:hover
+{
+    transform: scale(1.2);
+    transition-duration: 0.4s;
 }

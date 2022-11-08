@@ -2,6 +2,10 @@
 
 session_start();
 
+if(isset($_POST["id-connexion"]) && isset($_POST["password-connexion"])){
+    //TODO: faire la connexion
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -17,10 +21,10 @@ session_start();
             </article>
             <article>
                 <h1>Connexion Utilisateur</h1>
-                <form action="" method="post">
+                <form method="post">
                     <article>
                         <img src="../assets/img/mail.png" alt="mail">
-                        <input type="email" name="email-connexion" placeholder="EMAIL">
+                        <input type="text" name="id-connexion" placeholder="ID">
                     </article>
                     <article>
                         <img src="../assets/img/password.png" alt="">

@@ -2,11 +2,19 @@
 
 namespace app\controllers;
 
-class UsersController{
+use DatabaseManager;
+
+class UsersController extends DatabaseManager {
 
     public function loginPage(): void {
         render('connexion.php');
     }
+
+    public function loginIn() {
+        $db = $this->getInstance();
+        //TODO: faire la connexion
+    }
+
     public function accueilPage(): void {
         render('accueil.php');
     }
