@@ -1,6 +1,6 @@
 <?php
 
-class UserManager{
+class UserManager extends DatabaseManager {
 
     const ADMINISTRATEUR = "administrateur";
     const EMPLOYE = "employe";
@@ -11,7 +11,12 @@ class UserManager{
      * @return array
      */
     public function getAllClients(): array{
-
+        /** @var  $res Client[]*/
+        $res = [];
+        $stmt = $this->getInstance()->query("SELECT * FROM client");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $res[] = new Client($row["id"], $row["nom"], $row["prenom"], $row["adresse"], $row["codePostal"], $row["ville"], $row["telephone"], $this->getVehicle($row["id"]));
+        return $res;
     }
 
     /**
