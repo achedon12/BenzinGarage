@@ -15,7 +15,7 @@ class UserManager extends DatabaseManager {
         $res = [];
         $stmt = $this->getInstance()->query("SELECT * FROM client");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $res[] = new Client($row["id"], $row["nom"], $row["prenom"], $row["adresse"], $row["codePostal"], $row["ville"], $row["telephone"], $this->getVehicle($row["id"]));
+            $res[] = new Client($row["id"], $row["nom"], $row["prenom"], $row["adresse"], $row["codePostal"], $row["ville"], $row["telephone"], $row["mail]", $row["vehicle"]);
         return $res;
     }
 

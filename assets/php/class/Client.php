@@ -16,9 +16,11 @@ class Client{
 
     private string $telephoneNumber;
 
+    private string $mail;
+
     private Vehicle $vehicle;
 
-    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, Vehicle $vehicle)
+    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $mail, Vehicle $vehicle)
     {
         $this->id = $id;
         $this->name = $name;
@@ -27,6 +29,7 @@ class Client{
         $this->codePostal = $codePostal;
         $this->city = $city;
         $this->telephoneNumber = $telephoneNumber;
+        $this->mail = $mail;
         $this->vehicle = $vehicle;
     }
 
@@ -64,6 +67,10 @@ class Client{
 
     public function getCity(): string{
         return $this->city;
+    }
+
+    public function getMail(): string{
+        retrun $this->mail;
     }
 
     public function getTelephoneNumber(): string{
