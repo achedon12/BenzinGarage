@@ -22,8 +22,10 @@
     margin-right: 5%;
     margin-top: 3%;
     height: 70%;
+    width: 75%;
     border-radius: 20px;
     background-color: var(--grey-color);
+    position: fixed;
 
 }
 .infoClient form{

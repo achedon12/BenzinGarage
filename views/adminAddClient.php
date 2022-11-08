@@ -28,9 +28,9 @@
             <section class="sousListeSection">
                 <a class="hoverliSousList" href="#"><p>Ajouter un client</p></a>
                 <a href="/admin/editClient"><p>Modifier un client</p></a>
-                <a href=""><p>Supprimer un client</p></a>
+                <a href="/admin/removeClient"><p>Supprimer un client</p></a>
             </section>
-            <a href="#" class="aListeOptionAdmin"><p>Garage</p></a>
+            <a href="/admin/addEmploye" class="aListeOptionAdmin"><p>Garage</p></a>
         </section>
     </aside>
     <section class="addClientWindow">

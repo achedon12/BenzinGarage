@@ -27,7 +27,7 @@
                 <h1>Modifier un client</h1>
                 <img src="../assets/img/modify-clients.png" alt="">
             </a>
-            <a href="#">
+            <a href="/admin/removeClient">
                 <h1>Supprimer un client</h1>
                 <img src="../assets/img/delete-clients.png" alt="">
             </a>

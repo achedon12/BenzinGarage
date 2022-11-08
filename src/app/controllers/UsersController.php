@@ -39,4 +39,8 @@ class UsersController{
         render('stock.php');
     }
 
+    public function adminRemoveClient(){
+        render('adminRemoveClient.php');
+    }
+
 }

@@ -27,9 +27,9 @@
             <a href="/admin/addClient" class=" aListeOptionAdmin  "><p>Client</p></a>
             <a href="/admin/addEmploye" class="aListeOptionAdmin hoverli"><p>Garage</p></a>
             <section class="sousListeSection">
-                <a class="hoverliSousList" href="/admin/addEmploye"><p>Ajouter un employé</p></a>
-                <a href=""><p>Modifier un employé</p></a>
-                <a href=""><p>Supprimer un employé</p></a>
+                <a class="hoverliSousList" href="/admin/"><p>Ajouter un employé</p></a>
+                <a href="/admin/"><p>Modifier un employé</p></a>
+                <a href="/admin/"><p>Supprimer un employé</p></a>
             </section>
         </section>
     </aside>
