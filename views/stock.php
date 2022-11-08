@@ -4,10 +4,10 @@ use app\users\Auth;
 
 session_start();
 
-/*if(!Auth::isConnected()){
+if(!Auth::isConnected()){
     render("connexion.php");
     return;
-}*/
+}
 
 require_once("./assets/php/managers/TemplateManager.php");
 require_once("./assets/php/managers/GarageManager.php");
@@ -33,7 +33,7 @@ require_once("./assets/php/managers/GarageManager.php");
 
                 $pieces = getAllPieces();
 
-                if($_POST["connected"] === UserManager::MANAGER){
+                if($_POST["role"] === UserManager::MANAGER){
                     foreach ($pieces as $piece){
                         echo '<article class="ligne-product">
                                <section>
@@ -53,7 +53,7 @@ require_once("./assets/php/managers/GarageManager.php");
                             </article>';
                     }
                 }
-                if($_POST["connected"] === UserManager::MANAGER){
+                if($_POST["role"] === UserManager::MANAGER){
                     echo '<section class="button"><button>Valider commande</button></section>';
                 }
                 ?>
