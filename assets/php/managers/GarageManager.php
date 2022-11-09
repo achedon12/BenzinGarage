@@ -44,7 +44,6 @@ class GarageManager extends DatabaseManager {
     public function createFacture(Client $client): Facture{
         $stmt = $this->getInstance()->prepare("INSERT INTO facture(nofacture,datefacture,tauxtva,netapayer,etatfacture,numdde)VALUES (?,'2022-07-22',20,15.99,'Emise',1);");
         $stmt->execute([$client->codeclient]);
-        return
     }
 
     /**
@@ -56,7 +55,7 @@ class GarageManager extends DatabaseManager {
         $res = [];
         $stmt = $this->getInstance()->query("select * from facture;");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $res[] = new Facture($row['codearticle'], $row['libellearticle'], $row['qte_min'],$row['typearticle'],$row['prixunitactuelht'],$row['qte_stock']);
+            $res[] = new Facture($row['nofacture'], $row['datefacture'], $row['tauxtva'],$row['netapayer'],$row['etatfacture'],$row['numdde']);
         return $res;
     }
 }
