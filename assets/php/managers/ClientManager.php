@@ -1,6 +1,15 @@
 <?php
+require_once("./assets/php/database/DatabaseManager.php");
 
-class ClientManager extends DatabaseManager{
+class ClientManager{
+
+    private PDO $pdo;
+
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
 
 
     /**
@@ -14,8 +23,20 @@ class ClientManager extends DatabaseManager{
      * @param Vehicle $vehicle
      * @return Client
      */
-    public function createClient(string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, Vehicle $vehicle): Client{
-        $this->getInstance()->prepare("");
+    public function createClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $email, date $dateCreation): Client{
+        $stmt = $this->pdo->prepare("INSERT INTO client (codeclient, nom, prenom, adresse, codepostal, ville, tel, mail, datecreation ) VALUES (:id, :nom, :prenom, :adresse, :codePostal, :ville, :telephone, :mail, :dateCreation)");
+        $stmt->execute([
+            "id"=>$id,
+            "nom" => $name,
+            "prenom" => $firstName,
+            "adresse" => $adresse,
+            "codePostal" => $codePostal,
+            "ville" => $city,
+            "telephone" => $telephoneNumber,
+            "mail" => $email,
+            "dateCreation" => $dateCreation
+        ]);
+        return new Client($this->pdo->lastInsertId(), $name, $firstName, $adresse, $codePostal, $city, $telephoneNumber, $email, $dateCreation);
     }
 
     /**
@@ -24,7 +45,9 @@ class ClientManager extends DatabaseManager{
      * @return bool
      */
     public function clientExist(Client $client): bool{
-
+        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE id = :id");
+        $stmt->execute(["id" => $client->getId()]);
+        return $stmt->rowCount() > 0;
     }
 
     /**
@@ -33,7 +56,12 @@ class ClientManager extends DatabaseManager{
      * @return bool
      */
     public function deleteClient(Client $client): bool{
-
+        if ($this->clientExist($client)){
+            $stmt = $this->pdo->prepare("DELETE FROM client WHERE id = :id");
+            $stmt->execute(["id" => $client->getId()]);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -51,7 +79,10 @@ class ClientManager extends DatabaseManager{
      * @return Vehicle
      */
     public function getClientVehicle(Client $client): Vehicle{
-        return $client->getVehicle();
+        $stmt = $this->pdo->prepare("SELECT * FROM vehicule WHERE codeclient = :id");
+        $stmt->execute(["id" => $client->getId()]);
+        $result = $stmt->fetch();
+        return new Vehicle($result["vehicle"]);
     }
 
     /**
@@ -60,20 +91,11 @@ class ClientManager extends DatabaseManager{
      * @return bool
      */
     public function clientHasVehicle(Client $client): bool{
-        if($client->getVehicle() == null) return false; else{
-            return true;
-        }
+        $stmt = $this->pdo->prepare("SELECT * FROM vehicule WHERE codeclient = :id");
+        $stmt->execute(["id" => $client->getId()]);
+        return $stmt->rowCount() > 0;
     }
 
-    /**
-     * Add a new Vehicle for a given client.
-     * @param Client $client
-     * @param Vehicle $vehicle
-     * @return bool
-     */
-    public function addVehicleToClient(Client $client, Vehicle $vehicle): bool{
-
-    }
 
     /**
      * Remove a vehicle from a given client.
@@ -82,7 +104,13 @@ class ClientManager extends DatabaseManager{
      * @return bool
      */
     public function removeVehicleFromClient(Client $client, Vehicle $vehicle): bool{
-
+        if ($this->clientHasVehicle($client)){
+            $stmt = $this->pdo->prepare("DELETE FROM vehicule WHERE codeclient = :id and numimmatriculation = :numImmatriculation");
+            $stmt->execute(["id" => $client->getId()
+                , "numImmatriculation" => $vehicle->getId()]);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -97,7 +125,7 @@ class ClientManager extends DatabaseManager{
      * @param Vehicle|null $vehicle
      * @return Client
      */
-    public function getClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephone, Vehicle $vehicle = null): Client{
-        return new Client($id,  $name, $firstName, $adresse, $codePostal, $city, $telephone,  $vehicle );
+    public function getClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephone, string $ail, date $datecreation): Client{
+        return new Client($id,  $name, $firstName, $adresse, $codePostal, $city, $telephone,  $mail, $datecreation);
     }
 }

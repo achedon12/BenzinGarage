@@ -16,33 +16,24 @@ class Client{
 
     private string $telephoneNumber;
 
-<<<<<<< HEAD
     private string  $eMail;
 
     private string $dateCreation;
 
     private Vehicle $vehicle;
 
-    public function __construct(int $id, string $name, string $firstName,string $telephoneNumber, string $eMail, string $adresse, int $codePostal, string $city, string $dateCreation, Vehicle $vehicle)
-=======
-    private string $mail;
-
-    private Vehicle $vehicle;
-
-    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $mail, Vehicle $vehicle)
->>>>>>> bee837b307a8e631e47813bb1b94588d7701a6de
+    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $mail, Vehicle $vehicle, string $dateCreation)
     {
         $this->id = $id;
         $this->name = $name;
         $this->firstName = $firstName;
-        $this->eMail = $eMail;
         $this->adresse = $adresse;
-        $this->dateCreation = $dateCreation;
         $this->codePostal = $codePostal;
         $this->city = $city;
         $this->telephoneNumber = $telephoneNumber;
-        $this->mail = $mail;
+        $this->eMail = $mail;
         $this->vehicle = $vehicle;
+        $this->dateCreation = $dateCreation;
     }
 
     public function getId(): int{
