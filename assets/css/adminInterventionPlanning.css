@@ -5,7 +5,26 @@
     background-color: var(--grey-color);
     border-radius: 15px;
     display: flex;
+    flex-direction: column;
 }
+
+
+.choixPlanning{
+    text-align: right;
+}
+
+.interventionWindow select{
+    margin-top: 5px;
+    margin-right: 5%;
+
+}
+
+
+.planing{
+    display: flex;
+    height: 100%;
+}
+
 
 .hours{
     width: 3%;

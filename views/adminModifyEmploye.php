@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-        <link rel="stylesheet" href="../assets/css/style.css">
-        <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
-        <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
-        <link rel="stylesheet" href="../assets/css/adminAddClient.css">
-        <link rel="stylesheet" href="../assets/css/adminEditClient.css">
-        <title>Modifier un client</title>
-    </head>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
+    <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
+    <link rel="stylesheet" href="../assets/css/adminAddClient.css">
+    <link rel="stylesheet" href="../assets/css/adminEditClient.css">
+    <title>Modifier un client</title>
+</head>
 <body>
 <nav>
     <img src="../assets/img/logo.png" alt="logo">
@@ -29,13 +29,13 @@
         <section class="liste">
             <a href="/admin/utilisateur" class="aListeOptionAdmin"><p>Tableau de bord</p></a>
 
-            <a href="/admin/addClient" class=" aListeOptionAdmin hoverli "><p>Client</p></a>
+            <a href="/admin/addClient" class=" aListeOptionAdmin "><p>Client</p></a>
+            <a href="/admin/addEmploye" class="aListeOptionAdmin  hoverli"><p>Garage</p></a>
             <section class="sousListeSection">
-                <a  href="/admin/addClient"><p>Ajouter un client</p></a>
-                <a class="hoverliSousList"  href="#"><p>Modifier un client</p></a>
-                <a href="/admin/removeClient"><p>Supprimer un client</p></a>
+                <a  href="/admin/addEmploye"><p>Ajouter un employe</p></a>
+                <a class="hoverliSousList" href="/admin/editEmploye"><p>Modifier un employe</p></a>
+                <a  href="/admin/removeEmploye"><p>Supprimer un employe</p></a>
             </section>
-            <a href="/admin/addEmploye" class="aListeOptionAdmin"><p>Garage</p></a>
         </section>
     </aside>
     <section class="windowEditClient">

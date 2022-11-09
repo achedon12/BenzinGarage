@@ -1,10 +1,15 @@
 
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
         <link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
+        <title>Accueil administrateur</title>
     </head>
     <body>
         <nav>
@@ -32,15 +37,15 @@
                 <img src="../assets/img/delete-clients.png" alt="">
             </a>
             <a href="/admin/addEmploye">
-                <h1>Ajouter un rôle à un employé</h1>
+                <h1>Ajouter un employé</h1>
                 <img src="../assets/img/add-employe.png" alt="">
             </a>
-            <a href="#">
-                <h1>Modifier les rôles d'un employé</h1>
+            <a href="/admin/editEmploye">
+                <h1>Modifier un employé</h1>
                 <img src="../assets/img/modify-employe.png" alt="">
             </a>
-            <a href="#">
-                <h1>Supprimer un rôle à un employé</h1>
+            <a href="/admin/removeEmploye">
+                <h1>Supprimer un employé</h1>
                 <img src="../assets/img/remove-employe.png" alt="">
             </a>
             <a href="#">

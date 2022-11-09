@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
+    <title>Ajouter un employé</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
     <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
@@ -27,9 +31,9 @@
             <a href="/admin/addClient" class=" aListeOptionAdmin  "><p>Client</p></a>
             <a href="/admin/addEmploye" class="aListeOptionAdmin hoverli"><p>Garage</p></a>
             <section class="sousListeSection">
-                <a class="hoverliSousList" href="/admin/"><p>Ajouter un employé</p></a>
-                <a href="/admin/"><p>Modifier un employé</p></a>
-                <a href="/admin/"><p>Supprimer un employé</p></a>
+                <a class="hoverliSousList" href="/admin/addEmploye"><p>Ajouter un employé</p></a>
+                <a href="/admin/editEmploye"><p>Modifier un employé</p></a>
+                <a href="/admin/removeEmploye"><p>Supprimer un employé</p></a>
             </section>
         </section>
     </aside>

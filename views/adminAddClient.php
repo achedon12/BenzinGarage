@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
     <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
     <link rel="stylesheet" href="../assets/css/adminAddClient.css"></link>
+    <title>Ajouter un client</title>
 </head>
 <body>
 <nav>

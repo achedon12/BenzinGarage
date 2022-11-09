@@ -4,14 +4,16 @@ namespace app\controllers;
 
 use DatabaseManager;
 
-class UsersController extends DatabaseManager {
+// extends DatabaseManager
+
+class UsersController {
 
     public function loginPage(): void {
         render('connexion.php');
     }
 
     public function loginIn() {
-        $db = $this->getInstance();
+        //$db = $this->getInstance();
         //TODO: faire la connexion
     }
 
@@ -51,4 +53,12 @@ class UsersController extends DatabaseManager {
         render('adminRemoveClient.php');
     }
 
+    public function adminRemoveEmploye(){
+        render('adminRemoveEmploye.php');
+    }
+
+    public function adminModifyEmploye(){
+        render('adminModifyEmploye.php');
+    }
 }
+
