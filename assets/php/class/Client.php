@@ -16,16 +16,28 @@ class Client{
 
     private string $telephoneNumber;
 
+<<<<<<< HEAD
+    private string  $eMail;
+
+    private string $dateCreation;
+
+    private Vehicle $vehicle;
+
+    public function __construct(int $id, string $name, string $firstName,string $telephoneNumber, string $eMail, string $adresse, int $codePostal, string $city, string $dateCreation, Vehicle $vehicle)
+=======
     private string $mail;
 
     private Vehicle $vehicle;
 
     public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $mail, Vehicle $vehicle)
+>>>>>>> bee837b307a8e631e47813bb1b94588d7701a6de
     {
         $this->id = $id;
         $this->name = $name;
         $this->firstName = $firstName;
+        $this->eMail = $eMail;
         $this->adresse = $adresse;
+        $this->dateCreation = $dateCreation;
         $this->codePostal = $codePostal;
         $this->city = $city;
         $this->telephoneNumber = $telephoneNumber;
@@ -47,6 +59,22 @@ class Client{
 
     public function getPasswordNotHashed(): string{
 
+    }
+
+    /**
+     * @return string
+     */
+    public function getEMail(): string
+    {
+        return $this->eMail;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateCreation(): string
+    {
+        return $this->dateCreation;
     }
 
     public function getVehicle(): ?Vehicle{

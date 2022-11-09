@@ -8,7 +8,7 @@ class Piece{
 
     private float $prixunitactuelht;
 
-    private string $codearticle;
+    public string $codearticle;
 
     private string $typearticle;
 
