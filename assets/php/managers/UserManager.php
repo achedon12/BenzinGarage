@@ -1,6 +1,6 @@
 <?php
 
-class UserManager{
+class UserManager extends DatabaseManager {
 
     const ADMINISTRATEUR = "administrateur";
     const EMPLOYE = "employe";
@@ -11,7 +11,12 @@ class UserManager{
      * @return array
      */
     public function getAllClients(): array{
-
+        /** @var  $res Client[]*/
+        $res = [];
+        $stmt = $this->getInstance()->query("SELECT * FROM client");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $res[] = new Client($row["id"], $row["nom"], $row["prenom"], $row["adresse"], $row["codePostal"], $row["ville"], $row["telephone"], $row["mail]", $row["vehicle"]);
+        return $res;
     }
 
     /**
@@ -21,6 +26,9 @@ class UserManager{
     public function getAllManager(): array{
         /** @var  $array Manager[] */
         $array = [];
+        $stmt = $this->getInstance()->query("SELECT * FROM user WHERE role = 'manager'");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $array[] = new Manager($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
         return $array;
     }
 
@@ -31,6 +39,9 @@ class UserManager{
     public function getAllAdministrators(): array{
         /** @var  $array Administrator[]*/
         $array = [];
+        $stmt = $this->getInstance()->query("SELECT * FROM user WHERE role = 'administrateur'");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $array[] = new Manager($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
         return $array;
     }
 
@@ -41,6 +52,9 @@ class UserManager{
     public function getAllEmployees(): array{
         /** @var  $array Employee[]*/
         $array = [];
+        $stmt = $this->getInstance()->query("SELECT * FROM user WHERE role = 'employe'");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $array[] = new Manager($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
         return $array;
     }
 
@@ -51,12 +65,16 @@ class UserManager{
     public function getAllVehicle(): array{
         /** @var  $array Vehicle[]*/
         $array = [];
+        $stmt = $this->getInstance()->query("SELECT * FROM vehicule");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $array[] = new Vehicle($row["noimmatriculation"], $row["noserie"], $row["nummodele"], $row["datemiseencirculation"], $row["codeclient"]);
         return $array;
     }
 
 
     public function existAdministrateur(Administrator $administrateur): bool{
-
+        $stmt = $this->getInstance()->query("SELECT * FROM user WHERE role = 'administrateur'");
+        return $stmt->rowCount() > 0;
     }
     
     /**
@@ -67,8 +85,14 @@ class UserManager{
      * @param string $role
      * @return User
      */
-    public function createAdministrator(string $name, string $hashedPassword, string $firstName, string $role = self::ADMINISTRATEUR): User{
-
+    public function createAdministrator(string $name, string $hashedPassword, string $firstName, string $role): User{
+        $stmt = $this->getInstance()->prepare("INSERT INTO user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
+        $stmt->bindValue(":nom", $name);
+        $stmt->bindValue(":prenom", $firstName);
+        $stmt->bindValue(":password", $hashedPassword);
+        $stmt->bindValue(":role", $role);
+        $stmt->execute();
+        return new Administrator($this->getInstance()->lastInsertId(), $name, $firstName, $hashedPassword, $role);
     }
 
     /**
@@ -77,7 +101,13 @@ class UserManager{
      * @return bool
      */
     public function removeAdministrator(User $administrator): bool{
-
+        if ($this->existAdministrateur($administrator)){
+            $stmt = $this->getInstance()->prepare("DELETE FROM user WHERE id = :id");
+            $stmt->bindValue(":id", $administrator->getId());
+            $stmt->execute();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -98,16 +128,28 @@ class UserManager{
      * @return User
      */
     public function createEmployee(string $name, string $hashedPassword, string $firstName, string $role = self::EMPLOYE): User{
-
+        $stmt = $this->getInstance()->prepare("INSERT INTO user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
+        $stmt->bindValue(":nom", $name);
+        $stmt->bindValue(":prenom", $firstName);
+        $stmt->bindValue(":password", $hashedPassword);
+        $stmt->bindValue(":role", $role);
+        $stmt->execute();
+        return new Employee($this->getInstance()->lastInsertId(), $name, $firstName, $hashedPassword, $role);
     }
 
     /**
      * Delete an employee.
      * @param User $employee
-     * @return User
+     * @return bool
      */
-    public function removeEmployee(User $employee): User{
-        
+    public function removeEmployee(User $employee): bool{
+        if ($this->existEmployee($employee)){
+            $stmt = $this->getInstance()->prepare("DELETE FROM user WHERE id = :id");
+            $stmt->bindValue(":id", $employee->getId());
+            $stmt->execute();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -128,16 +170,28 @@ class UserManager{
      * @return User
      */
     public function createManager(string $name, string $hashedPassword, string $firstName, string $role = self::MANAGER): User{
-        
+        $stmt = $this->getInstance()->prepare("INSERT INTO user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
+        $stmt->bindValue(":nom", $name);
+        $stmt->bindValue(":prenom", $firstName);
+        $stmt->bindValue(":password", $hashedPassword);
+        $stmt->bindValue(":role", $role);
+        $stmt->execute();
+        return new Manager($this->getInstance()->lastInsertId(), $name, $firstName, $hashedPassword, $role);
     }
 
     /**
      * Delete a given manager.
      * @param User $manager
-     * @return User
+     * @return bool
      */
-    public function removeManager(User $manager): User{
-        
+    public function removeManager(User $manager): bool{
+        if ($this->existManager($manager)){
+            $stmt = $this->getInstance()->prepare("DELETE FROM user WHERE id = :id");
+            $stmt->bindValue(":id", $manager->getId());
+            $stmt->execute();
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -155,7 +209,8 @@ class UserManager{
      * @return bool
      */
     public function existManager(User $manager): bool{
-
+        $stmt = $this->getInstance()->query("SELECT * FROM user WHERE role = 'manager'");
+        return $stmt->rowCount() > 0;
     }
 
     /**
@@ -164,17 +219,10 @@ class UserManager{
      * @return bool
      */
     public function existEmployee(User $employee): bool{
-
+        $stmt = $this->getInstance()->query("SELECT * FROM user WHERE role = 'employee'");
+        return $stmt->rowCount() > 0;
     }
 
-    /**
-     * Verify if a given administrator exist.
-     * @param User $administrator
-     * @return bool
-     */
-    public function existAdministrator(User $administrator): bool{
-
-    }
 
     /**
      * Get all roles.
