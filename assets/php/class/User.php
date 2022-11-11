@@ -36,11 +36,11 @@ abstract class User{
 
     }
 
-    public function getFirtName(): string{
+    public function getFirstName(): string{
         return $this->firstName;
     }
 
-    public function gerRole(): string{
+    public function getRole(): string{
         return $this->role;
     }
 
