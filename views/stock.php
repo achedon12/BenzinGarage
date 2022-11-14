@@ -31,6 +31,7 @@ if(!Auth::isConnected()){
 
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/stock.css">
+    <link rel="shortcut icon" href="../assets/img/logo.png">
 </head>
     <body>
         <?php

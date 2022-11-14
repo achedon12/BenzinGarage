@@ -33,6 +33,7 @@ if(!Auth::isConnected()){
     <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
     <link rel="stylesheet" href="../assets/css/adminAddClient.css">
     <link rel="stylesheet" href="../assets/css/adminEditClient.css">
+    <link rel="shortcut icon" href="../assets/img/logo.png">
     <title>Modifier un client</title>
 </head>
 <body>

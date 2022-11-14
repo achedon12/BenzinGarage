@@ -38,6 +38,7 @@ if(isset($_POST["id-connexion"]) && isset($_POST["password-connexion"])){
         <title>connexion</title>
         <link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="../assets/css/connexion.css">
+        <link rel="shortcut icon" href="../assets/img/logo.png">
     </head>
     <body>
         <section>

@@ -34,7 +34,7 @@ if(!Auth::isConnected()){
     <link rel="stylesheet" href="../assets/css/adminAddClient.css">
     <link rel="stylesheet" href="../assets/css/adminEditClient.css">
     <link rel="stylesheet" href="../assets/css/adminRemoveClient.css">
-
+    <link rel="shortcut icon" href="../assets/img/logo.png">
 </head>
 <body>
 <nav>

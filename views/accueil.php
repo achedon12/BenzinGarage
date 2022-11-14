@@ -31,6 +31,7 @@ if(!Auth::isConnected()){
 
         <link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="../assets/css/accueil.css">
+        <link rel="shortcut icon" href="../assets/img/logo.png">
         <title>accueil</title>
     </head>
     <body>

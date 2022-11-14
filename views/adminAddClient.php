@@ -31,7 +31,8 @@ if(!Auth::isConnected()){
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
     <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
-    <link rel="stylesheet" href="../assets/css/adminAddClient.css"></link>
+    <link rel="stylesheet" href="../assets/css/adminAddClient.css">
+    <link rel="shortcut icon" href="../assets/img/logo.png">
     <title>Ajouter un client</title>
 </head>
 <body>
