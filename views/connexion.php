@@ -1,24 +1,30 @@
 <?php
 
 use app\controllers\ConnexionController;
+use app\users\Auth;
 
-session_start();
+require_once "assets/php/database/DatabaseManager.php";
+require_once "assets/php/managers/UserManager.php";
+
+if(session_status() !== 2){
+    session_start();
+}
+
+if(Auth::isConnected()){
+    switch($_SESSION["role"]){
+        case UserManager::MANAGER:
+        case UserManager::EMPLOYE:
+            render("accueil.php");
+            exit(0);
+        case UserManager::ADMINISTRATEUR:
+            render("AccueilAdmin.php");
+            exit(0);
+    }
+}
+
 
 if(isset($_POST["id-connexion"]) && isset($_POST["password-connexion"])){
-    if(($user = ConnexionController::loginIn($_POST["id-connexion"],$_POST["password-connexion"])) != null){
-        if($user->getRole() === UserManager::ADMINISTRATEUR){
-            $_POST["isConnected"] = true;
-            $_POST["role"] = UserManager::ADMINISTRATEUR;
-            render("AccueilAdmin.php");
-        }else{
-            if($user->getRole() === UserManager::MANAGER){
-                $_POST["role"] = UserManager::MANAGER;
-            }elseif ($user->getRole() === UserManager::EMPLOYE){
-                $_POST["role"] = UserManager::EMPLOYE;
-            }
-            render("accueil.php");
-        }
-    }
+    ConnexionController::loginIn($_POST["id-connexion"],$_POST["password-connexion"]);
 }
 
 ?>

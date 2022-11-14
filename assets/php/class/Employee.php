@@ -1,5 +1,5 @@
 <?php
 
-class Employee extends User{
+class Employee extends AbstractUser{
 
 }

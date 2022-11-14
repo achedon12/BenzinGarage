@@ -1,7 +1,5 @@
 <?php
 
-require_once("./assets/php/database/DatabaseManager.php");
-
 class UserManager{
 
     const ADMINISTRATEUR = "administrateur";
@@ -50,7 +48,7 @@ class UserManager{
         $array = [];
         $stmt = $this->pdo->query("SELECT * FROM user WHERE role = 'administrateur'");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $array[] = new Manager($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
+            $array[] = new Administrator($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
         return $array;
     }
 
@@ -63,7 +61,20 @@ class UserManager{
         $array = [];
         $stmt = $this->pdo->query("SELECT * FROM user WHERE role = 'employe'");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $array[] = new Manager($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
+            $array[] = new Employee($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
+        return $array;
+    }
+
+    /**
+     * Get all user.
+     * @return User[]
+     */
+    public function getAllUser(): array{
+        /** @var User[] $array */
+        $array = [];
+        $stmt = $this->pdo->query("SELECT * FROM user");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
         return $array;
     }
 
@@ -92,9 +103,9 @@ class UserManager{
      * @param string $hashedPassword
      * @param string $firstName
      * @param string $role
-     * @return User
+     * @return AbstractUser
      */
-    public function createAdministrator(string $name, string $hashedPassword, string $firstName, string $role): User{
+    public function createAdministrator(string $name, string $hashedPassword, string $firstName, string $role): AbstractUser{
         $stmt = $this->pdo->prepare("INSERT INTO user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
         $stmt->bindValue(":nom", $name);
         $stmt->bindValue(":prenom", $firstName);
@@ -106,10 +117,10 @@ class UserManager{
 
     /**
      * Delete a given admnistrator.
-     * @param User $administrator
+     * @param AbstractUser $administrator
      * @return bool
      */
-    public function removeAdministrator(User $administrator): bool{
+    public function removeAdministrator(AbstractUser $administrator): bool{
         if ($this->existAdministrateur($administrator)){
             $stmt = $this->pdo->prepare("DELETE FROM user WHERE id = :id");
             $stmt->bindValue(":id", $administrator->getId());
@@ -121,10 +132,10 @@ class UserManager{
 
     /**
      * Modify a given administrator.
-     * @param User $administrator
-     * @return User
+     * @param AbstractUser $administrator
+     * @return AbstractUser
      */
-    public function modifyAdministrator(User $administrator): User{
+    public function modifyAdministrator(AbstractUser $administrator): AbstractUser{
 
     }
 
@@ -134,9 +145,9 @@ class UserManager{
      * @param string $hashedPassword
      * @param string $firstName
      * @param string $role
-     * @return User
+     * @return AbstractUser
      */
-    public function createEmployee(string $name, string $hashedPassword, string $firstName, string $role = self::EMPLOYE): User{
+    public function createEmployee(string $name, string $hashedPassword, string $firstName, string $role = self::EMPLOYE): AbstractUser{
         $stmt = $this->pdo->prepare("INSERT INTO user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
         $stmt->bindValue(":nom", $name);
         $stmt->bindValue(":prenom", $firstName);
@@ -148,10 +159,10 @@ class UserManager{
 
     /**
      * Delete an employee.
-     * @param User $employee
+     * @param AbstractUser $employee
      * @return bool
      */
-    public function removeEmployee(User $employee): bool{
+    public function removeEmployee(AbstractUser $employee): bool{
         if ($this->existEmployee($employee)){
             $stmt = $this->pdo->prepare("DELETE FROM user WHERE id = :id");
             $stmt->bindValue(":id", $employee->getId());
@@ -163,10 +174,10 @@ class UserManager{
 
     /**
      * Modify an employee
-     * @param User $employee
-     * @return User
+     * @param AbstractUser $employee
+     * @return AbstractUser
      */
-    public function modifyEmployee(User $employee): User{
+    public function modifyEmployee(AbstractUser $employee): AbstractUser{
 
     }
 
@@ -176,9 +187,9 @@ class UserManager{
      * @param string $hashedPassword
      * @param string $firstName
      * @param string $role
-     * @return User
+     * @return AbstractUser
      */
-    public function createManager(string $name, string $hashedPassword, string $firstName, string $role = self::MANAGER): User{
+    public function createManager(string $name, string $hashedPassword, string $firstName, string $role = self::MANAGER): AbstractUser{
         $stmt = $this->pdo->prepare("INSERT INTO user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
         $stmt->bindValue(":nom", $name);
         $stmt->bindValue(":prenom", $firstName);
@@ -190,10 +201,10 @@ class UserManager{
 
     /**
      * Delete a given manager.
-     * @param User $manager
+     * @param AbstractUser $manager
      * @return bool
      */
-    public function removeManager(User $manager): bool{
+    public function removeManager(AbstractUser $manager): bool{
         if ($this->existManager($manager)){
             $stmt = $this->pdo->prepare("DELETE FROM user WHERE id = :id");
             $stmt->bindValue(":id", $manager->getId());
@@ -205,29 +216,29 @@ class UserManager{
 
     /**
      * Modify a manager.
-     * @param User $manager
-     * @return User
+     * @param AbstractUser $manager
+     * @return AbstractUser
      */
-    public function modifyManager(User $manager): User{
+    public function modifyManager(AbstractUser $manager): AbstractUser{
 
     }
 
     /**
      * Verify if a given manager exist.
-     * @param User $manager
+     * @param AbstractUser $manager
      * @return bool
      */
-    public function existManager(User $manager): bool{
+    public function existManager(AbstractUser $manager): bool{
         $stmt = $this->pdo->query("SELECT * FROM user WHERE role = 'manager'");
         return $stmt->rowCount() > 0;
     }
 
     /**
      * Verify if a given employee exist.
-     * @param User $employee
+     * @param AbstractUser $employee
      * @return bool
      */
-    public function existEmployee(User $employee): bool{
+    public function existEmployee(AbstractUser $employee): bool{
         $stmt = $this->pdo->query("SELECT * FROM user WHERE role = 'employee'");
         return $stmt->rowCount() > 0;
     }

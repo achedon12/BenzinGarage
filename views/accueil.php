@@ -2,12 +2,10 @@
 
 use app\users\Auth;
 
-session_start();
-
-/*if(!Auth::isConnected()){
+if(!Auth::isConnected()){
     render("connexion.php");
     return;
-}*/
+}
 
 require_once("./assets/php/managers/TemplateManager.php");
 

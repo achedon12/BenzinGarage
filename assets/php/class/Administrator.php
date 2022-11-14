@@ -1,5 +1,5 @@
 <?php
 
-class Administrator extends User{
+class Administrator extends AbstractUser{
 
 }

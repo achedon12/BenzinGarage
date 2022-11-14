@@ -1,5 +1,5 @@
 <?php
 
-class Manager extends User{
+class Manager extends AbstractUser{
 
 }

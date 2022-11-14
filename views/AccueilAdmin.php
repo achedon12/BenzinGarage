@@ -1,5 +1,13 @@
+<?php
 
+use app\users\Auth;
 
+if(!Auth::isConnected()){
+    render("connexion.php");
+    return;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
