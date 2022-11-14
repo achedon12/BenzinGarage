@@ -1,3 +1,26 @@
+<?php
+
+use app\users\Auth;
+
+require_once "assets/php/database/DatabaseManager.php";
+require_once "assets/php/managers/UserManager.php";
+
+$userManager = new UserManager(DatabaseManager::getInstance());
+
+if(isset($_SESSION["role"])){
+    if(!in_array($_SESSION["role"],$userManager->getRoles())){
+        render("connexion.php");
+        return;
+    }
+}
+
+if(!Auth::isConnected()){
+    render("connexion.php");
+    return;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -21,7 +44,7 @@
         <li><a href="#">Tarification</a></li>
         <li><a href="#">Stock</a></li>
         <li ><a href="/admin/interventionPlanning">Intervention</a></li>
-        <li><a href="#">Deconnexion</a></li>
+        <li><a href="/disconnect">Deconnexion</a></li>
     </ul>
 </nav>
 <main>

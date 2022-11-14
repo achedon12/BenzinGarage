@@ -66,7 +66,12 @@ nav.nav-bar a:hover
     color: var(--green-color);
 }
 
-nav
+nav.nav-bar li.hover a:hover
+{
+    color: var(--white-color);
+}
+
+nav.nav-bar
 {
     display: flex;
     margin-top: 5%;
@@ -77,12 +82,12 @@ nav
     justify-content: center;
 }
 
-nav>img
+nav.nav-bar>img
 {
     width: 5%;
 }
 
-nav>ul
+nav.nav-bar>ul
 {
     display: flex;
     justify-content: space-evenly;
@@ -91,7 +96,7 @@ nav>ul
     height: 100%;
 }
 
-nav>ul>li
+nav.nav-bar>ul>li
 {
     height: 100%;
     vertical-align: middle;

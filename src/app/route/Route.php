@@ -1,5 +1,6 @@
 <?php
 
+use app\controllers\ConnexionController;
 use app\controllers\UsersController;
 use Pecee\SimpleRouter\SimpleRouter;
 
@@ -19,4 +20,7 @@ SimpleRouter::get('/admin/removeClient', [UsersController::class, 'adminRemoveCl
 */
 SimpleRouter::get('/admin/removeEmploye', [UsersController::class, 'adminRemoveEmploye']);
 SimpleRouter::get('/admin/editEmploye', [UsersController::class, 'adminModifyEmploye']);
+
+/* Deconnection */
+SimpleRouter::get('/disconnect',[ConnexionController::class,'disconnect']);
 
