@@ -8,11 +8,8 @@ require_once("./assets/php/managers/TemplateManager.php");
 
 $userManager = new UserManager(DatabaseManager::getInstance());
 
-if(isset($_SESSION["role"])){
-    if(!in_array($_SESSION["role"],$userManager->getRoles())){
-        render("connexion.php");
-        return;
-    }
+if(session_status() !== 2){
+    session_start();
 }
 
 if(!Auth::isConnected()){

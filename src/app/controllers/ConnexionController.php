@@ -41,7 +41,7 @@ class ConnexionController extends DatabaseManager
         }
     }
 
-    public  function disconnect(){
+    public function disconnect(){
         session_start();
         Auth::disconnect();
         render("connexion.php");
