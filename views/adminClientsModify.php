@@ -16,7 +16,7 @@ if(!Auth::isConnected()){
     return;
 }
 
-$client = null;
+$user = null;
 
 ?>
 <!DOCTYPE html>
@@ -47,30 +47,32 @@ $client = null;
         </nav>
         <main>
             <form method="post" class="client-selecteur">
-                <label for="client-select">Choissir un Client:</label>
-                <select id="client-select" onchange="submit()" name="select">
-                    <option value="">--Client--</option>
-                    <?php
-                        foreach($userManager->getAllClients() as $client){
-                            $name  = $client->getName()." ".$client->getFirstName();
-                            $code = $client->getId();
-                            ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
-                        }
-                    ?>
-                </select>
+                <section>
+                    <label for="client-select">Choisir un Client:</label>
+                    <select id="client-select" onchange="submit()" name="select">
+                        <option value="">--Client--</option>
+                        <?php
+                            foreach($userManager->getAllClients() as $client){
+                                $name  = $client->getName()." ".$client->getFirstName();
+                                $code = $client->getId();
+                                ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                            }
+                        ?>
+                    </select>
+                </section>
             </form>
             <?php
-                if($client === null){
-                    echo "<h1>Veuillez séléctionner un client pour commencer l'opération</h1>";
+                if($user == null){
+                    echo "<section><h1>Veuillez séléctionner un client pour commencer l'opération</h1></section>";
                 }else{
                     ?>
                     <form class="client-informations" method="post">
-                        <input type="text" name="name" id="name" value='<?php echo $client->getName()?>'>
-                        <input type="text" name="firstname" id="firstname" value='<?php echo $client->getFirstName()?>'>
-                        <input type="text" name="adresse" id="adresse" value='<?php echo $client->getAdresse()?>'>
-                        <input type="text" name="codepostal" id="codepostal" value='<?php echo $client->getCodePostal()?>'>
-                        <input type="text" name="city" id="city" value='<?php echo $client->getCity()?>'>
-                        <input type="tel" name="telephone" id="telephone" value='<?php echo $client->getTelephoneNumber()?>'>
+                        <input type="text" name="name" id="name" value='<?php echo $user->getName()?>'>
+                        <input type="text" name="firstname" id="firstname" value='<?php echo $user->getFirstName()?>'>
+                        <input type="text" name="adresse" id="adresse" value='<?php echo $user->getAdresse()?>'>
+                        <input type="text" name="codepostal" id="codepostal" value='<?php echo $user->getCodePostal()?>'>
+                        <input type="text" name="city" id="city" value='<?php echo $user->getCity()?>'>
+                        <input type="tel" name="telephone" id="telephone" value='<?php echo $user->getTelephoneNumber()?>'>
                         <input type="submit" value="Modifier le client" id="modify" class="tier">
                         <input type="submit" value="Supprimer le client" id="del" class="tier">
                         <input type="reset" value="Réinitialiser les informations" class="tier">

@@ -1,6 +1,6 @@
 <?php
 
-class AbstractUser{
+abstract class AbstractUser{
 
     private int $id;
 

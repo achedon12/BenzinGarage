@@ -3,7 +3,7 @@
 use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
-require_once "assets/php/managers/ClientManager.php";
+
 require_once "assets/php/managers/UserManager.php";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
@@ -27,15 +27,15 @@ $user = null;
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-        <link rel="stylesheet" href="../assets/css/style.css">
-        <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
-        <link rel="stylesheet" href="../assets/css/adminClientsEmployesModify.css">
+        <link rel="stylesheet" href="../../assets/css/style.css">
+        <link rel="stylesheet" href="../../assets/css/accueilAdmin.css">
+        <link rel="stylesheet" href="../../assets/css/adminClientsEmployesModify.css">
         <title>Administrateur | Clients - modifier</title>
-        <link rel="shortcut icon" href="../assets/img/logo.png">
+        <link rel="shortcut icon" href="../../assets/img/logo.png">
     </head>
     <body>
         <nav>
-            <img src="../assets/img/logo.png" alt="logo">
+            <img src="../../assets/img/logo.png" alt="logo">
             <ul>
                 <li><a href="#">Accueil</a></li>
                 <li><a href="/admin/clients">Clients</a></li>
@@ -48,24 +48,26 @@ $user = null;
         </nav>
         <main>
             <form method="post" class="employe-selecteur">
-                <label for="employe-select">Choissir un employé</label>
-                <select id="employe-select" onchange="submit()" name="select">
-                    <option value="">--Employé--</option>
-                    <?php
-                        foreach($userManager->getAllGarageUser() as $user){
-                            $name  = $user->getName()." ".$user->getFirstName();
-                            $code = $user->getId();
-                            ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
-                        }
-                    ?>
-                </select>
+                <section>
+                    <label for="employe-select">Choisir un employé</label>
+                    <select id="employe-select" onchange="submit()" name="select">
+                        <option value="">--Employé--</option>
+                        <?php
+                            foreach($userManager->getAllGarageUser() as $people){
+                                $name  = $people->getName()." ".$people->getFirstName();
+                                $code = $people->getId();
+                                ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                            }
+                        ?>
+                    </select>
+                </section>
             </form>
             <?php
             if($user === null){
-                echo "<section><h1>Veuillez séléctionner un client pour commencer l'opération</h1></section>";
+                echo "<section class='choose'><h1>Veuillez séléctionner un employé pour commencer l'opération</h1></section>";
             }else{
                 ?>
-                <form class="client-informations" method="post">
+                <form class="employe-informations" method="post">
                     <input type="text" name="name" id="name" value='<?php echo $user->getName()?>'>
                     <input type="text" name="firstname" id="firstname" value='<?php echo $user->getFirstName()?>'>
                     <input type="text" name="adresse" id="adresse" value='<?php echo $user->getAdresse()?>'>

@@ -1,22 +1,27 @@
 main
 {
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 form.employe-selecteur, form.client-selecteur
 {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: flex-end;
     height: 10%;
+    width: 100%;
+}
+
+form.client-selecteur>section, form.employe-selecteur>section
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1%;
+    text-align: center;
     width: 20%;
     background-color: var(--green-color);
     border-radius: 25px;
-}
-
-form.client-selecteur>*, form.employes-selecteur>*
-{
-    padding: 3%;
 }
 
 main>section
@@ -29,20 +34,31 @@ main>section
     background-color: var(--grey-color);
 }
 
+section.choose
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    background-color: var(--grey-color);
+    color: var(--white-color);
+    border-radius: 25px;
+}
+
 h1
 {
     text-align: center;
     color: var(--white-color);
 }
 
-form.client-informations, form.employes-informations
+form.client-informations, form.employe-informations
 {
     display: flex;
     flex-direction: column;
     background-color: var(--grey-color);
 }
 
-form.client-informations>input, form.employes-informations>input
+form.client-informations>input, form.employe-informations>input
 {
     padding: 1%;
 }

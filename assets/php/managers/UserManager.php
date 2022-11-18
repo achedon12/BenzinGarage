@@ -18,11 +18,11 @@ class UserManager{
      * @return array
      */
     public function getAllClients(): array{
-        /** @var  $res Client[]*/
+        /** @var $res Client[]*/
         $res = [];
-        $stmt = $this->pdo->query("SELECT * FROM client");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.client");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $res[] = new Client($row["id"], $row["nom"], $row["prenom"], $row["adresse"], $row["codePostal"], $row["ville"], $row["telephone"], $row["mail"],$row["vehicle"]);
+            $res[] = new Client($row["codeClient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codePostal"], $row["ville"], $row["tel"],$row["mail"] );
         return $res;
     }
 
@@ -33,7 +33,7 @@ class UserManager{
     public function getAllManager(): array{
         /** @var  $array Manager[] */
         $array = [];
-        $stmt = $this->pdo->query("SELECT * FROM user WHERE role = 'manager'");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'manager'");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $array[] = new Manager($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
         return $array;
@@ -46,7 +46,7 @@ class UserManager{
     public function getAllAdministrators(): array{
         /** @var  $array Administrator[]*/
         $array = [];
-        $stmt = $this->pdo->query("SELECT * FROM user WHERE role = 'administrateur'");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'administrateur'");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $array[] = new Administrator($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
         return $array;
@@ -59,7 +59,7 @@ class UserManager{
     public function getAllEmployees(): array{
         /** @var  $array Employee[]*/
         $array = [];
-        $stmt = $this->pdo->query("SELECT * FROM user WHERE role = 'employe'");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'employe'");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $array[] = new Employee($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
         return $array;
@@ -72,7 +72,7 @@ class UserManager{
     public function getAllUser(): array{
         /** @var User[] $array */
         $array = [];
-        $stmt = $this->pdo->query("SELECT * FROM user");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
         return $array;
@@ -85,7 +85,7 @@ class UserManager{
     public function getAllGarageUser(): array{
         /** @var User[] $array */
         $array = [];
-        $stmt = $this->pdo->query("SELECT * FROM user where role ='administrateur' and role = 'employe' and role = 'manager'");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user where role ='administrateur' and role = 'employe' and role = 'manager'");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
         return $array;
@@ -98,7 +98,7 @@ class UserManager{
     public function getAllVehicle(): array{
         /** @var  $array Vehicle[]*/
         $array = [];
-        $stmt = $this->pdo->query("SELECT * FROM vehicule");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.vehicule");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $array[] = new Vehicle($row["noimmatriculation"], $row["noserie"], $row["nummodele"], $row["datemiseencirculation"], $row["codeclient"]);
         return $array;
@@ -106,7 +106,7 @@ class UserManager{
 
 
     public function existAdministrateur(Administrator $administrateur): bool{
-        $stmt = $this->pdo->query("SELECT * FROM user WHERE role = 'administrateur'");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'administrateur'");
         return $stmt->rowCount() > 0;
     }
 
@@ -119,7 +119,7 @@ class UserManager{
      * @return AbstractUser
      */
     public function createAdministrator(string $name, string $hashedPassword, string $firstName, string $role): AbstractUser{
-        $stmt = $this->pdo->prepare("INSERT INTO user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
         $stmt->bindValue(":nom", $name);
         $stmt->bindValue(":prenom", $firstName);
         $stmt->bindValue(":password", $hashedPassword);
@@ -135,7 +135,7 @@ class UserManager{
      */
     public function removeAdministrator(AbstractUser $administrator): bool{
         if ($this->existAdministrateur($administrator)){
-            $stmt = $this->pdo->prepare("DELETE FROM user WHERE id = :id");
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
             $stmt->bindValue(":id", $administrator->getId());
             $stmt->execute();
             return true;
@@ -161,7 +161,7 @@ class UserManager{
      * @return AbstractUser
      */
     public function createEmployee(string $name, string $hashedPassword, string $firstName, string $role = self::EMPLOYE): AbstractUser{
-        $stmt = $this->pdo->prepare("INSERT INTO user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
         $stmt->bindValue(":nom", $name);
         $stmt->bindValue(":prenom", $firstName);
         $stmt->bindValue(":password", $hashedPassword);
@@ -177,7 +177,7 @@ class UserManager{
      */
     public function removeEmployee(AbstractUser $employee): bool{
         if ($this->existEmployee($employee)){
-            $stmt = $this->pdo->prepare("DELETE FROM user WHERE id = :id");
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
             $stmt->bindValue(":id", $employee->getId());
             $stmt->execute();
             return true;
@@ -203,7 +203,7 @@ class UserManager{
      * @return AbstractUser
      */
     public function createManager(string $name, string $hashedPassword, string $firstName, string $role = self::MANAGER): AbstractUser{
-        $stmt = $this->pdo->prepare("INSERT INTO user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
         $stmt->bindValue(":nom", $name);
         $stmt->bindValue(":prenom", $firstName);
         $stmt->bindValue(":password", $hashedPassword);
@@ -219,7 +219,7 @@ class UserManager{
      */
     public function removeManager(AbstractUser $manager): bool{
         if ($this->existManager($manager)){
-            $stmt = $this->pdo->prepare("DELETE FROM user WHERE id = :id");
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
             $stmt->bindValue(":id", $manager->getId());
             $stmt->execute();
             return true;
@@ -242,7 +242,7 @@ class UserManager{
      * @return bool
      */
     public function existManager(AbstractUser $manager): bool{
-        $stmt = $this->pdo->query("SELECT * FROM user WHERE role = 'manager'");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'manager'");
         return $stmt->rowCount() > 0;
     }
 
@@ -252,7 +252,7 @@ class UserManager{
      * @return bool
      */
     public function existEmployee(AbstractUser $employee): bool{
-        $stmt = $this->pdo->query("SELECT * FROM user WHERE role = 'employee'");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'employee'");
         return $stmt->rowCount() > 0;
     }
 

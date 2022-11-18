@@ -16,9 +16,8 @@ class Client{
 
     private string $telephoneNumber;
 
-    private Vehicle $vehicle;
 
-    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, Vehicle $vehicle)
+    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber)
     {
         $this->id = $id;
         $this->name = $name;
@@ -27,7 +26,6 @@ class Client{
         $this->codePostal = $codePostal;
         $this->city = $city;
         $this->telephoneNumber = $telephoneNumber;
-        $this->vehicle = $vehicle;
     }
 
     public function getId(): int{
@@ -36,18 +34,6 @@ class Client{
 
     public function getName(): string{
         return $this->name;
-    }
-
-    public function getHashedPassword(): string{
-        return $this->hashedPassword;
-    }
-
-    public function getPasswordNotHashed(): string{
-
-    }
-
-    public function getVehicle(): ?Vehicle{
-        return $this->vehicle;
     }
 
     public function getFirstName(): string{
