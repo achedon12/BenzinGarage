@@ -12,8 +12,8 @@ class Intervention{
     private string $descriptifDemande;
     private int $kmActuel;
     private bool $devisOn;
-    private int $etat;
-    private string $idOpérateur;
+    private int $etatdemande;
+    private string $idOperateur;
     private Vehicle $vehicle;
     private Client $client;
 
@@ -37,8 +37,8 @@ class Intervention{
         $this->descriptifDemande = $descriptifDemande;
         $this->kmActuel = $kmActuel;
         $this->devisOn = $devisOn;
-        $this->etat = $etat;
-        $this->idOpérateur = $idOpérateur;
+        $this->etatdemande = $etat;
+        $this->idOperateur = $idOpérateur;
         $this->vehicle = $vehicle;
         $this->client = $client;
     }
@@ -62,9 +62,9 @@ class Intervention{
     /**
      * @return string
      */
-    public function getIdOpérateur(): string
+    public function getIdOperateur(): string
     {
-        return $this->idOpérateur;
+        return $this->idOperateur;
     }
 
     /**
@@ -118,9 +118,9 @@ class Intervention{
     /**
      * @return int
      */
-    public function getEtat(): int
+    public function getEtatdemande(): int
     {
-        return $this->etat;
+        return $this->etatdemande;
     }
 
     /**

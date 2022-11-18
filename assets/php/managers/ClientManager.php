@@ -52,14 +52,15 @@ class ClientManager{
      * @param Client $client
      * @return bool
      */
-    public function deleteClient(Client $client): bool{
-        if ($this->clientExist($client)){
+    public function deleteClient(Client $client): bool
+    {
+        if ($this->clientExist($client)) {
             $stmt = $this->pdo->prepare("DELETE FROM sae_garage.client WHERE id = :id");
             $stmt->execute(["id" => $client->getId()]);
             return true;
         }
         return false;
-
+    }
 
     /**
      * Update informations for a given client
@@ -67,8 +68,9 @@ class ClientManager{
      * @return Client
      */
     public function modifyClient(Client $client): Client{
-
+        return $client;
     }
+
 
     /**
      * Get vehicle from a given client.
@@ -79,7 +81,8 @@ class ClientManager{
         $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.vehicule WHERE codeclient = :id");
         $stmt->execute(["id" => $client->getId()]);
         $result = $stmt->fetch();
-        return new Vehicle($result["vehicle"]);
+        return new Vehicle($result["numberPlate"],$result["noSerie"],$result["dateMiseEnCirculation"],$result["numModele"],$result["client"]);
+        }
     }
 
     /**
@@ -103,8 +106,10 @@ class ClientManager{
     public function removeVehicleFromClient(Client $client, Vehicle $vehicle): bool{
         if ($this->$vehicle->clientHasVehicle($client)){
             $stmt = $this->pdo->prepare("DELETE FROM sae_garage.vehicule WHERE codeclient = :id and numimmatriculation = :numImmatriculation");
-            $stmt->execute(["id" => $client->getId()
-                , "numImmatriculation" => $vehicle->getId()]);
+            $stmt->execute([
+                "id" => $client->getId()
+                , "numImmatriculation" => $vehicle->getNumberPlate()
+            ]);
             return true;
         }
         return false;
