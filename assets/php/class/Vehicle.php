@@ -4,7 +4,7 @@ class Vehicle{
 
     private int $id;
     private int $numSerie;
-    private int $numModel;
+    private int $numModele;
     private date $dateRoadRelease;
     private int $client;
 
@@ -20,8 +20,8 @@ class Vehicle{
         return $this->id;
     }
 
-    public function getVehicleClient(int $client): int{
-
+    public function getClient(): int{
+        return $this->client;
     }
 
     public function getVehicleModel(): int{
@@ -35,6 +35,7 @@ class Vehicle{
     public function getVehicleNumSerie(): int{
         return $this->numSerie;
     }
+
 
 
 }

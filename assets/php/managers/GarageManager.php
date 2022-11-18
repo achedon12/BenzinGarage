@@ -53,7 +53,7 @@ class GarageManager extends DatabaseManager {
     public function getAllFacture(): array{
         /** @var  $array Facture[]*/
         $res = [];
-        $stmt = $this->pdo->query("select * from facture;");
+        $stmt = $this->pdo->query("swelect * from facture;");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $res[] = new Facture($row['nofacture'], $row['datefacture'], $row['tauxtva'],$row['netapayer'],$row['etatfacture'],$row['numdde']);
         return $res;

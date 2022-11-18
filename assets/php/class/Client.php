@@ -20,21 +20,19 @@ class Client{
 
     private string $dateCreation;
 
-    private string $hashedPassword;
 
-    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $eMail, string $dateCreation,string $hashedPassword)
+    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $mail, Vehicle $vehicle, string $dateCreation)
     {
         $this->id = $id;
         $this->name = $name;
         $this->firstName = $firstName;
-        $this->eMail = $eMail;
         $this->adresse = $adresse;
-        $this->dateCreation = $dateCreation;
         $this->codePostal = $codePostal;
         $this->city = $city;
         $this->telephoneNumber = $telephoneNumber;
-        $this->hashedPassword = $hashedPassword;
-
+        $this->eMail = $mail;
+        $this->vehicle = $vehicle;
+        $this->dateCreation = $dateCreation;
     }
 
     public function getId(): int{
@@ -44,16 +42,6 @@ class Client{
     public function getName(): string{
         return $this->name;
     }
-
-    public function getHashedPassword(): string{
-        return $this->hashedPassword;
-    }
-
-    public function getPasswordNotHashed(): string{
-
-    }
-
-
 
     /**
      * @return string
