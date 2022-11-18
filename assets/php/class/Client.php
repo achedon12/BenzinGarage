@@ -16,7 +16,22 @@ class Client{
 
     private string $telephoneNumber;
 
-    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber)
+    private string  $eMail;
+
+    private string $dateCreation;
+
+    /**
+     * @param int $id
+     * @param string $name
+     * @param string $firstName
+     * @param string $adresse
+     * @param int $codePostal
+     * @param string $city
+     * @param string $telephoneNumber
+     * @param string $eMail
+     * @param string $dateCreation
+     */
+    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $eMail, string $dateCreation)
     {
         $this->id = $id;
         $this->name = $name;
@@ -25,6 +40,8 @@ class Client{
         $this->codePostal = $codePostal;
         $this->city = $city;
         $this->telephoneNumber = $telephoneNumber;
+        $this->eMail = $eMail;
+        $this->dateCreation = $dateCreation;
     }
 
     public function getId(): int{
@@ -33,6 +50,14 @@ class Client{
 
     public function getName(): string{
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateCreation(): string
+    {
+        return $this->dateCreation;
     }
 
     public function getFirstName(): string{
@@ -49,6 +74,10 @@ class Client{
 
     public function getCity(): string{
         return $this->city;
+    }
+
+    public function getEmail(): string{
+        return $this->eMail;
     }
 
     public function getTelephoneNumber(): string{
