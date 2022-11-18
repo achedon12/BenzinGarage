@@ -48,7 +48,7 @@ if(!Auth::isConnected()){
                 <h1>Modifier un client</h1>
                 <img src="../assets/img/modify-clients.png" alt="">
             </a>
-            <a href="#">
+            <a href="/admin/clients/create">
                 <h1>Créer un client</h1>
                 <img src="../assets/img/add-clients.png" alt="">
             </a>

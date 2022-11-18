@@ -72,4 +72,12 @@ class UsersController{
         render('adminClientsModify.php');
     }
 
+    public function adminClientsCreate(){
+        render('adminClientsCreate.php');
+    }
+
+    public function adminEmployesCreate(){
+        render('adminEmployesCreate.php');
+    }
+
 }

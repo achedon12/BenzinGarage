@@ -27,5 +27,9 @@ SimpleRouter::get('/disconnect',[ConnexionController::class,'disconnect']);
 
 SimpleRouter::get('/admin/clients',[UsersController::class,'adminClients']);
 SimpleRouter::get('/admin/clients/modify',[UsersController::class,'adminClientsModify']);
+SimpleRouter::get('/admin/clients/delete',[UsersController::class,'adminClientsModify']);
+SimpleRouter::get('/admin/clients/create',[UsersController::class,'adminClientsCreate']);
 SimpleRouter::get('/admin/employes',[UsersController::class,'adminEmployes']);
 SimpleRouter::get('/admin/employes/modify',[UsersController::class,'adminEmployesModify']);
+SimpleRouter::get('/admin/employes/delete',[UsersController::class,'adminEmployesModify']);
+SimpleRouter::get('/admin/employes/create',[UsersController::class,'adminEmployesCreate']);

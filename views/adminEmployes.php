@@ -35,7 +35,7 @@ if(!Auth::isConnected()){
 
             <img src="../assets/img/logo.png" alt="logo">
             <ul>
-                <li><a href="/admin/accueil">Accueil</a></li>
+                <li><a href="/accueil/admin">Accueil</a></li>
                 <li><a href="/admin/clients">Clients</a></li>
                 <li class="hover"><a href="/admin/employes">Employés</a></li>
                 <li><a href="#">Tarification</a></li>
@@ -49,7 +49,7 @@ if(!Auth::isConnected()){
                 <h1>Modifier un employé</h1>
                 <img src="../assets/img/modify-employe.png" alt="">
             </a>
-            <a href="#">
+            <a href="/admin/employes/create">
                 <h1>Créer un employé</h1>
                 <img src="../assets/img/add-employe.png" alt="">
             </a>

@@ -3,7 +3,7 @@ main
     justify-content: space-evenly;
 }
 
-form.employe-selecteur, form.client-selecteur
+form.selecteur, form.selecteur
 {
     display: flex;
     align-items: center;
@@ -12,7 +12,7 @@ form.employe-selecteur, form.client-selecteur
     width: 100%;
 }
 
-form.client-selecteur>section, form.employe-selecteur>section
+form.selecteur>section, form.selecteur>section
 {
     display: flex;
     align-items: center;
@@ -22,6 +22,7 @@ form.client-selecteur>section, form.employe-selecteur>section
     width: 20%;
     background-color: var(--green-color);
     border-radius: 25px;
+    border: 1px solid var(--white-color);
 }
 
 main>section
@@ -51,14 +52,14 @@ h1
     color: var(--white-color);
 }
 
-form.client-informations, form.employe-informations
+form.informations
 {
     display: flex;
     flex-direction: column;
     background-color: var(--grey-color);
 }
 
-form.client-informations>input, form.employe-informations>input
+form.informations>input
 {
     padding: 1%;
 }

@@ -35,8 +35,8 @@ if(!Auth::isConnected()){
             <img src="../assets/img/logo.png" alt="logo">
             <ul>
                 <li class="hover"><a href="/accueil/admin">Accueil</a></li>
-                <li ><a href="/admin/clients">Clients</a></li>
-                <li ><a href="/admin/employes">Employés</a></li>
+                <li><a href="/admin/clients">Clients</a></li>
+                <li><a href="/admin/employes">Employés</a></li>
                 <li><a href="#">Tarification</a></li>
                 <li><a href="#">Stock</a></li>
                 <li ><a href="/admin/interventionPlanning">Intervention</a></li>
@@ -44,27 +44,27 @@ if(!Auth::isConnected()){
             </ul>
         </nav>
         <main>
-            <a href="/admin/addClient">
+            <a href="/admin/clients/create">
                 <h1>Ajouter un client</h1>
                 <img src="../assets/img/add-clients.png" alt="">
             </a>
-            <a href="/admin/editClient">
+            <a href="/admin/clients/modify">
                 <h1>Modifier un client</h1>
                 <img src="../assets/img/modify-clients.png" alt="">
             </a>
-            <a href="/admin/removeClient">
+            <a href="/admin/clients/delete">
                 <h1>Supprimer un client</h1>
                 <img src="../assets/img/delete-clients.png" alt="">
             </a>
-            <a href="/admin/addEmploye">
+            <a href="/admin/employes/create">
                 <h1>Ajouter un employé</h1>
                 <img src="../assets/img/add-employe.png" alt="">
             </a>
-            <a href="/admin/editEmploye">
+            <a href="/admin/employes/modify">
                 <h1>Modifier un employé</h1>
                 <img src="../assets/img/modify-employe.png" alt="">
             </a>
-            <a href="/admin/removeEmploye">
+            <a href="/admin/employes/delete">
                 <h1>Supprimer un employé</h1>
                 <img src="../assets/img/remove-employe.png" alt="">
             </a>

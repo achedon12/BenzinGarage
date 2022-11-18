@@ -18,7 +18,9 @@ if(!Auth::isConnected()){
 }
 
 $user = null;
-
+if(isset($_POST["employe-select"]) && $_POST["employe-select"] != ""){
+    $user = $_POST["employe-select"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -47,13 +49,13 @@ $user = null;
             </ul>
         </nav>
         <main>
-            <form method="post" class="employe-selecteur">
+            <form method="post" class="selecteur">
                 <section>
                     <label for="employe-select">Choisir un employé</label>
                     <select id="employe-select" onchange="submit()" name="select">
                         <option value="">--Employé--</option>
                         <?php
-                            foreach($userManager->getAllGarageUser() as $people){
+                            foreach($userManager->getAllUser() as $people){
                                 $name  = $people->getName()." ".$people->getFirstName();
                                 $code = $people->getId();
                                 ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
@@ -67,7 +69,7 @@ $user = null;
                 echo "<section class='choose'><h1>Veuillez séléctionner un employé pour commencer l'opération</h1></section>";
             }else{
                 ?>
-                <form class="employe-informations" method="post">
+                <form class="informations" method="post">
                     <input type="text" name="name" id="name" value='<?php echo $user->getName()?>'>
                     <input type="text" name="firstname" id="firstname" value='<?php echo $user->getFirstName()?>'>
                     <input type="text" name="adresse" id="adresse" value='<?php echo $user->getAdresse()?>'>

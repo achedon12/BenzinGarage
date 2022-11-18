@@ -1,5 +1,8 @@
 <?php
 
+require_once "assets/php/class/User.php";
+require_once "assets/php/class/Client.php";
+
 class UserManager{
 
     const ADMINISTRATEUR = "administrateur";
@@ -22,7 +25,7 @@ class UserManager{
         $res = [];
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.client");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $res[] = new Client($row["codeClient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codePostal"], $row["ville"], $row["tel"],$row["mail"] );
+            $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"],$row["mail"],$row["datecreation"] );
         return $res;
     }
 
@@ -73,19 +76,6 @@ class UserManager{
         /** @var User[] $array */
         $array = [];
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.user");
-        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
-        return $array;
-    }
-
-    /**
-     * Get all garager users.
-     * @return User[]
-     */
-    public function getAllGarageUser(): array{
-        /** @var User[] $array */
-        $array = [];
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user where role ='administrateur' and role = 'employe' and role = 'manager'");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
         return $array;
