@@ -2,65 +2,35 @@
 
 class Piece{
 
-    private string $libellearticle;
+    private string $reference;
 
-    private int $qte_min;
+    private int $stock;
 
-    private float $prixunitactuelht;
+    private float $price;
 
-    public string $codearticle;
+    private string $name;
 
-    private string $typearticle;
-
-    private int $qte_stock;
-
-    /**
-     * @param string $codearticle
-     * @param string $libellearticle
-     * @param int $qte_min
-     * @param String $typearticle
-     * @param float $prixunitactuelht
-     * @param int $qte_stock
-     */
-    public function __construct(string $codearticle, string $libellearticle, int $qte_min, String $typearticle, float $prixunitactuelht, int $qte_stock){
-        $this->libellearticle = $libellearticle;
-        $this->qte_min = $qte_min;
-        $this->prixunitactuelht = $prixunitactuelht;
-        $this->codearticle = $codearticle;
-        $this->typearticle = $typearticle;
-        $this->qte_stock = $qte_stock;
+    public function __construct(string $name, string $reference, int $stock, float $price){
+        $this->reference = $reference;
+        $this->stock = $stock;
+        $this->price = $price;
+        $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getTypearticle(): string
+    public function getReference(): string{
+        return $this->reference;
+    }
+
+    public function getStock(): int{
+        return $this->stock;
+    }
+
+    public function getPrice(): int{
+        return $this->price;
+    }
+
+    public function getName(): string
     {
-        return $this->typearticle;
-    }
-
-    /**
-     * @return int
-     */
-    public function getQteStock(): int
-    {
-        return $this->qte_stock;
-    }
-
-    public function getlibellearticle(): string{
-        return $this->libellearticle;
-    }
-
-    public function getQte_min(): int{
-        return $this->qte_min;
-    }
-
-    public function getPrixunitactuelht(): int{
-        return $this->prixunitactuelht;
-    }
-
-    public function getCodeArticle(): string
-    {
-        return $this->codearticle;
+        return $this->name;
     }
 }

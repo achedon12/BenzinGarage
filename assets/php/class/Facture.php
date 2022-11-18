@@ -5,52 +5,41 @@ class Facture{
     const FACTURE_PAYED = 0;
     const FACTURE_NOT_PAYED = 1;
 
-    private int $nofacture;
+    private int $factureNumber;
 
-    private string $datefacture;
+    private string $factureDate;
 
-    private int $tauxtva;
+    private int $tva;
 
-    private float $netapayer;
+    private float $toPay;
 
-    private int $etatfacture;
+    private int $etat;
 
-    private int $numdde;
-
-    public function __construct(int $nofacture, string $datefacture, int $tauxtva, float $netapayer, int $etatfacture,int $numdde)
+    public function __construct(int $factureNumber, string $factureDate, int $tva, float $toPay, int $etat)
     {
-        $this->nofacture = $nofacture;
-        $this->datefacture = $datefacture;
-        $this->tauxtva = $tauxtva;
-        $this->netapayer = $netapayer;
-        $this->etatfacture = $etatfacture;
-        $this->numdde = $numdde;
+        $this->factureNumber = $factureNumber;
+        $this->factureDate = $factureDate;
+        $this->tva = $tva;
+        $this->toPay = $toPay;
+        $this->etat = $etat;
     }
 
-    /**
-     * @return int
-     */
-    public function getNumdde(): int
-    {
-        return $this->numdde;
+    public function getFactureNumber(): int{
+        return $this->factureNumber;
     }
 
-    public function getNofacture(): int{
-        return $this->nofacture;
+    public function getFactureDate(): string{
+        return $this->factureDate;
+    }
+    public function getTva(): int{
+        return $this->tva;
+    }
+    public function getToPay(): float{
+        return $this->toPay;
     }
 
-    public function getDatefacture(): string{
-        return $this->datefacture;
-    }
-    public function getTauxtva(): int{
-        return $this->tauxtva;
-    }
-    public function getNetapayer(): float{
-        return $this->netapayer;
-    }
-
-    public function getEtatfacture(): int{
-        return $this->etatfacture;
+    public function getEtat(): int{
+        return $this->etat;
     }
 
 }

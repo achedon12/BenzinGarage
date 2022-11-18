@@ -16,13 +16,7 @@ class Client{
 
     private string $telephoneNumber;
 
-    private string  $eMail;
-
-    private string $dateCreation;
-
-    private Vehicle $vehicle;
-
-    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $mail, Vehicle $vehicle, string $dateCreation)
+    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber)
     {
         $this->id = $id;
         $this->name = $name;
@@ -31,9 +25,6 @@ class Client{
         $this->codePostal = $codePostal;
         $this->city = $city;
         $this->telephoneNumber = $telephoneNumber;
-        $this->eMail = $mail;
-        $this->vehicle = $vehicle;
-        $this->dateCreation = $dateCreation;
     }
 
     public function getId(): int{
@@ -42,34 +33,6 @@ class Client{
 
     public function getName(): string{
         return $this->name;
-    }
-
-    public function getHashedPassword(): string{
-        return $this->hashedPassword;
-    }
-
-    public function getPasswordNotHashed(): string{
-
-    }
-
-    /**
-     * @return string
-     */
-    public function getEMail(): string
-    {
-        return $this->eMail;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDateCreation(): string
-    {
-        return $this->dateCreation;
-    }
-
-    public function getVehicle(): ?Vehicle{
-        return $this->vehicle;
     }
 
     public function getFirstName(): string{
@@ -86,10 +49,6 @@ class Client{
 
     public function getCity(): string{
         return $this->city;
-    }
-
-    public function getMail(): string{
-        retrun $this->mail;
     }
 
     public function getTelephoneNumber(): string{
