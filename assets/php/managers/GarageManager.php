@@ -1,6 +1,14 @@
 <?php
 
-class GarageManager extends DatabaseManager {
+class GarageManager {
+
+    private PDO $pdo;
+
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
 
     /**
      * Get available account of a given piece.

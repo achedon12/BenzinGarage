@@ -1,6 +1,14 @@
 <?php
 
-class InterventionManager extends DatabaseManager{
+class InterventionManager {
+
+    private PDO $pdo;
+
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
 
     /**
      * Create a intervention for a given client.

@@ -1,7 +1,14 @@
 <?php
 require_once("./assets/php/database/DatabaseManager.php");
 
-class ClientManager extends DatabaseManager{
+class ClientManager{
+    private PDO $pdo;
+
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
 
     /**
      * Create a new Client.
