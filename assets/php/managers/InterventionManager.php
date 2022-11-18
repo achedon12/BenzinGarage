@@ -114,11 +114,15 @@ class InterventionManager {
     }
 
     /**
-     * Get informations from a given intervention.
+     * Get information from a given intervention.
      * @param Intervention $intervention
      * @return string
      */
     public function getInformationForTask(Intervention $intervention): string{
-
+        $stmt = $this->pdo->prepare("select descriptif_demande from sae_garage.dde_interv where numdde = :numdde;");
+        $stmt->execute([
+            "numdde" => $intervention->getId()
+        ]);
+        return $stmt->fetch(PDO::FETCH_ASSOC)["descriptif_demande"];
     }
 }

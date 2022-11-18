@@ -83,7 +83,7 @@ class ClientManager{
         $result = $stmt->fetch();
         return new Vehicle($result["numberPlate"],$result["noSerie"],$result["dateMiseEnCirculation"],$result["numModele"],$result["client"]);
         }
-    }
+
 
     /**
      * Verify if a given client has a vehicle.
@@ -124,10 +124,11 @@ class ClientManager{
      * @param int $codePostal
      * @param string $city
      * @param string $telephone
-     * @param Vehicle|null $vehicle
+     * @param string $mail
+     * @param string $datecreation
      * @return Client
      */
-    public function getClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephone, string $ail, date $datecreation): Client{
-        return new Client($id,  $name, $firstName, $adresse, $codePostal, $city, $telephone,  $mail, $datecreation);
+    public function getClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephone, string $mail, string $datecreation): Client{
+        return new Client($id, $name, $firstName, $adresse, $codePostal, $city, $telephone, $mail, $datecreation);
     }
 }
