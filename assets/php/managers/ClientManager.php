@@ -92,18 +92,19 @@ class ClientManager{
     }
 
     /**
-     * Get a client from parameters.
-     * @param int $id
-     * @param string $name
-     * @param string $firstName
-     * @param string $adresse
-     * @param int $codePostal
-     * @param string $city
-     * @param string $telephone
-     * @param Vehicle|null $vehicle
-     * @return Client
+     * Get a client from a given id.
+     * @param string $id
+     * @return Client|null
      */
-    public function getClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephone, Vehicle $vehicle = null): Client{
-        return new Client($id,  $name, $firstName, $adresse, $codePostal, $city, $telephone,  $vehicle );
+    public function getClient(string $id): ?Client{
+        $sql = "SELECT * FROM sae_garage.client WHERE codeclient = :id";
+        $prepare = $this->pdo->prepare($sql);
+        $prepare->bindParam(':id', $id, PDO::PARAM_STR);
+        $prepare->execute();
+        if ($prepare->rowCount() > 0) {
+            $result = $prepare->fetchAll();
+            return new Client($result[0]["codeclient"],$result[0]["nom"],$result[0]["prenom"],$result[0]["adresse"],$result[0]["codepostal"],$result[0]["ville"],$result[0]["tel"],$result[0]["mail"],$result[0]["datecreation"]);
+        }
+        return null;
     }
 }

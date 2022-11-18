@@ -6,7 +6,7 @@ use app\users\Auth;
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
 
-if(session_status() !== 2){
+if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 

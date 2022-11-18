@@ -11,11 +11,9 @@ if(session_status() !== 2){
     session_start();
 }
 
-if(!Auth::isConnected()){
-    render("connexion.php");
-    return;
+if(session_status() == PHP_SESSION_NONE){
+    session_start();
 }
-
 ?>
 
 <!doctype html>

@@ -8,7 +8,7 @@ require_once("./assets/php/managers/TemplateManager.php");
 
 $userManager = new UserManager(DatabaseManager::getInstance());
 
-if(session_status() !== 2){
+if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 

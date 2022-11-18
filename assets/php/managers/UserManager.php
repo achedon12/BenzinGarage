@@ -81,6 +81,7 @@ class UserManager{
         return $array;
     }
 
+
     /**
      * Get all vehicles.
      * @return array
@@ -94,6 +95,17 @@ class UserManager{
         return $array;
     }
 
+    public function getUser(string $id): ?User{
+        $sql = "SELECT * FROM sae_garage.user WHERE id = :id";
+        $prepare = $this->pdo->prepare($sql);
+        $prepare->bindParam(':id', $id, PDO::PARAM_STR);
+        $prepare->execute();
+        if ($prepare->rowCount() > 0) {
+            $result = $prepare->fetchAll();
+            return new User($result[0]["id"],$result[0]["nom"],$result[0]["password"],$result[0]["prenom"],$result[0]["role"]);
+        }
+        return null;
+    }
 
     public function existAdministrateur(Administrator $administrateur): bool{
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'administrateur'");

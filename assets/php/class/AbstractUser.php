@@ -2,7 +2,7 @@
 
 abstract class AbstractUser{
 
-    private int $id;
+    private string $id;
 
     private string $name;
 
@@ -12,7 +12,7 @@ abstract class AbstractUser{
 
     private string $role;
 
-    public function __construct(int $id, string $name, string $hashedPassword, string $firstName, string $role){
+    public function __construct(string $id, string $name, string $hashedPassword, string $firstName, string $role){
         $this->id = $id;
         $this->name = $name;
         $this->hashedPassword = $hashedPassword;
@@ -20,7 +20,7 @@ abstract class AbstractUser{
         $this->role = $role;
     }
 
-    public function getId(): int{
+    public function getId(): string{
         return $this->id;
     }
 
