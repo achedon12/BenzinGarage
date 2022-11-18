@@ -24,3 +24,8 @@ SimpleRouter::get('/admin/editEmploye', [UsersController::class, 'adminModifyEmp
 /* Deconnection */
 SimpleRouter::get('/disconnect',[ConnexionController::class,'disconnect']);
 
+
+SimpleRouter::get('/admin/clients',[UsersController::class,'adminClients']);
+SimpleRouter::get('/admin/clients/modify',[UsersController::class,'adminClientsModify']);
+SimpleRouter::get('/admin/employes',[UsersController::class,'adminEmployes']);
+SimpleRouter::get('/admin/employes/modify',[UsersController::class,'adminEmployesModify']);

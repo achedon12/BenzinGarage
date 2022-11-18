@@ -79,6 +79,12 @@ main>a{
     text-align: center;
 }
 
+main.clients, main.employes
+{
+    align-items: center;
+    justify-content: space-around;
+}
+
 main>a>img{
     width: 25%;
 }

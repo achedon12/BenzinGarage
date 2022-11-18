@@ -66,13 +66,26 @@ class UserManager{
     }
 
     /**
-     * Get all user.
+     * Get all users.
      * @return User[]
      */
     public function getAllUser(): array{
         /** @var User[] $array */
         $array = [];
         $stmt = $this->pdo->query("SELECT * FROM user");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
+        return $array;
+    }
+
+    /**
+     * Get all garager users.
+     * @return User[]
+     */
+    public function getAllGarageUser(): array{
+        /** @var User[] $array */
+        $array = [];
+        $stmt = $this->pdo->query("SELECT * FROM user where role ='administrateur' and role = 'employe' and role = 'manager'");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
         return $array;

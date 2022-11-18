@@ -1,0 +1,49 @@
+main
+{
+    justify-content: space-around;
+}
+
+form.employe-selecteur, form.client-selecteur
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    width: 20%;
+    background-color: var(--green-color);
+    border-radius: 25px;
+}
+
+form.client-selecteur>*, form.employes-selecteur>*
+{
+    padding: 3%;
+}
+
+main>section
+{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--grey-color);
+}
+
+h1
+{
+    text-align: center;
+    color: var(--white-color);
+}
+
+form.client-informations, form.employes-informations
+{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--grey-color);
+}
+
+form.client-informations>input, form.employes-informations>input
+{
+    padding: 1%;
+}
+

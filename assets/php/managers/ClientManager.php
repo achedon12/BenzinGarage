@@ -2,6 +2,13 @@
 
 class ClientManager{
 
+    private PDO $pdo;
+
+    public function __construct(PDO $pdo)
+    {
+        $this->pdo = $pdo;
+    }
+
     /**
      * Create a new Client.
      * @param string $name

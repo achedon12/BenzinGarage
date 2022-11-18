@@ -32,11 +32,11 @@ if(!Auth::isConnected()){
     </head>
     <body>
         <nav>
-
             <img src="../assets/img/logo.png" alt="logo">
             <ul>
                 <li class="hover"><a href="/accueil/admin">Accueil</a></li>
-                <li ><a href="/admin/utilisateur">Utilisateur</a></li>
+                <li ><a href="/admin/clients">Clients</a></li>
+                <li ><a href="/admin/employes">Employés</a></li>
                 <li><a href="#">Tarification</a></li>
                 <li><a href="#">Stock</a></li>
                 <li ><a href="/admin/interventionPlanning">Intervention</a></li>

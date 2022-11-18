@@ -37,7 +37,8 @@ if(!Auth::isConnected()){
     <img src="../assets/img/logo.png" alt="logo">
     <ul>
         <li><a href="/accueil/admin" >Accueil</a></li>
-        <li class="hover"><a href="/admin/utilisateur">Utilisateur</a></li>
+        <li><a href="#">Clients</a></li>
+        <li class="hover"><a href="#">Employés</a></li>
         <li><a href="#">Tarification</a></li>
         <li><a href="#">Stock</a></li>
         <li><a href="/admin/interventionPlanning">Intervention</a></li>
