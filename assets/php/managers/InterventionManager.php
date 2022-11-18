@@ -1,14 +1,16 @@
 <?php
 
-class InterventionManager{
+class InterventionManager extends DatabaseManager{
 
     /**
      * Create a intervention for a given client.
      * @param Client $client
      * @return Intervention
      */
-    public function createIntervention(Client $client): Intervention{
-
+    public function createIntervention(Intervention $ddeInterv, string $daterdv, string $heurerdv,string $descriptif_demande, int $km_actuel,bool $devisOn, int $etat,string $idOpérateur,Vehicle $vehicle, Client $client): bool{
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.dde_interv(numdde,daterdv,heurerdv,descriptif_demande,km_actuel,devis_on,etatdemande,idoperateur,noimmatriculation,codeclient)  VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $stmt->execute([$client->$client->codeclient]); // ici on doit rajouter tout les parametres pour la création
+        return true;
     }
 
     /**

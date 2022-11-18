@@ -45,6 +45,14 @@ class Intervention{
 
     /**
      * @return int
+     * Incrementation de l'id pour garder le dernier ID permettant de ne pas utiliser un id deja utiliser
+     */
+    public function keepLastId() : int{
+
+    }
+
+    /**
+     * @return int
      */
     public function getId(): int
     {

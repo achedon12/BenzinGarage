@@ -1,16 +1,7 @@
 <?php
 require_once("./assets/php/database/DatabaseManager.php");
 
-class ClientManager{
-
-    private PDO $pdo;
-
-
-    public function __construct(PDO $pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
+class ClientManager extends DatabaseManager{
 
     /**
      * Create a new Client.
@@ -20,11 +11,10 @@ class ClientManager{
      * @param int $codePostal
      * @param string $city
      * @param string $telephoneNumber
-     * @param Vehicle $vehicle
      * @return Client
      */
     public function createClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $email, date $dateCreation): Client{
-        $stmt = $this->pdo->prepare("INSERT INTO client (codeclient, nom, prenom, adresse, codepostal, ville, tel, mail, datecreation ) VALUES (:id, :nom, :prenom, :adresse, :codePostal, :ville, :telephone, :mail, :dateCreation)");
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.client (codeclient, nom, prenom, adresse, codepostal, ville, tel, mail, datecreation ) VALUES (:id, :nom, :prenom, :adresse, :codePostal, :ville, :telephone, :mail, :dateCreation)");
         $stmt->execute([
             "id"=>$id,
             "nom" => $name,
@@ -45,7 +35,7 @@ class ClientManager{
      * @return bool
      */
     public function clientExist(Client $client): bool{
-        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE id = :id");
+        $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.client WHERE id = :id");
         $stmt->execute(["id" => $client->getId()]);
         return $stmt->rowCount() > 0;
     }
@@ -57,12 +47,12 @@ class ClientManager{
      */
     public function deleteClient(Client $client): bool{
         if ($this->clientExist($client)){
-            $stmt = $this->pdo->prepare("DELETE FROM client WHERE id = :id");
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.client WHERE id = :id");
             $stmt->execute(["id" => $client->getId()]);
             return true;
         }
         return false;
-    }
+
 
     /**
      * Update informations for a given client
@@ -79,7 +69,7 @@ class ClientManager{
      * @return Vehicle
      */
     public function getClientVehicle(Client $client): Vehicle{
-        $stmt = $this->pdo->prepare("SELECT * FROM vehicule WHERE codeclient = :id");
+        $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.vehicule WHERE codeclient = :id");
         $stmt->execute(["id" => $client->getId()]);
         $result = $stmt->fetch();
         return new Vehicle($result["vehicle"]);
@@ -91,7 +81,7 @@ class ClientManager{
      * @return bool
      */
     public function clientHasVehicle(Client $client): bool{
-        $stmt = $this->pdo->prepare("SELECT * FROM vehicule WHERE codeclient = :id");
+        $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.vehicule WHERE codeclient = :id");
         $stmt->execute(["id" => $client->getId()]);
         return $stmt->rowCount() > 0;
     }
@@ -104,8 +94,8 @@ class ClientManager{
      * @return bool
      */
     public function removeVehicleFromClient(Client $client, Vehicle $vehicle): bool{
-        if ($this->clientHasVehicle($client)){
-            $stmt = $this->pdo->prepare("DELETE FROM vehicule WHERE codeclient = :id and numimmatriculation = :numImmatriculation");
+        if ($this->$vehicle->clientHasVehicle($client)){
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.vehicule WHERE codeclient = :id and numimmatriculation = :numImmatriculation");
             $stmt->execute(["id" => $client->getId()
                 , "numImmatriculation" => $vehicle->getId()]);
             return true;
