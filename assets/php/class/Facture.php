@@ -15,13 +15,33 @@ class Facture{
 
     private int $etat;
 
-    public function __construct(int $factureNumber, string $factureDate, int $tva, float $toPay, int $etat)
+    private Intervention $numDde;
+
+    /**
+     * @param int $factureNumber
+     * @param string $factureDate
+     * @param int $tva
+     * @param float $toPay
+     * @param int $etat
+     * @param int $numDde
+     */
+    public function __construct(int $factureNumber, string $factureDate, int $tva, float $toPay, int $etat, int $numDde)
     {
         $this->factureNumber = $factureNumber;
         $this->factureDate = $factureDate;
         $this->tva = $tva;
         $this->toPay = $toPay;
         $this->etat = $etat;
+        $this->numDde = $numDde;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getNumDde(): int
+    {
+        return $this->numDde;
     }
 
     public function getFactureNumber(): int{

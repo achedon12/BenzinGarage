@@ -2,35 +2,78 @@
 
 class Piece{
 
-    private string $reference;
-
-    private int $stock;
-
+    private string $codeArticle;
+    private string $libelleArticle;
+    private int $qteMin;
+    private string $typeArticle;
     private float $price;
+    private int $qteStock;
 
-    private string $name;
-
-    public function __construct(string $name, string $reference, int $stock, float $price){
-        $this->reference = $reference;
-        $this->stock = $stock;
+    /**
+     * @param string $codeArticle
+     * @param string $libelleArticle
+     * @param int $qteMin
+     * @param string $typeArticle
+     * @param float $price
+     * @param int $qteStock
+     */
+    public function __construct(string $codeArticle, string $libelleArticle, int $qteMin, string $typeArticle, float $price, int $qteStock)
+    {
+        $this->codeArticle = $codeArticle;
+        $this->libelleArticle = $libelleArticle;
+        $this->qteMin = $qteMin;
+        $this->typeArticle = $typeArticle;
         $this->price = $price;
-        $this->name = $name;
+        $this->qteStock = $qteStock;
     }
 
-    public function getReference(): string{
-        return $this->reference;
+    /**
+     * @return string
+     */
+    public function getCodeArticle(): string
+    {
+        return $this->codeArticle;
     }
 
-    public function getStock(): int{
-        return $this->stock;
+    /**
+     * @return string
+     */
+    public function getLibelleArticle(): string
+    {
+        return $this->libelleArticle;
     }
 
-    public function getPrice(): int{
+    /**
+     * @return int
+     */
+    public function getQteMin(): int
+    {
+        return $this->qteMin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeArticle(): string
+    {
+        return $this->typeArticle;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice(): float
+    {
         return $this->price;
     }
 
-    public function getName(): string
+    /**
+     * @return int
+     */
+    public function getQteStock(): int
     {
-        return $this->name;
+        return $this->qteStock;
     }
+
+
 }
