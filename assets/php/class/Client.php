@@ -16,21 +16,13 @@ class Client{
 
     private string $telephoneNumber;
 
-<<<<<<< HEAD
     private string  $eMail;
 
     private string $dateCreation;
 
-    private Vehicle $vehicle;
+    private string $hashedPassword;
 
-    public function __construct(int $id, string $name, string $firstName,string $telephoneNumber, string $eMail, string $adresse, int $codePostal, string $city, string $dateCreation, Vehicle $vehicle)
-=======
-    private string $mail;
-
-    private Vehicle $vehicle;
-
-    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $mail, Vehicle $vehicle)
->>>>>>> bee837b307a8e631e47813bb1b94588d7701a6de
+    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $eMail, string $dateCreation,string $hashedPassword)
     {
         $this->id = $id;
         $this->name = $name;
@@ -41,8 +33,8 @@ class Client{
         $this->codePostal = $codePostal;
         $this->city = $city;
         $this->telephoneNumber = $telephoneNumber;
-        $this->mail = $mail;
-        $this->vehicle = $vehicle;
+        $this->hashedPassword = $hashedPassword;
+
     }
 
     public function getId(): int{
@@ -61,13 +53,7 @@ class Client{
 
     }
 
-    /**
-     * @return string
-     */
-    public function getEMail(): string
-    {
-        return $this->eMail;
-    }
+
 
     /**
      * @return string
@@ -97,8 +83,8 @@ class Client{
         return $this->city;
     }
 
-    public function getMail(): string{
-        retrun $this->mail;
+    public function getEmail(): string{
+        return $this->eMail;
     }
 
     public function getTelephoneNumber(): string{
