@@ -1,5 +1,5 @@
 <?php
-
+require_once("./assets/php/database/DatabaseManager.php");
 require_once("./assets/php/managers/UserManager.php");
 
 $class = new UserManager(DatabaseManager::getInstance());
@@ -11,7 +11,7 @@ print_r($array);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="">
     <head>
         <title>Page de test</title>
     </head>
