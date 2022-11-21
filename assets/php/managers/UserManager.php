@@ -24,7 +24,7 @@ class UserManager{
         $res = [];
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.client");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $res[] = new Client($row["id"], $row["nom"], $row["prenom"], $row["adresse"], $row["codePostal"], $row["ville"], $row["telephone"], $row["mail"],$row["vehicle"]);
+            $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"], $row["mail"],$row["datecreation"]);
         return $res;
     }
 
