@@ -85,9 +85,9 @@ class UserManager{
     }
 
 
-    public function existAdministrateur(Administrator $administrateur): bool{
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'administrateur'");
-        return $stmt->rowCount() > 0;
+    public function existAdministrateur(): bool{
+           $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'administrateur'");
+            return $stmt->rowCount() > 0;
     }
     
     /**
