@@ -4,7 +4,7 @@ require_once("./assets/php/managers/UserManager.php");
 
 $class = new UserManager(DatabaseManager::getInstance());
 
-$array = $class->getAllClients();
+$array = $class->getAllManager();
 
 print_r($array);
 
