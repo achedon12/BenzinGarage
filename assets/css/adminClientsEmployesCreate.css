@@ -56,7 +56,7 @@ form>section:nth-child(2)
 select
 {
     text-align: center;
-    width: 25%;
+    width: 15%;
     border-radius: 25px;
     border: 1px solid var(--green-color);
 }

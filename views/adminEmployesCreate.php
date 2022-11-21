@@ -46,9 +46,11 @@ if(!Auth::isConnected()){
 <main class="create">
     <form method="post">
         <h1>Créer un nouvel employé</h1>
-        <input type="text" placeholder="prénom" id="firstname">
-        <input type="text" placeholder="nom" id="name">
-        <input type="password" id="password" placeholder="password">
+        <section class="inputs">
+            <input type="text" placeholder="prénom" id="firstname">
+            <input type="text" placeholder="nom" id="name">
+            <input type="password" id="password" placeholder="password">
+        </section>
         <select id="role-select" name="select">
             <option value="">--Rôle--</option>
             <?php

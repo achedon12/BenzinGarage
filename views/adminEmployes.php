@@ -1,4 +1,4 @@
-<!--<?php
+<?php
 
 use app\users\Auth;
 
@@ -17,7 +17,7 @@ if(!Auth::isConnected()){
     return;
 }
 
-?> -->
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
