@@ -1,21 +1,23 @@
 <?php
 
+require_once("./assets/php/class/Client.php");
+
 class Vehicle{
 
     private string $numberPlate;
     private string $noSerie;
     private string $dateMiseEnCirculation;
     private int $numModele;
-    private Client $client;
+    private string $client;
 
     /**
      * @param string $numberPlate
      * @param string $noSerie
      * @param string $dateMiseEnCirculation
      * @param int $numModele
-     * @param Client $client
+     * @param string $client
      */
-    public function __construct(string $numberPlate, string $noSerie, string $dateMiseEnCirculation, int $numModele, Client $client)
+    public function __construct(string $numberPlate, string $noSerie, string $dateMiseEnCirculation, int $numModele, string $client)
     {
         $this->numberPlate = $numberPlate;
         $this->noSerie = $noSerie;
@@ -49,9 +51,9 @@ class Vehicle{
     }
 
     /**
-     * @return Client
+     * @return string
      */
-    public function getClient(): Client
+    public function getClient(): string
     {
         return $this->client;
     }
@@ -61,7 +63,7 @@ class Vehicle{
         return $this->numberPlate;
     }
 
-    public function getVehicleClient(): Client{
+    public function getVehicleClient(): string{
         return $this->client;
     }
 

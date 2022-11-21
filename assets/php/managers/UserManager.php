@@ -80,7 +80,7 @@ class UserManager{
         $array = [];
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.vehicule");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $array[] = new Vehicle($row["noimmatriculation"], $row["noserie"], $row["nummodele"], $row["datemiseencirculation"], $row["codeclient"]);
+            $array[] = new Vehicle($row["noimmatriculation"], $row["noserie"], $row["datemiseencirculation"], $row["nummodele"], $row["codeclient"]);
         return $array;
     }
 
@@ -91,7 +91,7 @@ class UserManager{
     }
     
     /**
-     * Create an administrator from given informations.
+     * Create an administrator from given information.
      * @param string $name
      * @param string $hashedPassword
      * @param string $firstName
