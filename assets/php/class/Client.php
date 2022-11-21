@@ -2,9 +2,10 @@
 
 require_once "assets/php/class/AbstractUser.php";
 
+
 class Client{
 
-    private int $id;
+    private string $id;
 
     private string $name;
 
@@ -12,7 +13,7 @@ class Client{
 
     private string $adresse;
 
-    private int $codePostal;
+    private string $codePostal;
 
     private string $city;
 
@@ -23,17 +24,17 @@ class Client{
     private string $dateCreation;
 
     /**
-     * @param int $id
+     * @param string $id
      * @param string $name
      * @param string $firstName
      * @param string $adresse
-     * @param int $codePostal
+     * @param string $codePostal
      * @param string $city
      * @param string $telephoneNumber
      * @param string $eMail
      * @param string $dateCreation
      */
-    public function __construct(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $eMail, string $dateCreation)
+    public function __construct(string $id, string $name, string $firstName, string $adresse, string $codePostal, string $city, string $telephoneNumber, string $eMail, string $dateCreation)
     {
         $this->id = $id;
         $this->name = $name;
@@ -46,7 +47,7 @@ class Client{
         $this->dateCreation = $dateCreation;
     }
 
-    public function getId(): int{
+    public function getId(): string{
         return $this->id;
     }
 
@@ -70,7 +71,7 @@ class Client{
         return $this->adresse;
     }
 
-    public function getCodePostal(): int{
+    public function getCodePostal(): string{
         return $this->codePostal;
     }
 
