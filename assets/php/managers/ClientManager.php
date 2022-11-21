@@ -1,5 +1,6 @@
 <?php
-require_once("./assets/php/database/DatabaseManager.php");
+require_once("./assets/php/class/Client.php");
+require_once("./assets/php/class/Vehicle.php");
 
 class ClientManager{
     private PDO $pdo;
@@ -12,15 +13,18 @@ class ClientManager{
 
     /**
      * Create a new Client.
+     * @param int $id
      * @param string $name
      * @param string $firstName
      * @param string $adresse
      * @param int $codePostal
      * @param string $city
      * @param string $telephoneNumber
+     * @param string $email
+     * @param string $dateCreation
      * @return Client
      */
-    public function createClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $email, date $dateCreation): Client{
+    public function createClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $email, string $dateCreation): Client{
         $stmt = $this->pdo->prepare("INSERT INTO sae_garage.client (codeclient, nom, prenom, adresse, codepostal, ville, tel, mail, datecreation ) VALUES (:id, :nom, :prenom, :adresse, :codePostal, :ville, :telephone, :mail, :dateCreation)");
         $stmt->execute([
             "id"=>$id,
@@ -63,7 +67,7 @@ class ClientManager{
     }
 
     /**
-     * Update informations for a given client
+     * Update information for a given client
      * @param Client $client
      * @return Client
      */

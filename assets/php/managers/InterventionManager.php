@@ -16,7 +16,7 @@ class InterventionManager {
      * @return bool
      */
     public function createIntervention(Intervention $intervention): bool{
-        $sql = "INSERT INTO sae_garage.intervention (date_rdv, heure_rdv, descriptif_demande, km_actuel, devis_on, etat, id_operateur, no_serie, id_client) VALUES (:date_rdv, :heure_rdv, :descriptif_demande, :km_actuel, :devis_on, :etat, :id_operateur, :no_serie, :id_client)";
+        $sql = "INSERT INTO sae_garage.intervention (date_rdv, heure_rdv, descriptif_demande, km_actuel, devis_on, etat, id_operateur, numberPlate, id_client) VALUES (:date_rdv, :heure_rdv, :descriptif_demande, :km_actuel, :devis_on, :etat, :id_operateur, :numberPlate, :id_client)";
         $stmt = $this->pdo->prepare($sql);
         if($stmt->execute([
             "date_rdv" => $intervention->getDateRdv(),
@@ -26,7 +26,7 @@ class InterventionManager {
             "devis_on" => $intervention->isDevisOn(),
             "etat" => $intervention->getEtatdemande(),
             "id_operateur" => $intervention->getIdOperateur(),
-            "no_serie" => $intervention->getVehicle()->getNoSerie(),
+            "" => $intervention->getVehicle()->getNumberPlate(),
             "id_client" => $intervention->getClient()->getId()
         ])){return true;}
         else{return false;}
