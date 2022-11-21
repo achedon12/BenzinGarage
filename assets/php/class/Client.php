@@ -1,5 +1,7 @@
 <?php
 
+require_once "assets/php/class/AbstractUser.php";
+
 class Client{
 
     private int $id;
