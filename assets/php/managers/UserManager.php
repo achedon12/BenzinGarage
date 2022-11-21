@@ -1,6 +1,10 @@
 <?php
 
-require_once("./assets/php/database/DatabaseManager.php");
+require_once("./assets/php/class/Client.php");
+require_once("./assets/php/class/Manager.php");
+require_once("./assets/php/class/Vehicle.php");
+require_once("./assets/php/class/Administrator.php");
+require_once("./assets/php/class/Employee.php");
 
 class UserManager{
 
@@ -105,7 +109,7 @@ class UserManager{
     }
 
     /**
-     * Delete a given admnistrator.
+     * Delete a given administrator.
      * @param User $administrator
      * @return bool
      */
@@ -129,7 +133,7 @@ class UserManager{
     }
 
     /**
-     * Create an employee from given informations.
+     * Create an employee from given information.
      * @param string $name
      * @param string $hashedPassword
      * @param string $firstName
