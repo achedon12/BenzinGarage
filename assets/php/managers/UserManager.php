@@ -219,14 +219,20 @@ class UserManager{
      * @param string $role
      * @return User
      */
-    public function createManager(string $name, string $hashedPassword, string $firstName, string $role = self::MANAGER): User{
-        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
-        $stmt->bindValue(":nom", $name);
-        $stmt->bindValue(":prenom", $firstName);
-        $stmt->bindValue(":password", $hashedPassword);
-        $stmt->bindValue(":role", $role);
-        $stmt->execute();
-        return new Manager($this->pdo->lastInsertId(), $name, $firstName, $hashedPassword, $role);
+    public function createManager(string $name, string $hashedPassword, string $firstName): bool{
+
+            $sql = $this->pdo->query("SELECT max(id) FROM sae_garage.user ");
+
+            $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (id,nom, prenom, password, role) VALUES (:id, :nom, :prenom, :password, :role)");
+            $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
+            $stmt->execute([
+                "id" => (string)$newID,
+                "nom" => $name,
+                "prenom" => $firstName,
+                "password" => $hashedPassword,
+                "role" => 'manager'
+            ]);
+            return true;
     }
 
     /**

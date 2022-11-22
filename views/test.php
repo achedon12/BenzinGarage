@@ -5,10 +5,10 @@ require_once("./assets/php/class/User.php");
 $class = new UserManager(DatabaseManager::getInstance());
 
 
-$var2 = $class->createEmployee("a", "a", "a");
-$user = new User(7,"test","test","test","employe");
-$var =$class->modifyEmployee($user,'7');
-print_r($var);
+$var2 = $class->createManager("a", "a", "a");
+//$user = new User(7,"test","test","test","employe");
+//$var =$class->modifyEmployee($user,'7');
+print_r($var2);
 
 ?>
 
