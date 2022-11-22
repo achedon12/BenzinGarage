@@ -139,7 +139,7 @@ class UserManager{
      * @return bool
      */
     public function modifyAdministrator(User $administrator,string $id): bool{
-        if ($this->existAdministrateur($administrator->getId())){
+        if ($this->existAdministrateur($id)){
             $stmt = $this->pdo->prepare("UPDATE sae_garage.user SET nom = :nom, prenom = :prenom, password = :password WHERE id = :id and role = 'administrateur'");
             $stmt->execute([
                 "id" => $id,
@@ -198,7 +198,7 @@ class UserManager{
      * @return bool
      */
     public function modifyEmployee(User $employee,string $id): bool{
-        if ($this->existEmployee($employee->getId())){
+        if ($this->existEmployee($id)){
             $stmt = $this->pdo->prepare("UPDATE sae_garage.user SET nom = :nom, prenom = :prenom, password = :password WHERE id = :id and role = 'employe'");
             $stmt->execute([
                 "id" => $id,
@@ -216,8 +216,7 @@ class UserManager{
      * @param string $name
      * @param string $hashedPassword
      * @param string $firstName
-     * @param string $role
-     * @return User
+     * @return bool
      */
     public function createManager(string $name, string $hashedPassword, string $firstName): bool{
 
@@ -237,7 +236,7 @@ class UserManager{
 
     /**
      * Delete a given manager.
-     * @param User $manager
+     * @param string $id
      * @return bool
      */
     public function removeManager(string $id): bool{
@@ -254,10 +253,21 @@ class UserManager{
     /**
      * Modify a manager.
      * @param User $manager
-     * @return User
+     * @param string $id
+     * @return bool
      */
-    public function modifyManager(User $manager): User{
-        
+    public function modifyManager(User $manager,string $id): bool{
+        if ($this->existManager($id)){
+            $stmt = $this->pdo->prepare("UPDATE sae_garage.user SET nom = :nom, prenom = :prenom, password = :password WHERE id = :id and role = 'manager'");
+            $stmt->execute([
+                "id" => $id,
+                "nom" => $manager->getName(),
+                "prenom" => $manager->getFirstName(),
+                "password" => $manager->getHashedPassword()
+            ]);
+            return true;
+        }
+        return false;
     }
 
     /**

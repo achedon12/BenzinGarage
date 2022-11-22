@@ -5,11 +5,8 @@ require_once("./assets/php/class/User.php");
 $class = new UserManager(DatabaseManager::getInstance());
 
 
-$var2 = $class->createManager("a", "a", "a");
-$var3 = $class->removeManager('8');
-//$user = new User(7,"test","test","test","employe");
-//$var =$class->modifyEmployee($user,'7');
-print_r($var3);
+$var2 = $class->getRoles();
+print_r($var2);
 
 ?>
 
