@@ -306,5 +306,4 @@ class UserManager{
         }
         return $roles;
     }
-
 }
