@@ -4,7 +4,7 @@ require_once("./assets/php/managers/UserManager.php");
 require_once("./assets/php/class/User.php");
 $class = new UserManager(DatabaseManager::getInstance());
 
-$var = $class->createEmployee('test','test','test');
+$var = $class->removeEmployee('7');
 
 
 print_r($var);

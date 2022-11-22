@@ -135,6 +135,7 @@ class UserManager{
     /**
      * Modify a given administrator.
      * @param User $administrator
+     * @param string $id
      * @return bool
      */
     public function modifyAdministrator(User $administrator,string $id): bool{
@@ -156,8 +157,7 @@ class UserManager{
      * @param string $name
      * @param string $hashedPassword
      * @param string $firstName
-     * @param string $role
-     * @return User
+     * @return bool
      */
     public function createEmployee(string $name, string $hashedPassword, string $firstName): bool{
 
@@ -177,14 +177,15 @@ class UserManager{
 
     /**
      * Delete an employee.
-     * @param User $employee
+     * @param string $id
      * @return bool
      */
-    public function removeEmployee(User $employee): bool{
-        if ($this->existEmployee($employee)){
-            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
-            $stmt->bindValue(":id", $employee->getId());
-            $stmt->execute();
+    public function removeEmployee(string $id): bool{
+        if ($this->existEmployee($id)){
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id and role = 'employe'");
+            $stmt->execute([
+                "id" => $id
+            ]);
             return true;
         }
         return false;
@@ -200,7 +201,7 @@ class UserManager{
     }
 
     /**
-     * Create a manager from given informations.
+     * Create a manager from given information.
      * @param string $name
      * @param string $hashedPassword
      * @param string $firstName
@@ -243,22 +244,24 @@ class UserManager{
 
     /**
      * Verify if a given manager exist.
-     * @param User $manager
+     * @param string $id
      * @return bool
      */
-    public function existManager(User $manager): bool{
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'manager'");
-        return $stmt->rowCount() > 0;
+    public function existManager(string $id): bool{
+        if ($this->pdo->query("SELECT * FROM sae_garage.user WHERE id = '$id' AND role = 'manager'")->rowCount() > 0)
+            return true;
+        return false;
     }
 
     /**
      * Verify if a given employee exist.
-     * @param User $employee
+     * @param string $id
      * @return bool
      */
-    public function existEmployee(User $employee): bool{
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'employee'");
-        return $stmt->rowCount() > 0;
+    public function existEmployee(string $id): bool{
+        if ($this->pdo->query("SELECT * FROM sae_garage.user WHERE id = '$id' AND role = 'employe'")->rowCount() > 0)
+            return true;
+        return false;
     }
 
 
