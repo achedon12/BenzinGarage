@@ -4,13 +4,10 @@ require_once("./assets/php/managers/UserManager.php");
 require_once("./assets/php/class/User.php");
 $class = new UserManager(DatabaseManager::getInstance());
 
-$array = $class->getAllVehicle();
-$var2 = $class->createAdministrator("a", "a", "a");
-$user = new User(7,"test","test","test","administrateur");
-$var =$class->modifyAdministrator($user,'7');
+$var = $class->createEmployee('test','test','test');
 
 
-print_r($var2);
+print_r($var);
 
 ?>
 
