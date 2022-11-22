@@ -194,10 +194,21 @@ class UserManager{
     /**
      * Modify an employee
      * @param User $employee
-     * @return User
+     * @param string $id
+     * @return bool
      */
-    public function modifyEmployee(User $employee): User{
-        
+    public function modifyEmployee(User $employee,string $id): bool{
+        if ($this->existEmployee($employee->getId())){
+            $stmt = $this->pdo->prepare("UPDATE sae_garage.user SET nom = :nom, prenom = :prenom, password = :password WHERE id = :id and role = 'employe'");
+            $stmt->execute([
+                "id" => $id,
+                "nom" => $employee->getName(),
+                "prenom" => $employee->getFirstName(),
+                "password" => $employee->getHashedPassword()
+            ]);
+            return true;
+        }
+        return false;
     }
 
     /**
