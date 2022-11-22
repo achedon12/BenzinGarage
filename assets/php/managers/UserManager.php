@@ -240,11 +240,12 @@ class UserManager{
      * @param User $manager
      * @return bool
      */
-    public function removeManager(User $manager): bool{
-        if ($this->existManager($manager)){
-            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
-            $stmt->bindValue(":id", $manager->getId());
-            $stmt->execute();
+    public function removeManager(string $id): bool{
+        if ($this->existManager($id)){
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id and role = 'manager'");
+            $stmt->execute([
+                "id" => $id
+            ]);
             return true;
         }
         return false;
