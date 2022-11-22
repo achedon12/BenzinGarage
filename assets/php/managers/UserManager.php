@@ -298,7 +298,13 @@ class UserManager{
      * @return string[]
      */
     public function getRoles(): array{
-        return [self::ADMINISTRATEUR,self::EMPLOYE,self::MANAGER];
+        $roles = [];
+        $sql = $this->pdo->query("SELECT role FROM sae_garage.user");
+        while ($row = $sql->fetch(PDO::FETCH_ASSOC)){
+            if (!in_array($row['role'],$roles))
+                $roles[] = $row['role'];
+        }
+        return $roles;
     }
 
 }
