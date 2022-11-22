@@ -6,6 +6,7 @@ require_once("./assets/php/class/Vehicle.php");
 require_once("./assets/php/class/Administrator.php");
 require_once("./assets/php/class/Employee.php");
 
+
 class UserManager{
 
     const ADMINISTRATEUR = "administrateur";
@@ -134,10 +135,20 @@ class UserManager{
     /**
      * Modify a given administrator.
      * @param User $administrator
-     * @return User
+     * @return bool
      */
-    public function modifyAdministrator(User $administrator): User{
-
+    public function modifyAdministrator(User $administrator,string $id): bool{
+        if ($this->existAdministrateur($administrator->getId())){
+            $stmt = $this->pdo->prepare("UPDATE sae_garage.user SET nom = :nom, prenom = :prenom, password = :password WHERE id = :id and role = 'administrateur'");
+            $stmt->execute([
+                "id" => $id,
+                "nom" => $administrator->getName(),
+                "prenom" => $administrator->getFirstName(),
+                "password" => $administrator->getHashedPassword()
+            ]);
+            return true;
+        }
+        return false;
     }
 
     /**
