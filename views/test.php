@@ -5,7 +5,8 @@ require_once("./assets/php/managers/UserManager.php");
 $class = new UserManager(DatabaseManager::getInstance());
 
 $array = $class->getAllVehicle();
-$var = $class->existAdministrateur();
+$var = $class->removeAdministrator( '7');
+
 print_r($var);
 
 ?>

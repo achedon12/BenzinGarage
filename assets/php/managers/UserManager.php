@@ -85,39 +85,47 @@ class UserManager{
     }
 
 
-    public function existAdministrateur(): bool{
-           $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'administrateur'");
-            return $stmt->rowCount() > 0;
+    public function existAdministrateur(string $id): bool{
+        if ($this->pdo->query("SELECT * FROM sae_garage.user WHERE id = '$id' AND role = 'administrateur'")->rowCount() > 0)
+            return true;
+        return false;
     }
-    
+
+
     /**
      * Create an administrator from given information.
      * @param string $name
      * @param string $hashedPassword
      * @param string $firstName
-     * @param string $role
-     * @return User
+     * @return bool
      */
-    public function createAdministrator(string $name, string $hashedPassword, string $firstName, string $role): User{
-        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
-        $stmt->bindValue(":nom", $name);
-        $stmt->bindValue(":prenom", $firstName);
-        $stmt->bindValue(":password", $hashedPassword);
-        $stmt->bindValue(":role", $role);
-        $stmt->execute();
-        return new Administrator($this->pdo->lastInsertId(), $name, $firstName, $hashedPassword, $role);
+    public function createAdministrator(string $name, string $hashedPassword, string $firstName): bool
+    {
+        $sql = $this->pdo->query("SELECT max(id) FROM sae_garage.user ");
+
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (id,nom, prenom, password, role) VALUES (:id, :nom, :prenom, :password, :role)");
+        $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
+        $stmt->execute([
+            "id" => (string)$newID,
+            "nom" => $name,
+            "prenom" => $firstName,
+            "password" => $hashedPassword,
+            "role" => 'administrateur'
+        ]);
+        return true;
     }
 
     /**
      * Delete a given administrator.
-     * @param User $administrator
+     * @param string $id
      * @return bool
      */
-    public function removeAdministrator(User $administrator): bool{
-        if ($this->existAdministrateur($administrator)){
-            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
-            $stmt->bindValue(":id", $administrator->getId());
-            $stmt->execute();
+    public function removeAdministrator(string $id): bool{
+        if ($this->existAdministrateur($id)){
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id and role = 'administrateur'");
+            $stmt->execute([
+                "id" => $id
+            ]);
             return true;
         }
         return false;
