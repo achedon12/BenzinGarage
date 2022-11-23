@@ -9,7 +9,7 @@ form.selecteur, form.selecteur
 {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    align-self: center;
     height: 10%;
     width: 100%;
 }
@@ -25,6 +25,9 @@ form.selecteur>section, form.selecteur>section
     background-color: var(--green-color);
     border-radius: 25px;
     border: 1px solid var(--white-color);
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 main>section
@@ -42,7 +45,8 @@ section.choose
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 85%;
+    height: 85%;
     background-color: var(--grey-color);
     color: var(--white-color);
     border-radius: 25px;
