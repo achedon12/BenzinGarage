@@ -12,13 +12,16 @@ class GarageManager {
 
     /**
      * Get available account of a given piece.
-     * @param Piece $codearticle
+     * @param string $codearticle
      * @return int
      */
-    public function getAvailablePiece(Piece $codearticle): int{
-        /** */
-        $stmt = $this->pdo->query("select qte_stock from sae_garage.article where codearticle = ? ;");
-        return $stmt->execute([$codearticle->codearticle]);
+    public function getAvailablePiece(string $codearticle): int{
+        $query = $this->pdo->prepare("SELECT qte_Stock FROM sae_garage.article WHERE codeArticle = :codearticle");
+        $query->execute([
+            "codearticle" => $codearticle
+        ]);
+        $result = $query->fetch();
+        return $result["qte_stock"];
     }
 
     /**
