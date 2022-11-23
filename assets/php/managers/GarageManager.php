@@ -3,7 +3,8 @@ require_once("./assets/php/class/Piece.php");
 require_once("./assets/php/class/Client.php");
 require_once("./assets/php/class/Facture.php");
 
-class GarageManager {
+class GarageManager
+{
 
     private PDO $pdo;
 
@@ -18,7 +19,8 @@ class GarageManager {
      * @param string $codearticle
      * @return int
      */
-    public function getAvailablePiece(string $codearticle): int{
+    public function getAvailablePiece(string $codearticle): int
+    {
         $query = $this->pdo->prepare("SELECT qte_Stock FROM sae_garage.article WHERE codeArticle = :codearticle");
         $query->execute([
             "codearticle" => $codearticle
@@ -31,13 +33,14 @@ class GarageManager {
      * Get All pieces.
      * @return array
      */
-    public function getAllPieces(): array{
-        /** @var  $array Piece[]*/
+    public function getAllPieces(): array
+    {
+        /** @var  $array Piece[] */
         $array = [];
         $query = $this->pdo->prepare("SELECT * FROM sae_garage.article");
         $query->execute();
         $result = $query->fetchAll();
-        foreach ($result as $piece){
+        foreach ($result as $piece) {
             $array[] = new Piece($piece["codearticle"], $piece["libellearticle"], $piece["qte_min"], $piece["typearticle"], $piece["prixunitactuelht"], $piece["qte_stock"]);
         }
         return $array;
@@ -48,7 +51,8 @@ class GarageManager {
      * @param string $codearticle
      * @return float
      */
-    public function getPiecePrice(string $codearticle): float{
+    public function getPiecePrice(string $codearticle): float
+    {
         $query = $this->pdo->prepare("SELECT prixUnitActuelHT FROM sae_garage.article WHERE codeArticle = :codearticle");
         $query->execute([
             "codearticle" => $codearticle
@@ -66,7 +70,8 @@ class GarageManager {
      * @param int $numdde
      * @return bool
      */
-    public function createFacture( string $datefacture,int $tauxtva, float $netapayer, string $etatfacture,int $numdde): bool{
+    public function createFacture(string $datefacture, int $tauxtva, float $netapayer, string $etatfacture, int $numdde): bool
+    {
         $sql = $this->pdo->query("SELECT max(nofacture) FROM sae_garage.facture ");
         $newId = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
         $query = $this->pdo->prepare("INSERT INTO sae_garage.facture (nofacture, datefacture,tauxtva,netapayer,etatfacture,numdde) VALUES (:nofacture, :datefacture,:tauxtva,:netapayer,:etatfacture,:numdde)");
@@ -85,12 +90,12 @@ class GarageManager {
      * Get all factures.
      * @return array
      */
-    public function getAllFacture(): array{
-        /** @var  $array Facture[]*/
-        $res = [];
-        $stmt = $this->pdo->query("select * from sae_garage.facture;");
-        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $res[] = new Facture($row['nofacture'], $row['datefacture'], $row['tauxtva'],$row['netapayer'],$row['etatfacture'],$row['numdde']);
-        return $res;
+    public function getAllFacture(): array
+    {
+        /** @var  $array Facture[] */
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.facture");
+        $query->execute();
+        $result = $query->fetchAll();
+        return $result;
     }
 }
