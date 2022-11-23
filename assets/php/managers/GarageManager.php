@@ -1,4 +1,5 @@
 <?php
+require_once("./assets/php/class/Piece.php");
 
 class GarageManager {
 
@@ -30,21 +31,28 @@ class GarageManager {
      */
     public function getAllPieces(): array{
         /** @var  $array Piece[]*/
-        $res = [];
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.article;");
-        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $res[] = new Piece($row['codearticle'], $row['libellearticle'], $row['qte_min'],$row['typearticle'],$row['prixunitactuelht'],$row['qte_stock']);
-        return $res;
+        $array = [];
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article");
+        $query->execute();
+        $result = $query->fetchAll();
+        foreach ($result as $piece){
+            $array[] = new Piece($piece["codearticle"], $piece["libellearticle"], $piece["qte_min"], $piece["typearticle"], $piece["prixunitactuelht"], $piece["qte_stock"]);
+        }
+        return $array;
     }
 
     /**
      * Get price from a given piece.
-     * @param Piece $codearticle
+     * @param string $codearticle
      * @return float
      */
-    public function getPiecePrice(Piece $codearticle): float{
-        $stmt = $this->pdo->query("select prixunitactuelht from sae_garage.article where codearticle = ?;");
-        return $stmt->execute([$codearticle->$codearticle->codearticle]);
+    public function getPiecePrice(string $codearticle): float{
+        $query = $this->pdo->prepare("SELECT prixUnitActuelHT FROM sae_garage.article WHERE codeArticle = :codearticle");
+        $query->execute([
+            "codearticle" => $codearticle
+        ]);
+        $result = $query->fetch();
+        return $result["prixunitactuelht"];
     }
 
     /**

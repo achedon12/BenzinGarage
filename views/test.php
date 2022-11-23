@@ -8,7 +8,7 @@ require_once("./assets/php/class/User.php");
 $class = new UserManager(DatabaseManager::getInstance());
 $class2 = new GarageManager(DatabaseManager::getInstance());
 
-$var2 = $class2->getAvailablePiece('2');
+$var2 = $class2->getPiecePrice('2');
 print_r($var2);
 
 ?>
