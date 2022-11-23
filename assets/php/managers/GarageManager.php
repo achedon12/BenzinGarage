@@ -1,5 +1,7 @@
 <?php
 require_once("./assets/php/class/Piece.php");
+require_once("./assets/php/class/Client.php");
+require_once("./assets/php/class/Facture.php");
 
 class GarageManager {
 
@@ -56,13 +58,27 @@ class GarageManager {
     }
 
     /**
-     * Create a facture for a given client.
-     * @param Client $client
-     * @return Facture
+     * Create a facture for a given Intervention.
+     * @param string $datefacture
+     * @param int $tauxtva
+     * @param float $netapayer
+     * @param string $etatfacture
+     * @param int $numdde
+     * @return bool
      */
-    public function createFacture(Client $client): Facture{
-        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.facture(nofacture,datefacture,tauxtva,netapayer,etatfacture,numdde)VALUES (?,'2022-07-22',20,15.99,'Emise',1);");
-        $stmt->execute([$client->$client->id]);
+    public function createFacture( string $datefacture,int $tauxtva, float $netapayer, string $etatfacture,int $numdde): bool{
+        $sql = $this->pdo->query("SELECT max(nofacture) FROM sae_garage.facture ");
+        $newId = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
+        $query = $this->pdo->prepare("INSERT INTO sae_garage.facture (nofacture, datefacture,tauxtva,netapayer,etatfacture,numdde) VALUES (:nofacture, :datefacture,:tauxtva,:netapayer,:etatfacture,:numdde)");
+        $query->execute([
+            "nofacture" => $newId,
+            "datefacture" => $datefacture,
+            "tauxtva" => $tauxtva,
+            "netapayer" => $netapayer,
+            "etatfacture" => $etatfacture,
+            "numdde" => $numdde
+        ]);
+        return true;
     }
 
     /**
