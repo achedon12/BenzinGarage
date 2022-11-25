@@ -2,35 +2,78 @@
 
 class Piece{
 
-    private string $reference;
-
-    private int $stock;
-
+    private string $codeArticle;
+    private string $libelleArticle;
+    private int $quantiteMinimal;
+    private string $typeArticle;
     private float $price;
+    private int $quantiteStock;
 
-    private string $name;
-
-    public function __construct(string $name, string $reference, int $stock, float $price){
-        $this->reference = $reference;
-        $this->stock = $stock;
+    /**
+     * @param string $codeArticle
+     * @param string $libelleArticle
+     * @param int $quantiteMinimal
+     * @param string $typeArticle
+     * @param float $price
+     * @param int $quantiteStock
+     */
+    public function __construct(string $codeArticle, string $libelleArticle, int $quantiteMinimal, string $typeArticle, float $price, int $quantiteStock)
+    {
+        $this->codeArticle = $codeArticle;
+        $this->libelleArticle = $libelleArticle;
+        $this->quantiteMinimal = $quantiteMinimal;
+        $this->typeArticle = $typeArticle;
         $this->price = $price;
-        $this->name = $name;
+        $this->quantiteStock = $quantiteStock;
     }
 
-    public function getReference(): string{
-        return $this->reference;
+    /**
+     * @return string
+     */
+    public function getCodeArticle(): string
+    {
+        return $this->codeArticle;
     }
 
-    public function getStock(): int{
-        return $this->stock;
+    /**
+     * @return string
+     */
+    public function getLibelleArticle(): string
+    {
+        return $this->libelleArticle;
     }
 
-    public function getPrice(): int{
+    /**
+     * @return int
+     */
+    public function getMinimalQuantite(): int
+    {
+        return $this->quantiteMinimal;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeArticle(): string
+    {
+        return $this->typeArticle;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice(): float
+    {
         return $this->price;
     }
 
-    public function getName(): string
+    /**
+     * @return int
+     */
+    public function getStockQuantite(): int
     {
-        return $this->name;
+        return $this->quantiteStock;
     }
+
+
 }

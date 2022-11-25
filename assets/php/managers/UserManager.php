@@ -1,7 +1,10 @@
 <?php
 
-require_once "assets/php/class/User.php";
-require_once "assets/php/class/Client.php";
+require_once("./assets/php/class/Client.php");
+require_once("./assets/php/class/Manager.php");
+require_once("./assets/php/class/Vehicle.php");
+require_once("./assets/php/class/Administrator.php");
+require_once("./assets/php/class/Employee.php");
 
 class UserManager{
 
@@ -91,7 +94,7 @@ class UserManager{
         $array = [];
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.vehicule");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $array[] = new Vehicle($row["noimmatriculation"], $row["noserie"], $row["nummodele"], $row["datemiseencirculation"], $row["codeclient"]);
+            $array[] = new Vehicle($row["noimmatriculation"], $row["noserie"], $row["datemiseencirculation"], $row["nummodele"], $row["codeclient"]);
         return $array;
     }
 
@@ -107,39 +110,46 @@ class UserManager{
         return null;
     }
 
-    public function existAdministrateur(Administrator $administrateur): bool{
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'administrateur'");
-        return $stmt->rowCount() > 0;
+    public function existAdministrateur(string $id): bool{
+        if ($this->pdo->query("SELECT * FROM sae_garage.user WHERE id = '$id' AND role = 'administrateur'")->rowCount() > 0)
+            return true;
+        return false;
     }
 
     /**
-     * Create an administrator from given informations.
+     * Create an administrator from given information.
      * @param string $name
      * @param string $hashedPassword
      * @param string $firstName
-     * @param string $role
-     * @return AbstractUser
+     * @return bool
      */
-    public function createAdministrator(string $name, string $hashedPassword, string $firstName, string $role): AbstractUser{
-        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
-        $stmt->bindValue(":nom", $name);
-        $stmt->bindValue(":prenom", $firstName);
-        $stmt->bindValue(":password", $hashedPassword);
-        $stmt->bindValue(":role", $role);
-        $stmt->execute();
-        return new Administrator($this->pdo->lastInsertId(), $name, $firstName, $hashedPassword, $role);
+    public function createAdministrator(string $name, string $hashedPassword, string $firstName): bool
+    {
+        $sql = $this->pdo->query("SELECT max(id) FROM sae_garage.user ");
+
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (id,nom, prenom, password, role) VALUES (:id, :nom, :prenom, :password, :role)");
+        $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
+        $stmt->execute([
+            "id" => (string)$newID,
+            "nom" => $name,
+            "prenom" => $firstName,
+            "password" => $hashedPassword,
+            "role" => 'administrateur'
+        ]);
+        return true;
     }
 
     /**
-     * Delete a given admnistrator.
-     * @param AbstractUser $administrator
+     * Delete a given administrator.
+     * @param string $id
      * @return bool
      */
-    public function removeAdministrator(AbstractUser $administrator): bool{
-        if ($this->existAdministrateur($administrator)){
-            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
-            $stmt->bindValue(":id", $administrator->getId());
-            $stmt->execute();
+    public function removeAdministrator(string $id): bool{
+        if ($this->existAdministrateur($id)){
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id and role = 'administrateur'");
+            $stmt->execute([
+                "id" => $id
+            ]);
             return true;
         }
         return false;
@@ -147,41 +157,58 @@ class UserManager{
 
     /**
      * Modify a given administrator.
-     * @param AbstractUser $administrator
-     * @return AbstractUser
+     * @param User $administrator
+     * @param string $id
+     * @return bool
      */
-    public function modifyAdministrator(AbstractUser $administrator): AbstractUser{
-
+    public function modifyAdministrator(User $administrator,string $id): bool{
+        if ($this->existAdministrateur($id)){
+            $stmt = $this->pdo->prepare("UPDATE sae_garage.user SET nom = :nom, prenom = :prenom, password = :password WHERE id = :id and role = 'administrateur'");
+            $stmt->execute([
+                "id" => $id,
+                "nom" => $administrator->getName(),
+                "prenom" => $administrator->getFirstName(),
+                "password" => $administrator->getHashedPassword()
+            ]);
+            return true;
+        }
+        return false;
     }
 
     /**
-     * Create an employee from given informations.
+     * Create an employee from given information.
      * @param string $name
      * @param string $hashedPassword
      * @param string $firstName
-     * @param string $role
-     * @return AbstractUser
+     * @return bool
      */
-    public function createEmployee(string $name, string $hashedPassword, string $firstName, string $role = self::EMPLOYE): AbstractUser{
-        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
-        $stmt->bindValue(":nom", $name);
-        $stmt->bindValue(":prenom", $firstName);
-        $stmt->bindValue(":password", $hashedPassword);
-        $stmt->bindValue(":role", $role);
-        $stmt->execute();
-        return new Employee($this->pdo->lastInsertId(), $name, $firstName, $hashedPassword, $role);
+    public function createEmployee(string $name, string $hashedPassword, string $firstName): bool{
+
+        $sql = $this->pdo->query("SELECT max(id) FROM sae_garage.user ");
+
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (id,nom, prenom, password, role) VALUES (:id, :nom, :prenom, :password, :role)");
+        $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
+        $stmt->execute([
+            "id" => (string)$newID,
+            "nom" => $name,
+            "prenom" => $firstName,
+            "password" => $hashedPassword,
+            "role" => 'employe'
+        ]);
+        return true;
     }
 
     /**
      * Delete an employee.
-     * @param AbstractUser $employee
+     * @param string $id
      * @return bool
      */
-    public function removeEmployee(AbstractUser $employee): bool{
-        if ($this->existEmployee($employee)){
-            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
-            $stmt->bindValue(":id", $employee->getId());
-            $stmt->execute();
+    public function removeEmployee(string $id): bool{
+        if ($this->existEmployee($id)){
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id and role = 'employe'");
+            $stmt->execute([
+                "id" => $id
+            ]);
             return true;
         }
         return false;
@@ -189,41 +216,57 @@ class UserManager{
 
     /**
      * Modify an employee
-     * @param AbstractUser $employee
-     * @return AbstractUser
+     * @param User $employee
+     * @return bool
      */
-    public function modifyEmployee(AbstractUser $employee): AbstractUser{
-
+    public function modifyEmployee(User $employee): bool{
+        if ($this->existEmployee($employee->getId())){
+            $stmt = $this->pdo->prepare("UPDATE sae_garage.user SET nom = :nom, prenom = :prenom, password = :password WHERE id = :id and role = 'employe'");
+            $stmt->execute([
+                "id" => $employee->getId(),
+                "nom" => $employee->getName(),
+                "prenom" => $employee->getFirstName(),
+                "password" => $employee->getHashedPassword()
+            ]);
+            return true;
+        }
+        return false;
     }
 
     /**
-     * Create a manager from given informations.
+     * Create a manager from given information.
      * @param string $name
      * @param string $hashedPassword
      * @param string $firstName
-     * @param string $role
-     * @return AbstractUser
+     * @return bool
      */
-    public function createManager(string $name, string $hashedPassword, string $firstName, string $role = self::MANAGER): AbstractUser{
-        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (nom, prenom, password, role) VALUES (:nom, :prenom, :password, :role)");
-        $stmt->bindValue(":nom", $name);
-        $stmt->bindValue(":prenom", $firstName);
-        $stmt->bindValue(":password", $hashedPassword);
-        $stmt->bindValue(":role", $role);
-        $stmt->execute();
-        return new Manager($this->pdo->lastInsertId(), $name, $firstName, $hashedPassword, $role);
+    public function createManager(string $name, string $hashedPassword, string $firstName): bool{
+
+        $sql = $this->pdo->query("SELECT max(id) FROM sae_garage.user ");
+
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.user (id,nom, prenom, password, role) VALUES (:id, :nom, :prenom, :password, :role)");
+        $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
+        $stmt->execute([
+            "id" => (string)$newID,
+            "nom" => $name,
+            "prenom" => $firstName,
+            "password" => $hashedPassword,
+            "role" => 'manager'
+        ]);
+        return true;
     }
 
     /**
      * Delete a given manager.
-     * @param AbstractUser $manager
+     * @param string $id
      * @return bool
      */
-    public function removeManager(AbstractUser $manager): bool{
-        if ($this->existManager($manager)){
-            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
-            $stmt->bindValue(":id", $manager->getId());
-            $stmt->execute();
+    public function removeManager(string $id): bool{
+        if ($this->existManager($id)){
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id and role = 'manager'");
+            $stmt->execute([
+                "id" => $id
+            ]);
             return true;
         }
         return false;
@@ -231,33 +274,44 @@ class UserManager{
 
     /**
      * Modify a manager.
-     * @param AbstractUser $manager
-     * @return AbstractUser
+     * @param User $manager
+     * @return bool
      */
-    public function modifyManager(AbstractUser $manager): AbstractUser{
-
+    public function modifyManager(User $manager): bool{
+        if ($this->existManager($manager->getId())){
+            $stmt = $this->pdo->prepare("UPDATE sae_garage.user SET nom = :nom, prenom = :prenom, password = :password WHERE id = :id and role = 'manager'");
+            $stmt->execute([
+                "id" => $manager->getId(),
+                "nom" => $manager->getName(),
+                "prenom" => $manager->getFirstName(),
+                "password" => $manager->getHashedPassword()
+            ]);
+            return true;
+        }
+        return false;
     }
 
     /**
      * Verify if a given manager exist.
-     * @param AbstractUser $manager
+     * @param string $id
      * @return bool
      */
-    public function existManager(AbstractUser $manager): bool{
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'manager'");
-        return $stmt->rowCount() > 0;
+    public function existManager(string $id): bool{
+        if ($this->pdo->query("SELECT * FROM sae_garage.user WHERE id = '$id' AND role = 'manager'")->rowCount() > 0)
+            return true;
+        return false;
     }
 
     /**
      * Verify if a given employee exist.
-     * @param AbstractUser $employee
+     * @param string $id
      * @return bool
      */
-    public function existEmployee(AbstractUser $employee): bool{
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'employee'");
-        return $stmt->rowCount() > 0;
+    public function existEmployee(string $id): bool{
+        if ($this->pdo->query("SELECT * FROM sae_garage.user WHERE id = '$id' AND role = 'employe'")->rowCount() > 0)
+            return true;
+        return false;
     }
-
 
     /**
      * Get all roles.

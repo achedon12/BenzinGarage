@@ -52,23 +52,12 @@ class ClientManager{
     }
 
     /**
-     * Get vehicle from a given client.
-     * @param Client $client
-     * @return Vehicle
-     */
-    public function getClientVehicle(Client $client): Vehicle{
-        return $client->getVehicle();
-    }
-
-    /**
      * Verify if a given client has a vehicle.
      * @param Client $client
      * @return bool
      */
     public function clientHasVehicle(Client $client): bool{
-        if($client->getVehicle() == null) return false; else{
-            return true;
-        }
+
     }
 
     /**
