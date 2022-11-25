@@ -80,4 +80,8 @@ class UsersController{
         render('adminEmployesCreate.php');
     }
 
+    public  function adminStock(){
+        render('adminStock.php');
+    }
+
 }

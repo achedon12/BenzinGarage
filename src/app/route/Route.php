@@ -32,3 +32,4 @@ SimpleRouter::get('/admin/employes/modify',[UsersController::class,'adminEmploye
 SimpleRouter::post('/admin/employes/modify',[UsersController::class,'adminEmployesModify']);
 SimpleRouter::get('/admin/employes/delete',[UsersController::class,'adminEmployesModify']);
 SimpleRouter::get('/admin/employes/create',[UsersController::class,'adminEmployesCreate']);
+SimpleRouter::get('/admin/stock',[UsersController::class,'adminStock']);
