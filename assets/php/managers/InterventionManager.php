@@ -1,5 +1,5 @@
 <?php
-
+require_once "./assets/php/class/Intervention.php";
 class InterventionManager {
 
     private PDO $pdo;
@@ -12,24 +12,35 @@ class InterventionManager {
 
     /**
      * Create an intervention for a given client.
-     * @param Intervention $intervention
+     * @param int $id
+     * @param string $dateRdv
+     * @param string $heureRdv
+     * @param string $descriptifDemande
+     * @param int $kmActuel
+     * @param bool $devisOn
+     * @param string $etat
+     * @param string $idOpérateur
+     * @param Vehicle $vehicle
+     * @param string $codeClient
      * @return bool
      */
-    public function createIntervention(Intervention $intervention): bool{
-        $sql = "INSERT INTO sae_garage.intervention (date_rdv, heure_rdv, descriptif_demande, km_actuel, devis_on, etat, id_operateur, numberPlate, id_client) VALUES (:date_rdv, :heure_rdv, :descriptif_demande, :km_actuel, :devis_on, :etat, :id_operateur, :numberPlate, :id_client)";
-        $stmt = $this->pdo->prepare($sql);
-        if($stmt->execute([
-            "date_rdv" => $intervention->getDateRdv(),
-            "heure_rdv" => $intervention->getHeureRdv(),
-            "descriptif_demande" => $intervention->getDescriptifDemande(),
-            "km_actuel" => $intervention->getKmActuel(),
-            "devis_on" => $intervention->isDevisOn(),
-            "etat" => $intervention->getEtatdemande(),
-            "id_operateur" => $intervention->getIdOperateur(),
-            "" => $intervention->getVehicle()->getNumberPlate(),
-            "id_client" => $intervention->getClient()->getId()
-        ])){return true;}
-        else{return false;}
+    public function createIntervention(string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, string $etat, string $idOpérateur, string $noimmatriculation, string $codeClient): bool{
+        $sql = $this->pdo->query("SELECT max(numdde) FROM sae_garage.dde_interv");
+        $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.dde_interv (numdde, daterdv, heurerdv, descriptif_demande, km_actuel, devis_on, etatdemande, idoperateur, noimmatriculation, codeclient) VALUES (:id, :date_rdv, :heure_rdv, :descriptif_demande, :km_actuel, :devis_on, :etat_demande, :id_operateur, :id_vehicule, :code_client)");
+        $stmt->execute([
+            "id" => (string)$newID,
+            "date_rdv" => $dateRdv,
+            "heure_rdv" => $heureRdv,
+            "descriptif_demande" => $descriptifDemande,
+            "km_actuel" => $kmActuel,
+            "devis_on" => $devisOn,
+            "etat_demande" => $etat,
+            "id_operateur" => $idOpérateur,
+            "id_vehicule" => $noimmatriculation,
+            "code_client" => $codeClient
+        ]);
+        return $stmt;
     }
 
 

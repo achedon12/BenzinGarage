@@ -94,7 +94,6 @@ class GarageManager
         /** @var  $array Facture[] */
         $query = $this->pdo->prepare("SELECT * FROM sae_garage.facture");
         $query->execute();
-        $result = $query->fetchAll();
-        return $result;
+        return $query->fetchAll();
     }
 }
