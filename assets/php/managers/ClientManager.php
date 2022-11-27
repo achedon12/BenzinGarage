@@ -54,14 +54,14 @@ class ClientManager{
 
     /**
      * Delete a given client.
-     * @param Client $client
+     * @param string $codeclient
      * @return bool
      */
-    public function deleteClient(Client $client): bool
+    public function deleteClient(string $codeclient): bool
     {
-        if ($this->clientExist($client)) {
-            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.client WHERE id = :id");
-            $stmt->execute(["id" => $client->getId()]);
+        if ($this->clientExist($codeclient)) {
+            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.client WHERE codeclient = :id");
+            $stmt->execute(["id" => $codeclient]);
             return true;
         }
         return false;

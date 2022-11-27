@@ -13,7 +13,7 @@ $class3 = new InterventionManager(DatabaseManager::getInstance());
 $class4 = new ClientManager(DatabaseManager::getInstance());
 
 // $interv = new Intervention("5","2021-05-05", "12:00:00", "test", 0, false, "test", "test", "test", "test");
-$var = $class4->clientExist( 1);
+$var = $class4->deleteClient( 7);
         // 4	2022-07-12	15:30:00	Nettoyage du véhicule	172440	true	Définie   	2    	FA-235-FB	6
 // $var2 = $class3->createIntervention('2021-10-22','14:00','descriptif_test',156540,TRUE,'Facturée',2,'WL-456-MD','4');
 print_r($var);
