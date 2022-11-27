@@ -13,7 +13,6 @@ class ClientManager{
 
     /**
      * Create a new Client.
-     * @param int $id
      * @param string $name
      * @param string $firstName
      * @param string $adresse
@@ -22,12 +21,14 @@ class ClientManager{
      * @param string $telephoneNumber
      * @param string $email
      * @param string $dateCreation
-     * @return Client
+     * @return bool
      */
-    public function createClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $email, string $dateCreation): Client{
+    public function createClient(string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $email, string $dateCreation): bool{
+        $sql = $this->pdo->query("SELECT max(codeclient) FROM sae_garage.client");
+        $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
         $stmt = $this->pdo->prepare("INSERT INTO sae_garage.client (codeclient, nom, prenom, adresse, codepostal, ville, tel, mail, datecreation ) VALUES (:id, :nom, :prenom, :adresse, :codePostal, :ville, :telephone, :mail, :dateCreation)");
         $stmt->execute([
-            "id"=>$id,
+            "id"=>(string)$newID,
             "nom" => $name,
             "prenom" => $firstName,
             "adresse" => $adresse,
@@ -37,17 +38,17 @@ class ClientManager{
             "mail" => $email,
             "dateCreation" => $dateCreation
         ]);
-        return new Client($this->pdo->lastInsertId(), $name, $firstName, $adresse, $codePostal, $city, $telephoneNumber, $email, $dateCreation);
+           return $stmt;
     }
 
     /**
      * Verify if a given client exist.
-     * @param Client $client
+     * @param string $codeclient
      * @return bool
      */
-    public function clientExist(Client $client): bool{
-        $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.client WHERE id = :id");
-        $stmt->execute(["id" => $client->getId()]);
+    public function clientExist(string $codeclient): bool{
+        $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.client WHERE codeclient = :id");
+        $stmt->execute(["id" => $codeclient]);
         return $stmt->rowCount() > 0;
     }
 
