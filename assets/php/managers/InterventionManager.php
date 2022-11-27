@@ -12,7 +12,6 @@ class InterventionManager {
 
     /**
      * Create an intervention for a given client.
-     * @param int $id
      * @param string $dateRdv
      * @param string $heureRdv
      * @param string $descriptifDemande
@@ -20,7 +19,7 @@ class InterventionManager {
      * @param bool $devisOn
      * @param string $etat
      * @param string $idOpérateur
-     * @param Vehicle $vehicle
+     * @param string $noimmatriculation
      * @param string $codeClient
      * @return bool
      */
