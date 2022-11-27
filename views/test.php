@@ -9,7 +9,10 @@ require_once("./assets/php/class/User.php");
 $class = new UserManager(DatabaseManager::getInstance());
 $class2 = new GarageManager(DatabaseManager::getInstance());
 $class3 = new InterventionManager(DatabaseManager::getInstance());
-$var = $class3->existIntervention(1);
+
+// $interv = new Intervention("5","2021-05-05", "12:00:00", "test", 0, false, "test", "test", "test", "test");
+$var = $class3->updateIntervention("2021-05-05", "12:00:00", "ad", 0, true, "Planifiée ", "2", "WL-456-MD", "2",4);
+        // 4	2022-07-12	15:30:00	Nettoyage du véhicule	172440	true	Définie   	2    	FA-235-FB	6
 // $var2 = $class3->createIntervention('2021-10-22','14:00','descriptif_test',156540,TRUE,'Facturée',2,'WL-456-MD','4');
 print_r($var);
 

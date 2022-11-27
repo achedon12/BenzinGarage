@@ -24,7 +24,7 @@ class Intervention{
      * @param string $descriptifDemande
      * @param int $kmActuel
      * @param bool $devisOn
-     * @param int $etat
+     * @param string $etatdemande
      * @param string $idOpérateur
      * @param Vehicle $vehicle
      * @param Client $client

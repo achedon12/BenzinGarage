@@ -57,23 +57,33 @@ class InterventionManager {
     }
 
     /**
-     * Update information for a given interventions.
-     * @param Intervention $intervention
+     * Update information for a given intervention.
+     * @param string $daterdv
+     * @param string $heurerdv
+     * @param string $descriptif_demande
+     * @param int $km_actuel
+     * @param bool $devis_on
+     * @param string $etatdemande
+     * @param string $idoperateur
+     * @param string $noimmatriculation
+     * @param string $codeclient
+     * @param int $numdde
      * @return bool
      */
-    public function updateIntervention(Intervention $intervention): bool{
-        $sql = "update sae_garage.dde_interv set daterdv = :dateVal, heurerdv = :heureVal , datedescriptif_demande = :descVal,km_actuel = :kmVal, devis_on = :devisVal, etatdemande = :etatVal, idOpVal = :idoperateur, noimmatriculation = :noImmaVal, codeclient = :codeClientVal where numdde = ?;";
+    public function updateIntervention(string $daterdv, string $heurerdv, string $descriptif_demande, int $km_actuel, bool $devis_on,string $etatdemande,string $idoperateur, string $noimmatriculation, string $codeclient,int $numdde): bool{
+        $sql = ("UPDATE sae_garage.dde_interv SET daterdv = :daterdv, heurerdv = :heurerdv, descriptif_demande = :descriptif_demande, km_actuel = :km_actuel, devis_on = :devis_on, etatdemande = :etatdemande, idoperateur = :idoperateur, noimmatriculation = :noimmatriculation, codeclient = :codeclient WHERE numdde = :numdde");
         $stmt = $this->pdo->prepare($sql);
         if ( $stmt->execute([
-            "dateVal" => $intervention->getDateRdv(),
-            "heureVal" => $intervention->getHeureRdv(),
-            "descVal" => $intervention->getDescriptifDemande(),
-            "kmVal" => $intervention->getKmActuel(),
-            "devisVal" => $intervention->isDevisOn(),
-            "etatVal" => $intervention->getEtatdemande(),
-            "idoperateur" => $intervention->getIdOperateur(),
-            "noImmaVal" => $intervention->getVehicle()->getNumberPlate(),
-            "codeClientVal" => $intervention->getClient()->getId()
+            "daterdv" => $daterdv,
+            "heurerdv" => $heurerdv,
+            "descriptif_demande" => $descriptif_demande,
+            "km_actuel" => $km_actuel,
+            "devis_on" => $devis_on,
+            "etatdemande" => $etatdemande,
+            "idoperateur" => $idoperateur,
+            "noimmatriculation" => $noimmatriculation,
+            "codeclient" => $codeclient,
+            "numdde" => $numdde
         ])){ return true; }
         else { return false; }
     }
@@ -103,13 +113,13 @@ class InterventionManager {
 
     /**
      * Get price of a given intervention.
-     * @param Intervention $intervention
+     * @param int $numdde
      * @return int
      */
-    public function getInterventionPrice(Intervention $intervention): int{
+    public function getInterventionPrice(int $numdde): int{
         $stmt = $this->pdo->prepare("select netapayer from sae_garage.facture join dde_interv using(numdde) where numdde = :numdde;");
         $stmt->execute([
-            "numdde" => $intervention->getId()
+            "numdde" => $numdde
         ]);
         return $stmt->fetch(PDO::FETCH_ASSOC)["netapayer"];
     }
