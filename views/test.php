@@ -9,9 +9,9 @@ require_once("./assets/php/class/User.php");
 $class = new UserManager(DatabaseManager::getInstance());
 $class2 = new GarageManager(DatabaseManager::getInstance());
 $class3 = new InterventionManager(DatabaseManager::getInstance());
-
-$var2 = $class3->createIntervention('2021-10-22','14:00','descriptif_test',156540,TRUE,'Facturée',2,'WL-456-MD','4');
-print_r($var2);
+$var = $class3->existIntervention(1);
+// $var2 = $class3->createIntervention('2021-10-22','14:00','descriptif_test',156540,TRUE,'Facturée',2,'WL-456-MD','4');
+print_r($var);
 
 
 ?>

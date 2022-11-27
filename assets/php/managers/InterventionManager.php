@@ -46,13 +46,13 @@ class InterventionManager {
 
     /**
      * Verify if a given intervention exist.
-     * @param Intervention $intervention
+     * @param int $numdde
      * @return bool
      */
-    public function existIntervention(Intervention $intervention): bool
+    public function existIntervention(int $numdde): bool
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.intervention WHERE id = :id");
-        $stmt->execute(["id" => $intervention->getId()]);
+        $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.dde_interv WHERE numdde = :id");
+        $stmt->execute(["id" => $numdde]);
         return $stmt->rowCount() > 0;
     }
 
