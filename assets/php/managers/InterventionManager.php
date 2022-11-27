@@ -114,14 +114,14 @@ class InterventionManager {
     /**
      * Get price of a given intervention.
      * @param int $numdde
-     * @return int
+     * @return float
      */
-    public function getInterventionPrice(int $numdde): int{
-        $stmt = $this->pdo->prepare("select netapayer from sae_garage.facture join dde_interv using(numdde) where numdde = :numdde;");
+    public function getInterventionPrice(int $numdde): float{
+        $stmt = $this->pdo->prepare("select netapayer from sae_garage.facture where numdde = :numdde;");
         $stmt->execute([
             "numdde" => $numdde
         ]);
-        return $stmt->fetch(PDO::FETCH_ASSOC)["netapayer"];
+        return (float)$stmt->fetch(PDO::FETCH_ASSOC)["netapayer"];
     }
 
     /**
