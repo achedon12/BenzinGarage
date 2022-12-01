@@ -84,4 +84,8 @@ class UsersController{
         render('adminStock.php');
     }
 
+    public function adminTarification(){
+        render('adminTarification.php');
+    }
+
 }

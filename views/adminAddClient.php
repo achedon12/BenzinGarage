@@ -24,10 +24,10 @@ if(!Auth::isConnected()){
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
-    <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
-    <link rel="stylesheet" href="../assets/css/adminAddClient.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/accueilAdmin.css">
+    <link rel="stylesheet" href="../../assets/css/utilisateurAdministrateur.css">
+    <link rel="stylesheet" href="../../assets/css/adminAddClient.css">
     <link rel="shortcut icon" href="../assets/img/logo.png">
     <title>Ajouter un client</title>
 </head>
@@ -36,9 +36,9 @@ if(!Auth::isConnected()){
     <img src="../assets/img/logo.png" alt="logo">
     <ul>
         <li><a href="/accueil/admin">Accueil</a></li>
-        <li class="hover" ><a href="#">Clients</a></li>
-        <li ><a href="#">Employés</a></li>
-        <li><a href="#">Tarification</a></li>
+        <li class="hover"><a href="/admin/clients">Clients</a></li>
+        <li ><a href="/admin/employes">Employés</a></li>
+        <li><a href="/admin/tarification">Tarification</a></li>
         <li><a href="/admin/stock">Stock</a></li>
         <li ><a href="/admin/interventionPlanning">Intervention</a></li>
         <li><a href="/disconnect">Deconnexion</a></li>

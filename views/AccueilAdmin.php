@@ -36,7 +36,7 @@ if(!Auth::isConnected()){
                 <li class="hover"><a href="/accueil/admin">Accueil</a></li>
                 <li><a href="/admin/clients">Clients</a></li>
                 <li><a href="/admin/employes">Employés</a></li>
-                <li><a href="#">Tarification</a></li>
+                <li><a href="/admin/tarification">Tarification</a></li>
                 <li><a href="/admin/stock">Stock</a></li>
                 <li ><a href="/admin/interventionPlanning">Intervention</a></li>
                 <li><a href="/disconnect">Deconnexion</a></li>
@@ -67,11 +67,11 @@ if(!Auth::isConnected()){
                 <h1>Supprimer un employé</h1>
                 <img src="../assets/img/remove-employe.png" alt="">
             </a>
-            <a href="#">
+            <a href="/admin/tarification">
                 <h1>Tarifications</h1>
                 <img src="../assets/img/caisse.png" alt="" id="caisse">
             </a>
-            <a href="#">
+            <a href="/admin/stock">
                 <h1>Stock</h1>
                 <img src="../assets/img/cartons.png" alt="">
             </a>

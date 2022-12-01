@@ -43,7 +43,7 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
                 <li><a href="#">Accueil</a></li>
                 <li><a href="/admin/clients">Clients</a></li>
                 <li class="hover"><a href="/admin/employes">Employés</a></li>
-                <li><a href="#">Tarification</a></li>
+                <li><a href="/admin/tarification">Tarification</a></li>
                 <li><a href="/admin/stock">Stock</a></li>
                 <li ><a href="/admin/interventionPlanning">Intervention</a></li>
                 <li><a href="/disconnect">Deconnexion</a></li>
