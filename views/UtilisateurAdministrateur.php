@@ -38,7 +38,7 @@ if(!Auth::isConnected()){
             <li><a href="/admin/clients">Clients</a></li>
             <li><a href="/admin/employes">Employés</a></li>
             <li><a href="#">Tarification</a></li>
-            <li><a href="#">Stock</a></li>
+            <li><a href="/admin/stock">Stock</a></li>
             <li><a href="/admin/interventionPlanning">Intervention</a></li>
             <li><a href="/disconnect">Deconnexion</a></li>
         </ul>

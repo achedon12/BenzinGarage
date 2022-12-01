@@ -15,6 +15,12 @@ if(!Auth::isConnected()){
     return;
 }
 
+$_SESSION["employePlanning"] = 0;
+
+
+if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
+    $_SESSION["employePlanning"] = $_POST["select"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +29,6 @@ if(!Auth::isConnected()){
         <meta charset="UTF-8">
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-
         <link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
         <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
@@ -46,45 +51,77 @@ if(!Auth::isConnected()){
             </ul>
         </nav>
     <main>
-
         <section class="interventionWindow">
-            <section class="choixPlanning">
-                <select>
-                    <option value="fr">francois</option>
-                    <option value="nl">géraldine</option>
-                    <option value="en">chef d'atelier</option>
-                    <option value="other">administrateur</option>
-                </select>
-            </section>
+            <form method="post" class="selecteur" onchange="submit()">
+                <section class="choixPlanning">
+                    <label for="employe-select">Choisir un employé</label>
+                    <select id="employe-select" name="select">
+                        <?php
+                        if ($_SESSION["employePlanning"] === 0) {
+                            echo '<option value="false" disabled selected>--Employé--</option>';
+                        }
+                        foreach($userManager->getAllUser() as $people){
+                            $name  = $people->getName()." ".$people->getFirstName();
+                            $code = $people->getId();
+                            if($code == $_SESSION["employePlanning"]){
+                                ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
+                            }else{
+                                ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                            }
+                        }
+                        ?>
+                    </select>
+                </section>
+            </form>
+            <?php
+                if($_SESSION["employePlanning"] !== 0) {
+                    $user = $userManager->getUser($_SESSION["employePlanning"]);
+                    if($user !== null) {
+                        echo '<section class="choose"><h1>Emploi du temps de ' . $user->getFirstName() . ' ' . $user->getName() . '</h1></section>';
+                    }
+                }
 
+            ?>
             <section class="planing">
-                    <section class="hours">
-                        <p>8h</p>
-                        <p>9h</p>
-                        <p>10h</p>
-                        <p>11h</p>
-                        <p>12h</p>
-                        <p>13h</p>
-                        <p>14h</p>
-                        <p>15h</p>
-                        <p>16h</p>
-                        <p>17h</p>
-                        <p>18h</p>
-                    </section>
-                    <section class="day "><p>Lundi</p>
-                        <section class="planningDayZone">
-                            <section class="quinzeMinute"></section>
-                            <a class="reservation" id=""href="#popUpRDV"><p>Mr. Jean</p></a>
-                            <section class="trenteMinutes"> </section>
-                            <a class="reservation" id=""href="#popUpRDV"><p>Mr. Jean</p></a>
+                <?php
+                    if($_SESSION["employePlanning"] === 0){
+                        ?>
+                        <section class="choose">
+                            <h1>Veuillez séléctionner un client pour commencer l'opération</h1>
                         </section>
-                    </section>
-                    <section class="day "><p>Mardi</p><section class="planningDayZone"></section></section>
-                    <section class="day "><p>Mercredi</p><section class="planningDayZone"></section></section>
-                    <section class="day "><p>Jeudi</p><section class="planningDayZone"></section></section>
-                    <section class="day "><p>Vendredi</p><section class="planningDayZone"></section></section>
-            </section>
+                    <?php
+                    }else{
+                            ?>
+                        <section class="hours">
+                            <p>8h</p>
+                            <p>9h</p>
+                            <p>10h</p>
+                            <p>11h</p>
+                            <p>12h</p>
+                            <p>13h</p>
+                            <p>14h</p>
+                            <p>15h</p>
+                            <p>16h</p>
+                            <p>17h</p>
+                            <p>18h</p>
+                        </section>
+                        <section class="day "><p>Lundi</p>
+                            <section class="planningDayZone">
+                                <section class="quinzeMinute"></section>
+                                <a class="reservation" id=""href="#popUpRDV"><p>Mr. Jean</p></a>
+                                <section class="trenteMinutes"> </section>
+                                <a class="reservation" id=""href="#popUpRDV"><p>Mr. Jean</p></a>
+                            </section>
+                        </section>
+                        <section class="day "><p>Mardi</p><section class="planningDayZone"></section></section>
+                        <section class="day "><p>Mercredi</p><section class="planningDayZone"></section></section>
+                        <section class="day "><p>Jeudi</p><section class="planningDayZone"></section></section>
+                        <section class="day "><p>Vendredi</p><section class="planningDayZone"></section></section>
+                <?php
+                    }
+                ?>
 
+            </section>
             <section id="popUpRDV">
                 <section id="intoPopUpRDV">
                     <h1 class="nomClientIntervention">Mr. Jean</h1>

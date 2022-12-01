@@ -5,6 +5,7 @@ require_once("./assets/php/class/Manager.php");
 require_once("./assets/php/class/Vehicle.php");
 require_once("./assets/php/class/Administrator.php");
 require_once("./assets/php/class/Employee.php");
+require_once("./assets/php/class/User.php");
 
 class UserManager{
 

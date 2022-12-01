@@ -39,7 +39,7 @@ if(!Auth::isConnected()){
         <li class="hover" ><a href="#">Clients</a></li>
         <li ><a href="#">Employés</a></li>
         <li><a href="#">Tarification</a></li>
-        <li><a href="#">Stock</a></li>
+        <li><a href="/admin/stock">Stock</a></li>
         <li ><a href="/admin/interventionPlanning">Intervention</a></li>
         <li><a href="/disconnect">Deconnexion</a></li>
     </ul>
