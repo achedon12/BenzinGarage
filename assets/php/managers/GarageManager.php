@@ -96,4 +96,15 @@ class GarageManager
         $query->execute();
         return $query->fetchAll();
     }
+
+    /**
+     * Get all pieces where stock are lower than a given value.
+     * @param int $value
+     * @return Piece[]
+     */
+    public function getAvailablePieceWhereStockLowerThan(int $value): array{
+        /** @var Piece[] $array */
+        $array = [];
+        return $array;
+    }
 }
