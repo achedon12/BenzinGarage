@@ -105,6 +105,14 @@ class GarageManager
     public function getAvailablePieceWhereStockLowerThan(int $value): array{
         /** @var Piece[] $array */
         $array = [];
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE qte_stock < :value");
+        $query->execute([
+            "value" => $value
+        ]);
+        $result = $query->fetchAll();
+        foreach ($result as $piece) {
+            $array[] = new Piece($piece["codearticle"], $piece["libellearticle"], $piece["qte_min"], $piece["typearticle"], $piece["prixunitactuelht"], $piece["qte_stock"]);
+        }
         return $array;
     }
 }
