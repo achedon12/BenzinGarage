@@ -13,7 +13,7 @@ $class3 = new InterventionManager(DatabaseManager::getInstance());
 $class4 = new ClientManager(DatabaseManager::getInstance());
 
 // $interv = new Intervention("5","2021-05-05", "12:00:00", "test", 0, false, "test", "test", "test", "test");
-$var = $class3->existIntervention(5);
+$var = $class4->createClient('test','test','test',04500,'Paris','0632458515','test@gmail.com','2022-01-01');
 print_r($var);
 
 

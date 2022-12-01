@@ -38,7 +38,7 @@ class ClientManager{
             "mail" => $email,
             "dateCreation" => $dateCreation
         ]);
-           return $stmt;
+           return true;
     }
 
     /**
