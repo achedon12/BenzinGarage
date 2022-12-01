@@ -70,12 +70,27 @@ class ClientManager{
     /**
      * Update information for a given client
      * @param Client $client
-     * @return Client
+     * @param string $id
+     * @return bool
      */
-    public function modifyClient(Client $client): Client{
-
-        return $client;
+    public function modifyClient(Client $client,string $id): bool{
+        if ($this->clientExist($id)){
+            $stmt = $this->pdo->prepare("UPDATE sae_garage.client SET nom = :nom, prenom = :prenom, adresse = :adresse, codepostal = :codePostal, ville = :ville, tel = :telephone, mail = :mail, datecreation = :dateCreation WHERE codeclient = :id");
+            $stmt->execute([
+                "id" => $id,
+                "nom" => $client->getName(),
+                "prenom" => $client->getFirstName(),
+                "adresse" => $client->getAdresse(),
+                "codePostal" => $client->getCodePostal(),
+                "ville" => $client->getCity(),
+                "telephone" => $client->getTelephoneNumber(),
+                "mail" => $client->getEmail(),
+                "dateCreation" => $client->getDateCreation()
+            ]);
+            return true;
+        }return false;
     }
+
 
 
     /**
