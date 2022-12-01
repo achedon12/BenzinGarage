@@ -32,6 +32,9 @@ class UserManager{
         return $res;
     }
 
+
+
+
     /**
      * Get all managers.
      * @return array

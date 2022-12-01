@@ -18,6 +18,7 @@ class GarageManager{
     public function getAllPieces(): array{
         /** @var  $array Piece[]*/
        $array = [];
+
     }
 
     /**
