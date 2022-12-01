@@ -73,16 +73,17 @@ class ClientManager{
      * @return Client
      */
     public function modifyClient(Client $client): Client{
+
         return $client;
     }
 
 
     /**
      * Get vehicle from a given client.
-     * @param Client $client
+     * @param string $codeclient
      * @return Vehicle
      */
-    public function getClientVehicle(Client $client): Vehicle{
+    public function getClientVehicle(string $codeclient): Vehicle{
         $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.vehicule WHERE codeclient = :id");
         $stmt->execute(["id" => $client->getId()]);
         $result = $stmt->fetch();
@@ -92,12 +93,12 @@ class ClientManager{
 
     /**
      * Verify if a given client has a vehicle.
-     * @param Client $client
+     * @param string $codeclient
      * @return bool
      */
-    public function clientHasVehicle(Client $client): bool{
+    public function clientHasVehicle(string $codeclient): bool{
         $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.vehicule WHERE codeclient = :id");
-        $stmt->execute(["id" => $client->getId()]);
+        $stmt->execute(["id" =>$codeclient]);
         return $stmt->rowCount() > 0;
     }
 

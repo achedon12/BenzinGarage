@@ -26,7 +26,7 @@ class InterventionManager {
     public function createIntervention(string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, string $etat, string $idOpérateur, string $noimmatriculation, string $codeClient): bool{
         $sql = $this->pdo->query("SELECT max(numdde) FROM sae_garage.dde_interv");
         $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
-        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.dde_interv (numdde, daterdv, heurerdv, descriptif_demande, km_actuel, devis_on, etatdemande, idoperateur, noimmatriculation, codeclient) VALUES (:id, :date_rdv, :heure_rdv, :descriptif_demande, :km_actuel, :devis_on, :etat_demande, :id_operateur, :id_vehicule, :code_client)");
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.dde_interv VALUES (:id, :date_rdv, :heure_rdv, :descriptif_demande, :km_actuel, :devis_on,:id_operateur, :id_vehicule, :codeclient,:etat_demande)");
         $stmt->execute([
             "id" => (string)$newID,
             "date_rdv" => $dateRdv,
@@ -34,12 +34,12 @@ class InterventionManager {
             "descriptif_demande" => $descriptifDemande,
             "km_actuel" => $kmActuel,
             "devis_on" => $devisOn,
-            "etat_demande" => $etat,
             "id_operateur" => $idOpérateur,
             "id_vehicule" => $noimmatriculation,
-            "code_client" => $codeClient
+            "codeclient" => $codeClient,
+            "etat_demande" => $etat
         ]);
-        return $stmt;
+        return true;
     }
 
 
