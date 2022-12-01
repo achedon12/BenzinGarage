@@ -78,7 +78,7 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Client--"){
             </section>
             <section class="validatePrix">
                 <input class="submitEditPrice" type="submit" name="submitProduitChangement" value="Valider des informations">
-                <input class="resetEditPrice" type="reset" value="Réinitialiser informations">
+                <input class="submitEditPrice" type="reset" value="Réinitialiser informations">
             </section>
         </form>
 
