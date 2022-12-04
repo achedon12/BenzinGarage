@@ -44,7 +44,8 @@ section.choose
 {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    flex-direction: column;
     width: 85%;
     height: 85%;
     background-color: var(--grey-color);
@@ -121,4 +122,9 @@ form.informations>section:nth-child(2)>input
 form.informations>section:nth-child(2)>input:hover
 {
     border: 1px solid var(--white-color);
+}
+
+.errorCreate
+{
+    color: var(--green-color);
 }
