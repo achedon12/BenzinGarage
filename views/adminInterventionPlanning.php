@@ -10,6 +10,7 @@ $userManager = new UserManager(DatabaseManager::getInstance());
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
+
 if(!Auth::isConnected()){
     render("connexion.php");
     return;
