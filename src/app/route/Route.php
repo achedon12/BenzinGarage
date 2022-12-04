@@ -28,6 +28,7 @@ SimpleRouter::get('/admin/clients/modify',[UsersController::class,'adminClientsM
 SimpleRouter::post('/admin/clients/modify',[UsersController::class,'adminClientsModify']);
 SimpleRouter::get('/admin/clients/delete',[UsersController::class,'adminClientsModify']);
 SimpleRouter::get('/admin/clients/create',[UsersController::class,'adminClientsCreate']);
+SimpleRouter::post('/admin/clients/create',[UsersController::class,'adminClientsCreate']);
 SimpleRouter::get('/admin/employes',[UsersController::class,'adminEmployes']);
 SimpleRouter::get('/admin/employes/modify',[UsersController::class,'adminEmployesModify']);
 SimpleRouter::post('/admin/employes/modify',[UsersController::class,'adminEmployesModify']);
