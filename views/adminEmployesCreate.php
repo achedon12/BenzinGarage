@@ -9,11 +9,24 @@ $userManager = new UserManager(DatabaseManager::getInstance());
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
+    $_SESSION["errorEmployee"] = 0;
 }
 
 if(!Auth::isConnected()){
     render("connexion.php");
     return;
+}
+
+if(isset($_POST["create"])){
+    if(empty($_POST["firstname"]) || empty($_POST["name"]) || empty($_POST["password"])){
+        $_SESSION["errorClient"] = "none";
+    }else{
+        if($userManager->createUser($_POST["name"],$_POST["firstname"],$_POST["adresse"],$_POST["codepostal"],$_POST["city"],$_POST["telephone"],$_POST["mail"])){
+            $_SESSION["errorClient"] = "confirmCreate";
+        }else{
+            $_SESSION["errorClient"] = "none";
+        }
+    }
 }
 
 ?>
@@ -44,11 +57,12 @@ if(!Auth::isConnected()){
 </nav>
 <main class="create">
     <form method="post">
+        <?php  if($_SESSION["errorEmployee"] === "none"){ echo '<h1 class="errorCreate">Les informations n\'ont pas été correctement remplies</h1>'; }elseif($_SESSION["errorClient"] === "confirmCreate"){ echo '<h1 class="errorCreate">L\'employé a bien été créé</h1>'; } ?>
         <h1>Créer un nouvel employé</h1>
         <section class="inputs">
-            <input type="text" placeholder="prénom" id="firstname">
-            <input type="text" placeholder="nom" id="name">
-            <input type="password" id="password" placeholder="password">
+            <input type="text" placeholder="prénom" id="firstname" name="firstname">
+            <input type="text" placeholder="nom" id="name" name="name">
+            <input type="password" id="password" placeholder="password" name="password">
         </section>
         <select id="role-select" name="select">
             <option value="">--Rôle--</option>
@@ -60,7 +74,7 @@ if(!Auth::isConnected()){
         </select>
         <section>
             <input type="reset">
-            <input type="submit" value="Créer">
+            <input type="submit" value="Créer" name="create">
         </section>
     </form>
 
