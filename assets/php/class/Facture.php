@@ -15,7 +15,7 @@ class Facture{
 
     private int $etat;
 
-    private Intervention $numDde;
+    private int $numDde;
 
     /**
      * @param int $factureNumber
@@ -33,8 +33,8 @@ class Facture{
         $this->toPay = $toPay;
         $this->etat = $etat;
         $this->numDde = $numDde;
-    }
 
+    }
 
     /**
      * @return int
@@ -44,22 +44,53 @@ class Facture{
         return $this->numDde;
     }
 
-    public function getFactureNumber(): int{
+    /**
+     * @return int
+     */
+    public function getFactureNumber(): int
+    {
         return $this->factureNumber;
     }
 
-    public function getFactureDate(): string{
+    /**
+     * @return string
+     */
+    public function getFactureDate(): string
+    {
         return $this->factureDate;
     }
-    public function getTva(): int{
+
+    /**
+     * @return int
+     */
+    public function getTva(): int
+    {
         return $this->tva;
     }
-    public function getToPay(): float{
+
+    /**
+     * @return float
+     */
+    public function getToPay(): float
+    {
         return $this->toPay;
     }
 
-    public function getEtat(): int{
+    /**
+     * @return int
+     */
+    public function getEtat(): int
+    {
         return $this->etat;
     }
+
+    /**
+     * @return int
+     */
+    public function getNumDde(): int
+    {
+        return $this->numDde;
+    }
+
 
 }

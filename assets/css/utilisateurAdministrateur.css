@@ -79,6 +79,7 @@ aside li{
     margin-top: 10%;
     display: flex;
     align-items: center;
+    font-size: 1.1em;
 }
 
 aside li a{

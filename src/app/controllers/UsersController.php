@@ -7,6 +7,11 @@ class UsersController{
     public function loginPage(): void {
         render('connexion.php');
     }
+
+    public function index(): void {
+        render('connexion.php');
+    }
+
     public function accueilPage(): void {
         render('accueil.php');
     }
@@ -41,6 +46,50 @@ class UsersController{
 
     public function test(){
         render('test.php');
+    }
+
+    public function adminRemoveClient(){
+        render('adminRemoveClient.php');
+    }
+
+    public function adminModifyEmploye(){
+        render('adminModifyEmploye.php');
+    }
+
+    public function adminRemoveEmploye(){
+        render('adminRemoveEmploye.php');
+    }
+
+    public function adminClients(){
+        render('adminClients.php');
+    }
+
+    public function adminEmployes(){
+        render('adminEmployes.php');
+    }
+
+    public function adminEmployesModify(){
+        render('adminEmployesModify.php');
+    }
+
+    public function adminClientsModify(){
+        render('adminClientsModify.php');
+    }
+
+    public function adminClientsCreate(){
+        render('adminClientsCreate.php');
+    }
+
+    public function adminEmployesCreate(){
+        render('adminEmployesCreate.php');
+    }
+
+    public  function adminStock(){
+        render('adminStock.php');
+    }
+
+    public function adminTarification(){
+        render('adminTarification.php');
     }
 
 }

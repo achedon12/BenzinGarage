@@ -7,14 +7,23 @@ class Intervention{
     const INTERVENTION_VERIFY = 2;
 
     private int $id;
+    
     private string $dateRdv;
+    
     private string $heureRdv;
+    
     private string $descriptifDemande;
+  
     private int $kmActuel;
+    
     private bool $devisOn;
+    
     private string $etatdemande;
+    
     private string $idOperateur;
+    
     private Vehicle $vehicle;
+    
     private Client $client;
 
     /**

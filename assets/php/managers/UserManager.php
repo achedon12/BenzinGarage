@@ -1,12 +1,12 @@
 <?php
 
-
 require_once("./assets/php/class/Client.php");
 require_once("./assets/php/class/Manager.php");
 require_once("./assets/php/class/Vehicle.php");
 require_once("./assets/php/class/Administrator.php");
 require_once("./assets/php/class/Employee.php");
 require_once("./assets/php/database/DatabaseManager.php");
+require_once("./assets/php/class/User.php");
 
 
 class UserManager{
@@ -20,6 +20,19 @@ class UserManager{
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
+    }
+
+    /**
+     * Get all clients.
+     * @return array
+     */
+    public function getAllClients(): array{
+        /** @var $res Client[]*/
+        $res = [];
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.client");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"],$row["mail"],$row["datecreation"] );
+        return $res;
     }
 
     /**
@@ -44,7 +57,7 @@ class UserManager{
         $array = [];
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'administrateur'");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $array[] = new Manager($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
+            $array[] = new Administrator($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
         return $array;
     }
 
@@ -57,20 +70,20 @@ class UserManager{
         $array = [];
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'employe'");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $array[] = new Manager($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
+            $array[] = new Employee($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
         return $array;
     }
 
     /**
-     * Get all vehicles.
-     * @return array
+     * Get all users.
+     * @return User[]
      */
-    public function getAllVehicle(): array{
-        /** @var  $array Vehicle[]*/
+    public function getAllUser(): array{
+        /** @var User[] $array */
         $array = [];
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.vehicule");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $array[] = new Vehicle($row["noimmatriculation"], $row["noserie"], $row["datemiseencirculation"], $row["nummodele"], $row["codeclient"]);
+            $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
         return $array;
     }
 
@@ -127,17 +140,41 @@ class UserManager{
         ]);
         return true;
     }
-
-
+    
     /**
-     * Verify if a given manager exist.
-     * @param string $id
-     * @return bool
-     */
+    * Verify with a given id, a user exist.
+    * @param string $id
+    * return bool
+    */
     public function existUser(string $id): bool{
-        if ($this->pdo->query("SELECT * FROM sae_garage.user WHERE id = '$id' AND role = 'manager'")->rowCount() > 0)
+        if ($this->pdo->query("SELECT * FROM sae_garage.user WHERE id = '$id'")->rowCount() > 0)
             return true;
         return false;
+    }
+
+    /**
+     * Get all vehicles.
+     * @return array
+     */
+    public function getAllVehicle(): array{
+        /** @var  $array Vehicle[]*/
+        $array = [];
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.vehicule");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $array[] = new Vehicle($row["noimmatriculation"], $row["noserie"], $row["datemiseencirculation"], $row["nummodele"], $row["codeclient"]);
+        return $array;
+    }
+
+    public function getUser(string $id): ?User{
+        $sql = "SELECT * FROM sae_garage.user WHERE id = :id";
+        $prepare = $this->pdo->prepare($sql);
+        $prepare->bindParam(':id', $id, PDO::PARAM_STR);
+        $prepare->execute();
+        if ($prepare->rowCount() > 0) {
+            $result = $prepare->fetchAll();
+            return new User($result[0]["id"],$result[0]["nom"],$result[0]["password"],$result[0]["prenom"],$result[0]["role"]);
+        }
+        return null;
     }
 
     /**

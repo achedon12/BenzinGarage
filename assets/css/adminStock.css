@@ -1,0 +1,15 @@
+main{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.sectionGestionStock{
+    margin-top: 10px ;
+    background-color: var(--grey-color);
+    width: 75%;
+    height: 75%;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 25px;
+}

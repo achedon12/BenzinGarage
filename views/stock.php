@@ -2,23 +2,33 @@
 
 use app\users\Auth;
 
-session_start();
+require_once "assets/php/database/DatabaseManager.php";
+require_once "assets/php/managers/UserManager.php";
+require_once("./assets/php/managers/TemplateManager.php");
 
-/*if(!Auth::isConnected()){
+$userManager = new UserManager(DatabaseManager::getInstance());
+
+if(session_status() == PHP_SESSION_NONE){
+    session_start();
+}
+
+if(!Auth::isConnected()){
     render("connexion.php");
     return;
-}*/
-
-require_once("./assets/php/managers/TemplateManager.php");
-require_once("./assets/php/managers/GarageManager.php");
+}
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/stock.css">
+    <link rel="shortcut icon" href="../assets/img/logo.png">
 </head>
     <body>
         <?php
@@ -33,7 +43,7 @@ require_once("./assets/php/managers/GarageManager.php");
 
                 $pieces = getAllPieces();
 
-                if($_POST["connected"] === UserManager::MANAGER){
+                if($_POST["role"] === UserManager::MANAGER){
                     foreach ($pieces as $piece){
                         echo '<article class="ligne-product">
                                <section>
@@ -53,7 +63,7 @@ require_once("./assets/php/managers/GarageManager.php");
                             </article>';
                     }
                 }
-                if($_POST["connected"] === UserManager::MANAGER){
+                if($_POST["role"] === UserManager::MANAGER){
                     echo '<section class="button"><button>Valider commande</button></section>';
                 }
                 ?>
