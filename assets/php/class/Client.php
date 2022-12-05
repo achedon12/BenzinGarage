@@ -47,10 +47,16 @@ class Client{
         $this->dateCreation = $dateCreation;
     }
 
+    /**
+     * @return string
+     */
     public function getId(): string{
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string{
         return $this->name;
     }
@@ -63,26 +69,44 @@ class Client{
         return $this->dateCreation;
     }
 
+    /**
+     * @return string
+     */
     public function getFirstName(): string{
         return $this->firstName;
     }
 
+    /**
+     * @return string
+     */
     public function getAdresse(): string{
         return $this->adresse;
     }
 
+    /**
+     * @return string
+     */
     public function getCodePostal(): string{
         return $this->codePostal;
     }
 
+    /**
+     * @return string
+     */
     public function getCity(): string{
         return $this->city;
     }
 
+    /**
+     * @return string
+     */
     public function getEmail(): string{
         return $this->eMail;
     }
 
+    /**
+     * @return string
+     */
     public function getTelephoneNumber(): string{
         return $this->telephoneNumber;
     }

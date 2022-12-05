@@ -33,10 +33,6 @@ abstract class AbstractUser{
         return $this->hashedPassword;
     }
 
-    public function getPasswordNotHashed(): string{
-        return "";
-    }
-
     public function getFirstName(): string{
         return $this->firstName;
     }

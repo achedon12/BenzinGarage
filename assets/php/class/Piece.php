@@ -70,11 +70,8 @@ class Piece{
     /**
      * @return int
      */
-    return $this->qteStock;
     public function getStockQuantite(): int
     {
         return $this->qteStock;
     }
-
-
 }

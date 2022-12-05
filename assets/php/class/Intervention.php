@@ -34,11 +34,11 @@ class Intervention{
      * @param int $kmActuel
      * @param bool $devisOn
      * @param string $etatdemande
-     * @param string $idOpérateur
+     * @param string $idOperateur
      * @param Vehicle $vehicle
      * @param Client $client
      */
-    public function __construct(int $id, string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, string $etatdemande, string $idOpérateur, Vehicle $vehicle, Client $client)
+    public function __construct(int $id, string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, string $etatdemande, string $idOperateur, Vehicle $vehicle, Client $client)
     {
         $this->id = $id;
         $this->dateRdv = $dateRdv;
@@ -47,7 +47,7 @@ class Intervention{
         $this->kmActuel = $kmActuel;
         $this->devisOn = $devisOn;
         $this->etatdemande = $etatdemande;
-        $this->idOperateur = $idOpérateur;
+        $this->idOperateur = $idOperateur;
         $this->vehicle = $vehicle;
         $this->client = $client;
     }
@@ -131,6 +131,4 @@ class Intervention{
     {
         return $this->vehicle;
     }
-
-
 }

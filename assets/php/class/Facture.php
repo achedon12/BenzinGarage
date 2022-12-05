@@ -84,13 +84,4 @@ class Facture{
         return $this->etat;
     }
 
-    /**
-     * @return int
-     */
-    public function getNumDde(): int
-    {
-        return $this->numDde;
-    }
-
-
 }
