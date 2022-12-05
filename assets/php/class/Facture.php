@@ -33,6 +33,15 @@ class Facture{
         $this->toPay = $toPay;
         $this->etat = $etat;
         $this->numDde = $numDde;
+
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumDde(): int
+    {
+        return $this->numDde;
     }
 
     /**

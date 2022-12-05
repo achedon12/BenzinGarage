@@ -99,7 +99,6 @@ class ClientManager{
         return new Vehicle($result["numberPlate"],$result["noSerie"],$result["dateMiseEnCirculation"],$result["numModele"],$result["client"]);
     }
 
-
     /**
      * Verify if a given client has a vehicle.
      * @param string $codeclient

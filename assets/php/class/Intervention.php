@@ -7,14 +7,23 @@ class Intervention{
     const INTERVENTION_VERIFY = 2;
 
     private int $id;
+    
     private string $dateRdv;
+    
     private string $heureRdv;
+    
     private string $descriptifDemande;
+  
     private int $kmActuel;
+    
     private bool $devisOn;
-    private int $etatdemande;
+    
+    private string $etatdemande;
+    
     private string $idOperateur;
+    
     private Vehicle $vehicle;
+    
     private Client $client;
 
     /**
@@ -24,12 +33,12 @@ class Intervention{
      * @param string $descriptifDemande
      * @param int $kmActuel
      * @param bool $devisOn
-     * @param int $etat
-     * @param string $idOperateur
+     * @param string $etatdemande
+     * @param string $idOpérateur
      * @param Vehicle $vehicle
      * @param Client $client
      */
-    public function __construct(int $id, string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, int $etat, string $idOperateur, Vehicle $vehicle, Client $client)
+    public function __construct(int $id, string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, string $etatdemande, string $idOpérateur, Vehicle $vehicle, Client $client)
     {
         $this->id = $id;
         $this->dateRdv = $dateRdv;
@@ -37,8 +46,8 @@ class Intervention{
         $this->descriptifDemande = $descriptifDemande;
         $this->kmActuel = $kmActuel;
         $this->devisOn = $devisOn;
-        $this->etatdemande = $etat;
-        $this->idOperateur = $idOperateur;
+        $this->etatdemande = $etatdemande;
+        $this->idOperateur = $idOpérateur;
         $this->vehicle = $vehicle;
         $this->client = $client;
     }
@@ -122,5 +131,6 @@ class Intervention{
     {
         return $this->vehicle;
     }
+
 
 }

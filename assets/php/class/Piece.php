@@ -4,27 +4,27 @@ class Piece{
 
     private string $codeArticle;
     private string $libelleArticle;
-    private int $quantiteMinimal;
+    private int $qteMin;
     private string $typeArticle;
     private float $price;
-    private int $quantiteStock;
+    private int $qteStock;
 
     /**
      * @param string $codeArticle
      * @param string $libelleArticle
-     * @param int $quantiteMinimal
+     * @param int $qteMin
      * @param string $typeArticle
      * @param float $price
-     * @param int $quantiteStock
+     * @param int $qteStock
      */
-    public function __construct(string $codeArticle, string $libelleArticle, int $quantiteMinimal, string $typeArticle, float $price, int $quantiteStock)
+    public function __construct(string $codeArticle, string $libelleArticle, int $qteMin, string $typeArticle, float $price, int $qteStock)
     {
+        $this->qteMin = $qteMin;
+        $this->qteStock = $qteStock;
         $this->codeArticle = $codeArticle;
         $this->libelleArticle = $libelleArticle;
-        $this->quantiteMinimal = $quantiteMinimal;
         $this->typeArticle = $typeArticle;
         $this->price = $price;
-        $this->quantiteStock = $quantiteStock;
     }
 
     /**
@@ -48,7 +48,7 @@ class Piece{
      */
     public function getMinimalQuantite(): int
     {
-        return $this->quantiteMinimal;
+        return $this->qteMin;
     }
 
     /**
@@ -70,9 +70,10 @@ class Piece{
     /**
      * @return int
      */
+    return $this->qteStock;
     public function getStockQuantite(): int
     {
-        return $this->quantiteStock;
+        return $this->qteStock;
     }
 
 

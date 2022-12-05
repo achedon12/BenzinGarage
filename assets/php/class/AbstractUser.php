@@ -2,6 +2,7 @@
 
 abstract class AbstractUser{
 
+
     private string $id;
 
     private string $name;

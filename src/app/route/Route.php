@@ -16,6 +16,10 @@ SimpleRouter::get('/admin/interventionPlanning', [UsersController::class, 'admin
 SimpleRouter::post('/admin/interventionPlanning', [UsersController::class, 'adminInterventionPlanning']);
 SimpleRouter::get('/admin/editClient', [UsersController::class, 'editClientPage']);
 SimpleRouter::get('/stock', [UsersController::class, 'stockPage']);
+
+/* Test page */
+SimpleRouter::get('/test',[UsersController::class,'test']);
+
 SimpleRouter::get('/admin/removeClient', [UsersController::class, 'adminRemoveClient']);
 SimpleRouter::get('/admin/removeEmploye', [UsersController::class, 'adminRemoveEmploye']);
 SimpleRouter::get('/admin/editEmploye', [UsersController::class, 'adminModifyEmploye']);
