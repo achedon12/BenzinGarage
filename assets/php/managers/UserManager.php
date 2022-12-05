@@ -22,18 +22,7 @@ class UserManager{
         $this->pdo = $pdo;
     }
 
-    /**
-     * Get all clients.
-     * @return array
-     */
-    public function getAllClients(): array{
-        /** @var $res Client[]*/
-        $res = [];
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.client");
-        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"],$row["mail"],$row["datecreation"] );
-        return $res;
-    }
+
 
     /**
      * Get all managers.
@@ -81,7 +70,7 @@ class UserManager{
     public function getAllUser(): array{
         /** @var User[] $array */
         $array = [];
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user ORDER BY nom");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
         return $array;

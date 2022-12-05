@@ -84,7 +84,7 @@ if(isset($_POST["delete"])){
                     if($_SESSION["userId"] === 0){
                         echo '<option value="false" disabled selected>--Client--</option>';
                     }
-                    foreach($userManager->getAllClients() as $people){
+                    foreach($clientManager->getAllClients() as $people){
                         $name = $people->getName()." ".$people->getFirstName();
                         $code = $people->getId();
                         if($code == $_SESSION["userId"]){
