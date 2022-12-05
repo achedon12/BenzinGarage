@@ -7,6 +7,7 @@ require_once "assets/php/managers/UserManager.php";
 require_once("./assets/php/managers/TemplateManager.php");
 
 $userManager = new UserManager(DatabaseManager::getInstance());
+$garageManager = new GarageManager(DatabaseManager::getInstance());
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
@@ -41,7 +42,7 @@ if(!Auth::isConnected()){
             <section>
                 <?php
 
-                $pieces = getAllPieces();
+                $pieces = $garageManager->getAllPieces();
 
                 if($_POST["role"] === UserManager::MANAGER){
                     foreach ($pieces as $piece){
