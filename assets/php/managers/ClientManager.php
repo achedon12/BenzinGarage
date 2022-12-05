@@ -20,10 +20,9 @@ class ClientManager{
      * @param string $city
      * @param string $telephoneNumber
      * @param string $email
-     * @param string $dateCreation
      * @return bool
      */
-    public function createClient(string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $email, string $dateCreation): bool{
+    public function createClient(string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephoneNumber, string $email): bool{
         $sql = $this->pdo->query("SELECT max(codeclient) FROM sae_garage.client");
         $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
         $stmt = $this->pdo->prepare("INSERT INTO sae_garage.client (codeclient, nom, prenom, adresse, codepostal, ville, tel, mail, datecreation ) VALUES (:id, :nom, :prenom, :adresse, :codePostal, :ville, :telephone, :mail, :dateCreation)");
@@ -36,9 +35,9 @@ class ClientManager{
             "ville" => $city,
             "telephone" => $telephoneNumber,
             "mail" => $email,
-            "dateCreation" => $dateCreation
+            "dateCreation" => date("Y-n-d")
         ]);
-           return true;
+        return true;
     }
 
     /**
@@ -59,12 +58,9 @@ class ClientManager{
      */
     public function deleteClient(string $codeclient): bool
     {
-        if ($this->clientExist($codeclient)) {
-            $stmt = $this->pdo->prepare("DELETE FROM sae_garage.client WHERE codeclient = :id");
-            $stmt->execute(["id" => $codeclient]);
-            return true;
-        }
-        return false;
+        $stmt = $this->pdo->prepare("DELETE FROM sae_garage.client WHERE codeclient = ?");
+        $stmt->execute([$codeclient]);
+        return true;
     }
 
     /**
@@ -74,21 +70,19 @@ class ClientManager{
      * @return bool
      */
     public function modifyClient(Client $client,string $id): bool{
-        if ($this->clientExist($id)){
-            $stmt = $this->pdo->prepare("UPDATE sae_garage.client SET nom = :nom, prenom = :prenom, adresse = :adresse, codepostal = :codePostal, ville = :ville, tel = :telephone, mail = :mail, datecreation = :dateCreation WHERE codeclient = :id");
-            $stmt->execute([
-                "id" => $id,
-                "nom" => $client->getName(),
-                "prenom" => $client->getFirstName(),
-                "adresse" => $client->getAdresse(),
-                "codePostal" => $client->getCodePostal(),
-                "ville" => $client->getCity(),
-                "telephone" => $client->getTelephoneNumber(),
-                "mail" => $client->getEmail(),
-                "dateCreation" => $client->getDateCreation()
-            ]);
-            return true;
-        }return false;
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.client SET nom = :nom, prenom = :prenom, adresse = :adresse, codepostal = :codePostal, ville = :ville, tel = :telephone, mail = :mail, datecreation = :dateCreation WHERE codeclient = :id");
+        $stmt->execute([
+            "id" => $id,
+            "nom" => $client->getName(),
+            "prenom" => $client->getFirstName(),
+            "adresse" => $client->getAdresse(),
+            "codePostal" => $client->getCodePostal(),
+            "ville" => $client->getCity(),
+            "telephone" => $client->getTelephoneNumber(),
+            "mail" => $client->getEmail(),
+            "dateCreation" => $client->getDateCreation()
+        ]);
+        return true;
     }
 
 
@@ -100,7 +94,7 @@ class ClientManager{
      */
     public function getClientVehicle(string $codeclient): Vehicle{
         $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.vehicule WHERE codeclient = :id");
-        $stmt->execute(["id" => $client->getId()]);
+        $stmt->execute(["id" => $codeclient]);
         $result = $stmt->fetch();
         return new Vehicle($result["numberPlate"],$result["noSerie"],$result["dateMiseEnCirculation"],$result["numModele"],$result["client"]);
         }
@@ -134,6 +128,23 @@ class ClientManager{
             return true;
         }
         return false;
+    }
+
+    /**
+     * Get a client from a given id.
+     * @param string $id
+     * @return Client|null
+     */
+    public function getClientByID(string $id): ?Client{
+        $sql = "SELECT * FROM sae_garage.client WHERE codeclient = :id";
+        $prepare = $this->pdo->prepare($sql);
+        $prepare->bindParam(':id', $id, PDO::PARAM_STR);
+        $prepare->execute();
+        if ($prepare->rowCount() > 0) {
+            $result = $prepare->fetchAll();
+            return new Client($result[0]["codeclient"],$result[0]["nom"],$result[0]["prenom"],$result[0]["adresse"],$result[0]["codepostal"],$result[0]["ville"],$result[0]["tel"],$result[0]["mail"],$result[0]["datecreation"]);
+        }
+        return null;
     }
 
     /**

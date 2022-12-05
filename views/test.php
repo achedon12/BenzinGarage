@@ -15,6 +15,7 @@ $class4 = new ClientManager(DatabaseManager::getInstance());
 // $interv = new Intervention("5","2021-05-05", "12:00:00", "test", 0, false, "test", "test", "test", "test");
 $var = $class2->getAvailablePieceWhereStockLowerThan(11);
 print_r($var);
+$array = $class->getRoles();
 
 
 ?>
