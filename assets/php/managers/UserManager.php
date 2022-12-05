@@ -116,7 +116,7 @@ class UserManager{
      * @param string $id
      * @return bool
      */
-    public function removeUser(string $id): bool{
+    public function deleteUser(string $id): bool{
         $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
         $stmt->execute([
             "id" => $id
@@ -133,10 +133,10 @@ class UserManager{
     public function modifyUser(User $administrator,string $id): bool{
         $stmt = $this->pdo->prepare("UPDATE sae_garage.user SET nom = :nom, prenom = :prenom, password = :password WHERE id = :id");
         $stmt->execute([
-            "id" => $id,
             "nom" => $administrator->getName(),
             "prenom" => $administrator->getFirstName(),
-            "password" => $administrator->getHashedPassword()
+            "password" => $administrator->getHashedPassword(),
+            "id" => $id
         ]);
         return true;
     }

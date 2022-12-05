@@ -9,6 +9,9 @@ $userManager = new UserManager(DatabaseManager::getInstance());
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
+    $_SESSION["errorEmploye"] = 0;
+    $_SESSION["managerId"] = 0;
+    $_SESSION["modifyEmploye"] = 0;
 }
 
 if(!Auth::isConnected()){
@@ -16,13 +19,32 @@ if(!Auth::isConnected()){
     return;
 }
 
-$_SESSION["managerId"] = 0;
-
-
 if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
     $_SESSION["managerId"] = $_POST["select"];
 }
 
+if(isset($_POST["delete"])){
+    if($userManager->deleteUser($_POST["id"])){
+        $_SESSION["managerId"] = 0;
+        $_SESSION["errorEmploye"] = "confirmDelete";
+    }else{
+        $_SESSION["errorEmploye"] = "none";
+    }
+}
+
+if(isset($_POST["modify"])){
+    if(empty($_POST["firstname"]) || empty($_POST["name"]) || empty($_POST["password"])) {
+        $_SESSION["modifyEmploye"] = "none";
+    }else{
+        $newClient = new User($_POST["id"],$_POST["name"],$_POST["password"],$_POST["firstname"],$_POST["role-select"]);
+        if($userManager->modifyUser($newClient,$_POST["id"])){
+            $_SESSION["userId"] = 0;
+            $_SESSION["modifyEmploye"] = "confirmModify";
+        }else{
+            $_SESSION["modifyEmploye"] = "none";
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -75,6 +97,16 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
                 if($_SESSION["managerId"] === 0){
                     ?>
                     <section class="choose">
+                        <?php if($_SESSION["errorEmploye"] === "none"){
+                            echo '<h1 class="errorCreate">Une erreur s\'est produite</h1>';
+                        }elseif($_SESSION["errorEmploye"] === "confirmDelete"){
+                            echo '<h1 class="errorCreate">Vous avez bien supprimé l\'employé</h1>';
+                        }elseif ($_SESSION["modifyEmploye"] === "none"){
+                            echo '<h1>Une erreur s\'est produite lors de la modification d\'un client</h1>';
+                        }elseif($_SESSION["modifyEmploye"] === "confirmModify"){
+                            echo '<h1 class="errorCreate">Vous avez bien modifié le client</h1>';
+                        }
+                        ?>
                         <h1>Veuillez séléctionner un employé pour commencer l'opération</h1>
                     </section>
                     <?php
@@ -85,6 +117,8 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
                     <form class="informations" method="post">
                         <section class="admin">
                             <input type="text" name="name" id="name" value='<?php echo $user->getName()?>'>
+                            <input type="text" name="password" id="password" value='<?php echo $user->getHashedPassword()?>'>
+                            <input type="text" name="id" hidden id="id" value='<?php echo $user->getId()?>'>
                             <input type="text" name="firstname" id="firstname" value='<?php echo $user->getFirstName()?>'>
                             <select id="role-select" name="role-select">
                                 <?php
@@ -99,8 +133,8 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
                             </select>
                         </section>
                         <section>
-                            <input type="submit" value="Modifier l'employé" id="modify" class="tier">
-                            <input type="submit" value="Supprimer l'employé" id="del" class="tier">
+                            <input type="submit" value="Modifier l'employé" id="modify" class="tier" name="modify">
+                            <input type="submit" value="Supprimer l'employé" id="del" class="tier" name="delete">
                             <input type="reset" value="Réinitialiser les informations" class="tier">
                         </section>
                     </form>
@@ -111,3 +145,6 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
         </main>
     </body>
 </html>
+<?php
+$_SESSION["errorEmploye"] = 0;
+?>
