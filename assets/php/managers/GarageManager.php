@@ -46,15 +46,15 @@ class GarageManager
      */
     public function modifyPiece(Piece $piece, string $id):bool
     {
-        $stmt = $this->pdo->prepare("UPDATE sae_garage.article SET codearticle=:codearticle, libellearticle=:libellearticle, qte_min=:qte_min, typearticle=:typearticle, prixunitactuelht=:prixunitactuelht, qte_stock=:qte_stock, commander=:commander WHERE codeclient = :id");
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.article SET codearticle=:codearticle, libellearticle=:libellearticle, qte_min=:qte_min, typearticle=:typearticle, prixunitactuelht=:prixunitactuelht, qte_stock=:qte_stock WHERE codearticle = :id");
         $stmt->execute([
-            "codearticle"=> $id,
-            "libellearticle"=>$piece->getLibelleArticle(),
-            "qte_min"=>$piece->getMinimalQuantite(),
-            "typearticle"=>$piece->getTypeArticle(),
-            "prixunitactuelht"=>$piece->getPrice(),
-            "qte_stock"=>$piece->getStockQuantite(),
-            "commander"=>false
+            "codearticle" => $id,
+            "libellearticle" => $piece->getLibelleArticle(),
+            "qte_min" => $piece->getMinimalQuantite(),
+            "typearticle" => $piece->getTypeArticle(),
+            "prixunitactuelht" => $piece->getPrice(),
+            "qte_stock" => $piece->getStockQuantite(),
+            "id" =>$id
         ]);
         return true;
     }

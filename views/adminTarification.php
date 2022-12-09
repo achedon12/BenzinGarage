@@ -32,9 +32,10 @@ if(isset($_POST["submitProduitChangement"])){
         $_SESSION["modifyProduct"] = "none";
     }else{
         $produit =$garageManager->getPieceById($_SESSION['productId']);
-        $newprice= new Piece($_SESSION['productId'],$produit->getLibelleArticle(),$produit->getMinimalQuantite(),$produit->getTypeArticle(),$_POST['newPrice'],$produit->getStockQuantite());
+        $newprice= new Piece($_SESSION['productId'],$produit[1],$produit[2],$produit[3],$_POST['newPrice'],$produit[5]);
         if($garageManager->modifyPiece($newprice,$_SESSION["productId"])) {
-            $_SESSION["productId"] = 0;
+            $garageManager->modifyPiece($newprice,$_SESSION["productId"]);
+            $_SESSION["productId"] = null;
         }
     }
 }
@@ -80,8 +81,8 @@ if(isset($_POST["submitProduitChangement"])){
         <label for="client-select">Choisir un produit</label>
         <select id="client-select" name="select">
             <?php
-            if($_SESSION["productId"] === 0){
-                echo '<option value="false" disabled selected>--Produit--</option>';
+            if(!isset($_SESSION["productId"])){
+                echo '<option value="false" selected>--Produit--</option>';
             }
             foreach ($garageManager->getAllPieces() as $product){
                 $nameProduct = $product->getLibelleArticle();
@@ -98,19 +99,20 @@ if(isset($_POST["submitProduitChangement"])){
         </select>
     </section>
 </form>
-
 <section class="produit">
     <h1> nom du produit :
         <?php
-        if (!isset($_SESSION["productId"])){
+        if ($_SESSION["productId"] != "none"){
             echo 'pas de produit selectionné';
         }else{
             echo $garageManager->getPieceById($_SESSION["productId"])[3];
+
         }
+
         ?>
     </h1>
     <h2>Réference : <?php
-        if (!isset($_SESSION["productId"])){
+        if ($_SESSION["productId"] != "none"){
             echo '<h1>pas de produit selectionné</h1>';
         }else{
             echo '<h1>'.$garageManager->getPieceById($_SESSION["productId"])[1].'</h1>';
@@ -119,7 +121,13 @@ if(isset($_POST["submitProduitChangement"])){
     <form action="" method="post">
 
         <section class="containerPrices">
-            <input type="text" name="originPrice" value=" <?php echo $garageManager->getPieceById($_SESSION["productId"])[4] ?> " class="sortiePrix">
+            <input type="text" name="originPrice" value=" <?php
+            if($_SESSION["productId"] != "none") {
+                echo $garageManager->getPieceById($_SESSION["productId"])[4];
+            }else{
+                echo "";
+            }
+            ?> " class="sortiePrix">
             <input type="text" name="newPrice" placeholder="Nouveau prix" class="sortiePrix">
         </section>
         <section class="validatePrix">
