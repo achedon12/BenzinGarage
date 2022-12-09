@@ -29,6 +29,37 @@ class GarageManager
     }
 
     /**
+     * Get piece with ID
+     */
+    public function getPieceById(string $codearticle)
+    {
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE codearticle =:codearticle");
+        $query->execute([
+            "codearticle" => $codearticle
+        ]);
+        return $query->fetch();
+    }
+
+    /**
+     * modify a piece with ID
+     *
+     */
+    public function modifyPiece(Piece $piece, string $id):bool
+    {
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.article SET codearticle=:codearticle, libellearticle=:libellearticle, qte_min=:qte_min, typearticle=:typearticle, prixunitactuelht=:prixunitactuelht, qte_stock=:qte_stock, commander=:commander WHERE codeclient = :id");
+        $stmt->execute([
+            "codearticle"=> $id,
+            "libellearticle"=>$piece->getLibelleArticle(),
+            "qte_min"=>$piece->getMinimalQuantite(),
+            "typearticle"=>$piece->getTypeArticle(),
+            "prixunitactuelht"=>$piece->getPrice(),
+            "qte_stock"=>$piece->getStockQuantite(),
+            "commander"=>false
+        ]);
+        return true;
+    }
+
+    /**
      * Get All pieces.
      * @return array
      */
