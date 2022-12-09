@@ -19,12 +19,12 @@ if(!Auth::isConnected()){
 
 if(isset($_POST["create"])){
     if(empty($_POST["firstname"]) || empty($_POST["name"]) || empty($_POST["password"])){
-        $_SESSION["errorClient"] = "none";
+        $_SESSION["errorEmployee"] = "none";
     }else{
         if($userManager->createUser($_POST["name"],$_POST["password"],$_POST["firstname"],$_POST["select"])){
-            $_SESSION["errorClient"] = "confirmCreate";
+            $_SESSION["errorEmployee"] = "confirmCreate";
         }else{
-            $_SESSION["errorClient"] = "none";
+            $_SESSION["errorEmployee"] = "none";
         }
     }
 }
