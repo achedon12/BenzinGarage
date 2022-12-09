@@ -75,3 +75,6 @@ if(isset($_POST["create"])){
 </main>
 </body>
 </html>
+<?php
+$_SESSION["errorClient"] = 0;
+?>
