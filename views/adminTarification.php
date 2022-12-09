@@ -21,7 +21,6 @@ if(!Auth::isConnected()){
     return;
 }
 
-$_SESSION["userId"] = 0;
 
 if(isset($_POST["select"]) && $_POST["select"] !== "--Produit--"){
     $_SESSION["productId"] = $_POST["select"];
@@ -88,7 +87,7 @@ if(isset($_POST["submitProduitChangement"])){
                 $nameProduct = $product->getLibelleArticle();
                 $codeProduct = $product->getCodeArticle();
                 $originPrice= $garageManager->getPiecePrice($product->getCodeArticle());
-                if ($codeProduct == $_SESSION["codeId"]) {
+                if ($codeProduct == $_SESSION["productId"]) {
                     echo '<option value="' . $codeProduct . '" selected>' . $nameProduct . '</option>';
                 }else{
                     echo '<option value="' . $codeProduct . '">' . $nameProduct . '</option>';
@@ -101,26 +100,26 @@ if(isset($_POST["submitProduitChangement"])){
 </form>
 
 <section class="produit">
-    <h1>
+    <h1> nom du produit :
         <?php
-        if (!isset($_SESSION["codeId"])){
+        if (!isset($_SESSION["productId"])){
             echo 'pas de produit selectionné';
         }else{
-            echo $garageManager->getAvailablePiece($_SESSION["codeId"]);
+            echo $garageManager->getPieceById($_SESSION["productId"])[3];
         }
         ?>
     </h1>
     <h2>Réference : <?php
-        if (!isset($_SESSION["codeId"])){
+        if (!isset($_SESSION["productId"])){
             echo '<h1>pas de produit selectionné</h1>';
         }else{
-            echo '<h1>'. $_SESSION["codeId"].'</h1>';
+            echo '<h1>'.$garageManager->getPieceById($_SESSION["productId"])[1].'</h1>';
         }
         ?>   </h2>
     <form action="" method="post">
 
         <section class="containerPrices">
-            <input type="text" name="originPrice" value="" class="sortiePrix">
+            <input type="text" name="originPrice" value=" <?php echo $garageManager->getPieceById($_SESSION["productId"])[4] ?> " class="sortiePrix">
             <input type="text" name="newPrice" placeholder="Nouveau prix" class="sortiePrix">
         </section>
         <section class="validatePrix">

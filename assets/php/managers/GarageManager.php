@@ -33,7 +33,7 @@ class GarageManager
      */
     public function getPieceById(string $codearticle)
     {
-        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE codeArticle = :codearticle");
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE codearticle =:codearticle");
         $query->execute([
             "codearticle" => $codearticle
         ]);
