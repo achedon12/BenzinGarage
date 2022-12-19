@@ -5,13 +5,22 @@ use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
-require_once "assets/php/managers/GarageManager.php";
+require_once "assets/php/managers/ClientManager.php";
+require_once "assets/php/managers/GarageManager.php ";
+require_once "assets/php/class/Piece.php ";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
+$clientManager = new ClientManager(DatabaseManager::getInstance());
+$garageManager = new GarageManager(DatabaseManager::getInstance());
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
+
+if(isset($_POST["select"]) && $_POST["select"] !== "null"){
+    $_SESSION["typeProduct"] = $_POST["select"];
+}
+
 
 if(!Auth::isConnected()){
     render("connexion.php");
@@ -65,25 +74,29 @@ $garageManager=new GarageManager(DatabaseManager::getInstance());
     </section>
 </form>
 <section class="produit">
-    <h1>Les produits <?php
-        if((isset($_POST['select'])) && $_POST['select']== 'enstock'){echo "en stock";}else{echo "pas en stock";}  ?> </h1>
+    <h1> <?php
+        if (!isset($_POST['select'])){
+            echo "pas de produit selectionné";
+
+        }else{
+            if($_SESSION['typeProduct']== 'enstock'){echo "Les produits en stock";}
+            elseif($_SESSION['typeProduct']== 'null'){echo "pas de produit selectionné";}
+            else{echo "Les produits  pas en stock";}
+        }
+        ?> </h1>
     <form action="" class="AllProduct">
 
         <?php
-        if (isset($_POST['select']) && $_POST['select']== 'enstock'){
+        $test='enstock';
+        if (isset($_POST['select']) && $_POST['select']==$test) {
             $pieces = $garageManager->getAllPiecesAvailable();
 
-            foreach ($pieces as $piece){
-                echo    '<section class="productContainer"><h2 class="ProductName">Nom :'. $piece->getLibelleArticle().'</h2> <h2 class="RefProduct">Ref : '. $piece->getCodeArticle() .'</h2> <h2 class="PriceProduct">Prix : '. $piece->getPrice() .' €</h2> <h2 class="QteProduct"> Quantite : '. $piece->getStockQuantite() .'</h2>
+            foreach ($pieces as $piece) {
+                echo '<section class="productContainer"><h2 class="ProductName">Nom :' . $piece->getLibelleArticle() . '</h2> <h2 class="RefProduct">Ref : ' . $piece->getCodeArticle() . '</h2> <h2 class="PriceProduct">Prix : ' . $piece->getPrice() . ' €</h2> <h2 class="QteProduct"> Quantite : ' . $piece->getStockQuantite() . '</h2>
 
                    </section>';
             }
-
         }
-
-
-
-
         ?>
 
 
