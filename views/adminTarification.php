@@ -102,7 +102,7 @@ if(isset($_POST["submitProduitChangement"])){
 <section class="produit">
     <h1> nom du produit :
         <?php
-        if ($_SESSION["productId"] != "none"){
+        if (!isset($_SESSION["productId"])){
             echo 'pas de produit selectionné';
         }else{
             echo $garageManager->getPieceById($_SESSION["productId"])[3];
@@ -112,7 +112,7 @@ if(isset($_POST["submitProduitChangement"])){
         ?>
     </h1>
     <h2>Réference : <?php
-        if ($_SESSION["productId"] != "none"){
+        if (!isset($_SESSION["productId"])){
             echo '<h1>pas de produit selectionné</h1>';
         }else{
             echo '<h1>'.$garageManager->getPieceById($_SESSION["productId"])[1].'</h1>';
@@ -122,7 +122,7 @@ if(isset($_POST["submitProduitChangement"])){
 
         <section class="containerPrices">
             <input type="text" name="originPrice" value=" <?php
-            if($_SESSION["productId"] != "none") {
+            if(isset($_SESSION["productId"])) {
                 echo $garageManager->getPieceById($_SESSION["productId"])[4];
             }else{
                 echo "";

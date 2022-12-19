@@ -13,3 +13,45 @@ main{
     margin-left: auto;
     border-radius: 25px;
 }
+
+.AllProduct{
+    margin :  25px auto 25px auto;
+    display: flex;
+    flex-wrap: nowrap !important;
+    flex-direction: unset;
+    width: 80%;
+    height: 70%;
+    overflow: auto;
+
+}
+
+.productContainer{
+    display: flex;
+    background-color: red;
+    width: auto;
+    height: 12%;
+    border-radius: 8px;
+    margin: 8px;
+}
+
+
+
+
+.ProductName{
+    width: 30%;
+}
+
+
+.RefProduct{
+    margin-left: 5px;
+    width: 15%;
+}
+
+
+.PriceProduct{
+    width: 20%;
+}
+
+.QteProduct{
+    width: auto;
+}

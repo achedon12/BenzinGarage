@@ -1,9 +1,11 @@
+
 <?php
 
 use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
+require_once "assets/php/managers/GarageManager.php";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
 
@@ -15,6 +17,8 @@ if(!Auth::isConnected()){
     render("connexion.php");
     return;
 }
+$garageManager=new GarageManager(DatabaseManager::getInstance());
+
 
 ?>
 
@@ -30,8 +34,11 @@ if(!Auth::isConnected()){
     <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
     <link rel="stylesheet" href="../assets/css/adminAddClient.css">
     <link rel="stylesheet" href="../assets/css/adminEditClient.css">
+    <link rel="stylesheet" href="../assets/css/adminClientsEmployesModify.css">
+    <link rel="stylesheet" href="../assets/css/adminTarification.css">
     <link rel="stylesheet" href="../assets/css/adminStock.css">
     <link rel="shortcut icon" href="../assets/img/logo.png">
+
     <title>Modifier un client</title>
 </head>
 <body>
@@ -47,22 +54,51 @@ if(!Auth::isConnected()){
         <li><a href="/disconnect">Deconnexion</a></li>
     </ul>
 </nav>
-<main>
-    <form method="post">
-        <select name="" id="">
-            <option value="" disabled selected>--choisir en stock ou non--</option>
-            <option value="test">en stock</option>
-            <option value="test">pas en stock</option>
-
-
+<form method="post" class="selecteur" onchange="submit()">
+    <section>
+        <label for="client-select">Choisir une catégorie</label>
+        <select id="client-select" name="select">
+            <option value="null">---Choisir une catégorie---</option>
+            <option value="enstock">Produit en Stock</option>
+            <option value="pasenstock">Produit pas en Stock</option>
         </select>
-    </form>
-    <section class="sectionGestionStock">
-        qsd
     </section>
+</form>
+<section class="produit">
+    <h1>Les produits <?php
+        if((isset($_POST['select'])) && $_POST['select']== 'enstock'){echo "en stock";}else{echo "pas en stock";}  ?> </h1>
+    <form action="" class="AllProduct">
+
+        <?php
+        if (isset($_POST['select']) && $_POST['select']== 'enstock'){
+            $pieces = $garageManager->getAllPiecesAvailable();
+
+            foreach ($pieces as $piece){
+                echo    '<section class="productContainer"><h2 class="ProductName">Nom :'. $piece->getLibelleArticle().'</h2> <h2 class="RefProduct">Ref : '. $piece->getCodeArticle() .'</h2> <h2 class="PriceProduct">Prix : '. $piece->getPrice() .' €</h2> <h2 class="QteProduct"> Quantite : '. $piece->getStockQuantite() .'</h2>
+
+                   </section>';
+            }
+
+        }
 
 
-</main>
+
+
+        ?>
+
+
+
+
+
+
+
+    </form>
+
+
+
+
+</section>
+
 
 </body>
 </html>

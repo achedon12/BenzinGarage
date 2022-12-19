@@ -77,6 +77,63 @@ class GarageManager
     }
 
     /**
+     * Get All pieces available.
+     * @return array
+     */
+    public function getAllPiecesAvailable(): array
+    {
+        /** @var  $array Piece[] */
+        $array = [];
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE commander=false ");
+        $query->execute();
+        $result = $query->fetchAll();
+        foreach ($result as $piece) {
+            $array[] = new Piece($piece["codearticle"], $piece["libellearticle"], $piece["qte_min"], $piece["typearticle"], $piece["prixunitactuelht"], $piece["qte_stock"]);
+        }
+        return $array;
+    }
+
+
+    /**
+     * Get All pieces not available.
+     * @return array
+     */
+    public function getAllPiecesUnAvailable(): array
+    {
+        /** @var  $array Piece[] */
+        $array = [];
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE commander=true ");
+        $query->execute();
+        $result = $query->fetchAll();
+        foreach ($result as $piece) {
+            $array[] = new Piece($piece["codearticle"], $piece["libellearticle"], $piece["qte_min"], $piece["typearticle"], $piece["prixunitactuelht"], $piece["qte_stock"]);
+        }
+        return $array;
+    }
+
+
+
+
+    /**
+     * Get All pieces not available.
+     * @return array
+     */
+    public function getAllPiecesNotAvailable(): array
+    {
+        /** @var  $array Piece[] */
+        $array = [];
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE qte_Stock<=qte_min");
+        $query->execute();
+        $result = $query->fetchAll();
+        foreach ($result as $piece) {
+            $array[] = new Piece($piece["codearticle"], $piece["libellearticle"], $piece["qte_min"], $piece["typearticle"], $piece["prixunitactuelht"], $piece["qte_stock"]);
+        }
+        return $array;
+    }
+
+
+
+    /**
      * Get price from a given piece.
      * @param string $codearticle
      * @return float
