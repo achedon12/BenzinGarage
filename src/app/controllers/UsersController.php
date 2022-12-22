@@ -16,6 +16,10 @@ class UsersController{
         render('accueil.php');
     }
 
+    public function accueilChefAtelier(): void {
+        render('AccueilChefAtelier.php');
+    }
+
     public function accueilAdministrateurPage(): void {
         render('accueilAdmin.php');
     }
@@ -91,5 +95,10 @@ class UsersController{
     public function adminTarification(){
         render('adminTarification.php');
     }
+
+    public function chefAtelierInterventionPlanning(){
+        render("PlanningChefAtelier.php");
+    }
+
 
 }

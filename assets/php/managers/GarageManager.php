@@ -203,4 +203,22 @@ class GarageManager
         }
         return $array;
     }
+
+
+    public function setAvailablePieceWhenRefill(int $idProduct){
+        $query=$this->pdo->prepare("SELECT qte_min,qte_stock FROM sae_garage.article where codearticle=:id");
+        $query->execute([
+            "id"=> $idProduct
+        ]);
+        $result=$query->fetchAll();
+        $qte_min=$result[0]['qte_min'];
+        $qte_stock=$result[0]['qte_stock'];
+        $query2=$this->pdo->prepare("UPDATE sae_garage.article set qte_stock=:newqte where codearticle=:id");
+        $query2->execute([
+            "newqte"=> $qte_stock+$qte_min,
+            "id"=> $idProduct
+        ]);
+
+    }
+
 }

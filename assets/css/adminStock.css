@@ -18,7 +18,7 @@ main{
     margin :  25px auto 25px auto;
     display: flex;
     flex-wrap: nowrap !important;
-    flex-direction: unset;
+    flex-direction: column;
     width: 80%;
     height: 70%;
     overflow: auto;
@@ -26,16 +26,33 @@ main{
 }
 
 .productContainer{
+    text-align: center;
     display: flex;
-    background-color: red;
+    background-color: var(--green-color);
     width: auto;
-    height: 12%;
+    height: 15%;
     border-radius: 8px;
     margin: 8px;
+
+}
+
+.productContainerTitle{
+    display: flex;
+    background-color: var(--grey-color);
+    width: auto;
+    height: 15%;
+    border-radius: 8px;
+    margin: 8px;
+    text-align: center;
 }
 
 
+.refillStock{
+    width: 150px;
+    margin-right: 50px;
+    align-self: end;
 
+}
 
 .ProductName{
     width: 30%;
@@ -53,5 +70,13 @@ main{
 }
 
 .QteProduct{
-    width: auto;
+    width: 25%;
 }
+
+.inputrefillStock{
+    text-align: center;
+    content: unset;
+
+}
+
+

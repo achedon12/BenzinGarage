@@ -28,6 +28,21 @@ if(!Auth::isConnected()){
 }
 $garageManager=new GarageManager(DatabaseManager::getInstance());
 
+if(isset($_POST['refillstock'])){
+
+    $pieces=$garageManager->getAllPiecesNotAvailable();
+    foreach ($pieces as $piece) {
+        print_r($piece);
+        $garageManager->setAvailablePieceWhenRefill($piece->getCodeArticle());
+
+    }
+}
+
+if(isset($_POST['refillStockUn'])){
+
+    $garageManager->setAvailablePieceWhenRefill($_POST['refillStockUn']);
+}
+
 
 ?>
 
@@ -84,29 +99,35 @@ $garageManager=new GarageManager(DatabaseManager::getInstance());
             else{echo "Les produits  pas en stock";}
         }
         ?> </h1>
-    <form action="" class="AllProduct">
+    <form method="post" onchange="submit()">
+        <section class="AllProduct">
+            <section class="productContainerTitle"><h2 class="ProductName">Nom</h2> <h2 class="RefProduct"> Reférence </h2> <h2 class="PriceProduct">Prix</h2> <h2 class="QteProduct">Quantitée en stock</h2></section>
+            <?php
+            $test='enstock';
+            $test2='pasenstock';
 
-        <?php
-        $test='enstock';
-        if (isset($_POST['select']) && $_POST['select']==$test) {
-            $pieces = $garageManager->getAllPiecesAvailable();
+            if (isset($_POST['select']) && $_POST['select']==$test) {
+                $pieces = $garageManager->getAllPiecesAvailable();
+
+                foreach ($pieces as $piece) {
+                    echo '<section class="productContainer"><h2 class="ProductName">' . $piece->getLibelleArticle() . '</h2> <h2 class="RefProduct">' . $piece->getCodeArticle() . '</h2> <h2 class="PriceProduct">' . $piece->getPrice() . ' €</h2> <h2 class="QteProduct">' . $piece->getStockQuantite() . '</h2> 
+    
+                       </section>';
+                }
+            }elseif (isset($_POST['select']) && $_POST['select']==$test2){
+            $pieces = $garageManager->getAllPiecesNotAvailable();
 
             foreach ($pieces as $piece) {
-                echo '<section class="productContainer"><h2 class="ProductName">Nom :' . $piece->getLibelleArticle() . '</h2> <h2 class="RefProduct">Ref : ' . $piece->getCodeArticle() . '</h2> <h2 class="PriceProduct">Prix : ' . $piece->getPrice() . ' €</h2> <h2 class="QteProduct"> Quantite : ' . $piece->getStockQuantite() . '</h2>
-
-                   </section>';
+                echo '<section class="productContainer"><h2 class="ProductName">' . $piece->getLibelleArticle() . '</h2> <h2 class="RefProduct">' . $piece->getCodeArticle() . '</h2> <h2 class="PriceProduct">' . $piece->getPrice() . ' €</h2> <h2 class="QteProduct">' . $piece->getStockQuantite() . '</h2> <input class="inputrefillStock" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit"></section>';
             }
-        }
-        ?>
+            echo '<input  value="refillstock" class="refillStock" type="submit">';
+            }
 
 
-
-
-
-
+            ?>
+        </section>
 
     </form>
-
 
 
 
