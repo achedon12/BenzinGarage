@@ -90,24 +90,25 @@ class InterventionManager {
     /**
      * Add an intervention for a given client.
      * @param Intervention $intervention
-     * @param Client $client
      * @return bool
      */
-    public function addInterventionForClient(Intervention $intervention, Client $client): bool{
+    public function addInterventionForClient(Intervention $intervention): bool{
         $sql = "INSERT INTO sae_garage.intervention (date_rdv, heure_rdv, descriptif_demande, km_actuel, devis_on, etatdemande, idoperateur, noimmatriculation, codeclient) VALUES (:date_rdv, :heure_rdv, :descriptif_demande, :km_actuel, :devis_on, :etat, :id_operateur, :no_serie, :id_client)";
         $stmt = $this->pdo->prepare($sql);
-        if($stmt->execute([
-            "date_rdv" => $intervention->getDateRdv(),
-            "heure_rdv" => $intervention->getHeureRdv(),
-            "descriptif_demande" => $intervention->getDescriptifDemande(),
-            "km_actuel" => $intervention->getKmActuel(),
-            "devis_on" => $intervention->isDevisOn(),
-            "etatdemande" => $intervention->getEtatdemande(),
-            "idoperateur" => $intervention->getIdOperateur(),
-            "noimmatriculation" => $intervention->getVehicle()->getNoSerie(),
-            "codeclient" => $client->getId()
-        ])){return true;}
-        else{return false;}
+        if($stmt->execute(
+[
+                "date_rdv" => $intervention->getDateRdv(),
+                "heure_rdv" => $intervention->getHeureRdv(),
+                "descriptif_demande" => $intervention->getDescriptifDemande(),
+                "km_actuel" => $intervention->getKmActuel(),
+                "devis_on" => $intervention->getDevis(),
+                "etat" => $intervention->getEtatdemande(),
+                "id_operateur" => $intervention->getIdOperateur(),
+                "no_serie" => $intervention->getNumeroImmatriculation(),
+                "id_client" => $intervention->getCodeClient()
+            ]
+        )){ return true; }
+        else { return false; }
     }
 
     /**
@@ -128,9 +129,26 @@ class InterventionManager {
      * @return array
      */
     public function getInterventionList(): array{
+        /** @var Intervention[] $array */
+        $array = [];
         $stmt = $this->pdo->prepare("select * from sae_garage.dde_interv;");
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $item){
+            $array[] = new Intervention(
+                (int)$item["numdde"],
+                $item["daterdv"],
+                $item["heurerdv"],
+                $item["descriptif_demande"],
+                (int)$item["km_actuel"],
+                (bool)$item["devis_on"],
+                $item["etatdemande"],
+                $item["idoperateur"],
+                $item["noimmatriculation"],
+                $item["codeclient"]
+            );
+        }
+        return $array;
     }
 
     /**
@@ -144,5 +162,35 @@ class InterventionManager {
             "numdde" => $numdde
         ]);
         return $stmt->fetch(PDO::FETCH_ASSOC)["descriptif_demande"];
+    }
+
+    /**
+     * Get all interventions for a given operator.
+     * @param int $id
+     * @return array
+     */
+    public function getInterventionListForOperator(int $id): array{
+        /** @var Intervention[] $array */
+        $array = [];
+        $stmt = $this->pdo->prepare("select * from sae_garage.dde_interv where idoperateur = :id;");
+        $stmt->execute([
+            "id" => $id
+        ]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $item){
+            $array[] = new Intervention(
+                (int)$item["numdde"],
+                $item["daterdv"],
+                $item["heurerdv"],
+                $item["descriptif_demande"],
+                (int)$item["km_actuel"],
+                (bool)$item["devis_on"],
+                $item["idoperateur"],
+                $item["noimmatriculation"],
+                $item["codeclient"],
+                $item["etatdemande"]
+            );
+        }
+        return $array;
     }
 }

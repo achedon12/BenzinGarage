@@ -4,8 +4,10 @@ use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
+require_once "assets/php/managers/InterventionManager.php";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
+$inteventionManager = new InterventionManager(DatabaseManager::getInstance());
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
@@ -18,10 +20,10 @@ if(!Auth::isConnected()){
 
 $_SESSION["employePlanning"] = 0;
 
-
 if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
     $_SESSION["employePlanning"] = $_POST["select"];
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -139,6 +141,5 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
             </section>
         </section>
     </main>
-
     </body>
 </html>
