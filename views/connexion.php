@@ -13,6 +13,8 @@ if(session_status() == PHP_SESSION_NONE){
 if(Auth::isConnected()){
     switch($_SESSION["role"]){
         case UserManager::MANAGER:
+            render("AccueilChefAtelier.php");
+            exit(0);
         case UserManager::EMPLOYE:
             render("accueil.php");
             exit(0);

@@ -9,6 +9,7 @@ SimpleRouter::get('/', [UsersController::class, 'index']);
 SimpleRouter::post('/login', [UsersController::class, 'loginPage']);
 SimpleRouter::get('/login', [UsersController::class, 'loginPage']);
 SimpleRouter::get('/accueil/employe', [UsersController::class, 'accueilPage']);
+SimpleRouter::get('/accueil/chefatelier', [UsersController::class, 'accueilChefAtelier']);
 SimpleRouter::get('/accueil/admin', [UsersController::class, 'accueilAdministrateurPage']);
 SimpleRouter::get('/admin/utilisateur', [UsersController::class, 'utilisateurAdministrateur']);
 SimpleRouter::get('/admin/addClient', [UsersController::class, 'adminAddClientPage']);
@@ -41,4 +42,11 @@ SimpleRouter::get('/admin/employes/delete',[UsersController::class,'adminEmploye
 SimpleRouter::get('/admin/employes/create',[UsersController::class,'adminEmployesCreate']);
 SimpleRouter::post('/admin/employes/create',[UsersController::class,'adminEmployesCreate']);
 SimpleRouter::get('/admin/stock',[UsersController::class,'adminStock']);
+SimpleRouter::post('/admin/stock',[UsersController::class,'adminStock']);
 SimpleRouter::get('/admin/tarification',[UsersController::class,'adminTarification']);
+SimpleRouter::post('/admin/tarification',[UsersController::class,'adminTarification']);
+
+
+
+/*Chef d'atelier*/
+SimpleRouter::get('/chefAtelier/interventionPlanning', [UsersController::class, 'chefAtelierInterventionPlanning']);
