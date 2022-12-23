@@ -7,6 +7,7 @@ use Pecee\SimpleRouter\SimpleRouter;
 SimpleRouter::get('/', [UsersController::class, 'index']);
 
 SimpleRouter::post('/login', [UsersController::class, 'loginPage']);
+SimpleRouter::get('/login', [UsersController::class, 'loginPage']);
 SimpleRouter::get('/accueil/employe', [UsersController::class, 'accueilPage']);
 SimpleRouter::get('/accueil/chefatelier', [UsersController::class, 'accueilChefAtelier']);
 SimpleRouter::get('/accueil/admin', [UsersController::class, 'accueilAdministrateurPage']);
