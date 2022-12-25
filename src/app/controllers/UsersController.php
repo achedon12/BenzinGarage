@@ -45,7 +45,7 @@ class UsersController{
     }
 
     public function stockPage(){
-        render('stock.php');
+        render('chefAtelierStock.php');
     }
 
     public function test(){
@@ -101,7 +101,7 @@ class UsersController{
     }
 
     public function chefAtelierStock(){
-        render("stock.php");
+        render("chefAtelierStock.php");
     }
 
 

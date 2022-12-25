@@ -66,24 +66,24 @@ if(isset($_POST['refillStockUn'])){
     <title>Modifier un client</title>
 </head>
 <body>
-<nav>
-    <img src="../assets/img/logo.png" alt="logo">
-    <ul>
-        <li><a href="/accueil/admin">Accueil</a></li>
-        <li><a href="/admin/clients">Clients</a></li>
-        <li><a href="/admin/employes">Employés</a></li>
-        <li><a href="/admin/tarification">Tarification</a></li>
-        <li class="hover"><a href="/admin/stock" >Stock</a></li>
-        <li ><a href="/admin/interventionPlanning">Intervention</a></li>
-        <li><a href="/disconnect">Deconnexion</a></li>
-    </ul>
-</nav>
-<form method="post" class="selecteur" onchange="submit()">
-    <section>
-        <label for="client-select">Choisir une catégorie</label>
-        <select id="client-select" name="select">
-            <option value="null">---Choisir une catégorie---</option>
-            <option value="enstock">Produit en Stock</option>
+    <nav id="navbar">
+        <img src="../assets/img/logo.png" alt="logo">
+        <ul>
+            <li><a href="/accueil/admin">Accueil</a></li>
+            <li><a href="/admin/clients">Clients</a></li>
+            <li><a href="/admin/employes">Employés</a></li>
+            <li><a href="/admin/tarification">Tarification</a></li>
+            <li class="hover"><a href="/admin/stock" >Stock</a></li>
+            <li ><a href="/admin/interventionPlanning">Intervention</a></li>
+            <li><a href="/disconnect">Deconnexion</a></li>
+        </ul>
+    </nav>
+    <form method="post" class="selecteur" onchange="submit()">
+        <section>
+            <label for="client-select">Choisir une catégorie</label>
+            <select id="client-select" name="select">
+                <option value="null">---Choisir une catégorie---</option>
+                <option value="enstock">Produit en Stock</option>
             <option value="pasenstock">Produit pas en Stock</option>
         </select>
     </section>
@@ -120,7 +120,9 @@ if(isset($_POST['refillStockUn'])){
             foreach ($pieces as $piece) {
                 echo '<section class="productContainer"><h2 class="ProductName">' . $piece->getLibelleArticle() . '</h2> <h2 class="RefProduct">' . $piece->getCodeArticle() . '</h2> <h2 class="PriceProduct">' . $piece->getPrice() . ' €</h2> <h2 class="QteProduct">' . $piece->getStockQuantite() . '</h2> <input class="inputrefillStock" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit"></section>';
             }
-            echo '<input  value="refillstock" class="refillStock" type="submit">';
+            if($pieces !=null ) {
+                echo '<input  value="refillstock" class="refillStock" type="submit">';
+            }
             }
 
 

@@ -30,13 +30,13 @@ if(!Auth::isConnected()){
         <link rel="shortcut icon" href="../assets/img/logo.png">
     </head>
     <body>
-        <nav>
+        <nav class="nav-bar">
             <img src="../assets/img/logo.png" alt="logo">
             <ul>
                 <li class="hover"><a href="/accueil/chefatelier">Accueil</a></li>
                 <li><a href="">Planning</a></li>
                 <li><a href="">Prise de rendez-vous</a></li>
-                <li><a href="">Stock</a></li>
+                <li><a href="/chefAtelier/stock">Stock</a></li>
                 <li><a href="">Tarification</a></li>
                 <li ><a href="">Clients</a></li>
                 <li><a href="/disconnect">Deconnexion</a></li>

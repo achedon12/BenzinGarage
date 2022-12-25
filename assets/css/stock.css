@@ -52,8 +52,8 @@ form:hover
 .sectionListProduct{
     height: 450px;
     overflow-x: auto;
-    width: 50%;
     margin-top: 10px;
+    width: 75%;
 }
 
 
@@ -86,12 +86,18 @@ article.ligne-product
     display: flex;
     padding: 1%;
     height: 50px;
-
-
-
 }
 
-article.ligne-product>section
+article.ligne-product>section.red
+{
+    display: flex;
+    width: 100%;
+    border-radius: 8px;
+    justify-content: space-between;
+    color: var(--white-color);
+    background-color: red;
+}
+article.ligne-product>section.green
 {
     display: flex;
     width: 100%;
@@ -100,6 +106,7 @@ article.ligne-product>section
     color: var(--white-color);
     background-color: var(--green-color);
 }
+
 
 article.ligne-product>section>p
 {
@@ -111,4 +118,14 @@ article.ligne-product>img
 {
     width: 50px;
 }
+.validerCommande{
+    margin: auto 10px auto 0;
+    height: 20px;
+    width: 15px;
+    padding: 1px;
+}
 
+.selecteurProduit{
+    display: flex;
+    width: 75%;
+}
