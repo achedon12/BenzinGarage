@@ -10,13 +10,13 @@ main
     text-align: center;
     color: var(--white-color);
     width: 75%;
-    padding: 2%;
+    padding: 1% 3% 3% 1%;
     border-radius: 25px;
 }
 
 form
 {
-    margin-top: 0;
+    margin-top: 0px;
     background-color: var(--green-color);
     padding: 2%;
     width: 50%;
@@ -33,6 +33,7 @@ form>input
     height: 100%;
     color: var(--white-color);
     font-size: larger;
+
 }
 
 ::-webkit-input-placeholder
@@ -47,11 +48,21 @@ form:hover
     border: 1px solid var(--white-color);
 }
 
+
+.sectionListProduct{
+    height: 450px;
+    overflow-x: auto;
+    width: 50%;
+    margin-top: 10px;
+}
+
+
 main>section.button
 {
+    margin-top: 10px;
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: center;
 }
 
 section.button>button
@@ -73,14 +84,18 @@ section.button>button:hover
 article.ligne-product
 {
     display: flex;
-    width: 100%;
     padding: 1%;
+    height: 50px;
+
+
+
 }
 
 article.ligne-product>section
 {
     display: flex;
-    width: 80%;
+    width: 100%;
+    border-radius: 8px;
     justify-content: space-between;
     color: var(--white-color);
     background-color: var(--green-color);
@@ -94,11 +109,6 @@ article.ligne-product>section>p
 
 article.ligne-product>img
 {
-    width: 20%;
+    width: 50px;
 }
 
-article.ligne-product>img:hover
-{
-    transform: scale(1.2);
-    transition-duration: 0.4s;
-}

@@ -50,3 +50,5 @@ SimpleRouter::post('/admin/tarification',[UsersController::class,'adminTarificat
 
 /*Chef d'atelier*/
 SimpleRouter::get('/chefAtelier/interventionPlanning', [UsersController::class, 'chefAtelierInterventionPlanning']);
+SimpleRouter::get('/chefAtelier/stock', [UsersController::class, 'chefAtelierStock']);
+SimpleRouter::post('/chefAtelier/stock', [UsersController::class, 'chefAtelierStock']);

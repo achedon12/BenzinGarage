@@ -100,5 +100,9 @@ class UsersController{
         render("PlanningChefAtelier.php");
     }
 
+    public function chefAtelierStock(){
+        render("stock.php");
+    }
+
 
 }

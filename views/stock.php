@@ -5,6 +5,8 @@ use app\users\Auth;
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
 require_once("./assets/php/managers/TemplateManager.php");
+require_once "./assets/php/managers/GarageManager.php";
+require_once "assets/php/class/Piece.php ";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
 $garageManager = new GarageManager(DatabaseManager::getInstance());
@@ -39,36 +41,56 @@ if(!Auth::isConnected()){
             <form method="post">
                 <input type="text" name="search" id="id-product" placeholder="Recherche d'un produit par son id">
             </form>
-            <section>
+            <section class="sectionListProduct">
                 <?php
 
                 $pieces = $garageManager->getAllPieces();
 
-                if($_POST["role"] === UserManager::MANAGER){
+                if($_SESSION["role"] === UserManager::MANAGER){
+                    if (isset($_POST['search'])){
+
+                        $pieces=$garageManager->getPieceById((string)$_POST['search']);
+                        $piece=new Piece($pieces[0],$pieces[1],$pieces[2],$pieces[3],$pieces[4],$pieces[5]);
+
+                        echo '<article class="ligne-product">
+                            <section>
+                                <p class="product-name">'. $piece->getLibelleArticle() .'</p></br>
+                                <p class="product-ref">Référence : ' . $piece->getCodeArticle() .'</p>
+                                <p class="piece-available">'. $piece->getStockQuantite() .' pièce(s) restante(s)</p>
+                                <img src="../assets/img/add-basket.png" alt="add to basket">
+                            </section>
+                        </article>';
+
+
+                    }else{
                     foreach ($pieces as $piece){
                         echo '<article class="ligne-product">
                                <section>
-                                   <p class="product-name">'.$piece->getName().'</p>
-                                   <p class="product-ref">Référence : '.$piece->getReference.'</p>
-                                   <p class="piece-available">'.$piece->getStock().' pièce(s) restante(s)</p>
+                                   <p class="product-name">'.$piece->getLibelleArticle().'</p></br>
+                                   <p class="product-ref">Référence : '.$piece->getCodeArticle().'</p>
+                                   <p class="piece-available">'.$piece->getStockQuantite().' pièce(s) restante(s)</p>
+                                    <img src="../assets/img/add-basket.png" alt="add to basket">
                                 </section>
-                               <img src="../assets/img/add-basket.png" alt="add to basket">
+                               
                             </article>';
+                    }
                     }
                 }else{
                     foreach ($pieces as $piece){
                         echo '<article class="ligne-product">
-                               <p class="product-name">'.$piece->getName().'</p>
-                               <p class="product-ref">Référence : '.$piece->getReference.'</p>
-                               <p class="piece-available">'.$piece->getStock().' pièce(s) restante(s)</p>
+                               <p class="product-name">'.$piece->getLibelleArticle().'</p></br>
+                               <p class="product-ref">Référence : '.$piece->getCodeArticle().'</p>
+                               <p class="piece-available">'.$piece->getStockQuantite().' pièce(s) restante(s)</p>
                             </article>';
                     }
                 }
-                if($_POST["role"] === UserManager::MANAGER){
-                    echo '<section class="button"><button>Valider commande</button></section>';
-                }
                 ?>
             </section>
+            <?php
+            if($_SESSION["role"] === UserManager::MANAGER){
+                echo '<section class="button"><button>Valider commande</button></section>';
+            }
+            ?>
         </main>
     </body>
 </html>

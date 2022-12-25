@@ -51,17 +51,18 @@ if(!Auth::isConnected()){
                 <h1>Prise de rendez-vous</h1>
                 <img src="../assets/img/add-clients.png" alt="">
             </a>
-            <a href="">
-                <h1>Clients</h1>
-                <img src="../assets/img/modify-clients.png" alt="">
-            </a>
-            <a href="/admin/employes/create">
+
+            <a href="/chefAtelier/stock">
                 <h1>Stock</h1>
                 <img src="../assets/img/cartons.png" alt="">
             </a>
-            <a href="/admin/employes/modify">
+            <a href="">
                 <h1>Tarifications</h1>
                 <img src="../assets/img/caisse.png" alt="">
+            </a>
+            <a href="">
+                <h1>Clients</h1>
+                <img src="../assets/img/modify-clients.png" alt="">
             </a>
         </main>
     </body>
