@@ -170,7 +170,7 @@ class ClientManager{
     public function getAllClients(): array{
         /** @var $res Client[]*/
         $res = [];
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.client order by nom");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.client order by codeclient");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"],$row["mail"],$row["datecreation"] );
         return $res;

@@ -1,0 +1,55 @@
+main{
+
+    height: 75%;
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+
+.formChoixClient{
+    background-color: var(--grey-color);
+    border: none;
+    border-radius: 25px;
+    height: auto;
+    padding: 1%;
+
+    width: 12.5%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    gap: 20px;
+}
+
+.formChoixClient:hover{
+    border: none;
+}
+
+
+.listeClientHorizontal{
+    width: 100%;
+
+}
+
+
+.infoClientSelect{
+    margin: 25px auto;
+    width: 50%;
+    background-color: var(--grey-color);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.info{
+    margin: auto;
+}
+
+
+.info>p{
+    margin: 25px;
+    font-size: 25px;
+
+}

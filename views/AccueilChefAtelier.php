@@ -38,7 +38,7 @@ if(!Auth::isConnected()){
                 <li><a href="">Prise de rendez-vous</a></li>
                 <li><a href="/chefAtelier/stock">Stock</a></li>
                 <li><a href="">Tarification</a></li>
-                <li ><a href="">Clients</a></li>
+                <li ><a href="/chefAtelier/client">Clients</a></li>
                 <li><a href="/disconnect">Deconnexion</a></li>
             </ul>
         </nav>
@@ -60,7 +60,7 @@ if(!Auth::isConnected()){
                 <h1>Tarifications</h1>
                 <img src="../assets/img/caisse.png" alt="">
             </a>
-            <a href="">
+            <a href="/chefAtelier/client">
                 <h1>Clients</h1>
                 <img src="../assets/img/modify-clients.png" alt="">
             </a>

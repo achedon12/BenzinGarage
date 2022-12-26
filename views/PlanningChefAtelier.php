@@ -47,7 +47,7 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
         <li><a href="">Prise de rendez-vous</a></li>
         <li><a href="">Stock</a></li>
         <li><a href="">Tarification</a></li>
-        <li ><a href="">Clients</a></li>
+        <li ><a href="/chefAtelier/client">Clients</a></li>
         <li><a href="/disconnect">Deconnexion</a></li>
     </ul>
 </nav>

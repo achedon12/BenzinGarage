@@ -28,7 +28,7 @@ if(!Auth::isConnected()){
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-
+    <title>Chef d'atelier : Stock</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/stock.css">
     <link rel="shortcut icon" href="../assets/img/logo.png">
@@ -42,7 +42,7 @@ if(!Auth::isConnected()){
                 <li><a href="">Prise de rendez-vous</a></li>
                 <li class="hover"><a href="/chefAtelier/stock">Stock</a></li>
                 <li><a href="">Tarification</a></li>
-                <li ><a href="">Clients</a></li>
+                <li ><a href="/chefAtelier/client">Clients</a></li>
                 <li><a href="/disconnect">Deconnexion</a></li>
             </ul>
         </nav>

@@ -104,5 +104,9 @@ class UsersController{
         render("chefAtelierStock.php");
     }
 
+    public function chefAtelierClient(){
+        render("chefAtelierClient.php");
+    }
+
 
 }
