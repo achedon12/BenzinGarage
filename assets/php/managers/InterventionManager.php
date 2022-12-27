@@ -195,27 +195,7 @@ class InterventionManager {
         return $array;
     }
 
-    public function getAllOperation(){
-        $array = [];
-        $stmt = $this->pdo->prepare("select * from sae_garage.operation ;");
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $item){
-            $array[] = new (
-                (int)$item["numdde"],
-                $item["daterdv"],
-                $item["heurerdv"],
-                $item["descriptif_demande"],
-                (int)$item["km_actuel"],
-                (bool)$item["devis_on"],
-                $item["idoperateur"],
-                $item["noimmatriculation"],
-                $item["codeclient"],
-                $item["etatdemande"]
-            );
-        }
-        return $array;
-    }
+
 
 
 }

@@ -13,11 +13,12 @@ main{
 .InfoClient{
 
     margin: auto 0 auto 15px;
-    width: 80vh;
+
     height: 80%;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
 .infoIntervetion{
@@ -64,6 +65,12 @@ h2{
     display: flex;
 }
 
+.CompteClient>a {
+    margin-left: 25px;
+    color: white;
+}
+
+
 .CompteClient>input{
     margin: auto 0 auto 0;
 }
@@ -97,6 +104,7 @@ h2{
     flex-direction: column;
     gap: 15px;
     padding: 15px;
+    width: 525px;
 }
 
 .interventionRDV{
@@ -182,22 +190,88 @@ h2{
     width: 100%;
 }
 
-#intoPopUpRDV>input{
+#formInscriptionClient>input{
     width: 50%;
     height: 30px;
 }
 
-#intoPopUpRDV>label{
+#formInscriptionClient>label{
     text-align: left;
     display: flex;
     flex-direction: column;
     width: 40%;
 }
 
-#intoPopUpRDV>label>input{
+#formInscriptionClient>label>input{
     height: 25px;
 }
 
 .CompteClient>a{
     align-self: center;
+}
+
+.choixOperation{
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
+
+#popChoixClient {
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+
+}
+#intoPopUpRDV {
+    width: 500px;
+    height: 500px;
+    padding: 15px;
+    color: black;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background-color: #C0C0C0;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+#popChoixClient:target {display: block;}
+.close {
+    position:absolute;
+    right:10px;
+    top:10px;
+
+    text-decoration: none;
+    font-size: 18px;
+    cursor:pointer;
+    height: 1.1em;
+    width: 1.1em;
+    border-radius: 25px;
+}
+.validerIntervention{
+
+    margin-top: 50px;
+    height: 7%;
+    width: 50%;
+    text-align: center;
+    background-color: var(--green-color);
+    border:none;
+    color: var(--white-color);
+    font-size: 1.1em;
+    border-radius: 8px;
+}
+
+.close img{
+    width: 100%;
 }

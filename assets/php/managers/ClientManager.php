@@ -96,7 +96,7 @@ class ClientManager{
         $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.vehicule WHERE codeclient = :id");
         $stmt->execute(["id" => $codeclient]);
         $result = $stmt->fetch();
-        return new Vehicle($result["numberPlate"],$result["noSerie"],$result["dateMiseEnCirculation"],$result["numModele"],$result["client"]);
+        return new Vehicle($result["noimmatriculation"],$result["noserie"],$result["datemiseencirculation"],$result["nummodele"],$result["codeclient"]);
     }
 
     /**

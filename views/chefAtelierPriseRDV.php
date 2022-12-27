@@ -9,10 +9,15 @@ require_once "./assets/php/managers/GarageManager.php";
 require_once "./assets/php/managers/ClientManager.php";
 require_once "assets/php/class/Piece.php ";
 require_once "assets/php/managers/InterventionManager.php";
+require_once "assets/php/managers/OperationManager.php";
+require_once "assets/php/managers/CalendarManager.php";
+
+$calendarManager = new CalendarManager();
 $interventionManager= new InterventionManager(DatabaseManager::getInstance());
 $userManager = new UserManager(DatabaseManager::getInstance());
 $garageManager = new GarageManager(DatabaseManager::getInstance());
 $clientsManager = new ClientManager(DatabaseManager::getInstance());
+$operationManager = new OperationManager(DatabaseManager::getInstance());
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
@@ -23,6 +28,18 @@ if(!Auth::isConnected()){
     return;
 }
 
+if(isset($_POST['selectClient'])){
+    $Client = $clientsManager->getClientByID($_POST['selectClient']);
+    $prenomClient=$Client->getFirstName();
+    $nomClient= $Client->getName();
+    $voiture= $clientsManager->getClientVehicle($Client->getId());
+}else{
+    $prenomClient=False ;
+}
+$operationPourUneOperation ='';
+if (isset($_POST['typeIntervention'])){
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -55,18 +72,24 @@ if(!Auth::isConnected()){
 <main>
     <form method="post" class="formRDV">
         <section class="InfoClient">
-            <section class="NomPrenom">
-                <h2>Prenom</h2>
-                <h2>Nom de famille</h2>
-            </section>
-            <section class="Date">
-                <h2>Date : ../../....</h2>
-            </section>
             <section class="CompteClient">
                 <h2>Possède un compte client :</h2>
                 <a href="#popInscription">Non</a>
+                <a href="#popChoixClient">Oui</a>
 
             </section>
+            <section class="NomPrenom">
+                <h2>Prenom :<?php if(isset($prenomClient)) echo " ". $prenomClient."</h2>";
+                else echo '';
+                ?>
+                <h2>Nom de famille :<?php if(isset($nomClient)) echo " ".$nomClient."</h2>" ;
+                    else echo '';
+                ?>
+            </section>
+            <section class="Date" style="display: flex">
+                <h2>Date : </h2> <input type="datetime-local" name="dateRDV" required>
+            </section>
+
             <section class="ValiderPrix">
                 <input type="button" onclick="submit()" value="Ajouter le rendez-vous" name="ValiderRDV">
                 <h2>58€</h2>
@@ -74,27 +97,58 @@ if(!Auth::isConnected()){
         </section>
 
         <section class="infoIntervetion">
-            <section class="interventionRDV">
-                <h2>Parre-Brise</h2>
 
+            <section class="interventionRDV">
+                    <h2>Parre-Brise</h2>
+            </section>
+
+
+
+        </section>
+        <section class="choixOperation">
+            <form method="post" onchange="submit()">
+                <?php
+
+                $operations = $operationManager->getOperationList();
+                $select = "<label for=\"typeIntervention\">Choisir une operation à faire</label>";
+                $select .= "<select name='typeIntervention' id='typeIntervention' class='typeIntervention' onchange='submit()'>";
+                $select .= "<option disabled selected value='0'>-- Choisir une intervention --</option>";
+                foreach($operations as $operation => $value){
+                    $select .= '<option id="' . $operation . '">' . $operation . '</option>';
+                }
+                $select .= "</select>";
+                echo $select;
+                ?>
+            </form>
+        </section>
+
+
+        <section id="popChoixClient">
+            <section id="intoPopUpRDV">
+                <h2>Choix du client</h2>
+                <form method="post" id="formInscriptionClient" onchange="submit()">
+                    <select id="client-select" name="selectClient">
+                        <?php
+                        if($_SESSION["userId"] === 0){
+                            echo '<option value="false" disabled selected>--Client--</option>';
+                        }
+                        foreach($clientsManager->getAllClients() as $people){
+                            $name = $people->getName()." ".$people->getFirstName();
+                            $code = $people->getId();
+                            if($code == $_SESSION["userId"]){
+                                ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
+                            }else{
+                                ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                            }
+                        }
+                        ?>
+                    </select>
+                </form>
+                <a href="#" class="close"><img src="../assets/img/not%20done.png" alt=""></a>
 
             </section>
 
         </section>
-        <form method="post" onchange="submit()">
-            <input list="listeInterventions" id="myClient" name="myClient"/>
-        </form>
-        <datalist id="listeInterventions">
-            <?php
-            $interventions = $interventionManager->getInterventionList();
-            //            print_r($clients);
-            foreach ($interventions as $intervention){
-                echo '<option value="'.$intervention->getId().'" class="listeClientHorizontal">'.$intervention->getDescriptifDemande().'</option>';
-
-            }
-            ?>
-        </datalist>
-
 
 
         <section id="popInscription">
