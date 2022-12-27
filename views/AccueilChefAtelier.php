@@ -35,7 +35,7 @@ if(!Auth::isConnected()){
             <ul>
                 <li class="hover"><a href="/accueil/chefatelier">Accueil</a></li>
                 <li><a href="">Planning</a></li>
-                <li><a href="">Prise de rendez-vous</a></li>
+                <li><a href="/chefAtelier/RDV">Prise de rendez-vous</a></li>
                 <li><a href="/chefAtelier/stock">Stock</a></li>
                 <li><a href="">Tarification</a></li>
                 <li ><a href="/chefAtelier/client">Clients</a></li>
@@ -47,7 +47,7 @@ if(!Auth::isConnected()){
                 <h1>Planning</h1>
                 <img src="../assets/img/planning.png" alt="">
             </a>
-            <a href="">
+            <a href="/chefAtelier/RDV">
                 <h1>Prise de rendez-vous</h1>
                 <img src="../assets/img/add-clients.png" alt="">
             </a>

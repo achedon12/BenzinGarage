@@ -111,9 +111,9 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
                         <section class="day "><p>Lundi</p>
                             <section class="planningDayZone">
                                 <section class="quinzeMinute"></section>
-                                <a class="reservation" id=""href="#popUpRDV"><p>Mr. Jean</p></a>
+                                <a class="reservation" id="" href="#popUpRDV"><p>Mr. Jean</p></a>
                                 <section class="trenteMinutes"> </section>
-                                <a class="reservation" id=""href="#popUpRDV"><p>Mr. Jean</p></a>
+                                <a class="reservation" id="" href="#popUpRDV"><p>Mr. Jean</p></a>
                             </section>
                         </section>
                         <section class="day "><p>Mardi</p><section class="planningDayZone"></section></section>

@@ -108,5 +108,9 @@ class UsersController{
         render("chefAtelierClient.php");
     }
 
+    public function chefAtelierRDV(){
+        render("chefAtelierPriseRDV.php");
+    }
+
 
 }

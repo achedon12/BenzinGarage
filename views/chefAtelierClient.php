@@ -42,7 +42,7 @@ if(!Auth::isConnected()){
     <ul>
         <li><a href="/accueil/chefatelier">Accueil</a></li>
         <li><a href="">Planning</a></li>
-        <li><a href="">Prise de rendez-vous</a></li>
+        <li><a href="/chefAtelier/RDV">Prise de rendez-vous</a></li>
         <li><a href="/chefAtelier/stock">Stock</a></li>
         <li><a href="">Tarification</a></li>
         <li  class="hover"><a href="/chefAtelier/client">Clients</a></li>
