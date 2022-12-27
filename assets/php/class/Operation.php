@@ -1,34 +1,28 @@
 <?php
 
-class Operation{
+class Operation
+{
 
+    private int $id;
 
+    private string $libelleop;
+
+    private string $codeop;
+
+    private int  $numdde;
 
     /**
      * @param int $id
-     * @param string $dateRdv
-     * @param string $heureRdv
-     * @param string $descriptifDemande
-     * @param int $kmActuel
-     * @param bool $devisOn
-     * @param string $idOperateur
-     * @param string $etatdemande
-     * @param string $numeroImmatriculation
-     * @param string $codeClient
-     * @param string $etatDemande
+     * @param string $libelleop
+     * @param string $codeop
+     * @param int $numdde
      */
-    public function __construct(int $id, string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, string $idOperateur, string $numeroImmatriculation,string $codeClient, string $etatDemande)
+    public function __construct(int $id, string $libelleop, string $codeop, int $numdde)
     {
         $this->id = $id;
-        $this->dateRdv = $dateRdv;
-        $this->heureRdv = $heureRdv;
-        $this->descriptifDemande = $descriptifDemande;
-        $this->kmActuel = $kmActuel;
-        $this->devisOn = $devisOn;
-        $this->idOperateur = $idOperateur;
-        $this->numeroImmatriculation = $numeroImmatriculation;
-        $this->codeClient = $codeClient;
-        $this->etatDemande = $etatDemande;
+        $this->libelleop = $libelleop;
+        $this->codeop = $codeop;
+        $this->numdde = $numdde;
     }
 
     /**
@@ -39,75 +33,28 @@ class Operation{
         return $this->id;
     }
 
+
     /**
      * @return string
      */
-    public function getIdOperateur(): string
+    public function getLibelleop(): string
     {
-        return $this->idOperateur;
+        return $this->libelleop;
     }
 
     /**
      * @return string
      */
-    public function getDateRdv(): string
+    public function getCodeop(): string
     {
-        return $this->dateRdv;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHeureRdv(): string
-    {
-        return $this->heureRdv;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescriptifDemande(): string
-    {
-        return $this->descriptifDemande;
+        return $this->codeop;
     }
 
     /**
      * @return int
      */
-    public function getKmActuel(): int
+    public function getNumdde(): int
     {
-        return $this->kmActuel;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getDevis(): bool
-    {
-        return $this->devisOn;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEtatdemande(): string
-    {
-        return $this->etatDemande;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNumeroImmatriculation(): string
-    {
-        return $this->numeroImmatriculation;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCodeClient(): string
-    {
-        return $this->codeClient;
+        return $this->numdde;
     }
 }

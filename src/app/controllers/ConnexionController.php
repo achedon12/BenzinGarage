@@ -25,6 +25,7 @@ class ConnexionController
                 render('connexion.php');
             }else{
                 $_SESSION["isConnected"] = true;
+                $_SESSION["employePlanning"] = 0;
                 if($result[0]["role"] == UserManager::ADMINISTRATEUR){
                     $_SESSION["role"] = UserManager::ADMINISTRATEUR;
                     render("AccueilAdmin.php");
