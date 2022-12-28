@@ -6,6 +6,8 @@
     border-radius: 15px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .choixPlanning{
@@ -14,6 +16,7 @@
 .planing{
     display: flex;
     height: 100%;
+    width: 100%;
 }
 
 
@@ -43,24 +46,6 @@
     display: flex;
     flex-direction: column;
 
-}
-
-.reservation{
-    background-color: var(--grey-color);
-    height: 20%;
-    width: 96%;
-    border-radius: 25px;
-
-    margin-left: 2%;
-    margin-right: 2%;
-    display: flex;
-
-}
-
-.reservation p{
-    width: 100%;
-    text-align: center;
-    align-self: center;
 }
 
 #popUpRDV {
@@ -111,8 +96,6 @@
     margin-top: 2%;
     border-radius: 10px;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
 }
 
 .aIntervention{
@@ -145,10 +128,15 @@
     height: 7%;
     width: 17%;
     background-color: var(--green-color);
-    border:none;
     color: var(--white-color);
     font-size: 1.1em;
     border-radius: 8px;
+    border: 1px solid var(--green-color);
+}
+
+.validerIntervention:hover
+{
+    border: 1px solid var(--white-color);
 }
 
 .close img{
@@ -171,7 +159,7 @@ section.choose
     align-items: center;
     justify-content: center;
     width: 100%;
-    background-color: var(--grey-color);
+    background-color: transparent;
     color: var(--white-color);
 }
 
@@ -205,4 +193,97 @@ form.selecteur>section, form.selecteur>section
     margin-left: auto;
     margin-right: 1%;
     margin-top: 1%;
+}
+
+form.dateChoose
+{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+form.dateChoose>h1
+{
+    text-align: center;
+}
+
+form.dateChoose>input {
+    background-color: var(--green-color);
+    border: 1px solid var(--green-color);
+    color: var(--white-color);
+    padding: 3%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 25px;
+}
+
+form.dateChoose>input:hover {
+    border: 1px solid var(--white-color);
+}
+
+
+/* Calendar */
+table
+{
+    margin: auto;
+    border: 4px outset green;
+    border-collapse: collapse;
+    width:90%;
+    height: 90%;
+}
+
+th
+{
+    background-color: #006600;
+    color: white;
+    font-size: 1.1em;
+    border:1px solid red;
+}
+
+td
+{
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+td.time
+{
+    width:5%;
+}
+
+td:hover
+{
+    background-color: var(--green-color);
+    color: var(--white-color);
+}
+
+td:hover> a
+{
+    color: var(--white-color);
+}
+
+.left
+{
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.left p
+{
+    text-align: center;
+}
+
+.right
+{
+    flex-basis: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

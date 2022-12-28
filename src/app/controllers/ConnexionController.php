@@ -11,10 +11,10 @@ use DatabaseManager;
 use PDO;
 use UserManager;
 
-class ConnexionController extends DatabaseManager
+class ConnexionController
 {
     public static function loginIn(int $id, string $password){
-        $db = self::getInstance();
+        $db = DatabaseManager::getInstance();
         $sql = "SELECT * FROM sae_garage.user WHERE id = :id;";
         $prepare = $db->prepare($sql);
         $prepare->bindParam(':id', $id, PDO::PARAM_INT);
@@ -22,9 +22,10 @@ class ConnexionController extends DatabaseManager
         if ($prepare->rowCount() > 0) {
             $result = $prepare->fetchAll();
             if ($password !== $result[0]['password']) {
-                render('connexion.php', 'Votre mot de passe est incorrect');
+                render('connexion.php');
             }else{
                 $_SESSION["isConnected"] = true;
+                $_SESSION["employePlanning"] = 0;
                 if($result[0]["role"] == UserManager::ADMINISTRATEUR){
                     $_SESSION["role"] = UserManager::ADMINISTRATEUR;
                     render("AccueilAdmin.php");
@@ -37,8 +38,11 @@ class ConnexionController extends DatabaseManager
                     render("connexion.php");
                 }
             }
-            exit(0);
+        }else{
+            render("connexion.php");
+
         }
+        exit(0);
     }
 
     public function disconnect(){

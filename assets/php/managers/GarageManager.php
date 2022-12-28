@@ -29,6 +29,37 @@ class GarageManager
     }
 
     /**
+     * Get piece with ID
+     */
+    public function getPieceById(string $codearticle)
+    {
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE codearticle =:codearticle");
+        $query->execute([
+            "codearticle" => $codearticle
+        ]);
+        return $query->fetch();
+    }
+
+    /**
+     * modify a piece with ID
+     *
+     */
+    public function modifyPiece(Piece $piece, string $id):bool
+    {
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.article SET codearticle=:codearticle, libellearticle=:libellearticle, qte_min=:qte_min, typearticle=:typearticle, prixunitactuelht=:prixunitactuelht, qte_stock=:qte_stock WHERE codearticle = :id");
+        $stmt->execute([
+            "codearticle" => $id,
+            "libellearticle" => $piece->getLibelleArticle(),
+            "qte_min" => $piece->getMinimalQuantite(),
+            "typearticle" => $piece->getTypeArticle(),
+            "prixunitactuelht" => $piece->getPrice(),
+            "qte_stock" => $piece->getStockQuantite(),
+            "id" =>$id
+        ]);
+        return true;
+    }
+
+    /**
      * Get All pieces.
      * @return array
      */
@@ -36,7 +67,7 @@ class GarageManager
     {
         /** @var  $array Piece[] */
         $array = [];
-        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article");
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article Order By codearticle");
         $query->execute();
         $result = $query->fetchAll();
         foreach ($result as $piece) {
@@ -44,6 +75,63 @@ class GarageManager
         }
         return $array;
     }
+
+    /**
+     * Get All pieces available.
+     * @return array
+     */
+    public function getAllPiecesAvailable(): array
+    {
+        /** @var  $array Piece[] */
+        $array = [];
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE commander=false ");
+        $query->execute();
+        $result = $query->fetchAll();
+        foreach ($result as $piece) {
+            $array[] = new Piece($piece["codearticle"], $piece["libellearticle"], $piece["qte_min"], $piece["typearticle"], $piece["prixunitactuelht"], $piece["qte_stock"]);
+        }
+        return $array;
+    }
+
+
+    /**
+     * Get All pieces not available.
+     * @return array
+     */
+    public function getAllPiecesUnAvailable(): array
+    {
+        /** @var  $array Piece[] */
+        $array = [];
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE commander=true ");
+        $query->execute();
+        $result = $query->fetchAll();
+        foreach ($result as $piece) {
+            $array[] = new Piece($piece["codearticle"], $piece["libellearticle"], $piece["qte_min"], $piece["typearticle"], $piece["prixunitactuelht"], $piece["qte_stock"]);
+        }
+        return $array;
+    }
+
+
+
+
+    /**
+     * Get All pieces not available.
+     * @return array
+     */
+    public function getAllPiecesNotAvailable(): array
+    {
+        /** @var  $array Piece[] */
+        $array = [];
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE qte_Stock<=qte_min");
+        $query->execute();
+        $result = $query->fetchAll();
+        foreach ($result as $piece) {
+            $array[] = new Piece($piece["codearticle"], $piece["libellearticle"], $piece["qte_min"], $piece["typearticle"], $piece["prixunitactuelht"], $piece["qte_stock"]);
+        }
+        return $array;
+    }
+
+
 
     /**
      * Get price from a given piece.
@@ -115,4 +203,22 @@ class GarageManager
         }
         return $array;
     }
+
+
+    public function setAvailablePieceWhenRefill(int $idProduct){
+        $query=$this->pdo->prepare("SELECT qte_min,qte_stock FROM sae_garage.article where codearticle=:id");
+        $query->execute([
+            "id"=> $idProduct
+        ]);
+        $result=$query->fetchAll();
+        $qte_min=$result[0]['qte_min'];
+        $qte_stock=$result[0]['qte_stock'];
+        $query2=$this->pdo->prepare("UPDATE sae_garage.article set qte_stock=:newqte where codearticle=:id");
+        $query2->execute([
+            "newqte"=> $qte_stock+$qte_min,
+            "id"=> $idProduct
+        ]);
+
+    }
+
 }

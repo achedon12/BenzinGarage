@@ -19,12 +19,12 @@ if(!Auth::isConnected()){
 
 if(isset($_POST["create"])){
     if(empty($_POST["firstname"]) || empty($_POST["name"]) || empty($_POST["password"])){
-        $_SESSION["errorClient"] = "none";
+        $_SESSION["errorEmployee"] = "none";
     }else{
-        if($userManager->createUser($_POST["name"],$_POST["firstname"],$_POST["adresse"],$_POST["codepostal"],$_POST["city"],$_POST["telephone"],$_POST["mail"])){
-            $_SESSION["errorClient"] = "confirmCreate";
+        if($userManager->createUser($_POST["name"],$_POST["password"],$_POST["firstname"],$_POST["select"])){
+            $_SESSION["errorEmployee"] = "confirmCreate";
         }else{
-            $_SESSION["errorClient"] = "none";
+            $_SESSION["errorEmployee"] = "none";
         }
     }
 }
@@ -57,7 +57,7 @@ if(isset($_POST["create"])){
 </nav>
 <main class="create">
     <form method="post">
-        <?php  if($_SESSION["errorEmployee"] === "none"){ echo '<h1 class="errorCreate">Les informations n\'ont pas été correctement remplies</h1>'; }elseif($_SESSION["errorClient"] === "confirmCreate"){ echo '<h1 class="errorCreate">L\'employé a bien été créé</h1>'; } ?>
+        <?php  if($_SESSION["errorEmployee"] === "none"){ echo '<h1 class="errorCreate">Les informations n\'ont pas été correctement remplies</h1>'; }elseif($_SESSION["errorEmployee"] === "confirmCreate"){ echo '<h1 class="errorCreate">L\'employé a bien été créé</h1>'; } ?>
         <h1>Créer un nouvel employé</h1>
         <section class="inputs">
             <input type="text" placeholder="prénom" id="firstname" name="firstname">
@@ -81,3 +81,6 @@ if(isset($_POST["create"])){
 </main>
 </body>
 </html>
+<?php
+$_SESSION["errorEmployee"] = 0;
+?>

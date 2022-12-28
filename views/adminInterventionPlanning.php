@@ -4,8 +4,10 @@ use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
+require_once "assets/php/managers/CalendarManager.php";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
+$calendarManager = new CalendarManager();
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
@@ -16,14 +18,18 @@ if(!Auth::isConnected()){
     return;
 }
 
-$_SESSION["employePlanning"] = 0;
+$_SESSION["weekPlanning"] = $calendarManager->getWeek();
 
-
-if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
+if(isset($_POST["nextWeek"])){
+    unset($_SESSION["weekPlanning"]);
+    $_SESSION["weekPlanning"] = $calendarManager->nextWeek();
+}elseif (isset($_POST["beforeWeek"])){
+    unset($_SESSION["weekPlanning"]);
+    $_SESSION["weekPlanning"] = $calendarManager->beforeWeek();
+}elseif(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
     $_SESSION["employePlanning"] = $_POST["select"];
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -32,8 +38,6 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
-        <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
-        <link rel="stylesheet" href="../assets/css/adminAddClient.css">
         <link rel="stylesheet" href="../assets/css/adminInterventionPlanning.css">
         <link rel="shortcut icon" href="../assets/img/logo.png">
         <title>Planning</title>
@@ -83,6 +87,11 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
                 }
 
             ?>
+            <form class="dateChoose" method="post">
+                <input type="submit" name="beforeWeek" value="<">
+                <h1 class="choosenDate"><?php echo 'Semaine du '.$calendarManager->convertDate($_SESSION["weekPlanning"][0]).' au '.$calendarManager->convertDate($_SESSION["weekPlanning"][4]);?></h1>
+                <input type="submit" name="nextWeek" value=">">
+            </form>
             <section class="planing">
                 <?php
                     if($_SESSION["employePlanning"] === 0){
@@ -92,53 +101,14 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
                         </section>
                     <?php
                     }else{
-                            ?>
-                        <section class="hours">
-                            <p>8h</p>
-                            <p>9h</p>
-                            <p>10h</p>
-                            <p>11h</p>
-                            <p>12h</p>
-                            <p>13h</p>
-                            <p>14h</p>
-                            <p>15h</p>
-                            <p>16h</p>
-                            <p>17h</p>
-                            <p>18h</p>
-                        </section>
-                        <section class="day "><p>Lundi</p>
-                            <section class="planningDayZone">
-                                <section class="quinzeMinute"></section>
-                                <a class="reservation" id=""href="#popUpRDV"><p>Mr. Jean</p></a>
-                                <section class="trenteMinutes"> </section>
-                                <a class="reservation" id=""href="#popUpRDV"><p>Mr. Jean</p></a>
-                            </section>
-                        </section>
-                        <section class="day "><p>Mardi</p><section class="planningDayZone"></section></section>
-                        <section class="day "><p>Mercredi</p><section class="planningDayZone"></section></section>
-                        <section class="day "><p>Jeudi</p><section class="planningDayZone"></section></section>
-                        <section class="day "><p>Vendredi</p><section class="planningDayZone"></section></section>
-                <?php
+                       $calendarManager->displayTable($_SESSION["employePlanning"],$_SESSION["weekPlanning"]);
                     }
                 ?>
 
             </section>
-            <section id="popUpRDV">
-                <section id="intoPopUpRDV">
-                    <h1 class="nomClientIntervention">Mr. Jean</h1>
-                    <h1 class="heureIntervention">8h20 - 10h00 (1h40)</h1>
-                    <section class="typeIntevrentionZone">
-                        <section class="aIntervention"><p>Changement des pneux</p><img src="../assets/img/not%20done.png" alt=""></section>
-                        <img class="plusAIntervention" src="../assets/img/plus.png" alt="">
-                        <section class="aIntervention"><p>Changement des pneux</p><img src="../assets/img/not%20done.png" alt=""></section>
-                        <section class="aIntervention"><p>Changement des pneux</p><img src="../assets/img/not%20done.png" alt=""></section>
-                    </section>
-                    <a href="#" class="close"><img src="../assets/img/not%20done.png" alt=""></a>
-                    <button class="validerIntervention">Valider l'intervention</button>
-                </section>
-            </section>
+            <?php $calendarManager->displayPopup(); ?>
         </section>
     </main>
-
     </body>
+    <script src="../assets/js/intervention.js"></script>
 </html>

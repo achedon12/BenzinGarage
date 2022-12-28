@@ -17,14 +17,16 @@ class Intervention{
     private int $kmActuel;
     
     private bool $devisOn;
-    
-    private string $etatdemande;
-    
+
     private string $idOperateur;
     
-    private Vehicle $vehicle;
-    
-    private Client $client;
+    private string $numeroImmatriculation;
+
+    private string $codeClient;
+
+    private string $etatDemande;
+
+
 
     /**
      * @param int $id
@@ -33,12 +35,12 @@ class Intervention{
      * @param string $descriptifDemande
      * @param int $kmActuel
      * @param bool $devisOn
-     * @param string $etatdemande
      * @param string $idOperateur
-     * @param Vehicle $vehicle
-     * @param Client $client
+     * @param string $numeroImmatriculation
+     * @param string $codeClient
+     * @param string $etatDemande
      */
-    public function __construct(int $id, string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, string $etatdemande, string $idOperateur, Vehicle $vehicle, Client $client)
+    public function __construct(int $id, string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, string $idOperateur, string $numeroImmatriculation,string $codeClient, string $etatDemande)
     {
         $this->id = $id;
         $this->dateRdv = $dateRdv;
@@ -46,10 +48,10 @@ class Intervention{
         $this->descriptifDemande = $descriptifDemande;
         $this->kmActuel = $kmActuel;
         $this->devisOn = $devisOn;
-        $this->etatdemande = $etatdemande;
         $this->idOperateur = $idOperateur;
-        $this->vehicle = $vehicle;
-        $this->client = $client;
+        $this->numeroImmatriculation = $numeroImmatriculation;
+        $this->codeClient = $codeClient;
+        $this->etatDemande = $etatDemande;
     }
 
     /**
@@ -66,14 +68,6 @@ class Intervention{
     public function getIdOperateur(): string
     {
         return $this->idOperateur;
-    }
-
-    /**
-     * @return Client
-     */
-    public function getClient(): Client
-    {
-        return $this->client;
     }
 
     /**
@@ -111,24 +105,32 @@ class Intervention{
     /**
      * @return bool
      */
-    public function isDevisOn(): bool
+    public function getDevis(): bool
     {
         return $this->devisOn;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getEtatdemande(): int
+    public function getEtatdemande(): string
     {
-        return $this->etatdemande;
+        return $this->etatDemande;
     }
 
     /**
-     * @return Vehicle
+     * @return string
      */
-    public function getVehicle(): Vehicle
+    public function getNumeroImmatriculation(): string
     {
-        return $this->vehicle;
+        return $this->numeroImmatriculation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCodeClient(): string
+    {
+        return $this->codeClient;
     }
 }

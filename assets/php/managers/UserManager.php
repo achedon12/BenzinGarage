@@ -22,18 +22,7 @@ class UserManager{
         $this->pdo = $pdo;
     }
 
-    /**
-     * Get all clients.
-     * @return array
-     */
-    public function getAllClients(): array{
-        /** @var $res Client[]*/
-        $res = [];
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.client");
-        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"],$row["mail"],$row["datecreation"] );
-        return $res;
-    }
+
 
     /**
      * Get all managers.
@@ -81,7 +70,7 @@ class UserManager{
     public function getAllUser(): array{
         /** @var User[] $array */
         $array = [];
-        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user");
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user ORDER BY nom");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
             $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
         return $array;
@@ -116,7 +105,7 @@ class UserManager{
      * @param string $id
      * @return bool
      */
-    public function removeUser(string $id): bool{
+    public function deleteUser(string $id): bool{
         $stmt = $this->pdo->prepare("DELETE FROM sae_garage.user WHERE id = :id");
         $stmt->execute([
             "id" => $id
@@ -133,10 +122,10 @@ class UserManager{
     public function modifyUser(User $administrator,string $id): bool{
         $stmt = $this->pdo->prepare("UPDATE sae_garage.user SET nom = :nom, prenom = :prenom, password = :password WHERE id = :id");
         $stmt->execute([
-            "id" => $id,
             "nom" => $administrator->getName(),
             "prenom" => $administrator->getFirstName(),
-            "password" => $administrator->getHashedPassword()
+            "password" => $administrator->getHashedPassword(),
+            "id" => $id
         ]);
         return true;
     }

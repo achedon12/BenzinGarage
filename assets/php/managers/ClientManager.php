@@ -96,7 +96,7 @@ class ClientManager{
         $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.vehicule WHERE codeclient = :id");
         $stmt->execute(["id" => $codeclient]);
         $result = $stmt->fetch();
-        return new Vehicle($result["numberPlate"],$result["noSerie"],$result["dateMiseEnCirculation"],$result["numModele"],$result["client"]);
+        return new Vehicle($result["noimmatriculation"],$result["noserie"],$result["datemiseencirculation"],$result["nummodele"],$result["codeclient"]);
     }
 
     /**
@@ -161,5 +161,18 @@ class ClientManager{
      */
     public function getClient(int $id, string $name, string $firstName, string $adresse, int $codePostal, string $city, string $telephone, string $mail, string $datecreation): Client{
         return new Client($id, $name, $firstName, $adresse, $codePostal, $city, $telephone, $mail, $datecreation);
+    }
+
+    /**
+     * Get all clients.
+     * @return array
+     */
+    public function getAllClients(): array{
+        /** @var $res Client[]*/
+        $res = [];
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.client order by codeclient");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"],$row["mail"],$row["datecreation"] );
+        return $res;
     }
 }

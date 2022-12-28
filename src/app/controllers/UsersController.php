@@ -16,6 +16,10 @@ class UsersController{
         render('accueil.php');
     }
 
+    public function accueilChefAtelier(): void {
+        render('AccueilChefAtelier.php');
+    }
+
     public function accueilAdministrateurPage(): void {
         render('accueilAdmin.php');
     }
@@ -41,7 +45,7 @@ class UsersController{
     }
 
     public function stockPage(){
-        render('stock.php');
+        render('chefAtelierStock.php');
     }
 
     public function test(){
@@ -91,5 +95,22 @@ class UsersController{
     public function adminTarification(){
         render('adminTarification.php');
     }
+
+    public function chefAtelierInterventionPlanning(){
+        render("PlanningChefAtelier.php");
+    }
+
+    public function chefAtelierStock(){
+        render("chefAtelierStock.php");
+    }
+
+    public function chefAtelierClient(){
+        render("chefAtelierClient.php");
+    }
+
+    public function chefAtelierRDV(){
+        render("chefAtelierPriseRDV.php");
+    }
+
 
 }

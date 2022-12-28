@@ -22,7 +22,6 @@ if(!Auth::isConnected()){
     return;
 }
 
-
 if(isset($_POST["select"]) && $_POST["select"] !== "--Client--"){
     $_SESSION["userId"] = $_POST["select"];
 }
@@ -31,7 +30,6 @@ if(isset($_POST["modify"])){
     if(empty($_POST["firstname"]) || empty($_POST["name"]) || empty($_POST["adresse"]) || empty($_POST["codepostal"]) || empty($_POST["city"]) || empty($_POST["mail"]) || empty($_POST["telephone"])) {
         $_SESSION["modifyClient"] = "none";
     }else{
-        $_SESSION["test"] = "jean";
         $newClient = new Client($_POST["id"],$_POST["name"],$_POST["firstname"],$_POST["adresse"],$_POST["codepostal"],$_POST["city"],$_POST["telephone"],$_POST["mail"],date("Y-n-d"));
         if($clientManager->modifyClient($newClient,$_POST["id"])){
             $_SESSION["userId"] = 0;
@@ -86,7 +84,7 @@ if(isset($_POST["delete"])){
                     if($_SESSION["userId"] === 0){
                         echo '<option value="false" disabled selected>--Client--</option>';
                     }
-                    foreach($userManager->getAllClients() as $people){
+                    foreach($clientManager->getAllClients() as $people){
                         $name = $people->getName()." ".$people->getFirstName();
                         $code = $people->getId();
                         if($code == $_SESSION["userId"]){
@@ -144,3 +142,6 @@ if(isset($_POST["delete"])){
 </main>
 </body>
 </html>
+<?php
+$_SESSION["errorClient"] = 0;
+?>
