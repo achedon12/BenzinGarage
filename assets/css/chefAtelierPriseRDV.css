@@ -279,7 +279,8 @@ h2{
 
 
 .buttonSupprOpe{
-    height: 25px;
+    font-size: 3em;
+    margin-left: 5px;
 }
 
 .hidden{

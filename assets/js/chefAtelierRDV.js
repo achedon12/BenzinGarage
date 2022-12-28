@@ -26,9 +26,10 @@ Operations=[
         "dureeop":2,
         "codetarif":7}
 ]
-let prixIntervention = 0;
+let prixIntervention = [];
 
 let operationForOneInervention =[];
+
 
 function operationSelect(Operations) {
     for (let i = 0; i < Operations.length; i++) {
@@ -83,9 +84,11 @@ function rafraichir(idOpe) {
     let sectionOperationRDV = document.getElementById("interventionRDV");
     sectionOperationRDV.appendChild(newOperation);
     operationForOneInervention.push(Operations[positionidOpe].id);
+    prixIntervention.push(Operations[positionidOpe].codetarif);
     console.log(operationForOneInervention);
 
-    document.cookie = "js_var_value=" + operationForOneInervention;
+    document.cookie = "operationForOneInervention=" + operationForOneInervention;
+    document.cookie = "prixTotal=" + prixIntervention;
 
 }
 

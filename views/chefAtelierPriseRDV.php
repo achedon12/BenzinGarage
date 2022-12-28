@@ -47,8 +47,12 @@ if (isset($_POST['typeIntervention'])){
 }
 
 
-if(isset($_COOKIE['js_var_value'])){
-    echo $_COOKIE['js_var_value'];
+if(isset($_COOKIE['operationForOneInervention'])){
+    echo $_COOKIE['operationForOneInervention'];
+    $tabOperationForOneInervention = explode(",",$_COOKIE['operationForOneInervention']);
+}
+if(isset($_COOKIE['prixTotal'])){
+    echo $_COOKIE['prixTotal'];
 }
 ?>
 
@@ -102,7 +106,24 @@ if(isset($_COOKIE['js_var_value'])){
 
             <section class="ValiderPrix">
                 <input type="button" onclick="submit()" value="Ajouter le rendez-vous" name="ValiderRDV">
-                <h2>58€</h2>
+                <h2><?php $prixtotal = 0.0;
+                if (isset($tabOperationForOneInervention)){
+
+                    foreach ($tabOperationForOneInervention as $operation) {
+                        $codeTarif = $operationManager->getOperationById($operation)[0][3];
+                        $tempsOpe = $operationManager->getOperationById($operation)[0][2];
+
+                        
+                        $prixtotal+=$tempsOpe*$operationManager->getCoutHorraire($codeTarif)[0]['couthoraireactuelht'];
+
+                    }
+                    print_r($prixtotal);
+                }
+                else{
+                    echo '0';
+                }
+
+                ?>€</h2>
             </section>
         </section>
 
