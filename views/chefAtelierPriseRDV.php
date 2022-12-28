@@ -36,8 +36,13 @@ if(isset($_POST['selectClient'])){
 }else{
     $prenomClient=False ;
 }
-$operationPourUneOperation ='';
+if(!isset($operationPourUneOperation)){
+    $operationPourUneOperation =[];;
+}
+
 if (isset($_POST['typeIntervention'])){
+    $operationPourUneOperation[]=$operationManager->getOperationById($_POST['typeIntervention']);
+//    print_r($operationManager->getOperationById($_POST['typeIntervention']));
 
 }
 ?>
@@ -55,7 +60,7 @@ if (isset($_POST['typeIntervention'])){
     <link rel="stylesheet" href="../assets/css/chefAtelierPriseRDV.css">
     <link rel="shortcut icon" href="../assets/img/logo.png">
 </head>
-<body>
+<body onload="init()">
 <nav class="nav-bar">
     <img src="../assets/img/logo.png" alt="logo">
     <ul>
@@ -96,30 +101,14 @@ if (isset($_POST['typeIntervention'])){
             </section>
         </section>
 
-        <section class="infoIntervetion">
-
-            <section class="interventionRDV">
-                    <h2>Parre-Brise</h2>
-            </section>
-
-
+        <section class="infoIntervetion" id="interventionRDV">
 
         </section>
         <section class="choixOperation">
-            <form method="post" onchange="submit()">
-                <?php
-
-                $operations = $operationManager->getOperationList();
-                $select = "<label for=\"typeIntervention\">Choisir une operation à faire</label>";
-                $select .= "<select name='typeIntervention' id='typeIntervention' class='typeIntervention' onchange='submit()'>";
-                $select .= "<option disabled selected value='0'>-- Choisir une intervention --</option>";
-                foreach($operations as $operation => $value){
-                    $select .= '<option id="' . $operation . '">' . $operation . '</option>';
-                }
-                $select .= "</select>";
-                echo $select;
-                ?>
-            </form>
+            <label for="operations">Choisir une opération</label>
+            <select name="" id="operations" onchange="rafraichir(this.value)">
+                <option value="-1">Choisissez une operation...</option>
+            </select>
         </section>
 
 
@@ -129,10 +118,10 @@ if (isset($_POST['typeIntervention'])){
                 <form method="post" id="formInscriptionClient" onchange="submit()">
                     <select id="client-select" name="selectClient">
                         <?php
-                        if($_SESSION["userId"] === 0){
-                            echo '<option value="false" disabled selected>--Client--</option>';
-                        }
+
+                        echo '<option value="false" disabled selected>--Client--</option>';
                         foreach($clientsManager->getAllClients() as $people){
+
                             $name = $people->getName()." ".$people->getFirstName();
                             $code = $people->getId();
                             if($code == $_SESSION["userId"]){
@@ -184,5 +173,6 @@ if (isset($_POST['typeIntervention'])){
     </form>
 </main>
 </body>
+<script src="/assets/js/chefAtelierRDV.js"></script>
 </html>
 
