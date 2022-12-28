@@ -45,6 +45,11 @@ if (isset($_POST['typeIntervention'])){
 //    print_r($operationManager->getOperationById($_POST['typeIntervention']));
 
 }
+
+
+if(isset($_COOKIE['js_var_value'])){
+    echo $_COOKIE['js_var_value'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -104,6 +109,10 @@ if (isset($_POST['typeIntervention'])){
         <section class="infoIntervetion" id="interventionRDV">
 
         </section>
+
+
+
+
         <section class="choixOperation">
             <label for="operations">Choisir une opération</label>
             <select name="" id="operations" onchange="rafraichir(this.value)">
@@ -115,8 +124,8 @@ if (isset($_POST['typeIntervention'])){
         <section id="popChoixClient">
             <section id="intoPopUpRDV">
                 <h2>Choix du client</h2>
-                <form method="post" id="formInscriptionClient" onchange="submit()">
-                    <select id="client-select" name="selectClient">
+                <form method="post" id="formInscriptionClient" >
+                    <select id="client-select" name="selectClient" onchange="submit()">
                         <?php
 
                         echo '<option value="false" disabled selected>--Client--</option>';

@@ -26,8 +26,9 @@ Operations=[
         "dureeop":2,
         "codetarif":7}
 ]
-let idOperation;
+let prixIntervention = 0;
 
+let operationForOneInervention =[];
 
 function operationSelect(Operations) {
     for (let i = 0; i < Operations.length; i++) {
@@ -41,9 +42,19 @@ function operationSelect(Operations) {
 
 function init() {
     idContactCourant = -2;
-    // Dans un deuxième temps, on ira chercher les contacts avec une requête AJAX, on se contente pour l'instant
-    // d'afficher la liste préchargée
     operationSelect(Operations);
+}
+
+function supprOperations(){
+    let idrequest = this.getAttribute('id');
+    let positionI=operationForOneInervention.indexOf(idrequest);
+    if (positionI > -1) {
+        operationForOneInervention.splice(positionI, 1);
+    }
+    console.log(operationForOneInervention);
+
+    document.getElementById(idrequest).classList.add("hidden");
+
 }
 
 function rafraichir(idOpe) {
@@ -53,13 +64,30 @@ function rafraichir(idOpe) {
             positionidOpe=i;
         }
     }
-    console.log(typeof(positionidOpe));
     let newOperation = document.createElement("section");
     let newH2 = document.createElement("h2")
     let newContent = document.createTextNode(Operations[positionidOpe].id);
+    let supprsection = document.createElement("section");
+    supprsection.classList.add("buttonSupprOpe");
+    supprsection.id =Operations[positionidOpe].id;
+
+    let textSuppre = document.createTextNode("-");
+    supprsection.appendChild(textSuppre);
+    supprsection.addEventListener('click', supprOperations);
+
     newH2.appendChild(newContent)
+    newOperation.id = Operations[positionidOpe].id
     newOperation.classList.add("interventionRDV")
     newOperation.appendChild(newH2);
+    newOperation.appendChild(supprsection);
     let sectionOperationRDV = document.getElementById("interventionRDV");
     sectionOperationRDV.appendChild(newOperation);
+    operationForOneInervention.push(Operations[positionidOpe].id);
+    console.log(operationForOneInervention);
+
+    document.cookie = "js_var_value=" + operationForOneInervention;
+
 }
+
+
+
