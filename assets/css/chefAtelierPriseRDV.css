@@ -275,3 +275,14 @@ h2{
 .close img{
     width: 100%;
 }
+
+
+
+.buttonSupprOpe{
+    font-size: 3em;
+    margin-left: 5px;
+}
+
+.hidden{
+    display:none;
+}

@@ -36,9 +36,23 @@ if(isset($_POST['selectClient'])){
 }else{
     $prenomClient=False ;
 }
-$operationPourUneOperation ='';
-if (isset($_POST['typeIntervention'])){
+if(!isset($operationPourUneOperation)){
+    $operationPourUneOperation =[];;
+}
 
+if (isset($_POST['typeIntervention'])){
+    $operationPourUneOperation[]=$operationManager->getOperationById($_POST['typeIntervention']);
+//    print_r($operationManager->getOperationById($_POST['typeIntervention']));
+
+}
+
+
+if(isset($_COOKIE['operationForOneInervention'])){
+    echo $_COOKIE['operationForOneInervention'];
+    $tabOperationForOneInervention = explode(",",$_COOKIE['operationForOneInervention']);
+}
+if(isset($_COOKIE['prixTotal'])){
+    echo $_COOKIE['prixTotal'];
 }
 ?>
 
@@ -55,7 +69,7 @@ if (isset($_POST['typeIntervention'])){
     <link rel="stylesheet" href="../assets/css/chefAtelierPriseRDV.css">
     <link rel="shortcut icon" href="../assets/img/logo.png">
 </head>
-<body>
+<body onload="init()">
 <nav class="nav-bar">
     <img src="../assets/img/logo.png" alt="logo">
     <ul>
@@ -92,47 +106,52 @@ if (isset($_POST['typeIntervention'])){
 
             <section class="ValiderPrix">
                 <input type="button" onclick="submit()" value="Ajouter le rendez-vous" name="ValiderRDV">
-                <h2>58€</h2>
-            </section>
-        </section>
+                <h2><?php $prixtotal = 0.0;
+                if (isset($tabOperationForOneInervention)){
 
-        <section class="infoIntervetion">
+                    foreach ($tabOperationForOneInervention as $operation) {
+                        $codeTarif = $operationManager->getOperationById($operation)[0][3];
+                        $tempsOpe = $operationManager->getOperationById($operation)[0][2];
 
-            <section class="interventionRDV">
-                    <h2>Parre-Brise</h2>
-            </section>
+                        
+                        $prixtotal+=$tempsOpe*$operationManager->getCoutHorraire($codeTarif)[0]['couthoraireactuelht'];
 
-
-
-        </section>
-        <section class="choixOperation">
-            <form method="post" onchange="submit()">
-                <?php
-
-                $operations = $operationManager->getOperationList();
-                $select = "<label for=\"typeIntervention\">Choisir une operation à faire</label>";
-                $select .= "<select name='typeIntervention' id='typeIntervention' class='typeIntervention' onchange='submit()'>";
-                $select .= "<option disabled selected value='0'>-- Choisir une intervention --</option>";
-                foreach($operations as $operation => $value){
-                    $select .= '<option id="' . $operation . '">' . $operation . '</option>';
+                    }
+                    print_r($prixtotal);
                 }
-                $select .= "</select>";
-                echo $select;
-                ?>
-            </form>
+                else{
+                    echo '0';
+                }
+
+                ?>€</h2>
+            </section>
+        </section>
+
+        <section class="infoIntervetion" id="interventionRDV">
+
+        </section>
+
+
+
+
+        <section class="choixOperation">
+            <label for="operations">Choisir une opération</label>
+            <select name="" id="operations" onchange="rafraichir(this.value)">
+                <option value="-1">Choisissez une operation...</option>
+            </select>
         </section>
 
 
         <section id="popChoixClient">
             <section id="intoPopUpRDV">
                 <h2>Choix du client</h2>
-                <form method="post" id="formInscriptionClient" onchange="submit()">
-                    <select id="client-select" name="selectClient">
+                <form method="post" id="formInscriptionClient" >
+                    <select id="client-select" name="selectClient" onchange="submit()">
                         <?php
-                        if($_SESSION["userId"] === 0){
-                            echo '<option value="false" disabled selected>--Client--</option>';
-                        }
+
+                        echo '<option value="false" disabled selected>--Client--</option>';
                         foreach($clientsManager->getAllClients() as $people){
+
                             $name = $people->getName()." ".$people->getFirstName();
                             $code = $people->getId();
                             if($code == $_SESSION["userId"]){
@@ -184,5 +203,6 @@ if (isset($_POST['typeIntervention'])){
     </form>
 </main>
 </body>
+<script src="/assets/js/chefAtelierRDV.js"></script>
 </html>
 

@@ -80,4 +80,19 @@ class OperationManager
         $stmt->execute(["idop_ef" => $newID,"libelleop" => $libelle, "codeop" => $codeop, "numdde" => $numdde]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+    public function getOperationById(string $idOpe){
+        $stmt = $this->pdo->prepare("select * from sae_garage.operation where codeop=:id");
+        $stmt->execute(["id"=> $idOpe]);
+        return $stmt->fetchAll();
+    }
+
+    public function getCoutHorraire(string $codeTarif){
+        $requete=$this->pdo->prepare("select couthoraireactuelht from sae_garage.tarif_mo where codetarif=:code");
+        $requete->execute(["code"=> $codeTarif]);
+        $tarifHorraire = $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $tarifHorraire;
+    }
+
 }
