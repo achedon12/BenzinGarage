@@ -1,0 +1,277 @@
+main{
+    background-color: var(--grey-color);
+    width: 75%;
+    border-radius: 25px;
+}
+
+.formRDV{
+
+    display: flex;
+    gap: 10px;
+}
+
+.InfoClient{
+
+    margin: auto 0 auto 15px;
+
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.infoIntervetion{
+
+    margin: auto 0 auto 15px;
+    width: 55vh;
+    height: 80%;
+}
+
+.formRDV>input{
+    margin-top: 40px;
+    width: 8%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    height: 4%;
+}
+h2{
+    color: #FFFFFF;
+}
+
+.InfoClient>section{
+    background-color: var(--green-color);
+    padding: 2%;
+    border-radius: 25px;
+    color: #FFFFFF;
+    align-items: center;
+}
+.NomPrenom{
+    height: 25%;
+
+}
+.NomPrenom>h2{
+    margin-top: 15px;
+}
+
+
+.Date{
+    height: 10%;
+
+}
+
+.CompteClient{
+    height: 10%;
+    display: flex;
+}
+
+.CompteClient>a {
+    margin-left: 25px;
+    color: white;
+}
+
+
+.CompteClient>input{
+    margin: auto 0 auto 0;
+}
+
+
+.ValiderPrix{
+    background-color: var(--grey-color) !important;
+    display: flex;
+    justify-content: flex-end;
+    gap: 50px;
+}
+
+.ValiderPrix>input{
+    background-color: var(--green-color);
+    padding: 5px;
+    font-size: 1.5em;
+    color: white;
+    border: none;
+    border-radius: 25px;
+}
+
+.ValiderPrix>h2{
+    padding: 2%;
+    background-color: var(--green-color);
+}
+
+.infoIntervetion{
+    background-color: var(--green-color);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    width: 525px;
+}
+
+.interventionRDV{
+    background-color: var(--grey-color);
+    height: 15%;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.interventionRDV>input{
+    width: 10%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.interventionRDV>h2{
+    color: black;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#popInscription {
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+
+}
+#intoPopUpRDV {
+    width: 500px;
+    height: 500px;
+    padding: 15px;
+    color: black;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background-color: #C0C0C0;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+#popInscription:target {display: block;}
+.close {
+    position:absolute;
+    right:10px;
+    top:10px;
+
+    text-decoration: none;
+    font-size: 18px;
+    cursor:pointer;
+    height: 1.1em;
+    width: 1.1em;
+    border-radius: 25px;
+}
+.validerIntervention{
+
+    margin-top: 50px;
+    height: 7%;
+    width: 50%;
+    text-align: center;
+    background-color: var(--green-color);
+    border:none;
+    color: var(--white-color);
+    font-size: 1.1em;
+    border-radius: 8px;
+}
+
+.close img{
+    width: 100%;
+}
+
+#formInscriptionClient>input{
+    width: 50%;
+    height: 30px;
+}
+
+#formInscriptionClient>label{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+#formInscriptionClient>label>input{
+    height: 25px;
+}
+
+.CompteClient>a{
+    align-self: center;
+}
+
+.choixOperation{
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
+
+#popChoixClient {
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+
+}
+#intoPopUpRDV {
+    width: 500px;
+    height: 500px;
+    padding: 15px;
+    color: black;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background-color: #C0C0C0;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+#popChoixClient:target {display: block;}
+.close {
+    position:absolute;
+    right:10px;
+    top:10px;
+
+    text-decoration: none;
+    font-size: 18px;
+    cursor:pointer;
+    height: 1.1em;
+    width: 1.1em;
+    border-radius: 25px;
+}
+.validerIntervention{
+
+    margin-top: 50px;
+    height: 7%;
+    width: 50%;
+    text-align: center;
+    background-color: var(--green-color);
+    border:none;
+    color: var(--white-color);
+    font-size: 1.1em;
+    border-radius: 8px;
+}
+
+.close img{
+    width: 100%;
+}

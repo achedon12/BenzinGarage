@@ -76,7 +76,8 @@ main{
 .inputrefillStock{
     text-align: center;
     content: unset;
-
+    width: 20px;
+    height: 10px;
 }
 
 

@@ -67,7 +67,7 @@ class GarageManager
     {
         /** @var  $array Piece[] */
         $array = [];
-        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article");
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article Order By codearticle");
         $query->execute();
         $result = $query->fetchAll();
         foreach ($result as $piece) {

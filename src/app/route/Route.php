@@ -50,3 +50,9 @@ SimpleRouter::post('/admin/tarification',[UsersController::class,'adminTarificat
 
 /*Chef d'atelier*/
 SimpleRouter::get('/chefAtelier/interventionPlanning', [UsersController::class, 'chefAtelierInterventionPlanning']);
+SimpleRouter::get('/chefAtelier/stock', [UsersController::class, 'chefAtelierStock']);
+SimpleRouter::post('/chefAtelier/stock', [UsersController::class, 'chefAtelierStock']);
+SimpleRouter::get('/chefAtelier/client', [UsersController::class, 'chefAtelierClient']);
+SimpleRouter::post('/chefAtelier/client', [UsersController::class, 'chefAtelierClient']);
+SimpleRouter::get('/chefAtelier/RDV', [UsersController::class, 'chefAtelierRDV']);
+SimpleRouter::post('/chefAtelier/RDV', [UsersController::class, 'chefAtelierRDV']);

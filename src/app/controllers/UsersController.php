@@ -45,7 +45,7 @@ class UsersController{
     }
 
     public function stockPage(){
-        render('stock.php');
+        render('chefAtelierStock.php');
     }
 
     public function test(){
@@ -98,6 +98,18 @@ class UsersController{
 
     public function chefAtelierInterventionPlanning(){
         render("PlanningChefAtelier.php");
+    }
+
+    public function chefAtelierStock(){
+        render("chefAtelierStock.php");
+    }
+
+    public function chefAtelierClient(){
+        render("chefAtelierClient.php");
+    }
+
+    public function chefAtelierRDV(){
+        render("chefAtelierPriseRDV.php");
     }
 
 

@@ -30,15 +30,15 @@ if(!Auth::isConnected()){
         <link rel="shortcut icon" href="../assets/img/logo.png">
     </head>
     <body>
-        <nav>
+        <nav class="nav-bar">
             <img src="../assets/img/logo.png" alt="logo">
             <ul>
                 <li class="hover"><a href="/accueil/chefatelier">Accueil</a></li>
                 <li><a href="">Planning</a></li>
-                <li><a href="">Prise de rendez-vous</a></li>
-                <li><a href="">Stock</a></li>
+                <li><a href="/chefAtelier/RDV">Prise de rendez-vous</a></li>
+                <li><a href="/chefAtelier/stock">Stock</a></li>
                 <li><a href="">Tarification</a></li>
-                <li ><a href="">Clients</a></li>
+                <li ><a href="/chefAtelier/client">Clients</a></li>
                 <li><a href="/disconnect">Deconnexion</a></li>
             </ul>
         </nav>
@@ -47,21 +47,22 @@ if(!Auth::isConnected()){
                 <h1>Planning</h1>
                 <img src="../assets/img/planning.png" alt="">
             </a>
-            <a href="">
+            <a href="/chefAtelier/RDV">
                 <h1>Prise de rendez-vous</h1>
                 <img src="../assets/img/add-clients.png" alt="">
             </a>
-            <a href="">
-                <h1>Clients</h1>
-                <img src="../assets/img/modify-clients.png" alt="">
-            </a>
-            <a href="/admin/employes/create">
+
+            <a href="/chefAtelier/stock">
                 <h1>Stock</h1>
                 <img src="../assets/img/cartons.png" alt="">
             </a>
-            <a href="/admin/employes/modify">
+            <a href="">
                 <h1>Tarifications</h1>
                 <img src="../assets/img/caisse.png" alt="">
+            </a>
+            <a href="/chefAtelier/client">
+                <h1>Clients</h1>
+                <img src="../assets/img/modify-clients.png" alt="">
             </a>
         </main>
     </body>
