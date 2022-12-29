@@ -106,7 +106,7 @@ if (isset($_POST['typeIntervention'])){
 
             <section class="ValiderPrix">
                 <input type="button" onclick="submit()" value="Ajouter le rendez-vous" name="ValiderRDV">
-                <h2 id="prixIntervention">0€</h2>
+                <section style="display: flex"><h2 id="prixIntervention">0</h2><h2>€</h2></section>
             </section>
         </section>
 

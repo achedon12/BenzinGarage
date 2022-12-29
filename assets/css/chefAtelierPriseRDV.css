@@ -8,6 +8,7 @@ main{
 
     display: flex;
     gap: 10px;
+    width: 100%;
 }
 
 .InfoClient{
@@ -81,6 +82,7 @@ h2{
     display: flex;
     justify-content: flex-end;
     gap: 50px;
+    align-self: flex-start;
 }
 
 .ValiderPrix>input{

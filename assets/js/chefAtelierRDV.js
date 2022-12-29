@@ -90,7 +90,7 @@ function rafraichir(idOpe) {
     sectionOperationRDV.appendChild(newOperation);
     operationForOneInervention.push(Operations[positionidOpe].id);
     prixOperation.push(Operations[positionidOpe].codetarif);
-    console.log(operationForOneInervention);
+    // console.log(operationForOneInervention);
 
     document.cookie = "operationForOneInervention=" + operationForOneInervention;
     document.cookie = "prixTotal=" + prixIntervention;
@@ -100,16 +100,29 @@ function rafraichir(idOpe) {
 
 }
 
+
 async function changerPrix(){
     prixTotalIntervention=0.0;
     let data =await (await fetch(`http://benzingarage.test/assets/php/request/getCountHorraire.php`)).json();
     for (let codePrix of prixOperation) {
+        // console.log(codePrix);
+        // console.log("test : ",data);
+        codePrix=codePrix.toString();
+        if(codePrix.length===1){
+            codePrix+=' ';
+        }
+        for (let info of data) {
 
-        data.forEach(function (element){
-            console.log(element)
-        })
-        console.log(data);
-        // document.querySelector("#prixIntervention").innerHTML=data;
+            if (info['codetarif']===codePrix){
+
+                prixTotalIntervention += parseFloat(info['couthoraireactuelht']);
+            }
+        }
+
+
+
+        // console.log(data);
+        document.getElementById("prixIntervention").innerHTML=prixTotalIntervention.toFixed(2);
 
     }
 }
