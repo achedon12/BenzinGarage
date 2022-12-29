@@ -102,7 +102,7 @@ function rafraichir(idOpe) {
 
 async function changerPrix(){
     prixTotalIntervention=0.0;
-    let data =await (await fetch(`http://benzingarage.test/assets/php/request/getCoutHorraire.php`)).json();
+    let data =await (await fetch(`http://benzingarage.test/assets/php/request/getCountHorraire.php`)).json();
     for (let codePrix of prixOperation) {
 
         data.forEach(function (element){
