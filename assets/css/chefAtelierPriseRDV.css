@@ -1,6 +1,6 @@
 main{
     background-color: var(--grey-color);
-    width: 75%;
+    width: 80%;
     border-radius: 25px;
 }
 
@@ -10,11 +10,12 @@ main{
     gap: 10px;
     width: 100%;
 }
-
+input:invalid {
+    border: red solid 3px;
+}
 .InfoClient{
 
-    margin: auto 0 auto 15px;
-
+    margin: 15px 0 auto 15px;
     height: 80%;
     display: flex;
     flex-direction: column;
@@ -22,9 +23,14 @@ main{
     width: 100%;
 }
 
+.infoSupp{
+    display: flex;
+    justify-content: space-around;
+}
+
 .infoIntervetion{
 
-    margin: auto 0 auto 15px;
+    margin: 15px 0 auto 15px;
     width: 55vh;
     height: 80%;
 }
@@ -52,7 +58,7 @@ h2{
 
 }
 .NomPrenom>h2{
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 

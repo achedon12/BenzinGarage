@@ -56,3 +56,4 @@ SimpleRouter::get('/chefAtelier/client', [UsersController::class, 'chefAtelierCl
 SimpleRouter::post('/chefAtelier/client', [UsersController::class, 'chefAtelierClient']);
 SimpleRouter::get('/chefAtelier/RDV', [UsersController::class, 'chefAtelierRDV']);
 SimpleRouter::post('/chefAtelier/RDV', [UsersController::class, 'chefAtelierRDV']);
+SimpleRouter::get('/chefAtelier/Tarification', [UsersController::class, 'chefAtelierTarification']);

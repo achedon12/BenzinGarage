@@ -111,6 +111,9 @@ class UsersController{
     public function chefAtelierRDV(){
         render("chefAtelierPriseRDV.php");
     }
+    public function chefAtelierTarification(){
+        render("chefAtelierTarification.php");
+    }
 
 
 }

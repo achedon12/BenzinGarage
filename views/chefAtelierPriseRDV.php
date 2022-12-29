@@ -32,6 +32,7 @@ if(isset($_POST['selectClient'])){
     $Client = $clientsManager->getClientByID($_POST['selectClient']);
     $prenomClient=$Client->getFirstName();
     $nomClient= $Client->getName();
+    $id=$Client->getId();
     $voiture= $clientsManager->getClientVehicle($Client->getId());
 }else{
     $prenomClient=False ;
@@ -45,7 +46,9 @@ if (isset($_POST['typeIntervention'])){
 //    print_r($operationManager->getOperationById($_POST['typeIntervention']));
 
 }
-
+if(isset($_POST['ValiderInscriptionClient'])){
+    echo "ValiderInscriptionClient";
+}
 
 //if(isset($_COOKIE['operationForOneInervention'])){
 //    echo $_COOKIE['operationForOneInervention'];
@@ -77,7 +80,7 @@ if (isset($_POST['typeIntervention'])){
         <li><a href="">Planning</a></li>
         <li class="hover"><a href="/chefAtelier/RDV">Prise de rendez-vous</a></li>
         <li><a href="/chefAtelier/stock">Stock</a></li>
-        <li><a href="">Tarification</a></li>
+        <li><a href="/chefAtelier/Tarification">Tarification</a></li>
         <li><a href="/chefAtelier/client">Clients</a></li>
         <li><a href="/disconnect">Deconnexion</a></li>
     </ul>
@@ -99,9 +102,44 @@ if (isset($_POST['typeIntervention'])){
                 <h2>Nom de famille :<?php if(isset($nomClient)) echo " ".$nomClient."</h2>" ;
                     else echo '';
                 ?>
+                    <h2>Code Client :<?php if(isset($nomClient)) echo " ".$id."</h2>" ;
+                        else echo '';
+                        ?></h2>
             </section>
             <section class="Date" style="display: flex">
                 <h2>Date : </h2> <input type="datetime-local" name="dateRDV" required>
+            </section>
+            <section class="infoSupp">
+                <section class="infoVehicule" style="display: flex; flex-direction: column">
+                    <h4>No d'immatriculation : </h4> <input type="text" name="noimatriculation" value="<?php if(isset($_POST['selectClient'])){echo $voiture->getNumberPlate();}?>" required placeholder="XX-000-XX" pattern="[A-Z]{2}-[0-9]{3}-[A-Z]{2}" >
+                    <h4>Kilométrage du vehicule : </h4> <input type="text" name="km_actuel" required>
+                </section>
+                <section class="Employe" id="employe">
+                    <h4>Employé chargée de l'intervention</h4>
+                    <select id="employe-select" name="select">
+                    <?php
+                    if ($_SESSION["managerId"] === 0) {
+                        echo '<option value="false" disabled selected>--Employé--</option>';
+                    }
+                    foreach($userManager->getAllEmployees() as $people){
+                        $name  = $people->getName()." ".$people->getFirstName();
+                        $code = $people->getId();
+                        if($code == $_SESSION["managerId"]){
+                            ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
+                        }else{
+                            ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                        }
+                    }
+                    ?>
+                    </select>
+                    <section class="devis">
+                        <h4>Devis fait :</h4>
+                        <input type="checkbox" id="DevisNon" name="false" checked><label for="DevisNon">Non</label>
+                        <input type="checkbox" id="DevisOui" name="true"><label for="DevisOui">Oui</label>
+
+                    </section>
+                </section>
+
             </section>
 
             <section class="ValiderPrix">

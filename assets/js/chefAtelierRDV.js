@@ -43,6 +43,8 @@ function operationSelect(Operations) {
     }
 }
 
+
+
 function init() {
     idContactCourant = -2;
     operationSelect(Operations);
@@ -56,11 +58,12 @@ function supprOperations(){
     let positionI=operationForOneInervention.indexOf(idrequest);
     if (positionI > -1) {
         operationForOneInervention.splice(positionI, 1);
+        prixOperation.splice(positionI,1);
     }
-    console.log(operationForOneInervention);
-
+    console.log("operationForOneIntervention",operationForOneInervention);
+    console.log("prixOperation",prixOperation);
     document.getElementById(idrequest).classList.add("hidden");
-
+    changerPrix();
 }
 
 function rafraichir(idOpe) {
@@ -104,27 +107,32 @@ function rafraichir(idOpe) {
 async function changerPrix(){
     prixTotalIntervention=0.0;
     let data =await (await fetch(`http://benzingarage.test/assets/php/request/getCountHorraire.php`)).json();
-    for (let codePrix of prixOperation) {
-        // console.log(codePrix);
-        // console.log("test : ",data);
-        codePrix=codePrix.toString();
-        if(codePrix.length===1){
-            codePrix+=' ';
-        }
-        for (let info of data) {
+    if(prixOperation.length===0){
+        prixOperation=0.0;
+    }
+    else{
+        for (let codePrix of prixOperation) {
+            // console.log(codePrix);
+            // console.log("test : ",data);
+            codePrix = codePrix.toString();
+            if (codePrix.length === 1) {
+                codePrix += ' ';
+            }
+            for (let info of data) {
 
-            if (info['codetarif']===codePrix){
+                if (info['codetarif'] === codePrix) {
 
-                prixTotalIntervention += parseFloat(info['couthoraireactuelht']);
+                    prixTotalIntervention += parseFloat(info['couthoraireactuelht']);
+                }
             }
         }
-
+    }
 
 
         // console.log(data);
         document.getElementById("prixIntervention").innerHTML=prixTotalIntervention.toFixed(2);
 
-    }
+
 }
 
 
