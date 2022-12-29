@@ -16,8 +16,7 @@ class PriceManager
     public function getAllPrice(){
         $requete=$this->pdo->prepare("select * from sae_garage.tarif_mo");
         $requete->execute();
-        $taHor = $requete->fetchAll(PDO::FETCH_ASSOC);
-        return $taHor;
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
