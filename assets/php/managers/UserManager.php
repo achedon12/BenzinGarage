@@ -72,7 +72,7 @@ class UserManager{
         $array = [];
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.user ORDER BY nom");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $array[] = new User($row["id"], $row["nom"], $row["password"],$row["prenom"], $row["role"]);
+            $array[] = new User($row["id"], $row["nom"],$row["prenom"], $row["password"], $row["role"]);
         return $array;
     }
 
