@@ -88,11 +88,6 @@ class OperationManager
         return $stmt->fetchAll();
     }
 
-    public function getCoutHorraire(string $codeTarif){
-        $requete=$this->pdo->prepare("select couthoraireactuelht from sae_garage.tarif_mo where codetarif=:code");
-        $requete->execute(["code"=> $codeTarif]);
-        $tarifHorraire = $requete->fetchAll(PDO::FETCH_ASSOC);
-        return $tarifHorraire;
-    }
+
 
 }

@@ -26,7 +26,9 @@ Operations=[
         "dureeop":2,
         "codetarif":7}
 ]
-let prixIntervention = [];
+let prixOperation = [];
+
+let prixTotalIntervention = 0.0;
 
 let operationForOneInervention =[];
 
@@ -45,6 +47,9 @@ function init() {
     idContactCourant = -2;
     operationSelect(Operations);
 }
+
+
+
 
 function supprOperations(){
     let idrequest = this.getAttribute('id');
@@ -84,12 +89,29 @@ function rafraichir(idOpe) {
     let sectionOperationRDV = document.getElementById("interventionRDV");
     sectionOperationRDV.appendChild(newOperation);
     operationForOneInervention.push(Operations[positionidOpe].id);
-    prixIntervention.push(Operations[positionidOpe].codetarif);
+    prixOperation.push(Operations[positionidOpe].codetarif);
     console.log(operationForOneInervention);
 
     document.cookie = "operationForOneInervention=" + operationForOneInervention;
     document.cookie = "prixTotal=" + prixIntervention;
 
+    changerPrix()
+
+
+}
+
+async function changerPrix(){
+    prixTotalIntervention=0.0;
+    let data =await (await fetch(`http://benzingarage.test/assets/php/request/getCoutHorraire.php`)).json();
+    for (let codePrix of prixOperation) {
+
+        data.forEach(function (element){
+            console.log(element)
+        })
+        console.log(data);
+        // document.querySelector("#prixIntervention").innerHTML=data;
+
+    }
 }
 
 
