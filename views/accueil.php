@@ -16,7 +16,6 @@ if(!Auth::isConnected()){
     render("connexion.php");
     return;
 }
-
 ?>
 
 <!DOCTYPE html>

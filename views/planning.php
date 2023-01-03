@@ -4,6 +4,7 @@ use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
+require_once "./assets/php/managers/TemplateManager.php";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
 
@@ -18,7 +19,6 @@ if(!Auth::isConnected()){
 
 $_SESSION["employePlanning"] = 0;
 
-
 if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
     $_SESSION["employePlanning"] = $_POST["select"];
 }
@@ -31,26 +31,16 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
-    <link rel="stylesheet" href="../assets/css/utilisateurAdministrateur.css">
+    <link rel="stylesheet" href="../assets/css/accueil.css">
     <link rel="stylesheet" href="../assets/css/adminAddClient.css">
     <link rel="stylesheet" href="../assets/css/adminInterventionPlanning.css">
     <link rel="shortcut icon" href="../assets/img/logo.png">
     <title>Planning</title>
 </head>
 <body>
-<nav>
-    <img src="../assets/img/logo.png" alt="logo">
-    <ul>
-        <li ><a href="/accueil/chefatelier">Accueil</a></li>
-        <li class="hover"><a href="/chefAtelier/interventionPlanning">Planning</a></li>
-        <li><a href="">Prise de rendez-vous</a></li>
-        <li><a href="">Stock</a></li>
-        <li><a href="">Tarification</a></li>
-        <li ><a href="/chefAtelier/client">Clients</a></li>
-        <li><a href="/disconnect">Deconnexion</a></li>
-    </ul>
-</nav>
+<?php
+TemplateManager::getDefaultNavBar("planning");
+?>
 <main>
     <section class="interventionWindow">
         <form method="post" class="selecteur" onchange="submit()">

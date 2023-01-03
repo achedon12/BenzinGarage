@@ -7,6 +7,7 @@ require_once "assets/php/managers/UserManager.php";
 require_once "assets/php/managers/ClientManager.php";
 require_once "assets/php/managers/GarageManager.php ";
 require_once "assets/php/class/Piece.php ";
+require_once "./assets/php/managers/TemplateManager.php";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
 $clientManager = new ClientManager(DatabaseManager::getInstance());
@@ -21,11 +22,9 @@ if(!Auth::isConnected()){
     return;
 }
 
-
 if(isset($_POST["select"]) && $_POST["select"] !== "--Produit--"){
     $_SESSION["productId"] = $_POST["select"];
 }
-
 
 if(isset($_POST["submitProduitChangement"])){
     if(empty($_POST["newPrice"])) {
@@ -39,11 +38,6 @@ if(isset($_POST["submitProduitChangement"])){
         }
     }
 }
-
-
-
-
-
 ?>
 
 <!doctype html>
@@ -64,20 +58,8 @@ if(isset($_POST["submitProduitChangement"])){
     <title>Chef d'atelier : Tarification</title>
 </head>
 <body>
-<nav class="nav-bar">
-    <img src="../assets/img/logo.png" alt="logo">
-    <ul>
-        <li><a href="/accueil/chefatelier">Accueil</a></li>
-        <li><a href="">Planning</a></li>
-        <li><a href="/chefAtelier/RDV">Prise de rendez-vous</a></li>
-        <li><a href="/chefAtelier/stock">Stock</a></li>
-        <li class="hover"><a href="/chefAtelier/Tarification">Tarification</a></li>
-        <li><a href="/chefAtelier/client">Clients</a></li>
-        <li><a href="/disconnect">Deconnexion</a></li>
-    </ul>
-</nav>
 <?php
-
+TemplateManager::getDefaultNavBar("tarifs");
 ?>
 <form method="post" class="selecteur" onchange="submit()">
     <section>

@@ -44,14 +44,6 @@ class UsersController{
         render('adminModifyClient.php');
     }
 
-    public function stockPage(){
-        render('chefAtelierStock.php');
-    }
-
-    public function test(){
-        render('test.php');
-    }
-
     public function adminRemoveClient(){
         render('adminRemoveClient.php');
     }
@@ -96,24 +88,22 @@ class UsersController{
         render('adminTarification.php');
     }
 
-    public function chefAtelierInterventionPlanning(){
-        render("PlanningChefAtelier.php");
+    public function planning(){
+        render("planning.php");
     }
 
-    public function chefAtelierStock(){
-        render("chefAtelierStock.php");
+    public function stock(){
+        render("stock.php");
     }
 
-    public function chefAtelierClient(){
-        render("chefAtelierClient.php");
+    public function clients(){
+        render("clients.php");
     }
 
-    public function chefAtelierRDV(){
-        render("chefAtelierPriseRDV.php");
+    public function priseRDV(){
+        render("priseRDV.php");
     }
-    public function chefAtelierTarification(){
-        render("chefAtelierTarification.php");
+    public function tarification(){
+        render("tarification.php");
     }
-
-
 }

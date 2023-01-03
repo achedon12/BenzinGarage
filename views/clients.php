@@ -4,7 +4,7 @@ use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
-require_once("./assets/php/managers/TemplateManager.php");
+require_once "./assets/php/managers/TemplateManager.php";
 require_once "./assets/php/managers/GarageManager.php";
 require_once "./assets/php/managers/ClientManager.php";
 require_once "assets/php/class/Piece.php ";
@@ -37,19 +37,9 @@ if(!Auth::isConnected()){
     <link rel="shortcut icon" href="../assets/img/logo.png">
 </head>
 <body>
-<nav class="nav-bar">
-    <img src="../assets/img/logo.png" alt="logo">
-    <ul>
-        <li><a href="/accueil/chefatelier">Accueil</a></li>
-        <li><a href="">Planning</a></li>
-        <li><a href="/chefAtelier/RDV">Prise de rendez-vous</a></li>
-        <li><a href="/chefAtelier/stock">Stock</a></li>
-        <li><a href="">Tarification</a></li>
-        <li  class="hover"><a href="/chefAtelier/client">Clients</a></li>
-        <li><a href="/disconnect">Deconnexion</a></li>
-    </ul>
-</nav>
-
+<?php
+TemplateManager::getDefaultNavBar("clients");
+?>
 <main>
     <section class="formChoixClient">
         <label for="myClient">Liste des Clients</label>

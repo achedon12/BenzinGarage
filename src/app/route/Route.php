@@ -17,10 +17,7 @@ SimpleRouter::get('/admin/addEmploye', [UsersController::class, 'adminAddEmploye
 SimpleRouter::get('/admin/interventionPlanning', [UsersController::class, 'adminInterventionPlanning']);
 SimpleRouter::post('/admin/interventionPlanning', [UsersController::class, 'adminInterventionPlanning']);
 SimpleRouter::get('/admin/editClient', [UsersController::class, 'editClientPage']);
-SimpleRouter::get('/stock', [UsersController::class, 'stockPage']);
 
-/* Test page */
-SimpleRouter::get('/test',[UsersController::class,'test']);
 
 SimpleRouter::get('/admin/removeClient', [UsersController::class, 'adminRemoveClient']);
 SimpleRouter::get('/admin/removeEmploye', [UsersController::class, 'adminRemoveEmploye']);
@@ -47,13 +44,12 @@ SimpleRouter::get('/admin/tarification',[UsersController::class,'adminTarificati
 SimpleRouter::post('/admin/tarification',[UsersController::class,'adminTarification']);
 
 
-
-/*Chef d'atelier*/
-SimpleRouter::get('/chefAtelier/interventionPlanning', [UsersController::class, 'chefAtelierInterventionPlanning']);
-SimpleRouter::get('/chefAtelier/stock', [UsersController::class, 'chefAtelierStock']);
-SimpleRouter::post('/chefAtelier/stock', [UsersController::class, 'chefAtelierStock']);
-SimpleRouter::get('/chefAtelier/client', [UsersController::class, 'chefAtelierClient']);
-SimpleRouter::post('/chefAtelier/client', [UsersController::class, 'chefAtelierClient']);
-SimpleRouter::get('/chefAtelier/RDV', [UsersController::class, 'chefAtelierRDV']);
-SimpleRouter::post('/chefAtelier/RDV', [UsersController::class, 'chefAtelierRDV']);
-SimpleRouter::get('/chefAtelier/Tarification', [UsersController::class, 'chefAtelierTarification']);
+SimpleRouter::get('/planning', [UsersController::class, 'planning']);
+SimpleRouter::post('/planning', [UsersController::class, 'planning']);
+SimpleRouter::get('/stock', [UsersController::class, 'stock']);
+SimpleRouter::post('/stock', [UsersController::class, 'stock']);
+SimpleRouter::get('/clients', [UsersController::class, 'clients']);
+SimpleRouter::post('/clients', [UsersController::class, 'clients']);
+SimpleRouter::get('/prise-rdv', [UsersController::class, 'priseRDV']);
+SimpleRouter::post('/prise-rdv', [UsersController::class, 'priseRDV']);
+SimpleRouter::get('/tarification', [UsersController::class, 'tarification']);
