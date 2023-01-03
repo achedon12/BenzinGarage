@@ -84,8 +84,8 @@ TemplateManager::getDefaultNavBar("tarifs");
         </select>
     </section>
 </form>
-<section class="produit">
-    <h1> nom du produit :
+<section class="produit" style="height: 50%; width: 50%">
+    <h1> type du produit :
         <?php
         if (!isset($_SESSION["productId"])){
             echo 'pas de produit selectionné';
@@ -98,27 +98,24 @@ TemplateManager::getDefaultNavBar("tarifs");
     </h1>
     <h2>Réference : <?php
         if (!isset($_SESSION["productId"])){
-            echo '<h1>pas de produit selectionné</h1>';
+            echo '<h1>Pas de produit selectionné</h1>';
         }else{
             echo '<h1>'.$garageManager->getPieceById($_SESSION["productId"])[1].'</h1>';
         }
         ?>   </h2>
-    <form action="" method="post">
+    <form action="" method="post" >
 
         <section class="containerPrices">
-            <input type="text" name="originPrice" value=" <?php
+            <input type="text" name="originPrice" disabled value=" <?php
             if(isset($_SESSION["productId"])) {
                 echo $garageManager->getPieceById($_SESSION["productId"])[4];
             }else{
                 echo "";
             }
             ?> " class="sortiePrix">
-            <input type="text" name="newPrice" placeholder="Nouveau prix" class="sortiePrix">
+
         </section>
-        <section class="validatePrix">
-            <input class="submitEditPrice" type="submit" name="submitProduitChangement" value="Valider des informations">
-            <input class="submitEditPrice" type="reset" value="Réinitialiser informations">
-        </section>
+
     </form>
 
 

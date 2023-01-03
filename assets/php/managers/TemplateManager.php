@@ -94,12 +94,12 @@ class TemplateManager{
                     $navBar = '<nav class="nav-bar">
                                 <img src="../assets/img/logo.png" alt="logo">
                                 <ul>
-                                    <li class="hover"><a href="/accueil/employe" >Accueil</a></li>
-                                    <li><a href="#">Planning</a></li>
-                                    <li><a href="#">Prise de rendez-vous</a></li>
+                                    <li class="hover"><a href="/accueil/chefatelier" >Accueil</a></li>
+                                    <li><a href="/planning">Planning</a></li>
+                                    <li><a href="/prise-rdv">Prise de rendez-vous</a></li>
                                     <li><a href="/stock">Stock</a></li>
-                                    <li><a href="#">Tarifs</a></li>
-                                    <li><a href="#">Clients</a></li>
+                                    <li><a href="/tarification">Tarifs</a></li>
+                                    <li><a href="/clients">Clients</a></li>
                                     <li><a href="/disconnect">Deconnexion</a></li>
                                 </ul>
                             </nav>';
@@ -108,12 +108,12 @@ class TemplateManager{
                     $navBar = '<nav class="nav-bar">
                                 <img src="../assets/img/logo.png" alt="logo">
                                 <ul>
-                                    <li><a href="/accueil/employe" >Accueil</a></li>
-                                    <li class="hover"><a href="#">Planning</a></li>
-                                    <li><a href="#">Prise de rendez-vous</a></li>
+                                    <li><a href="/accueil/chefatelier" >Accueil</a></li>
+                                    <li class="hover"><a href="/planning">Planning</a></li>
+                                    <li><a href="/prise-rdv">Prise de rendez-vous</a></li>
                                     <li><a href="/stock">Stock</a></li>
-                                    <li><a href="#">Tarifs</a></li>
-                                    <li><a href="#">Clients</a></li>
+                                    <li><a href="/tarification">Tarifs</a></li>
+                                    <li><a href="/clients">Clients</a></li>
                                     <li><a href="/disconnect">Deconnexion</a></li>
                                 </ul>
                             </nav>';
@@ -122,12 +122,12 @@ class TemplateManager{
                     $navBar = '<nav class="nav-bar">
                                 <img src="../assets/img/logo.png" alt="logo">
                                 <ul>
-                                    <li><a href="/accueil/employe">Accueil</a></li>
-                                    <li><a href="#">Planning</a></li>
-                                    <li class="hover"><a href="#">Prise de rendez-vous</a></li>
+                                    <li><a href="/accueil/chefatelier">Accueil</a></li>
+                                    <li><a href="/planning">Planning</a></li>
+                                    <li class="hover"><a href="/prise-rdv">Prise de rendez-vous</a></li>
                                     <li><a href="/stock">Stock</a></li>
-                                    <li><a href="#">Tarifs</a></li>
-                                    <li><a href="#">Clients</a></li>
+                                    <li><a href="/tarification">Tarifs</a></li>
+                                    <li><a href="/clients">Clients</a></li>
                                     <li><a href="/disconnect">Deconnexion</a></li>
                                 </ul>
                             </nav>';
@@ -136,12 +136,12 @@ class TemplateManager{
                     $navBar = '<nav class="nav-bar">
                                 <img src="../assets/img/logo.png" alt="logo">
                                 <ul>
-                                    <li><a href="/accueil/employe">Accueil</a></li>
-                                    <li><a href="#">Planning</a></li>
-                                    <li><a href="#">Prise de rendez-vous</a></li>
+                                    <li><a href="/accueil/chefatelier">Accueil</a></li>
+                                    <li><a href="/planning">Planning</a></li>
+                                    <li><a href="/prise-rdv">Prise de rendez-vous</a></li>
                                     <li class="hover"><a href="/stock">Stock</a></li>
-                                    <li><a href="#">Tarifs</a></li>
-                                    <li><a href="#">Clients</a></li>
+                                    <li><a href="/tarification">Tarifs</a></li>
+                                    <li><a href="/clients">Clients</a></li>
                                     <li><a href="/disconnect">Deconnexion</a></li>
                                 </ul>
                             </nav>';
@@ -150,12 +150,12 @@ class TemplateManager{
                     $navBar = '<nav class="nav-bar">
                                 <img src="../assets/img/logo.png" alt="logo">
                                 <ul>
-                                    <li><a href="/accueil/employe">Accueil</a></li>
-                                    <li><a href="#">Planning</a></li>
-                                    <li><a href="#">Prise de rendez-vous</a></li>
+                                    <li><a href="/accueil/chefatelier">Accueil</a></li>
+                                    <li><a href="/planning">Planning</a></li>
+                                    <li><a href="/prise-rdv">Prise de rendez-vous</a></li>
                                     <li><a href="/stock">Stock</a></li>
-                                    <li class="hover"><a href="#">Tarifs</a></li>
-                                    <li><a href="#">Clients</a></li>
+                                    <li class="hover"><a href="/tarification">Tarifs</a></li>
+                                    <li><a href="/clients">Clients</a></li>
                                     <li><a href="/disconnect">Deconnexion</a></li>
                                 </ul>
                             </nav>';
@@ -164,12 +164,12 @@ class TemplateManager{
                     $navBar = '<nav class="nav-bar">
                                 <img src="../assets/img/logo.png" alt="logo">
                                 <ul>
-                                    <li><a href="/accueil/employe">Accueil</a></li>
-                                    <li><a href="#">Planning</a></li>
-                                    <li><a href="#">Prise de rendez-vous</a></li>
+                                    <li><a href="/accueil/chefatelier">Accueil</a></li>
+                                    <li><a href="/planning">Planning</a></li>
+                                    <li><a href="/prise-rdv">Prise de rendez-vous</a></li>
                                     <li><a href="/stock">Stock</a></li>
-                                    <li><a href="#">Tarifs</a></li>
-                                    <li class="hover"><a href="#">Clients</a></li>
+                                    <li><a href="/tarification">Tarifs</a></li>
+                                    <li class="hover"><a href="/clients">Clients</a></li>
                                     <li><a href="/disconnect">Deconnexion</a></li>
                                 </ul>
                             </nav>';

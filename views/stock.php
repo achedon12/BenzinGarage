@@ -15,6 +15,8 @@ if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 
+
+
 if(!Auth::isConnected()){
     render("connexion.php");
     return;
@@ -59,8 +61,8 @@ if(!Auth::isConnected()){
                                     <p class="product-name">' . $piece->getLibelleArticle() . '</p></br>
                                     <p class="product-ref">Référence : ' . $piece->getCodeArticle() . '</p>
                                     <p class="piece-available">' . $piece->getStockQuantite() . ' pièce(s) restante(s)</p>
-                                    <input class="validerCommande" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit">
-                                    <img src="../assets/img/add-basket.png" alt="add to basket">
+                                    <button class="buttonPasserCommande" id="'.$piece->getCodeArticle().'">coucou</button>
+                                    
                                 </section>
                             </article>';
                             }else{
@@ -70,7 +72,7 @@ if(!Auth::isConnected()){
                                     <p class="product-ref">Référence : ' . $piece->getCodeArticle() . '</p>
                                     <p class="piece-available">' . $piece->getStockQuantite() . ' pièce(s) restante(s)</p>
                                     <input class="validerCommande" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit">
-                                    <img src="../assets/img/add-basket.png" alt="add to basket">
+                                   
                                 </section>
                             </article>';
                             }
@@ -116,11 +118,18 @@ if(!Auth::isConnected()){
                 }
                 ?>
             </section>
+            <section class="commande">
+                <h2>Liste des article à commander</h2>
+                <section id="elementCommande">
+
+                </section>
+            </section>
             <?php
             if($_SESSION["role"] === UserManager::MANAGER){
-                echo '<section class="button"><button>Valider commande</button></section>';
+                echo '<section class="button"><button onclick="sendmail()">Valider commande</button></section>';
             }
             ?>
         </main>
     </body>
+<script src="/assets/js/chefAtelierRDV.js"></script>
 </html>
