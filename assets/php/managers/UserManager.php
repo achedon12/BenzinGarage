@@ -175,7 +175,7 @@ class UserManager{
         $prepare->execute();
         if ($prepare->rowCount() > 0) {
             $result = $prepare->fetchAll();
-            return new User($result[0]["id"],$result[0]["nom"],$result[0]["password"],$result[0]["prenom"],$result[0]["role"]);
+            return new User($result[0]["id"],$result[0]["nom"],$result[0]["prenom"],$result[0]["password"],$result[0]["role"]);
         }
         return null;
     }

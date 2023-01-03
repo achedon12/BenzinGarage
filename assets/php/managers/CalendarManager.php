@@ -81,12 +81,7 @@ class CalendarManager{
     }
 
     public function displayTable(int $id, array $week, $admin = true): void{
-        if(!$admin){
-            //TODO: Display table for managers and employees
 
-
-            return;
-        }
         $rdv = [];
         $interventions = $this->interventionManager->getInterventionListForOperator($id);
         $ids = [];
@@ -117,6 +112,7 @@ class CalendarManager{
                 }
                 echo '<td>';
                 if(isset($rdv[$jour[$i+1]][$j])) {
+                    echo '<div class="timeDate" hidden>'.array_values($interventions)[$theId]->getHeureRdv().'</div>';
                     echo '<a class="reservation" href="#popUpRDV" id="'.$ids[$theId].'">'.$rdv[$jour[$i+1]][$j].'</a>';
                     $theId++;
                 }
@@ -161,12 +157,13 @@ class CalendarManager{
         return $explode[2];
     }
 
-    public function displayPopup(): void
+    public function displayPopup($admin = true): void
     {
-        echo '<section id="popUpRDV">
+        if($admin){
+            echo '<section id="popUpRDV">
                 <section id="intoPopUpRDV">
                     <h1 class="nomClientIntervention"></h1>
-                    <h1 class="heureIntervention">8h20 - 10h00 (1h40)</h1>
+                    <h1 class="heureIntervention"></h1>
                     <section class="typeIntevrentionZone">
                         <section class="left"></section>
                         <section class="right">
@@ -178,6 +175,19 @@ class CalendarManager{
                     <button class="validerIntervention">Valider l\'intervention</button>
                 </section>
             </section>';
+        }else{
+            echo '<section id="popUpRDV">
+                <section id="intoPopUpRDV">
+                    <h1 class="nomClientIntervention"></h1>
+                    <h1 class="heureIntervention">8h20 - 10h00 (1h40)</h1>
+                    <section class="typeIntevrentionZone">
+                        <section class="left" style="flex-basis: 100%"></section>
+                    </section>
+                    <a href="#" class="close"><img src="../assets/img/not%20done.png" alt=""></a>
+                </section>
+            </section>';
+        }
+
     }
 
     private function displayAllOperations(): string

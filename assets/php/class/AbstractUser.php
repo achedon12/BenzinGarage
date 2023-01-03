@@ -2,18 +2,13 @@
 
 abstract class AbstractUser{
 
-
     private string $id;
-
     private string $name;
-
     private string $firstName;
-
     private string $hashedPassword;
-
     private string $role;
 
-    public function __construct(string $id, string $name,  string $firstName,string $hashedPassword, string $role){
+    public function __construct(string $id, string $name, string $firstName,string $hashedPassword, string $role){
         $this->id = $id;
         $this->name = $name;
         $this->hashedPassword = $hashedPassword;
