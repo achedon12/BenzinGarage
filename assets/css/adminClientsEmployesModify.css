@@ -75,9 +75,10 @@ select#role-select#role-select
 form.informations
 {
     display: flex;
-    width: 70%;
-    flex-direction: column;
+    width: 80%;
+
     justify-content: space-around;
+    flex-wrap: wrap;
     height: 70%;
     border-radius: 25px;
     background-color: var(--grey-color);
@@ -88,7 +89,7 @@ form.informations>section:nth-child(1)
 {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 50%;
     height: 40%;
     justify-content: center;
 }
@@ -102,14 +103,28 @@ form.informations>section:nth-child(1)>input
     margin: 1%;
 }
 
-form.informations>section:nth-child(2)
+.vehicule{
+    width: 40%;
+    background-color: red;
+}
+
+.vehicule>input
+{
+    width: 33%;
+    padding: 1%;
+    border-radius: 25px;
+    border: 1px solid var(--green-color);
+    margin: 1%;
+}
+
+form.informations>section:nth-child(3)
 {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-form.informations>section:nth-child(2)>input
+form.informations>section:nth-child(3)>input
 {
     width: 18%;
     background-color: var(--green-color);
@@ -119,7 +134,7 @@ form.informations>section:nth-child(2)>input
     color: var(--white-color);
 }
 
-form.informations>section:nth-child(2)>input:hover
+form.informations>section:nth-child(3)>input:hover
 {
     border: 1px solid var(--white-color);
 }

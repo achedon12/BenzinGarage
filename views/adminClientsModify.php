@@ -129,6 +129,12 @@ if(isset($_POST["delete"])){
                     <input type="text" name="city" id="city" value='<?php echo $user->getCity()?>'>
                     <input type="tel" name="telephone" id="telephone" value='<?php echo $user->getTelephoneNumber()?>'>
                 </section>
+                <section class="vehicule">
+                    <input type="text" value="<?php $userManager->getVehiculeByUserId("2         ")[0] ?>">
+
+                </section>
+
+
                 <section>
                     <input type="submit" value="Modifier le client" id="modify" class="tier" name="modify">
                     <input type="submit" value="Supprimer le client" id="del" class="tier" name="delete">
