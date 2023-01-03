@@ -80,7 +80,13 @@ class CalendarManager{
         return $date->format('d/m');
     }
 
-    public function displayTable(int $id, array $week): void{
+    public function displayTable(int $id, array $week, $admin = true): void{
+        if(!$admin){
+            //TODO: Display table for managers and employees
+
+
+            return;
+        }
         $rdv = [];
         $interventions = $this->interventionManager->getInterventionListForOperator($id);
         $ids = [];

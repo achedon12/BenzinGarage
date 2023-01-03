@@ -95,4 +95,11 @@ class OperationManager
         return $tarifHorraire;
     }
 
+    public function deleteOperationForIntervention(int $param, mixed $codeop)
+    {
+        $stmt = $this->pdo->prepare("delete from sae_garage.operation_effectuer where numdde = :numdde and codeop = :codeop;");
+        $stmt->execute(["numdde" => $param, "codeop" => $codeop]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

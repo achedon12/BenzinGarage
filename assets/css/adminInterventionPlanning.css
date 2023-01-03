@@ -76,6 +76,7 @@
 
 
 #popUpRDV:target {display: block;}
+
 .close {
     position:absolute;
     right:10px;
@@ -91,7 +92,7 @@
 
 .typeIntevrentionZone{
     background-color: var(--green-color);
-    height: 50%;
+    height: 80%;
     width: 100%;
     margin-top: 2%;
     border-radius: 10px;
@@ -114,6 +115,7 @@
 .aIntervention p {
     margin-left: 2%;
     width: 80%;
+    align-self: center;
 }
 
 .plusAIntervention{
@@ -124,7 +126,7 @@
 }
 
 .validerIntervention{
-    margin-top: 50px;
+    margin-top: 2%;
     height: 7%;
     width: 17%;
     background-color: var(--green-color);
@@ -132,6 +134,17 @@
     font-size: 1.1em;
     border-radius: 8px;
     border: 1px solid var(--green-color);
+}
+
+img.removeItem
+{
+    filter: invert(1);
+}
+
+img.removeItem:hover
+{
+    filter: invert(0);
+    cursor: pointer;
 }
 
 .validerIntervention:hover
@@ -272,6 +285,9 @@ td:hover> a
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 3%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 .left p

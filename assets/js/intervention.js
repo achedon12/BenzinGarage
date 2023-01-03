@@ -1,28 +1,48 @@
-    let interventions = [];
-
+let interventions = [];
 let id;
-
+let deletedInterventions = [];
 
 document.querySelectorAll(".reservation").forEach(function (element) {
     element.addEventListener("click", async function () {
         document.querySelector(".nomClientIntervention").innerHTML = element.textContent;
-
+        document.querySelector("#popUpRDV").style.display = "inherit";
         id = element.id;
 
         let data = await (await fetch(`http://sae.test/assets/php/request/getOperationListForIntervention.php?id=${element.id}`)).json()
 
         document.querySelectorAll(".aIntervention").forEach(function (element) {
+
             element.remove();
         });
 
         let parent = document.querySelector(".left");
 
         data.forEach(function (element) {
-            let libelle = getLibelle(element.codeop.trim());
 
-            parent.innerHTML += `<section class="aIntervention"><p>${libelle}</p><img src="../assets/img/not%20done.png" alt=""></section>`;
+            let bigElement = document.createElement("section");
+            bigElement.classList.add("aIntervention");
+
+            let libelleElement = document.createElement("p");
+            libelleElement.textContent = getLibelle(element.codeop.trim());
+            bigElement.appendChild(libelleElement);
+
+            let img = document.createElement("img");
+            img.classList.add("removeItem");
+            img.src = "../assets/img/not%20done.png";
+            img.addEventListener("click", function () {
+                let libelle = getIdLibelle(this.parentElement.firstElementChild.textContent);
+                deletedInterventions.push(libelle);
+                this.parentElement.remove();
+            });
+
+            bigElement.appendChild(img);
+            parent.appendChild(bigElement);
         });
     });
+});
+
+document.querySelector(".close").addEventListener("click", function () {
+    document.querySelector("#popUpRDV").style.display = "none";
 });
 
 document.querySelector(".addIntervention").style.display = "none";
@@ -39,20 +59,26 @@ document.querySelector(".validerIntervention").addEventListener("click", async f
     for (const element of interventions) {
         await (await fetch(`http://sae.test/assets/php/request/addIntervention.php?id=${id}&codeop=${getIdLibelle(element)}`)).json();
     }
-    window.reload();
+    for(const element of deletedInterventions){
+        await (await fetch(`http://sae.test/assets/php/request/deleteIntervention.php?id=${id}&codeop=${element}`)).json();
+    }
+    interventions = [];
+    deletedInterventions = [];
+    document.querySelector("#popUpRDV").style.display = "none";
 });
 
 document.querySelector(".addIntervention").addEventListener("click", function () {
     let type = getSelectValue("typeIntervention");
     interventions.push(type);
-
-    console.log(type)
-
-
     let parent = document.querySelector(".left");
 
-    parent.innerHTML += `<section class="aIntervention"><p>${type}</p><img src="../assets/img/not%20done.png" alt=""></section>`;
+    parent.innerHTML += `<section class="aIntervention"><p>${type}</p><img src="../assets/img/not%20done.png" alt="interventionLeft"></section>`;
+});
 
+document.querySelectorAll(".removeItem").forEach( element =>{
+   element.addEventListener("click", async function () {
+       console.log("click");
+   });
 });
 
 function getLibelle(libelle){
