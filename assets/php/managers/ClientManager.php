@@ -40,6 +40,18 @@ class ClientManager{
         return true;
     }
 
+    public function createVehicule(string $numberPlate, string $numeroSerie, string $dateMiseEnCirculation, int $numerModele, string $client){
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.vehicule VALUES (:numPlate,:numSer,:dateMis,:numMod,:idClient)");
+        $stmt->execute([
+            "numPlate"=>$numberPlate,
+            "numSer"=>$numeroSerie,
+            "dateMis"=>$dateMiseEnCirculation,
+            "numMod"=>$numerModele,
+            "idClient"=>$client
+        ]);
+        return true;
+    }
+
     /**
      * Verify if a given client exist.
      * @param string $codeclient
@@ -50,6 +62,18 @@ class ClientManager{
         $stmt->execute(["id" => $codeclient]);
         return $stmt->rowCount() > 0;
     }
+
+
+    public function getClientByFirstnameAndName(string $prenom,String $name){
+        $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.client WHERE nom=:nom and prenom=:prenom");
+        $stmt->execute([
+            "prenom"=>$prenom,
+            "nom"=>$name
+        ]);
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
 
     /**
      * Delete a given client.

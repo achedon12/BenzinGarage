@@ -182,8 +182,8 @@ h2{
     width: 1.1em;
     border-radius: 25px;
 }
-.validerIntervention{
 
+.validerIntervention{
     margin-top: 50px;
     height: 7%;
     width: 50%;
@@ -297,3 +297,23 @@ h2{
 .hidden{
     display:none;
 }
+
+#formInscriptionClient{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ClientInfo{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoVehicule{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
