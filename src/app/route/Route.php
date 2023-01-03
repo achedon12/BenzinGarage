@@ -22,6 +22,10 @@ SimpleRouter::get('/admin/removeEmploye', [UsersController::class, 'adminRemoveE
 SimpleRouter::get('/admin/editEmploye', [UsersController::class, 'adminModifyEmploye']);
 SimpleRouter::get('/admin/facture',[UsersController::class,'facture']);
 SimpleRouter::post('/admin/facture',[UsersController::class,'facture']);
+SimpleRouter::get('/admin/facture/create',[UsersController::class,'createFacture']);
+SimpleRouter::post('/admin/facture/create',[UsersController::class,'createFacture']);
+SimpleRouter::post('/admin/facture/liste',[UsersController::class,'listFacture']);
+SimpleRouter::get('/admin/facture/liste',[UsersController::class,'listFacture']);
 
 /* Deconnection */
 SimpleRouter::get('/disconnect',[ConnexionController::class,'disconnect']);

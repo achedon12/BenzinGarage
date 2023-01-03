@@ -94,4 +94,12 @@ class UsersController{
     public function facture(){
         render('facture.php');
     }
+
+    public function createFacture(){
+        render('factureCreate.php');
+    }
+
+    public function listFacture(){
+        render('factureList.php');
+    }
 }

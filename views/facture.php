@@ -34,5 +34,15 @@ if(!Auth::isConnected()){
     <?php
     TemplateManager::getAdminNavBar("facture");
     ?>
+    <main>
+        <a href="/admin/facture/create">
+            <h1>Créer une facture</h1>
+            <img src="../assets/img/facture.png" alt="facture">
+        </a>
+        <a href="/admin/facture/liste">
+            <h1>Liste des factures</h1>
+            <img src="../assets/img/facture.png" alt="factures-liste">
+        </a>
+    </main>
 </body>
 </html>
