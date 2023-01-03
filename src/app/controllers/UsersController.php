@@ -40,18 +40,6 @@ class UsersController{
         render('adminModifyClient.php');
     }
 
-    public function adminRemoveClient(){
-        render('adminRemoveClient.php');
-    }
-
-    public function adminModifyEmploye(){
-        render('adminModifyEmploye.php');
-    }
-
-    public function adminRemoveEmploye(){
-        render('adminRemoveEmploye.php');
-    }
-
     public function adminClients(){
         render('adminClients.php');
     }

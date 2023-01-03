@@ -45,7 +45,7 @@ if(isset($_POST["create"])){
 </head>
 <body>
 <?php
-TemplateManager::getAdminNavBar("employes");
+TemplateManager::getAdminNavBar("employesFar");
 ?>
 <main class="create">
     <form method="post">

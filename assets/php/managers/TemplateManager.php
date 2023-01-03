@@ -185,8 +185,8 @@ class TemplateManager{
                 $navBar = '<nav>
                             <img src="../assets/img/logo.png" alt="logo">
                             <ul>
-                                <li><a href="/accueil/admin">Accueil</a></li>
-                                <li class="hover"><a href="/admin/clients">Clients</a></li>
+                                <li class="hover"><a href="/accueil/admin">Accueil</a></li>
+                                <li><a href="/admin/clients">Clients</a></li>
                                 <li ><a href="/admin/employes">Employés</a></li>
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
@@ -261,7 +261,7 @@ class TemplateManager{
                             <img src="../assets/img/logo.png" alt="logo">
                             <ul>
                                 <li><a href="/accueil/admin">Accueil</a></li>
-                                <li class="hover"><a href="/admin/clients">Clients</a></li>
+                                <li><a href="/admin/clients">Clients</a></li>
                                 <li><a href="/admin/employes">Employés</a></li>
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
@@ -276,11 +276,41 @@ class TemplateManager{
                             <img src="../assets/img/logo.png" alt="logo">
                             <ul>
                                 <li><a href="/accueil/admin">Accueil</a></li>
+                                <li><a href="/admin/clients">Clients</a></li>
+                                <li><a href="/admin/employes">Employés</a></li>
+                                <li><a href="/admin/tarification">Tarification</a></li>
+                                <li><a href="/admin/stock">Stock</a></li>
+                                <li><a href="/admin/interventionPlanning">Intervention</a></li>
+                                <li class="hover"><a href="/admin/facture">Factures</a></li>
+                                <li><a href="/disconnect">Deconnexion</a></li>
+                            </ul>
+                        </nav>';
+                break;
+            case "clientsFar":
+                $navBar = '<nav>
+                            <img src="../../assets/img/logo.png" alt="logo">
+                            <ul>
+                                <li><a href="/accueil/admin">Accueil</a></li>
                                 <li class="hover"><a href="/admin/clients">Clients</a></li>
                                 <li><a href="/admin/employes">Employés</a></li>
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
-                                <li class="hover"><a href="/admin/interventionPlanning">Intervention</a></li>
+                                <li><a href="/admin/interventionPlanning">Intervention</a></li>
+                                <li><a href="/admin/facture">Factures</a></li>
+                                <li><a href="/disconnect">Deconnexion</a></li>
+                            </ul>
+                        </nav>';
+                break;
+            case "employesFar":
+                $navBar = '<nav>
+                            <img src="../../assets/img/logo.png" alt="logo">
+                            <ul>
+                                <li><a href="/accueil/admin">Accueil</a></li>
+                                <li><a href="/admin/clients">Clients</a></li>
+                                <li class="hover"><a href="/admin/employes">Employés</a></li>
+                                <li><a href="/admin/tarification">Tarification</a></li>
+                                <li><a href="/admin/stock">Stock</a></li>
+                                <li><a href="/admin/interventionPlanning">Intervention</a></li>
                                 <li><a href="/admin/facture">Factures</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>

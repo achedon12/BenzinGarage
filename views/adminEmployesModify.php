@@ -61,7 +61,7 @@ if(isset($_POST["modify"])){
     </head>
     <body>
     <?php
-    TemplateManager::getAdminNavBar("employes");
+    TemplateManager::getAdminNavBar("employesFar");
     ?>
         <main>
             <form method="post" class="selecteur" onchange="submit()">

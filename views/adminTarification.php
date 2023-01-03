@@ -89,7 +89,6 @@ TemplateManager::getAdminNavBar("tarifs");
             echo $garageManager->getPieceById($_SESSION["productId"])[3];
 
         }
-
         ?>
     </h1>
     <h2>Réference : <?php
@@ -100,7 +99,6 @@ TemplateManager::getAdminNavBar("tarifs");
         }
         ?>   </h2>
     <form action="" method="post">
-
         <section class="containerPrices">
             <input type="text" name="originPrice" value=" <?php
             if(isset($_SESSION["productId"])) {
@@ -116,11 +114,6 @@ TemplateManager::getAdminNavBar("tarifs");
             <input class="submitEditPrice" type="reset" value="Réinitialiser informations">
         </section>
     </form>
-
-
-
 </section>
-
-
 </body>
 </html>

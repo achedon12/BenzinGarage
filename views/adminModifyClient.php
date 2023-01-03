@@ -16,9 +16,7 @@ if(!Auth::isConnected()){
     render("connexion.php");
     return;
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -42,7 +40,6 @@ TemplateManager::getAdminNavBar("clients");
     <aside>
         <section class="liste">
             <a href="/admin/utilisateur" class="aListeOptionAdmin"><p>Tableau de bord</p></a>
-
             <a href="/admin/addClient" class=" aListeOptionAdmin hoverli "><p>Client</p></a>
             <section class="sousListeSection">
                 <a  href="/admin/addClient"><p>Ajouter un client</p></a>

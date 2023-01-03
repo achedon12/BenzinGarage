@@ -65,7 +65,7 @@ if(isset($_POST["delete"])){
 </head>
 <body>
 <?php
-TemplateManager::getAdminNavBar("clients");
+TemplateManager::getAdminNavBar("clientsFar");
 ?>
 <main>
     <form method="post" class="selecteur" onchange="submit()">
