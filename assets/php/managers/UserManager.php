@@ -163,7 +163,7 @@ class UserManager{
         $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.vehicule where codeclient=:id");
         $stmt->execute(["id"=>$id]);
         $res=$stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo $res;
+
         return $res[0];
     }
 

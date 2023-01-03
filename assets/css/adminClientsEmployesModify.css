@@ -108,7 +108,7 @@ form.informations>section:nth-child(1)>input
     background-color: red;
 }
 
-.vehicule>input
+.vehicule input
 {
     width: 33%;
     padding: 1%;

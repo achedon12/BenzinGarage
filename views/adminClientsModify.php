@@ -130,7 +130,19 @@ if(isset($_POST["delete"])){
                     <input type="tel" name="telephone" id="telephone" value='<?php echo $user->getTelephoneNumber()?>'>
                 </section>
                 <section class="vehicule">
-                    <input type="text" value="<?php $userManager->getVehiculeByUserId("2         ")[0] ?>">
+                    <?php $vehicul = $userManager->getVehiculeByUserId("2         ") ?>
+                    <label>
+                        <input type="text" value="<?php echo $vehicul["noimmatriculation"]?>">
+                    </label>
+                    <label>
+                        <input type="text" value="<?php echo $vehicul["noserie"]?>">
+                    </label>
+                    <label>
+                        <input type="text" value="<?php echo $vehicul["datemiseencirculation"]?>">
+                    </label>
+                    <label>
+                        <input type="text" value="<?php echo $vehicul["nummodele"]?>">
+                    </label>
 
                 </section>
 
