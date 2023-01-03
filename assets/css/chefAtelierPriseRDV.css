@@ -136,6 +136,7 @@ h2{
     color: black;
     margin-top: auto;
     margin-bottom: auto;
+    width: 50%;
 }
 
 #popInscription {
@@ -289,6 +290,8 @@ h2{
 .buttonSupprOpe{
     font-size: 3em;
     margin-left: 5px;
+    text-align: right;
+    width: 25%;
 }
 
 .hidden{

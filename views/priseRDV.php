@@ -34,6 +34,7 @@ if(isset($_POST['selectClient'])){
     $nomClient= $Client->getName();
     $id=$Client->getId();
     $voiture= $clientsManager->getClientVehicle($Client->getId());
+
 }else{
     $prenomClient=False ;
 }
@@ -65,7 +66,7 @@ if(isset($_POST['ValiderInscriptionClient'])){
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Chef d'atelier : Prise de rendez-vous</title>
+    <title><?php if($_SESSION["role"] === UserManager::MANAGER){echo "Chef d'atelier ";}else{echo"Employé ";} ?> : Prise de rendez-vous</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 
     <link rel="stylesheet" href="../assets/css/chefAtelierClient.css">
@@ -92,9 +93,9 @@ TemplateManager::getDefaultNavBar("rdv");
                 <h2>Nom de famille :<?php if(isset($nomClient)) echo " ".$nomClient."</h2>" ;
                     else echo '';
                 ?>
-                    <h2>Code Client :<?php if(isset($nomClient)) echo " ".$id."</h2>" ;
-                        else echo '';
-                        ?></h2>
+                <h2>Code Client :<?php if(isset($nomClient)) echo " ".$id."</h2>" ;
+                    else echo '';
+                ?></h2>
             </section>
             <section class="Date" style="display: flex">
                 <h2>Date : </h2> <input type="datetime-local" name="dateRDV" required>

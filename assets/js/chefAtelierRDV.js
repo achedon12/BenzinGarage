@@ -102,12 +102,7 @@ function rafraichir(idOpe) {
 
 
 }
-document.querySelectorAll(".buttonPasserCommande").forEach(element=>{
-    element.addEventListener("click",async function () {
-        let data = await (await fetch(`http://benzingarage.test/assets/php/request/getPieces.php?id=${element.id}`)).json()
-        console.log(data);
-    })
-})
+
 
 async function changerPrix(){
     prixTotalIntervention=0.0;

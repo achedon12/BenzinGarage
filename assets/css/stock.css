@@ -2,7 +2,7 @@ main
 {
     margin: 2%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     height: 60vh;
@@ -14,9 +14,9 @@ main
     border-radius: 25px;
 }
 
-form
+form#recherche
 {
-    margin-top: 0px;
+    margin-top: 0;
     background-color: var(--green-color);
     padding: 2%;
     width: 50%;
@@ -43,15 +43,15 @@ form>input
     text-align: center;
 }
 
-form:hover
+form#recherche:hover
 {
     border: 1px solid var(--white-color);
 }
 
 
 .sectionListProduct{
-    height: 450px;
-    overflow-x: auto;
+    height: 75%;
+    overflow-y: auto;
     margin-top: 10px;
     display: flex;
     width: 75%;
@@ -92,6 +92,15 @@ article.ligne-product
     height: 50px;
     border-radius: 25px;
 }
+article.ligne-product>p
+{
+    width: 25%;
+}
+
+article.ligne-product>button{
+
+}
+
 
 article.ligne-product>section.red
 {

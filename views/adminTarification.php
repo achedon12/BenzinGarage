@@ -21,11 +21,9 @@ if(!Auth::isConnected()){
     return;
 }
 
-
 if(isset($_POST["select"]) && $_POST["select"] !== "--Produit--"){
     $_SESSION["productId"] = $_POST["select"];
 }
-
 
 if(isset($_POST["submitProduitChangement"])){
     if(empty($_POST["newPrice"])) {
@@ -39,15 +37,10 @@ if(isset($_POST["submitProduitChangement"])){
         }
     }
 }
-
-
-
-
-
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -57,8 +50,8 @@ if(isset($_POST["submitProduitChangement"])){
     <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
     <link rel="stylesheet" href="../assets/css/adminClientsEmployesModify.css">
     <link rel="stylesheet" href="../assets/css/adminTarification.css">
-
-    <title>Tarification</title>
+    <link rel="shortcut icon" href="../assets/img/logo.png">
+    <title>Admin : Tarification</title>
 </head>
 <body>
 <nav>
@@ -73,9 +66,7 @@ if(isset($_POST["submitProduitChangement"])){
         <li><a href="/disconnect">Deconnexion</a></li>
     </ul>
 </nav>
-<?php
 
-?>
 <form method="post" class="selecteur" onchange="submit()">
     <section>
         <label for="client-select">Choisir un produit</label>
@@ -136,10 +127,6 @@ if(isset($_POST["submitProduitChangement"])){
         </section>
     </form>
 
-
-
 </section>
-
-
 </body>
 </html>

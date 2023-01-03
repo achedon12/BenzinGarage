@@ -55,7 +55,7 @@ if(isset($_POST["submitProduitChangement"])){
     <link rel="stylesheet" href="../assets/css/adminClientsEmployesModify.css">
     <link rel="stylesheet" href="../assets/css/adminTarification.css">
 
-    <title>Chef d'atelier : Tarification</title>
+    <title><?php if($_SESSION["role"] === UserManager::MANAGER){echo "Chef d'atelier ";}else{echo"Employé ";} ?> : Tarification</title>
 </head>
 <body>
 <?php
@@ -105,6 +105,7 @@ TemplateManager::getDefaultNavBar("tarifs");
         ?>   </h2>
     <form action="" method="post" >
 
+
         <section class="containerPrices">
             <input type="text" name="originPrice" disabled value=" <?php
             if(isset($_SESSION["productId"])) {
@@ -113,7 +114,10 @@ TemplateManager::getDefaultNavBar("tarifs");
                 echo "";
             }
             ?> " class="sortiePrix">
+        <?php
+        if($_SESSION["role"] === UserManager::MANAGER){echo '<input type="text" name="newPrice" placeholder="Nouveau prix" class="sortiePrix">';}else{echo "";}
 
+        ?>
         </section>
 
     </form>
