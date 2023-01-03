@@ -17,11 +17,11 @@ SimpleRouter::get('/admin/addEmploye', [UsersController::class, 'adminAddEmploye
 SimpleRouter::get('/admin/interventionPlanning', [UsersController::class, 'adminInterventionPlanning']);
 SimpleRouter::post('/admin/interventionPlanning', [UsersController::class, 'adminInterventionPlanning']);
 SimpleRouter::get('/admin/editClient', [UsersController::class, 'editClientPage']);
-
-
 SimpleRouter::get('/admin/removeClient', [UsersController::class, 'adminRemoveClient']);
 SimpleRouter::get('/admin/removeEmploye', [UsersController::class, 'adminRemoveEmploye']);
 SimpleRouter::get('/admin/editEmploye', [UsersController::class, 'adminModifyEmploye']);
+SimpleRouter::get('/admin/facture',[UsersController::class,'facture']);
+SimpleRouter::post('/admin/facture',[UsersController::class,'facture']);
 
 /* Deconnection */
 SimpleRouter::get('/disconnect',[ConnexionController::class,'disconnect']);
@@ -42,7 +42,6 @@ SimpleRouter::get('/admin/stock',[UsersController::class,'adminStock']);
 SimpleRouter::post('/admin/stock',[UsersController::class,'adminStock']);
 SimpleRouter::get('/admin/tarification',[UsersController::class,'adminTarification']);
 SimpleRouter::post('/admin/tarification',[UsersController::class,'adminTarification']);
-
 
 SimpleRouter::get('/planning', [UsersController::class, 'planning']);
 SimpleRouter::post('/planning', [UsersController::class, 'planning']);

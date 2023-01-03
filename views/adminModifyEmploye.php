@@ -4,6 +4,7 @@ use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
+require_once "assets/php/managers/TemplateManager.php";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
 
@@ -34,18 +35,9 @@ if(!Auth::isConnected()){
     <title>Modifier un client</title>
 </head>
 <body>
-<nav>
-    <img src="../assets/img/logo.png" alt="logo">
-    <ul>
-        <li><a href="/accueil/admin">Accueil</a></li>
-        <li><a href="/admin/clients">Clients</a></li>
-        <li><a href="/admin/employes">Employés</a></li>
-        <li><a href="/admin/tarification">Tarification</a></li>
-        <li><a href="/admin/stock">Stock</a></li>
-        <li ><a href="/admin/interventionPlanning">Intervention</a></li>
-        <li><a href="/disconnect">Deconnexion</a></li>
-    </ul>
-</nav>
+<?php
+TemplateManager::getAdminNavBar("employes");
+?>
 <main>
     <aside>
         <section class="liste">

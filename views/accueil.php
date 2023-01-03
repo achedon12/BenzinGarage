@@ -4,7 +4,7 @@ use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
-require_once("./assets/php/managers/TemplateManager.php");
+require_once "assets/php/managers/TemplateManager.php";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
 

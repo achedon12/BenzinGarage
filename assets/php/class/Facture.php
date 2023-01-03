@@ -9,23 +9,23 @@ class Facture{
 
     private string $factureDate;
 
-    private int $tva;
+    private float $tva;
 
     private float $toPay;
 
-    private int $etat;
+    private string $etat;
 
     private int $numDde;
 
     /**
      * @param int $factureNumber
      * @param string $factureDate
-     * @param int $tva
+     * @param float $tva
      * @param float $toPay
-     * @param int $etat
+     * @param string $etat
      * @param int $numDde
      */
-    public function __construct(int $factureNumber, string $factureDate, int $tva, float $toPay, int $etat, int $numDde)
+    public function __construct(int $factureNumber, string $factureDate, float $tva, float $toPay, string $etat, int $numDde)
     {
         $this->factureNumber = $factureNumber;
         $this->factureDate = $factureDate;

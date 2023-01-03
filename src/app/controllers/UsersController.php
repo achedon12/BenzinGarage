@@ -24,10 +24,6 @@ class UsersController{
         render('accueilAdmin.php');
     }
 
-    public function utilisateurAdministrateur():void{
-        render('UtilisateurAdministrateur.php');
-    }
-
     public function adminAddClientPage():void{
         render('adminAddClient.php');
     }
@@ -105,5 +101,9 @@ class UsersController{
     }
     public function tarification(){
         render("tarification.php");
+    }
+
+    public function facture(){
+        render('facture.php');
     }
 }
