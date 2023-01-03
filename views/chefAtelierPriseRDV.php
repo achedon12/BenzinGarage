@@ -134,8 +134,8 @@ if(isset($_POST['ValiderInscriptionClient'])){
                     </select>
                     <section class="devis">
                         <h4>Devis fait :</h4>
-                        <input type="checkbox" id="DevisNon" name="false" checked><label for="DevisNon">Non</label>
-                        <input type="checkbox" id="DevisOui" name="true"><label for="DevisOui">Oui</label>
+                        <input type="radio" id="DevisNon" name="radio" value="false" checked><label for="DevisNon">Non</label>
+                        <input type="radio" id="DevisOui" name="radio" value="true"><label for="DevisOui">Oui</label>
 
                     </section>
                 </section>
