@@ -88,6 +88,18 @@ class OperationManager
         return $stmt->fetchAll();
     }
 
+    public function getCoutHorraire(string $codeTarif){
+        $requete=$this->pdo->prepare("select couthoraireactuelht from sae_garage.tarif_mo where codetarif=:code");
+        $requete->execute(["code"=> $codeTarif]);
+        $tarifHorraire = $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $tarifHorraire;
+    }
 
+    public function deleteOperationForIntervention(int $param, mixed $codeop)
+    {
+        $stmt = $this->pdo->prepare("delete from sae_garage.operation_effectuer where numdde = :numdde and codeop = :codeop;");
+        $stmt->execute(["numdde" => $param, "codeop" => $codeop]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
