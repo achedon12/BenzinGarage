@@ -6,7 +6,8 @@ require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
 require_once "assets/php/managers/ClientManager.php";
 require_once "assets/php/class/Client.php";
-
+require_once "assets/php/managers/GarageManager.php";
+$garaManager = new GarageManager(DatabaseManager::getInstance());
 $userManager = new UserManager(DatabaseManager::getInstance());
 $clientManager = new ClientManager(DatabaseManager::getInstance());
 
@@ -31,7 +32,8 @@ if(isset($_POST["modify"])){
         $_SESSION["modifyClient"] = "none";
     }else{
         $newClient = new Client($_POST["id"],$_POST["name"],$_POST["firstname"],$_POST["adresse"],$_POST["codepostal"],$_POST["city"],$_POST["telephone"],$_POST["mail"],date("Y-n-d"));
-        if($clientManager->modifyClient($newClient,$_POST["id"])){
+        $newVehicule = new Vehicle($_POST["NoIm"],$_POST["NoSer"],$_POST["DateCir"],$_POST["NumDe"],$_POST['id']);
+        if($clientManager->modifyClient($newClient,$_POST["id"]) && $garaManager->modifyVehicule($newVehicule,$newVehicule->getNumberPlate())){
             $_SESSION["userId"] = 0;
             $_SESSION["modifyClient"] = "confirmModify";
         }else{
@@ -130,24 +132,25 @@ if(isset($_POST["delete"])){
                     <input type="tel" name="telephone" id="telephone" value='<?php echo $user->getTelephoneNumber()?>'>
                 </section>
                 <section class="vehicule">
-                    <?php $vehicul = $userManager->getVehiculeByUserId("2         ") ?>
-                    <label>
-                        <input type="text" value="<?php echo $vehicul["noimmatriculation"]?>">
-                    </label>
-                    <label>
-                        <input type="text" value="<?php echo $vehicul["noserie"]?>">
-                    </label>
-                    <label>
-                        <input type="text" value="<?php echo $vehicul["datemiseencirculation"]?>">
-                    </label>
-                    <label>
-                        <input type="text" value="<?php echo $vehicul["nummodele"]?>">
-                    </label>
+                    <?php $vehicul = $userManager->getVehiculeByUserId($user->getId());
+                    ?>
+                    <label> Plaque d'immatricualtion
+                        <input type="text" name="NoIm" value="<?php echo $vehicul->getNumberPlate()?>">
+                    </label> <br>
+                    <label> NoSerie
+                        <input type="text" name="NoSer" value="<?php echo $vehicul->getNumeroSerie()?>">
+                    </label><br>
+                    <label> Date mise en service
+                        <input type="text" name="DateCir" value="<?php echo $vehicul->getDateMiseEnCirculation()?>">
+                    </label><br>
+                    <label> Num de modèle
+                        <input type="text" name="NumDe" value="<?php echo $vehicul->getNumerModele()?>">
+                    </label><br>
 
                 </section>
 
 
-                <section>
+                <section class="validateButtonClient">
                     <input type="submit" value="Modifier le client" id="modify" class="tier" name="modify">
                     <input type="submit" value="Supprimer le client" id="del" class="tier" name="delete">
                     <input type="reset" value="Réinitialiser les informations" class="tier">

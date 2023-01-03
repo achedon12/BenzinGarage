@@ -69,9 +69,9 @@ if(isset($_POST["submitProduitChangement"])){
     <ul>
         <li><a href="/accueil/chefatelier">Accueil</a></li>
         <li><a href="">Planning</a></li>
-        <li class="hover"><a href="/chefAtelier/RDV">Prise de rendez-vous</a></li>
+        <li><a href="/chefAtelier/RDV">Prise de rendez-vous</a></li>
         <li><a href="/chefAtelier/stock">Stock</a></li>
-        <li><a href="/chefAtelier/Tarification">Tarification</a></li>
+        <li class="hover"><a href="/chefAtelier/Tarification">Tarification</a></li>
         <li><a href="/chefAtelier/client">Clients</a></li>
         <li><a href="/disconnect">Deconnexion</a></li>
     </ul>

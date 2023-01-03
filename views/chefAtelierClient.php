@@ -79,13 +79,21 @@ if(!Auth::isConnected()){
             $clientSelected = $clientsManager->getClientByID($_POST['myClient']);
 
             echo '<section class="info">
-                        <p>'.$clientSelected->getName().' '.$clientSelected->getFirstName().'</p>
+                        <p>Nom Prénom : '.$clientSelected->getName().' '.$clientSelected->getFirstName().'</p>
                         <p>Tel : '.$clientSelected->getTelephoneNumber().'</p>
                         <p>Mail : '.$clientSelected->getEmail().'</p>
                         <p>Adresse :  '.$clientSelected->getAdresse().' '.$clientSelected->getCodePostal().' '.$clientSelected->getCity().'</p>
-                        
-                       
-                    </section>';
+                        <p>Information Véhicule : </p>';
+            if ($clientsManager->clientHasVehicle($clientSelected->getId())){
+                echo '<p>Plaque Immatriculation : '.$userManager->getVehiculeByUserId($clientSelected->getId())->getNumberPlate().'</p>
+                    <p>Numero de Série : '.$userManager->getVehiculeByUserId($clientSelected->getId())->getNumeroSerie().'</p>
+                    <p>Date de mise en circulation : '.$userManager->getVehiculeByUserId($clientSelected->getId())->getDateMiseEnCirculation().'</p>
+                </section>';
+            }else{
+                echo "<p>Il n'y a pas de véhicule enregistré</p>";
+            }
+
+
         }
         else{
             echo "<h2 style='margin: auto'>aucun client sélectionné</h2>";

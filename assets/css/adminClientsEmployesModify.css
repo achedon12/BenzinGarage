@@ -105,7 +105,6 @@ form.informations>section:nth-child(1)>input
 
 .vehicule{
     width: 40%;
-    background-color: red;
 }
 
 .vehicule input
@@ -142,4 +141,8 @@ form.informations>section:nth-child(3)>input:hover
 .errorCreate
 {
     color: var(--green-color);
+}
+
+.validateButtonClient{
+    width: 100%;
 }
