@@ -8,8 +8,7 @@ SimpleRouter::get('/', [UsersController::class, 'index']);
 
 SimpleRouter::post('/login', [UsersController::class, 'loginPage']);
 SimpleRouter::get('/login', [UsersController::class, 'loginPage']);
-SimpleRouter::get('/accueil/employe', [UsersController::class, 'accueilPage']);
-SimpleRouter::get('/accueil/chefatelier', [UsersController::class, 'accueilChefAtelier']);
+SimpleRouter::get('/accueil/user', [UsersController::class, 'accueilPage']);
 SimpleRouter::get('/accueil/admin', [UsersController::class, 'accueilAdministrateurPage']);
 SimpleRouter::get('/admin/utilisateur', [UsersController::class, 'utilisateurAdministrateur']);
 SimpleRouter::get('/admin/addClient', [UsersController::class, 'adminAddClientPage']);
