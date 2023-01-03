@@ -27,8 +27,7 @@ if(!Auth::isConnected()){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
-    <link rel="stylesheet" href="../assets/css/adminClientsEmployesModify.css">
-    <link rel="stylesheet" href="../assets/css/adminTarification.css">
+    <link rel="stylesheet" href="../assets/css/facture.css">
     <title>Factures</title>
 </head>
 <body>
