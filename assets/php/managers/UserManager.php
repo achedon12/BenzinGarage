@@ -203,4 +203,23 @@ class UserManager{
         }
         return $roles;
     }
+
+    public function getAvailableEmployes(string $time): array
+    {
+        $time = $this->transformTime($time);
+        $explode = explode(":", $time);
+        $highTime = (int)$explode[0] + 2;
+        $lowTime = (int)$explode[0];
+        /** @var  $array Employee[]*/
+        $array = [];
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'employe' or role = 'manager' AND id NOT IN (SELECT idoperateur FROM sae_garage.dde_interv WHERE extract(hour from heurerdv) < '$lowTime' and extract(hour from heurerdv) > '$highTime')");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $array[] = new Employee($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
+        return $array;
+    }
+
+    private function transformTime(string $time): string{
+        $explode = explode(":", $time);
+        return $explode[0].":".$explode[1].":00";
+    }
 }

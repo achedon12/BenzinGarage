@@ -103,7 +103,7 @@ class FactureManager{
     public function createFacturePDF(Facture $facture): void
     {
         $operations = $this->operationManager->getOperationInformations($facture->getNumDde());
-        //print_r($operations[0]["codeop"]);
-        (new FacturePdfManager(new FacturePDF($facture,$operations,$this->clientManager->getClientByID($this->interventionManager->getCodeClientFromDemandeIntervention($facture->getNumDde())))))->toPdf();
+        $facturePdf = new FacturePDF($facture,$operations,$this->clientManager->getClientByID($this->interventionManager->getCodeClientFromDemandeIntervention($facture->getNumDde())));
+        (new FacturePdfManager($facturePdf))->toPdf();
     }
 }

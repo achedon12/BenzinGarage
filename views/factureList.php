@@ -42,11 +42,11 @@ TemplateManager::getAdminNavBar("factureFar");
 <main class="custom">
     <form method="post" class="selecteur-custom" onchange="submit()">
         <section>
-            <label for="facture-select">Choisir une facture</label>
+            <label for="facture-select">Choisir un devis</label>
             <select id="facture-select" name="select">
                 <?php
                 if($_SESSION["facture"] === 0){
-                    echo '<option value="false" disabled selected>--Facture--</option>';
+                    echo '<option value="false" disabled selected>--Devis--</option>';
                 }
                 foreach($factureManager->getAllFacture() as $facture){
                     $code = $facture->getFactureNumber();
@@ -64,7 +64,7 @@ TemplateManager::getAdminNavBar("factureFar");
     <section class="main">
         <?php
         if($_SESSION["facture"] == 0){
-            echo '<section class="head"><h1 class="no-facture">Aucune facture sélectionnée</h1></section>';
+            echo '<section class="head"><h1 class="no-facture">Aucun devis sélectionné</h1></section>';
         }else{
             $facture = $factureManager->getFacture($_SESSION["facture"]);
             $factureManager->toForm($facture);

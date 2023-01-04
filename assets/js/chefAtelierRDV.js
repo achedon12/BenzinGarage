@@ -32,7 +32,6 @@ let prixTotalIntervention = 0.0;
 
 let operationForOneInervention =[];
 
-
 function operationSelect(Operations) {
     for (let i = 0; i < Operations.length; i++) {
         let operation = Operations[i];
@@ -43,14 +42,10 @@ function operationSelect(Operations) {
     }
 }
 
-
-
 function init() {
     idContactCourant = -2;
     operationSelect(Operations);
 }
-
-
 
 
 function supprOperations(){
@@ -93,16 +88,12 @@ function rafraichir(idOpe) {
     sectionOperationRDV.appendChild(newOperation);
     operationForOneInervention.push(Operations[positionidOpe].id);
     prixOperation.push(Operations[positionidOpe].codetarif);
-    // console.log(operationForOneInervention);
 
     document.cookie = "operationForOneInervention=" + operationForOneInervention;
     document.cookie = "prixTotal=" + prixIntervention;
 
     changerPrix()
-
-
 }
-
 
 async function changerPrix(){
     prixTotalIntervention=0.0;
@@ -112,8 +103,6 @@ async function changerPrix(){
     }
     else{
         for (let codePrix of prixOperation) {
-            // console.log(codePrix);
-            // console.log("test : ",data);
             codePrix = codePrix.toString();
             if (codePrix.length === 1) {
                 codePrix += ' ';
@@ -127,12 +116,7 @@ async function changerPrix(){
             }
         }
     }
-
-
-        // console.log(data);
-        document.getElementById("prixIntervention").innerHTML=prixTotalIntervention.toFixed(2);
-
-
+    document.getElementById("prixIntervention").innerHTML=prixTotalIntervention.toFixed(2);
 }
 
 
