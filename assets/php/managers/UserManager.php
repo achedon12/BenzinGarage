@@ -156,15 +156,14 @@ class UserManager{
 
     /**
      * Get vehicles by ID user.
-     * @return array
+     * @return Vehicle
      */
     public function getVehiculeByUserId(string $id){
 
         $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.vehicule where codeclient=:id");
         $stmt->execute(["id"=>$id]);
-        $res=$stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $res[0];
+        $row=$stmt->fetch();
+        return new Vehicle($row["noimmatriculation"], $row["noserie"], $row["datemiseencirculation"], $row["nummodele"], $row["codeclient"]);
     }
 
 

@@ -36,7 +36,7 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Employé--"){
     <link rel="stylesheet" href="../assets/css/accueil.css">
     <link rel="stylesheet" href="../assets/css/adminInterventionPlanning.css">
     <link rel="shortcut icon" href="../assets/img/logo.png">
-    <title>Planning</title>
+    <title><?php if($_SESSION["role"] === UserManager::MANAGER){echo "Chef d'atelier ";}else{echo"Employé ";} ?> : Planning</title>
 </head>
 <body>
 <?php

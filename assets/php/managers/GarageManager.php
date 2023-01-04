@@ -59,6 +59,19 @@ class GarageManager
         return true;
     }
 
+    public function modifyVehicule( Vehicle $vehicle, string $plaque){
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.vehicule SET noimmatriculation=:codenoimm, noserie=:noSer, datemiseencirculation=:miseencir, nummodele=:nummo, codeclient=:codeclient WHERE noimmatriculation = :plaque");
+        $stmt->execute([
+            "codenoimm" => $plaque,
+            "noSer" => $vehicle->getNumeroSerie(),
+            "miseencir" => $vehicle->getDateMiseEnCirculation(),
+            "nummo" => $vehicle->getNumerModele(),
+            "codeclient" => $vehicle->getClient(),
+            "plaque"=>$plaque
+        ]);
+        return true;
+    }
+
     /**
      * Get All pieces.
      * @return array
@@ -220,5 +233,7 @@ class GarageManager
         ]);
 
     }
+
+
 
 }

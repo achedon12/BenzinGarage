@@ -136,6 +136,7 @@ h2{
     color: black;
     margin-top: auto;
     margin-bottom: auto;
+    width: 50%;
 }
 
 #popInscription {
@@ -181,8 +182,8 @@ h2{
     width: 1.1em;
     border-radius: 25px;
 }
-.validerIntervention{
 
+.validerIntervention{
     margin-top: 50px;
     height: 7%;
     width: 50%;
@@ -289,8 +290,30 @@ h2{
 .buttonSupprOpe{
     font-size: 3em;
     margin-left: 5px;
+    text-align: right;
+    width: 25%;
 }
 
 .hidden{
     display:none;
 }
+
+#formInscriptionClient{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ClientInfo{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoVehicule{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+

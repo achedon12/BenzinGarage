@@ -11,7 +11,11 @@ require_once "assets/php/class/Piece.php ";
 require_once "assets/php/managers/InterventionManager.php";
 require_once "assets/php/managers/OperationManager.php";
 require_once "assets/php/managers/CalendarManager.php";
+require_once "assets/php/class/Modele.php";
+require_once "assets/php/managers/ModeleManager.php";
 
+
+$modeleManager = new ModeleManager(DatabaseManager::getInstance());
 $calendarManager = new CalendarManager();
 $interventionManager= new InterventionManager(DatabaseManager::getInstance());
 $userManager = new UserManager(DatabaseManager::getInstance());
@@ -28,12 +32,13 @@ if(!Auth::isConnected()){
     return;
 }
 
-if(isset($_POST['selectClient'])){
-    $Client = $clientsManager->getClientByID($_POST['selectClient']);
+if(isset($_POST["selectClient"])){
+    $Client = $clientsManager->getClientByID($_POST["selectClient"]);
     $prenomClient=$Client->getFirstName();
     $nomClient= $Client->getName();
     $id=$Client->getId();
     $voiture= $clientsManager->getClientVehicle($Client->getId());
+
 }else{
     $prenomClient=False ;
 }
@@ -41,14 +46,29 @@ if(!isset($operationPourUneOperation)){
     $operationPourUneOperation =[];;
 }
 
-if (isset($_POST['typeIntervention'])){
-    $operationPourUneOperation[]=$operationManager->getOperationById($_POST['typeIntervention']);
+if (isset($_POST["typeIntervention"])){
+    $operationPourUneOperation[]=$operationManager->getOperationById($_POST["typeIntervention"]);
 //    print_r($operationManager->getOperationById($_POST['typeIntervention']));
 
 }
-if(isset($_POST['ValiderInscriptionClient'])){
-    echo "ValiderInscriptionClient";
+if(isset($_POST["ValiderInscriptionClient"])){
+
+    $clientsManager->createClient($_POST["NomClient"],$_POST["PrenomClient"],$_POST["adresseClient"],$_POST["codePostalClient"],$_POST["villeClient"],$_POST["telClient"],$_POST["mailClient"]);
+    $client = $clientsManager->getClientByFirstnameAndName($_POST["PrenomClient"],$_POST["NomClient"])[0];
+
+
+    $clientsManager->createVehicule($_POST["noimma"],$_POST["noserie"],$_POST["dateService"] ,$_POST["numModel"],$client["codeclient"]);
 }
+
+if(isset($_POST["ValiderRDV"])){
+    echo "test";
+    echo $_COOKIE["operationForOneInervention"];
+
+
+//    $interventionManager->createIntervention();
+
+}
+
 
 //if(isset($_COOKIE['operationForOneInervention'])){
 //    echo $_COOKIE['operationForOneInervention'];
@@ -65,7 +85,7 @@ if(isset($_POST['ValiderInscriptionClient'])){
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Chef d'atelier : Prise de rendez-vous</title>
+    <title><?php if($_SESSION["role"] === UserManager::MANAGER){echo "Chef d'atelier ";}else{echo"Employé ";} ?> : Prise de rendez-vous</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 
     <link rel="stylesheet" href="../assets/css/chefAtelierClient.css">
@@ -92,9 +112,9 @@ TemplateManager::getDefaultNavBar("rdv");
                 <h2>Nom de famille :<?php if(isset($nomClient)) echo " ".$nomClient."</h2>" ;
                     else echo '';
                 ?>
-                    <h2>Code Client :<?php if(isset($nomClient)) echo " ".$id."</h2>" ;
-                        else echo '';
-                        ?></h2>
+                <h2>Code Client :<?php if(isset($nomClient)) echo " ".$id."</h2>" ;
+                    else echo '';
+                ?></h2>
             </section>
             <section class="Date" style="display: flex">
                 <h2>Date : </h2> <input type="datetime-local" name="dateRDV" required>
@@ -133,7 +153,7 @@ TemplateManager::getDefaultNavBar("rdv");
             </section>
 
             <section class="ValiderPrix">
-                <input type="button" onclick="submit()" value="Ajouter le rendez-vous" name="ValiderRDV">
+                <input type="submit" value="Ajouter le rendez-vous" name="ValiderRDV">
                 <section style="display: flex"><h2 id="prixIntervention">0</h2><h2>€</h2></section>
             </section>
         </section>
@@ -148,7 +168,7 @@ TemplateManager::getDefaultNavBar("rdv");
         <section class="choixOperation">
             <label for="operations">Choisir une opération</label>
             <select name="" id="operations" onchange="rafraichir(this.value)">
-                <option value="-1">Choisissez une operation...</option>
+                <option value="-1" selected disabled>Choisissez une operation...</option>
             </select>
         </section>
 
@@ -184,26 +204,55 @@ TemplateManager::getDefaultNavBar("rdv");
         <section id="popInscription">
             <section id="intoPopUpRDV">
                 <h2>Inscription d'un client</h2>
-                <form method="post" id="formInscriptionClient">
-                    <label for="NomClient"> Nom du client
-                        <input type="text" name="NomClient" placeholder="Nom" required>
-                    </label>
-                    <label for="PrenomClient"> Prenom du client
-                        <input type="text" name="PrenomClient" placeholder="Prenom" required>
-                    </label>
-                    <label for="adresseClient"> Adresse du client
-                        <input type="text" name="adresseClient" placeholder="adresse" required>
-                    </label>
-                    <label for="codePostalClient"> code postal du client
-                        <input type="text" name="codePostalClient" placeholder="Code Postal" required>
-                    </label>
-                    <label for="telClient"> Téléphone du client
-                        <input type="text" name="telClient" placeholder="Téléphone" required>
-                    </label>
-                    <label for="mailClient"> Adresse e-mail du client
-                        <input type="text" name="mailClient" placeholder="Mail" required>
-                    </label>
-                    <input type="button" class="validerIntervention" name="ValiderInscriptionClient" onclick="submit()" value ="Valider l'inscription du client">
+                <form method="post" id="formInscriptionClient" >
+                    <section class="ClientInfo">
+                        <label for="NomClient"> Nom du client
+                            <input type="text" name="NomClient" placeholder="Nom" required>
+                        </label>
+                        <label for="PrenomClient"> Prenom du client
+                            <input type="text" name="PrenomClient" placeholder="Prenom" required>
+                        </label>
+                        <label for="adresseClient"> Adresse du client
+                            <input type="text" name="adresseClient" placeholder="adresse" required>
+                        </label>
+                        <label for="codePostalClient"> code postal du client
+                            <input type="text" name="codePostalClient" placeholder="Code Postal" required>
+                        </label>
+                        <label for="villeClient">Ville du client
+                            <input type="text" name="villeClient" placeholder="Ville" required>
+                        </label>
+                        <label for="telClient"> Téléphone du client
+                            <input type="text" name="telClient" placeholder="Téléphone" required>
+                        </label>
+                        <label for="mailClient"> Adresse e-mail du client
+                            <input type="text" name="mailClient" placeholder="Mail" required>
+                        </label>
+                    </section>
+                    <section class="infoVehicule">
+                        <label for="noimma"> Numéro d'immatriculation
+                            <input type="text" name="noimma" placeholder="Plaque d'immatriculation" required>
+                        </label>
+                        <label for="noserie"> Numéro de série
+                            <input type="text" name="noserie" placeholder="No de série" required>
+                        </label>
+                        <label for="dateService"> date de mise en service
+                            <input type="date" name="dateService"  required>
+                        </label>
+                        <label for="numModel"> Numéro de modele
+                            <input list="Modeles" id="myClient" name="numModel" required/>
+                            <datalist id="Modeles">
+                                <?php
+                                $res = $modeleManager->getAllModele();
+                                foreach ($res as $modele){
+                                    echo '<option value="'.$modele->getNummodele().'" class="listeClientHorizontal">'.$modele->getModele().'</option>';
+                                }
+                                ?>
+
+
+                            </datalist>
+                        </label>
+                    </section>
+                    <input type="submit" class="validerIntervention" name="ValiderInscriptionClient" value ="Valider l'inscription du client">
 
                 </form>
                 <a href="#" class="close"><img src="../assets/img/not%20done.png" alt=""></a>

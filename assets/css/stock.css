@@ -14,9 +14,9 @@ main
     border-radius: 25px;
 }
 
-form
+form#recherche
 {
-    margin-top: 0px;
+    margin-top: 0;
     background-color: var(--green-color);
     padding: 2%;
     width: 50%;
@@ -43,17 +43,20 @@ form>input
     text-align: center;
 }
 
-form:hover
+form#recherche:hover
 {
     border: 1px solid var(--white-color);
 }
 
 
 .sectionListProduct{
-    height: 450px;
-    overflow-x: auto;
+    height: 75%;
+    overflow-y: auto;
     margin-top: 10px;
+    display: flex;
     width: 75%;
+    flex-direction: column;
+    gap: 10px;
 }
 
 
@@ -84,9 +87,20 @@ section.button>button:hover
 article.ligne-product
 {
     display: flex;
+    justify-content: space-around;
     padding: 1%;
     height: 50px;
+    border-radius: 25px;
 }
+article.ligne-product>p
+{
+    width: 25%;
+}
+
+article.ligne-product>button{
+
+}
+
 
 article.ligne-product>section.red
 {
@@ -129,3 +143,8 @@ article.ligne-product>img
     display: flex;
     width: 75%;
 }
+
+.commande{
+    height: 75%;
+}
+
