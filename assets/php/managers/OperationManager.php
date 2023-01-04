@@ -118,4 +118,10 @@ class OperationManager
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getPriceForOperation(int $codeTarif): float{
+        $stmt = $this->pdo->prepare("select couthoraireactuelht from sae_garage.tarif_mo where codetarif = :codetarif;");
+        $stmt->execute(["codetarif" => $codeTarif]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0]["couthoraireactuelht"];
+    }
+
 }

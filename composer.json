@@ -2,6 +2,8 @@
     "require": {
         "pecee/simple-router": "4.3.7.2",
       "ext-pdo": "*",
-        "dompdf/dompdf": "^2.0"
+        "dompdf/dompdf": "^2.0",
+      "ext-dom": "*",
+      "ext-libxml": "*"
     }
 }
