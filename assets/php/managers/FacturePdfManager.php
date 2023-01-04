@@ -1,6 +1,7 @@
 <?php
 
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 require_once "assets/php/class/Facture.php";
 require_once "assets/php/managers/OperationManager.php";
@@ -17,60 +18,20 @@ class FacturePdfManager{
     }
 
     public function toPdf(){
-        $dompdf = new Dompdf();
+        $options = new Options();
+        $options->set('defaultFont', 'Courier');
+        $dompdf = new Dompdf($options);
         $dompdf->loadHtml($this->toHtml());
         $dompdf->setPaper('A4','portrait');
         $dompdf->render();
         $dompdf->stream("facture.pdf", [
-            "Attachment" => false
+            "Attachment" => true,
+            "isPhpEnabled" => true
         ]);
     }
 
 
     private function toHtml(): string{
-
-        /******************* v1 *****************/
-        $html = file_get_contents("http://sae.test/facture");
-        //TODO: replace the content of the html file with the content of the facture
-
-        /******************* v2 marche pas *****************/
-
-        /*$doc = new DOMDocument();
-        $doc->loadHTML($html);
-        $tbody = $doc->getElementById("operations");
-
-        $newElement = $doc->createElement("tr","<td>test</td>");
-
-        $tbody->remove($newElement);*/
-        /*foreach($this->facture->getOperations() as $operation){
-
-           $tr = $doc->createElement("tr");
-            $tr->appendChild($doc->createElement("td", $operation["codeop"]));
-            $tr->appendChild($doc->createElement("td", 1));
-            $tr->appendChild($doc->createElement("td", $operation["couthoraireht"]));
-            $tr->appendChild($doc->createElement("td",$operation["couthoraireht"] ));
-
-
-            "<tr><td>".$operation["codeop"]."</td><td>1</td><td>".$operation["couthoraireht"]."</td><td>".$operation["couthoraireht"]."</td></tr>";
-            $doc->getElementById("operations")->appendChild($tr);
-        }*/
-
-        //$html = $doc->saveHTML();
-
-        /******************* v3 marche pas *****************/
-        /*$html = $this->getHtml();
-
-        $dom = new DOMDocument();
-        libxml_use_internal_errors(true);
-        $dom->loadHTML($html);
-        $dom->preserveWhiteSpace = false;
-
-        $parent = $dom->getElementById("FirstListOfItems");
-        $newElement = $dom->createDocumentFragment();
-        $newElement->appendXML('<li>Item 4</li>');
-        $parent->appendChild($newElement);
-
-        $html = $dom->saveHTML();*/
 
         return str_replace(["{firstName}","{name}","{adresse}","{formeJuridique}","{numTVA}","{numFacture}","{date}","{priceHT}","{tauxTVA}","{priceTTC}"],
             [$this->facture->getClient()->getFirstName(),
@@ -83,7 +44,7 @@ class FacturePdfManager{
                 $this->facture->getFacture()->getToPay() * (1 - $this->facture->getFacture()->getTva() / 100),
                 $this->facture->getFacture()->getTva(),
                 $this->facture->getFacture()->getToPay(),
-                ],$html);
+                ],$this->getHtml());
     }
 
     /**
@@ -207,7 +168,7 @@ class FacturePdfManager{
     </section>
     <h2 class="bold">Facture n°{numFacture}</h2>
     <h3>Date : {date}</h3>
-    <table>
+    <table style="border-color: rgb(18, 14, 44);">
         <thead>
         <tr>
             <th>Désignation des produits ou prestations</th>
@@ -216,67 +177,8 @@ class FacturePdfManager{
             <th>Total HT</th>
         </tr>
         </thead>
-        <tbody id="operations">
-            <tr>
-                <td>Produit 1</td>
-                <td>1</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Produit 2</td>
-                <td>1</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Produit 3</td>
-                <td>1</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Produit 4</td>
-                <td>1</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Produit 5</td>
-                <td>1</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Produit 6</td>
-                <td>1</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Produit 7</td>
-                <td>1</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Produit 8</td>
-                <td>1</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Produit 9</td>
-                <td>1</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
-            <tr>
-                <td>Produit 10</td>
-                <td>1</td>
-                <td>10€</td>
-                <td>10€</td>
-            </tr>
+        <tbody id="operations" style="background-color: white; border-color: rgb(18, 14, 44);">
+            '.$this->getOperations().'
         </tbody>
     </table>
     <table class="custom" style="background-color: rgb(18, 14, 44);">
@@ -303,6 +205,21 @@ class FacturePdfManager{
 </body>
 </html>
         ';
+    }
+
+    private function getOperations(): string{
+        $operations = "";
+        foreach ($this->facture->getOperations() as $operation){
+            $operations .= '
+            <tr style="border-color: rgb(18, 14, 44);">
+                <td style="border-color: rgb(18, 14, 44);">'.$operation["codeop"].'</td>
+                <td>1</td>
+                <td>'.(int)$operation["couthoraireht"] * (int)$operation["duree_prevue"].'</td>
+                <td>'.(int)$operation["couthoraireht"] * (int)$operation["duree_prevue"].'</td>
+            </tr>
+            ';
+        }
+        return $operations;
     }
 
 }
