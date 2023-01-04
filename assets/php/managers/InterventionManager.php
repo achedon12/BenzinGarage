@@ -173,7 +173,7 @@ class InterventionManager {
     public function getInterventionListForOperator(int $id): array{
         /** @var Intervention[] $array */
         $array = [];
-        $stmt = $this->pdo->prepare("select * from sae_garage.dde_interv where idoperateur = :id;");
+        $stmt = $this->pdo->prepare("select * from sae_garage.dde_interv where idoperateur = :id and codeclient is not null;");
         $stmt->execute([
             "id" => $id
         ]);
