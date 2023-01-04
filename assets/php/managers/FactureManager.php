@@ -102,9 +102,8 @@ class FactureManager{
 
     public function createFacturePDF(Facture $facture): void
     {
-        $interventions = [];
-        $interventions[] = $this->operationManager->getOperationInformations($facture->getNumDde());
-        $interventions[] = $this->operationManager->getOperationListForIntervention($facture->getNumDde());
-        (new FacturePdfManager(new FacturePDF($facture,$interventions,$this->clientManager->getClientByID($this->interventionManager->getCodeClientFromDemandeIntervention($facture->getNumDde())))))->toPdf();
+        $operations = $this->operationManager->getOperationInformations($facture->getNumDde());
+        //print_r($operations[0]["codeop"]);
+        (new FacturePdfManager(new FacturePDF($facture,$operations,$this->clientManager->getClientByID($this->interventionManager->getCodeClientFromDemandeIntervention($facture->getNumDde())))))->toPdf();
     }
 }
