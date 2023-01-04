@@ -68,7 +68,7 @@ if(!Auth::isConnected()){
                 <img src="../assets/img/cartons.png" alt="">
             </a>
             <a href="/admin/interventionPlanning">
-                <h1>Interventions</h1>
+                <h1>Plannings</h1>
                 <img src="../assets/img/outils.png" alt="">
             </a>
         </main>

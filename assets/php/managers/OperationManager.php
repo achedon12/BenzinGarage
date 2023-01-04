@@ -50,36 +50,12 @@ class OperationManager
 
 
     public function getOperationListForIntervention(int $numdde): array{
-        $stmt = $this->pdo->prepare("select * from sae_garage.operation_effectuer where numdde = :numdde;");
+        $stmt = $this->pdo->prepare("select * from sae_garage.prevoir_ope join sae_garage.operation using(codeop) where numdde = :numdde;");
         $stmt->execute(["numdde" => $numdde]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function addOperationForIntervention(int $numdde,string $codeop): array{
-        $sql = $this->pdo->query("SELECT max(idop_ef) FROM sae_garage.operation_effectuer");
-        $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
-        $libelle = "";
-        switch ($codeop){
-            case "ChangPneuAVG":
-                $libelle = "ChPnAVG";
-                break;
-            case "Vidange":
-                $libelle = "VidFiltHuil";
-                break;
-            case "Nettoyage":
-                $libelle = "Nettoy";
-                break;
-            case "DemontBoitVitesse":
-                $libelle = "DmtBVits";
-                break;
-            case "ChangPneuAVD":
-                $libelle = "ChPnAVD";
-                break;
-        }
-        $stmt = $this->pdo->prepare("insert into sae_garage.operation_effectuer (idop_ef, libelleop, codeop, numdde) values (:idop_ef, :libelleop, :codeop, :numdde);");
-        $stmt->execute(["idop_ef" => $newID,"libelleop" => $libelle, "codeop" => $codeop, "numdde" => $numdde]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+
 
 
     public function getOperationById(string $idOpe){
@@ -97,8 +73,14 @@ class OperationManager
 
     public function deleteOperationForIntervention(int $param, mixed $codeop)
     {
-        $stmt = $this->pdo->prepare("delete from sae_garage.operation_effectuer where numdde = :numdde and codeop = :codeop;");
+        $stmt = $this->pdo->prepare("delete from sae_garage.prevoir_ope where numdde = :numdde and codeop = :codeop;");
         $stmt->execute(["numdde" => $param, "codeop" => $codeop]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function addOperationForIntervention(int $numdde,string $codeop): array{
+        $stmt = $this->pdo->prepare("insert into sae_garage.prevoir_ope (numdde,codeop,couthoraireht,duree_prevue) values(:numdde,:codeop,NULL,NULL);");
+        $stmt->execute(["numdde" => $numdde, "codeop" => $codeop]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -122,6 +104,13 @@ class OperationManager
         $stmt = $this->pdo->prepare("select couthoraireactuelht from sae_garage.tarif_mo where codetarif = :codetarif;");
         $stmt->execute(["codetarif" => $codeTarif]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC)[0]["couthoraireactuelht"];
+    }
+
+    public function hasIntervention(int $param, mixed $codeop): bool
+    {
+        $stmt = $this->pdo->prepare("select * from sae_garage.prevoir_ope where numdde = :numdde and codeop = :codeop;");
+        $stmt->execute(["numdde" => $param, "codeop" => $codeop]);
+        return count($stmt->fetchAll(PDO::FETCH_ASSOC)) > 0;
     }
 
 }

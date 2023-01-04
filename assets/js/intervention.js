@@ -68,18 +68,40 @@ document.querySelector(".validerIntervention").addEventListener("click", async f
     document.querySelector("#popUpRDV").style.display = "none";
 });
 
-document.querySelector(".addIntervention").addEventListener("click", function () {
+document.querySelector(".addIntervention").addEventListener("click", async function () {
     let type = getSelectValue("typeIntervention");
-    interventions.push(type);
-    let parent = document.querySelector(".left");
+    let alreadyExist = false;
+    document.querySelectorAll(".aIntervention").forEach(function (element) {
+        if (element.firstElementChild.textContent === type) {
+            alreadyExist = true;
+        }
+    });
+    if (!alreadyExist) {
+        interventions.push(type);
+        let parent = document.querySelector(".left");
 
-    parent.innerHTML += `<section class="aIntervention"><p>${type}</p><img src="../assets/img/not%20done.png" alt="interventionLeft"></section>`;
-});
+        let section = document.createElement("section");
+        section.classList.add("aIntervention");
 
-document.querySelectorAll(".removeItem").forEach( element =>{
-   element.addEventListener("click", async function () {
-       console.log("click");
-   });
+        let p = document.createElement("p");
+        p.textContent = type;
+
+        let img = document.createElement("img");
+        img.classList.add("removeItem");
+        img.src = "../assets/img/not%20done.png";
+        img.alt = "reminterventionLeftove";
+        img.addEventListener("click", function () {
+            let libelle = getIdLibelle(this.parentElement.firstElementChild.textContent);
+            deletedInterventions.push(libelle);
+            this.parentElement.remove();
+        });
+
+        section.appendChild(p);
+        section.appendChild(img);
+        parent.appendChild(section);
+    }else{
+        alert("Cette intervention est déjà présente");
+    }
 });
 
 function getLibelle(libelle){

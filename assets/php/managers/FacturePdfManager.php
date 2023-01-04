@@ -57,7 +57,7 @@ class FacturePdfManager{
 
         //$html = $doc->saveHTML();
 
-        /******************* v3 *****************/
+        /******************* v3 marche pas *****************/
         /*$html = $this->getHtml();
 
         $dom = new DOMDocument();
@@ -71,7 +71,6 @@ class FacturePdfManager{
         $parent->appendChild($newElement);
 
         $html = $dom->saveHTML();*/
-
 
         return str_replace(["{firstName}","{name}","{adresse}","{formeJuridique}","{numTVA}","{numFacture}","{date}","{priceHT}","{tauxTVA}","{priceTTC}"],
             [$this->facture->getClient()->getFirstName(),
