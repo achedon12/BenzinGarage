@@ -34,8 +34,9 @@ if(isset($_POST["modify"])){
         $_SESSION["modifyClient"] = "none";
     }else{
         $newClient = new Client($_POST["id"],$_POST["name"],$_POST["firstname"],$_POST["adresse"],$_POST["codepostal"],$_POST["city"],$_POST["telephone"],$_POST["mail"],date("Y-n-d"));
+
         $newVehicule = new Vehicle($_POST["NoIm"],$_POST["NoSer"],$_POST["DateCir"],$_POST["NumDe"],$_POST['id']);
-        if($clientManager->modifyClient($newClient,$_POST["id"]) && $garaManager->modifyVehicule($newVehicule,$newVehicule->getNumberPlate())){
+        if($clientManager->modifyClient($newClient,$_POST["id"]) && $garaManager->modifyVehicule($newVehicule,$newClient->getId())){
             $_SESSION["userId"] = 0;
             $_SESSION["modifyClient"] = "confirmModify";
         }else{
@@ -52,6 +53,8 @@ if(isset($_POST["delete"])){
         $_SESSION["errorClient"] = "none";
     }
 }
+
+
 
 ?>
 <!DOCTYPE html>
@@ -73,47 +76,61 @@ TemplateManager::getAdminNavBar("clientsFar");
 <main>
     <form method="post" class="selecteur" onchange="submit()">
         <section>
-            <label for="client-select">Choisir un client</label>
-            <select id="client-select" name="select">
-                <?php
-                    if($_SESSION["userId"] === 0){
-                        echo '<option value="false" disabled selected>--Client--</option>';
+            <h1>Choisir un client</h1>
+            <form method="post" onchange="submit()">
+                <label for="filtreNom"> Trier par ordre alphabétique
+                    <?php
+                    if(isset($_SESSION['cocher']) && $_SESSION['cocher']===true) {
+
+                        echo '<input type = "checkbox" name = "filtreNom" value = "yes" checked>';
+
+                    }else{
+                        echo '<input type = "checkbox" name = "filtreNom" value = "yes">';
+
                     }
+                    ?>
+                </label>
+            </form>
+            <section id="client-select" style="    gap: 10px;    display: flex;    flex-direction: column; overflow-x: auto ; height: 100em; width: 300px">
+                <?php
+                if(isset($_POST["filtreNom"]) && $_POST["filtreNom"]==="yes"){
+
+                    foreach($clientManager->getAllClientOrderByName() as $people){
+                        $name = $people->getName()." ".$people->getFirstName();
+                        $code = $people->getId();
+                        if($code == $_SESSION["userId"]){
+                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit" class="buttonSelectClient" name="select" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
+                        }else{
+                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
+                        }
+                    }
+                }if(!isset($_POST["filtreNom"])){
+
                     foreach($clientManager->getAllClients() as $people){
                         $name = $people->getName()." ".$people->getFirstName();
                         $code = $people->getId();
                         if($code == $_SESSION["userId"]){
-                            ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
+                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
                         }else{
-                            ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
                         }
                     }
+                }
                 ?>
-            </select>
+            </section>
         </section>
     </form>
     <?php
     if($_SESSION["userId"] === 0){
         ?>
-        <section class="choose">
-            <?php if($_SESSION["errorClient"] === "none"){
-                echo '<h1 class="errorCreate">Une erreur s\'est produite</h1>';
-            }elseif($_SESSION["errorClient"] === "confirmDelete"){
-                echo '<h1 class="errorCreate">Vous avez bien supprimé le client</h1>';
-            }elseif ($_SESSION["modifyClient"] === "none"){
-                echo '<h1>Une erreur s\'est produite lors de la modification d\'un client</h1>';
-            }elseif($_SESSION["modifyClient"] === "confirmModify"){
-                echo '<h1 class="errorCreate">Vous avez bien modifié le client</h1>';
-            }
-            ?>
-            <h1>Veuillez séléctionner un client pour commencer l'opération</h1>
-        </section>
+
     <?php
     }else{
             $user = $clientManager->getClientByID($_SESSION["userId"]);
             if($user != null){
         ?>
             <form class='informations' method='post'>
+                <h2 style ="width: 100%; text-align: center">Client : n° <?php echo $user->getId()?></h2>
                 <section>
                     <input type="text" name="name" id="name" value="<?php echo $user->getName()?>">
                     <input type="text" name="id" hidden id="id" value="<?php echo $user->getId()?>">
@@ -124,6 +141,7 @@ TemplateManager::getAdminNavBar("clientsFar");
                     <input type="text" name="city" id="city" value='<?php echo $user->getCity()?>'>
                     <input type="tel" name="telephone" id="telephone" value='<?php echo $user->getTelephoneNumber()?>'>
                 </section>
+
                 <section class="vehicule">
                     <?php $vehicul = $userManager->getVehiculeByUserId($user->getId());
                     ?>

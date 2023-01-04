@@ -63,28 +63,50 @@ if(isset($_POST["modify"])){
     <?php
     TemplateManager::getAdminNavBar("employesFar");
     ?>
-        <main>
-            <form method="post" class="selecteur" onchange="submit()">
-                <section>
-                    <label for="employe-select">Choisir un employé</label>
-                    <select id="employe-select" name="select">
+    <main>
+        <form method="post" class="selecteur" onchange="submit()">
+            <section>
+                <h1>Choisir un client</h1>
+                <form method="post" onchange="submit()">
+                    <label for="filtreNom"> Trier par ordre alphabétique
                         <?php
-                            if ($_SESSION["managerId"] === 0) {
-                                echo '<option value="false" disabled selected>--Employé--</option>';
-                            }
-                            foreach($userManager->getAllUser() as $people){
-                                $name  = $people->getName()." ".$people->getFirstName();
-                                $code = $people->getId();
-                                if($code == $_SESSION["managerId"]){
-                                    ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
-                                }else{
-                                    ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
-                                }
-                            }
+                        if(isset ($_SESSION['cocher']) && $_SESSION['cocher']===true) {
+                            echo '<input type = "checkbox" name = "filtreNom" value = "yes" checked>';
+                        }else{
+                            echo '<input type = "checkbox" name = "filtreNom" value = "yes">';
+                        }
                         ?>
-                    </select>
+                    </label>
+                </form>
+                <section id="client-select" style="    gap: 10px;    display: flex;    flex-direction: column;">
+                    <?php
+                    if(isset($_POST["filtreNom"]) && $_POST["filtreNom"]==="yes"){
+                        $_SESSION['cocher']=true;
+                        foreach($userManager->getAllEmployeOrderByName() as $people){
+                            $name = $people->getName()." ".$people->getFirstName();
+                            $code = $people->getId();
+                            if($code == $_SESSION["userId"]){
+                                ?><section style="display: flex;flex-direction: row"><input type="submit"  name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                            }else{
+                                ?><section style="display: flex;flex-direction: row"><input type="submit"  name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                            }
+                        }
+                    }if(!isset($_POST["filtreNom"])){
+                        $_SESSION['cocher']=false;
+                        foreach($userManager->getAllEmployees() as $people){
+                            $name = $people->getName()." ".$people->getFirstName();
+                            $code = $people->getId();
+                            if($code == $_SESSION["userId"]){
+                                ?><section style="display: flex;flex-direction: row"><input type="submit"  name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                            }else{
+                                ?><section style="display: flex;flex-direction: row"><input type="submit"  name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                            }
+                        }
+                    }
+                    ?>
                 </section>
-            </form>
+            </section>
+        </form>
                 <?php
                 if($_SESSION["managerId"] === 0){
                     ?>
@@ -107,7 +129,8 @@ if(isset($_POST["modify"])){
                         if($user != null){
                     ?>
                     <form class="informations" method="post">
-                        <section class="admin">
+                        <h2 style ="width: 100%; text-align: center">Employé : n° <?php echo $user->getId()?></h2>
+                        <section class="admin" style="width: 100%">
                             <input type="text" name="name" id="name" value='<?php echo $user->getName()?>'>
                             <input type="text" name="password" id="password" value='<?php echo $user->getHashedPassword()?>'>
                             <input type="text" name="id" hidden id="id" value='<?php echo $user->getId()?>'>
@@ -124,6 +147,7 @@ if(isset($_POST["modify"])){
                                 ?>
                             </select>
                         </section>
+                        <section></section>
                         <section>
                             <input type="submit" value="Modifier l'employé" id="modify" class="tier" name="modify">
                             <input type="submit" value="Supprimer l'employé" id="del" class="tier" name="delete">

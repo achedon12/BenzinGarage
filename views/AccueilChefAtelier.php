@@ -35,24 +35,24 @@ if(!Auth::isConnected()){
     TemplateManager::getDefaultNavBar("accueil");
     ?>
         <main>
-            <a href="/chefAtelier/interventionPlanning">
+            <a href="/planning">
                 <h1>Planning</h1>
                 <img src="../assets/img/planning.png" alt="">
             </a>
-            <a href="/chefAtelier/RDV">
+            <a href="/prise-rdv">
                 <h1>Prise de rendez-vous</h1>
                 <img src="../assets/img/add-clients.png" alt="">
             </a>
 
-            <a href="/chefAtelier/stock">
+            <a href="/stock">
                 <h1>Stock</h1>
                 <img src="../assets/img/cartons.png" alt="">
             </a>
-            <a href="">
+            <a href="/tarification">
                 <h1>Tarifications</h1>
                 <img src="../assets/img/caisse.png" alt="">
             </a>
-            <a href="/chefAtelier/client">
+            <a href="/clients">
                 <h1>Clients</h1>
                 <img src="../assets/img/modify-clients.png" alt="">
             </a>

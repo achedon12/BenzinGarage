@@ -8,6 +8,7 @@ form
 {
     display: flex;
     flex-direction: column;
+    height: 80%;
     justify-content: center;
     align-items: center;
     width: 80%;
@@ -33,9 +34,10 @@ form>section.inputs
     flex-wrap: wrap;
 }
 
-form>section.inputs>input
+form>section.inputs input
 {
-    width: 30%;
+    width: 33%;
+    height: 25px;
     border-radius: 25px;
     border: 1px solid var(--green-color);
     margin: 1%;
@@ -68,7 +70,7 @@ form>section
     justify-content: space-around;
 }
 
-form>section>input
+form>section input
 {
     width: 48%;
     padding: 1%;

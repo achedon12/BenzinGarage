@@ -59,15 +59,15 @@ class GarageManager
         return true;
     }
 
-    public function modifyVehicule( Vehicle $vehicle, string $plaque){
-        $stmt = $this->pdo->prepare("UPDATE sae_garage.vehicule SET noimmatriculation=:codenoimm, noserie=:noSer, datemiseencirculation=:miseencir, nummodele=:nummo, codeclient=:codeclient WHERE noimmatriculation = :plaque");
+    public function modifyVehicule( Vehicle $vehicle, string $idClient){
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.vehicule SET noimmatriculation=:codenoimm, noserie=:noSer, datemiseencirculation=:miseencir, nummodele=:nummo, codeclient=:codeclient WHERE codeclient = :idClient");
         $stmt->execute([
-            "codenoimm" => $plaque,
-            "noSer" => $vehicle->getNumeroSerie(),
-            "miseencir" => $vehicle->getDateMiseEnCirculation(),
-            "nummo" => $vehicle->getNumerModele(),
-            "codeclient" => $vehicle->getClient(),
-            "plaque"=>$plaque
+            "codenoimm"=> $vehicle->getNumberPlate(),
+            "noSer"=> $vehicle->getNumeroSerie(),
+            "miseencir"=> $vehicle->getDateMiseEnCirculation(),
+            "nummo"=> $vehicle->getNumerModele(),
+            "codeclient"=> $vehicle->getClient(),
+            "idClient"=> $idClient
         ]);
         return true;
     }
@@ -232,6 +232,34 @@ class GarageManager
             "id"=> $idProduct
         ]);
 
+    }
+
+    public function plusOneProduct(string $id){
+        $query=$this->pdo->prepare("SELECT qte_stock FROM sae_garage.article where codearticle=:id");
+        $query->execute([
+            "id"=> $id
+        ]);
+        $res= $query->fetchAll();
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.article set qte_stock=:value where codearticle=:id");
+        $stmt->execute([
+            "value"=> $res[0][0]+1,
+            "id"=> $id
+        ]);
+        return true;
+    }
+
+    public function moinsOneProduct(string $id){
+        $query=$this->pdo->prepare("SELECT qte_stock FROM sae_garage.article where codearticle=:id");
+        $query->execute([
+            "id"=> $id
+        ]);
+        $res= $query->fetchAll();
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.article set qte_stock=:value where codearticle=:id");
+        $stmt->execute([
+            "value"=> $res[0][0]-1,
+            "id"=> $id
+        ]);
+        return true;
     }
 
 

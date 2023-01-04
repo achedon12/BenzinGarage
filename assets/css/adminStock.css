@@ -80,4 +80,27 @@ main{
     height: 10px;
 }
 
+form.selecteur>section{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 1%;
+    text-align: center;
+    width: 101%;
+    background-color: var(--green-color);
+    border-radius: 25px;
+    border: 1px solid var(--white-color);
+    margin-left: auto;
+    margin-right: auto;
+    height: 60%;
+    flex-direction: column;
+    gap: 25px;
+}
+form.selecteur {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    height: 20%;
+    width: 30%;
+}
 

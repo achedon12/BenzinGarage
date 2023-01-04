@@ -63,6 +63,15 @@ class ClientManager{
         return $stmt->rowCount() > 0;
     }
 
+    public function getAllClientOrderByName(){
+        $res = [];
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.client order by nom");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"],$row["mail"],$row["datecreation"] );
+        return $res;
+    }
+
+
 
     public function getClientByFirstnameAndName(string $prenom,String $name){
         $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.client WHERE nom=:nom and prenom=:prenom");
