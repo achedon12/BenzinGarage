@@ -135,9 +135,9 @@ class GarageManager
     {
         /** @var  $array Piece[] */
         $array = [];
-        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE qte_Stock<=qte_min");
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.article WHERE qte_stock<=qte_min");
         $query->execute();
-        $result = $query->fetchAll();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $piece) {
             $array[] = new Piece($piece["codearticle"], $piece["libellearticle"], $piece["qte_min"], $piece["typearticle"], $piece["prixunitactuelht"], $piece["qte_stock"]);
         }

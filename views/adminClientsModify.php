@@ -54,6 +54,9 @@ if(isset($_POST["delete"])){
     }
 }
 
+if(isset($_POST["filtreNom"])){
+    $_SESSION['cocher']=$_POST["filtreNom"];
+}
 
 
 ?>
@@ -80,20 +83,22 @@ TemplateManager::getAdminNavBar("clientsFar");
             <form method="post" onchange="submit()">
                 <label for="filtreNom"> Trier par ordre alphabétique
                     <?php
-                    if(isset($_SESSION['cocher']) && $_SESSION['cocher']===true) {
+                    if(isset($_SESSION['cocher']) && $_SESSION["cocher"]==="yes") {
 
-                        echo '<input type = "checkbox" name = "filtreNom" value = "yes" checked>';
+                        echo '<input type = "checkbox" name = "filtreNom" value = "no"> On';
+
+                    }elseif(isset($_SESSION['cocher']) && $_SESSION["cocher"]==="no"){
+                        echo '<input type = "checkbox" name = "filtreNom" value = "yes"> Off';
 
                     }else{
-                        echo '<input type = "checkbox" name = "filtreNom" value = "yes">';
-
+                        echo '<input type = "checkbox" name = "filtreNom" value = "yes"> Off';
                     }
                     ?>
                 </label>
             </form>
             <section id="client-select" style="    gap: 10px;    display: flex;    flex-direction: column; overflow-x: auto ; height: 100em; width: 300px">
                 <?php
-                if(isset($_POST["filtreNom"]) && $_POST["filtreNom"]==="yes"){
+                if(isset($_SESSION['cocher']) && $_SESSION['cocher']==="yes"){
 
                     foreach($clientManager->getAllClientOrderByName() as $people){
                         $name = $people->getName()." ".$people->getFirstName();
@@ -104,8 +109,18 @@ TemplateManager::getAdminNavBar("clientsFar");
                             ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
                         }
                     }
-                }if(!isset($_POST["filtreNom"])){
+                }elseif(isset($_SESSION['cocher']) && $_SESSION['cocher']==="no"){
 
+                    foreach($clientManager->getAllClients() as $people){
+                        $name = $people->getName()." ".$people->getFirstName();
+                        $code = $people->getId();
+                        if($code == $_SESSION["userId"]){
+                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
+                        }else{
+                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
+                        }
+                    }
+                }else{
                     foreach($clientManager->getAllClients() as $people){
                         $name = $people->getName()." ".$people->getFirstName();
                         $code = $people->getId();
@@ -121,10 +136,22 @@ TemplateManager::getAdminNavBar("clientsFar");
         </section>
     </form>
     <?php
-    if($_SESSION["userId"] === 0){
+    if($_SESSION["managerId"] === 0){
         ?>
-
-    <?php
+        <section class="choose">
+            <?php if($_SESSION["errorEmploye"] === "none"){
+                echo '<h1 class="errorCreate">Une erreur s\'est produite</h1>';
+            }elseif($_SESSION["errorEmploye"] === "confirmDelete"){
+                echo '<h1 class="errorCreate">Vous avez bien supprimé l\'employé</h1>';
+            }elseif ($_SESSION["modifyEmploye"] === "none"){
+                echo '<h1>Une erreur s\'est produite lors de la modification d\'un client</h1>';
+            }elseif($_SESSION["modifyEmploye"] === "confirmModify"){
+                echo '<h1 class="errorCreate">Vous avez bien modifié le client</h1>';
+            }
+            ?>
+            <h1>Veuillez séléctionner un client pour commencer l'opération</h1>
+        </section>
+        <?php
     }else{
             $user = $clientManager->getClientByID($_SESSION["userId"]);
             if($user != null){

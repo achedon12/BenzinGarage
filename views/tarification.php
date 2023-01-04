@@ -63,12 +63,13 @@ TemplateManager::getDefaultNavBar("tarifs");
 ?>
 <form method="post" class="selecteur" onchange="submit()">
     <section>
-        <label for="client-select">Choisir un produit</label>
-        <select id="client-select" name="select">
+        <label for="myClient">Liste des Produits</label>
+
+        <form method="post" onchange="submit()">
+            <input list="Clients" id="myClient" name="select" placeholder="Nom produit"/>
+        </form>
+        <datalist id="Clients">
             <?php
-            if(!isset($_SESSION["productId"])){
-                echo '<option value="false" selected>--Produit--</option>';
-            }
             foreach ($garageManager->getAllPieces() as $product){
                 $nameProduct = $product->getLibelleArticle();
                 $codeProduct = $product->getCodeArticle();
@@ -81,7 +82,7 @@ TemplateManager::getDefaultNavBar("tarifs");
             }
 
             ?>
-        </select>
+        </datalist>
     </section>
 </form>
 <section class="produit" style="height: 50%; width: 50%">

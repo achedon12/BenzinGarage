@@ -46,6 +46,9 @@ if(isset($_POST["modify"])){
         }
     }
 }
+if(isset($_POST["filtreNom"])){
+    $_SESSION['cocher']=$_POST["filtreNom"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -70,39 +73,53 @@ if(isset($_POST["modify"])){
                 <form method="post" onchange="submit()">
                     <label for="filtreNom"> Trier par ordre alphabétique
                         <?php
-                        if(isset ($_SESSION['cocher']) && $_SESSION['cocher']===true) {
-                            echo '<input type = "checkbox" name = "filtreNom" value = "yes" checked>';
+                        if(isset($_SESSION['cocher']) && $_SESSION["cocher"]==="yes") {
+
+                            echo '<input type = "checkbox" name = "filtreNom" value = "no"> On';
+
+                        }elseif(isset($_SESSION['cocher']) && $_SESSION["cocher"]==="no"){
+                            echo '<input type = "checkbox" name = "filtreNom" value = "yes"> Off';
+
                         }else{
-                            echo '<input type = "checkbox" name = "filtreNom" value = "yes">';
+                            echo '<input type = "checkbox" name = "filtreNom" value = "yes"> Off';
                         }
                         ?>
                     </label>
                 </form>
-                <section id="client-select" style="    gap: 10px;    display: flex;    flex-direction: column;">
+                <section id="client-select" style="gap: 10px;    display: flex;    flex-direction: column; overflow-x: auto ; height: 100em; width: 300px">
                     <?php
                     if(isset($_POST["filtreNom"]) && $_POST["filtreNom"]==="yes"){
-                        $_SESSION['cocher']=true;
                         foreach($userManager->getAllEmployeOrderByName() as $people){
                             $name = $people->getName()." ".$people->getFirstName();
                             $code = $people->getId();
                             if($code == $_SESSION["userId"]){
-                                ?><section style="display: flex;flex-direction: row"><input type="submit"  name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                                ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit" class="buttonSelectClient" name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
                             }else{
-                                ?><section style="display: flex;flex-direction: row"><input type="submit"  name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                                ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit" class="buttonSelectClient" name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
                             }
                         }
-                    }if(!isset($_POST["filtreNom"])){
-                        $_SESSION['cocher']=false;
+                    }elseif(isset($_SESSION['cocher']) && $_SESSION['cocher']==="no"){
                         foreach($userManager->getAllEmployees() as $people){
                             $name = $people->getName()." ".$people->getFirstName();
                             $code = $people->getId();
                             if($code == $_SESSION["userId"]){
-                                ?><section style="display: flex;flex-direction: row"><input type="submit"  name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                                ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit" class="buttonSelectClient" name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
                             }else{
-                                ?><section style="display: flex;flex-direction: row"><input type="submit"  name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                                ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit" class="buttonSelectClient" name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                            }
+                        }
+                    }else{
+                        foreach($userManager->getAllEmployees() as $people){
+                            $name = $people->getName()." ".$people->getFirstName();
+                            $code = $people->getId();
+                            if($code == $_SESSION["userId"]){
+                                ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit" class="buttonSelectClient" name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                            }else{
+                                ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit" class="buttonSelectClient" name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
                             }
                         }
                     }
+
                     ?>
                 </section>
             </section>

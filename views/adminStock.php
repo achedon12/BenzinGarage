@@ -44,6 +44,16 @@ if(isset($_POST['refillStockUn'])){
     $garageManager->setAvailablePieceWhenRefill($_POST['refillStockUn']);
 }
 
+if(isset($_POST["plusArticle"]) && $_POST["plusArticle"]!==0){
+    $garageManager->plusOneProduct($_POST["plusArticle"]);
+    header("Location:./stock");
+}
+// moins
+if(isset($_POST["moinsArticle"]) && $_POST["moinsArticle"]!==0){
+
+    $garageManager->moinsOneProduct($_POST["moinsArticle"]);
+    header("Location:./stock");
+}
 
 ?>
 
@@ -76,7 +86,7 @@ TemplateManager::getAdminNavBar("stock");
             <select id="client-select" name="select">
                 <option value="null">---Choisir une catégorie---</option>
                 <option value="enstock">Produit en Stock</option>
-            <option value="pasenstock">Produit pas en Stock</option>
+                <option value="pasenstock">Produit pas en Stock</option>
         </select>
     </section>
 </form>
@@ -93,7 +103,7 @@ TemplateManager::getAdminNavBar("stock");
         ?> </h1>
     <form method="post" onchange="submit()">
         <section class="AllProduct">
-            <section class="productContainerTitle"><h2 class="ProductName">Nom</h2> <h2 class="RefProduct"> Reférence </h2> <h2 class="PriceProduct">Prix</h2> <h2 class="QteProduct">Quantitée en stock</h2></section>
+            <section class="productContainerTitle"><h2 class="ProductName">Nom</h2> <h2 class="RefProduct"> Reférence </h2> <h2 class="PriceProduct">Prix</h2> <h2 class="QteProduct">Quantitée en stock</h2> <h2 class="QteProductMinimum">Quantité minimum </h2></section>
             <?php
             $test='enstock';
             $test2='pasenstock';
@@ -102,13 +112,13 @@ TemplateManager::getAdminNavBar("stock");
                 $pieces = $garageManager->getAllPiecesAvailable();
 
                 foreach ($pieces as $piece) {
-                    echo '<section class="productContainer"><h2 class="ProductName">' . $piece->getLibelleArticle() . '</h2> <h2 class="RefProduct">' . $piece->getCodeArticle() . '</h2> <h2 class="PriceProduct">' . $piece->getPrice() . ' €</h2> <h2 class="QteProduct">' . $piece->getStockQuantite() . '</h2> 
-    
+                    echo '<section class="productContainer"><h2 class="ProductName">' . $piece->getLibelleArticle() . '</h2> <h2 class="RefProduct">' . $piece->getCodeArticle() . '</h2> <h2 class="PriceProduct">' . $piece->getPrice() . ' €</h2> <h2 class="QteProduct">' . $piece->getStockQuantite() . '</h2> <h2 class="QteProductMinimum">'.$piece->getMinimalQuantite().' </h2>
+                                        <input type="submit" value="'.$piece->getCodeArticle().'" class="plusArticle" name="plusArticle" src="../assets/img/plus.png">
+                                    <input type="submit" value="'.$piece->getCodeArticle().'" class="moinsArticle" name="moinsArticle" src="../assets/img/moins.png">
                        </section>';
                 }
             }elseif (isset($_POST['select']) && $_POST['select']==$test2){
             $pieces = $garageManager->getAllPiecesNotAvailable();
-
             foreach ($pieces as $piece) {
                 echo '<section class="productContainer"><h2 class="ProductName">' . $piece->getLibelleArticle() . '</h2> <h2 class="RefProduct">' . $piece->getCodeArticle() . '</h2> <h2 class="PriceProduct">' . $piece->getPrice() . ' €</h2> <h2 class="QteProduct">' . $piece->getStockQuantite() . '</h2> <input class="inputrefillStock" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit"></section>';
             }
