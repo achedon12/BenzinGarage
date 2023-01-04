@@ -36,9 +36,6 @@ if(isset($_POST["selectClient"])){
     $_SESSION["rdv"]["enable"] = true;
     $_SESSION["rdv"]["idClient"] = $_POST["selectClient"];
 }
-if(!isset($operationPourUneOperation)){
-    $operationPourUneOperation = [];
-}
 
 if (isset($_POST["typeIntervention"])){
     $_SESSION["rdv"]["typeIntervention"] = $_POST["typeIntervention"];
@@ -73,10 +70,7 @@ if(isset($_POST["km_actuel"])){
 if(isset($_POST["dateRDV"])){
     $_SESSION["rdv"]["date"] = $_POST["dateRDV"];
 }
-
-print_r($_SESSION["rdv"]);
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -127,6 +121,7 @@ TemplateManager::getDefaultNavBar("rdv");
                         echo '<select id="employe-select" name="selectEmploye" >';
                     }
                     if($_SESSION["rdv"]["date"] === 0){
+                        print_r("ll");
                         if ($_SESSION["rdv"]["employe"] === 0) {
                             echo '<option value="false" disabled selected>--Employé--</option>';
                         }
@@ -143,18 +138,19 @@ TemplateManager::getDefaultNavBar("rdv");
                         if($_SESSION["rdv"]["employe"] === 0){
                             echo '<option value="false" disabled selected>--Employé--</option>';
                         }
-                        //TODO: a patch
-                        if(isset($_SESSION["rdv"]["date"]) && $_SESSION["rdv"]["date"] != 0){
-                            foreach($userManager->getAvailableEmployes(explode("T",$_SESSION["rdv"]["date"])[1]) as $people){
-                                $name  = $people->getName()." ".$people->getFirstName();
-                                $code = $people->getId();
-                                if($code == $_SESSION["rdv"]["employe"]){
-                                    ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
-                                }else{
-                                    ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
-                                }
+
+                        $explode = explode("T",$_SESSION["rdv"]["date"])[1] ?? "00:00:00";
+                        print_r($explode);
+                        foreach($userManager->getAvailableEmployes($explode) as $people){
+                            $name  = $people->getName()." ".$people->getFirstName();
+                            $code = $people->getId();
+                            if($code == $_SESSION["rdv"]["employe"]){
+                                ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
+                            }else{
+                                ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
                             }
                         }
+
                     }
                     ?>
                     </select>
@@ -264,18 +260,13 @@ TemplateManager::getDefaultNavBar("rdv");
                                     echo '<option value="'.$modele->getNummodele().'" class="listeClientHorizontal">'.$modele->getModele().'</option>';
                                 }
                                 ?>
-
-
                             </datalist>
                         </label>
                     </section>
                     <input type="submit" class="validerIntervention" name="ValiderInscriptionClient" value ="Valider l'inscription du client">
-
                 </form>
                 <a href="#" class="close"><img src="../assets/img/not%20done.png" alt=""></a>
-
             </section>
-
         </section>
     </form>
 </main>
