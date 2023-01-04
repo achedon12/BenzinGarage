@@ -34,8 +34,9 @@ if(isset($_POST["modify"])){
         $_SESSION["modifyClient"] = "none";
     }else{
         $newClient = new Client($_POST["id"],$_POST["name"],$_POST["firstname"],$_POST["adresse"],$_POST["codepostal"],$_POST["city"],$_POST["telephone"],$_POST["mail"],date("Y-n-d"));
+
         $newVehicule = new Vehicle($_POST["NoIm"],$_POST["NoSer"],$_POST["DateCir"],$_POST["NumDe"],$_POST['id']);
-        if($clientManager->modifyClient($newClient,$_POST["id"]) && $garaManager->modifyVehicule($newVehicule,$newVehicule->getNumberPlate())){
+        if($clientManager->modifyClient($newClient,$_POST["id"]) && $garaManager->modifyVehicule($newVehicule,$newClient->getId())){
             $_SESSION["userId"] = 0;
             $_SESSION["modifyClient"] = "confirmModify";
         }else{
@@ -82,15 +83,15 @@ TemplateManager::getAdminNavBar("clientsFar");
                     if(isset($_SESSION['cocher']) && $_SESSION['cocher']===true) {
 
                         echo '<input type = "checkbox" name = "filtreNom" value = "yes" checked>';
-                        $_SESSION['cocher']=false;
+
                     }else{
                         echo '<input type = "checkbox" name = "filtreNom" value = "yes">';
-                        $_SESSION['cocher']=true;
+
                     }
                     ?>
                 </label>
             </form>
-            <section id="client-select" style="    gap: 10px;    display: flex;    flex-direction: column;">
+            <section id="client-select" style="    gap: 10px;    display: flex;    flex-direction: column; overflow-x: auto ; height: 100em; width: 300px">
                 <?php
                 if(isset($_POST["filtreNom"]) && $_POST["filtreNom"]==="yes"){
 
@@ -98,9 +99,9 @@ TemplateManager::getAdminNavBar("clientsFar");
                         $name = $people->getName()." ".$people->getFirstName();
                         $code = $people->getId();
                         if($code == $_SESSION["userId"]){
-                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit" class="buttonSelectClient" name="select" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit" class="buttonSelectClient" name="select" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
                         }else{
-                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
                         }
                     }
                 }if(!isset($_POST["filtreNom"])){
@@ -109,9 +110,9 @@ TemplateManager::getAdminNavBar("clientsFar");
                         $name = $people->getName()." ".$people->getFirstName();
                         $code = $people->getId();
                         if($code == $_SESSION["userId"]){
-                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
                         }else{
-                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo $name ?></h2></input></section><?php
+                            ?><section style="display: flex;flex-direction: row;align-items: center;gap: 10px"><input type="submit"  name="select" class="buttonSelectClient" value='<?php echo $code ?>'><h2><?php echo ucwords(strtolower($name)) ?></h2></input></section><?php
                         }
                     }
                 }
