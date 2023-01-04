@@ -2,6 +2,7 @@
 
 use app\users\Auth;
 
+
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
 require_once "./assets/php/managers/TemplateManager.php";
@@ -15,11 +16,6 @@ if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 
-
-//$_SESSION["articleCommande"]=[];
-
-
-
 if(isset($_POST["ajoutProduitCommande"])){
     $_SESSION["articleCommande"][] = $_POST["ajoutProduitCommande"];
 }
@@ -30,6 +26,21 @@ if(!Auth::isConnected()){
     render("connexion.php");
     return;
 }
+
+// plus
+if(isset($_POST["plusArticle"]) && $_POST["plusArticle"]!==0){
+    $garageManager->plusOneProduct($_POST["plusArticle"]);
+    header("Location:./stock");
+}
+// moins
+if(isset($_POST["moinsArticle"]) && $_POST["moinsArticle"]!==0){
+
+    $garageManager->moinsOneProduct($_POST["moinsArticle"]);
+    header("Location:./stock");
+}
+
+
+
 
 ?>
 
@@ -59,12 +70,12 @@ if(!Auth::isConnected()){
 
                 $pieces = $garageManager->getAllPieces();
 
-                if($_SESSION["role"] === UserManager::MANAGER){
-                    if (isset($_POST['search'])) {
+
+                    if (isset($_POST['search']) && $_POST['search']!=="all") {
 
                         $pieces = $garageManager->getPieceById((string)$_POST['search']);
+
                         if ($pieces != null) {
-                            echo "test";
                             $piece = new Piece($pieces[0], $pieces[1], $pieces[2], $pieces[3], $pieces[4], $pieces[5]);
                             if ($piece->getStockQuantite()<=$piece->getMinimalQuantite()){
                                 echo '<article class="ligne-product">
@@ -72,8 +83,9 @@ if(!Auth::isConnected()){
                                     <p class="product-name">' . $piece->getLibelleArticle() . '</p></br>
                                     <p class="product-ref">Référence : ' . $piece->getCodeArticle() . '</p>
                                     <p class="piece-available">' . $piece->getStockQuantite() . ' pièce(s) restante(s)</p>
-                                    <input class="validerCommande" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit">
                                     
+                                    <input type="submit" value="'.$piece->getCodeArticle().'" class="plusArticle" name="plusArticle" src="../assets/img/plus.png">
+                                    <input type="submit" value="'.$piece->getCodeArticle().'" class="moinsArticle" name="moinsArticle" src="../assets/img/moins.png">                 
                                 </section>
                             </article>';
                             }else{
@@ -82,8 +94,9 @@ if(!Auth::isConnected()){
                                     <p class="product-name">' . $piece->getLibelleArticle() . '</p></br>
                                     <p class="product-ref">Référence : ' . $piece->getCodeArticle() . '</p>
                                     <p class="piece-available">' . $piece->getStockQuantite() . ' pièce(s) restante(s)</p>
-                                    <input class="validerCommande" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit">
-                                   
+                                    
+                                    <input type="submit" value="'.$piece->getCodeArticle().'" class="plusArticle" name="plusArticle" src="../assets/img/plus.png">
+                                    <input type="submit" value="'.$piece->getCodeArticle().'" class="moinsArticle" name="moinsArticle" src="../assets/img/moins.png">
                                 </section>
                             </article>';
                             }
@@ -91,33 +104,7 @@ if(!Auth::isConnected()){
                         } else {
                             echo "il n'y a pas de produit avec cette référence";
                         }
-                    }else{
-                    foreach ($pieces as $piece){
-                        $qte=$piece->getStockQuantite();
-                        $qtemini=$piece->getMinimalQuantite();
-                        if ($qte<$qtemini){
-                            echo '<article class="ligne-product">
-                                <section class="red">
-                                    <p class="product-name">' . $piece->getLibelleArticle() . '</p></br>
-                                    <p class="product-ref">Référence : ' . $piece->getCodeArticle() . '</p>
-                                    <p class="piece-available">' . $piece->getStockQuantite() . ' pièce(s) restante(s)</p>
-                                    <input class="validerCommande" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit">
-                                    
-                                </section>
-                            </article>';
-                        }else{
-                            echo '<article class="ligne-product">
-                                <section class="green">
-                                    <p class="product-name">' . $piece->getLibelleArticle() . '</p></br>
-                                    <p class="product-ref">Référence : ' . $piece->getCodeArticle() . '</p>
-                                    <p class="piece-available">' . $piece->getStockQuantite() . ' pièce(s) restante(s)</p>
-                                    <input class="validerCommande" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit">
-                                    
-                                </section>
-                            </article>';
-                        }
-                    }
-                    }
+
                 }else{
                     foreach ($pieces as $piece){
                         $qte=$piece->getStockQuantite();
@@ -128,7 +115,8 @@ if(!Auth::isConnected()){
                                     <p class="product-name">' . $piece->getLibelleArticle() . '</p></br>
                                     <p class="product-ref">Référence : ' . $piece->getCodeArticle() . '</p>
                                     <p class="piece-available">' . $piece->getStockQuantite() . ' pièce(s) restante(s)</p>
-                                    <input type="submit" name="ajoutProduitCommande" id="'.$piece->getLibelleArticle().'" value="'.$piece->getCodeArticle().'">
+                                    <input type="submit" value="'.$piece->getCodeArticle().'" class="plusArticle" name="plusArticle" src="../assets/img/plus.png">
+                                    <input type="submit" value="'.$piece->getCodeArticle().'" class="moinsArticle" name="moinsArticle" src="../assets/img/moins.png">
                                 </section>
                             </article>';
                         }else{
@@ -138,6 +126,8 @@ if(!Auth::isConnected()){
                                     <p class="product-ref">Référence : ' . $piece->getCodeArticle() . '</p>
                                     <p class="piece-available">' . $piece->getStockQuantite() . ' pièce(s) restante(s)</p>
                                     
+                                    <input type="submit" value="'.$piece->getCodeArticle().'" class="plusArticle" name="plusArticle" src="../assets/img/plus.png">
+                                    <input type="submit" value="'.$piece->getCodeArticle().'" class="moinsArticle" name="moinsArticle" src="../assets/img/moins.png">
                                 </section>
                             </article>';
                         }
@@ -147,13 +137,7 @@ if(!Auth::isConnected()){
             </form>
             </section>
 
-            <?php
-            if($_SESSION["role"] === UserManager::MANAGER){
-                echo '<section class="button"><button onclick="">Valider commande</button></section>';
-            }else{
-                echo '<section class="button"><button onclick="">Passer la commande</button></section>';
-            }
-            ?>
+
         </main>
     </body>
 <script src="/assets/js/chefAtelierRDV.js"></script>

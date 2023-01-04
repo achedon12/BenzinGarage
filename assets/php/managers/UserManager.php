@@ -64,6 +64,17 @@ class UserManager{
     }
 
     /**
+     * @return PDO
+     */
+    public function getAllEmployeOrderByName(){
+        $array = [];
+        $stmt = $this->pdo->query("SELECT * FROM sae_garage.user WHERE role = 'employe' order by nom");
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
+            $array[] = new Employee($row["id"], $row["nom"], $row["prenom"], $row["password"], $row["role"]);
+        return $array;
+    }
+
+    /**
      * Get all users.
      * @return User[]
      */

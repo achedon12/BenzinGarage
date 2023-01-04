@@ -234,6 +234,34 @@ class GarageManager
 
     }
 
+    public function plusOneProduct(string $id){
+        $query=$this->pdo->prepare("SELECT qte_stock FROM sae_garage.article where codearticle=:id");
+        $query->execute([
+            "id"=> $id
+        ]);
+        $res= $query->fetchAll();
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.article set qte_stock=:value where codearticle=:id");
+        $stmt->execute([
+            "value"=> $res[0][0]+1,
+            "id"=> $id
+        ]);
+        return true;
+    }
+
+    public function moinsOneProduct(string $id){
+        $query=$this->pdo->prepare("SELECT qte_stock FROM sae_garage.article where codearticle=:id");
+        $query->execute([
+            "id"=> $id
+        ]);
+        $res= $query->fetchAll();
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.article set qte_stock=:value where codearticle=:id");
+        $stmt->execute([
+            "value"=> $res[0][0]-1,
+            "id"=> $id
+        ]);
+        return true;
+    }
+
 
 
 }
