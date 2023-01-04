@@ -56,3 +56,6 @@ SimpleRouter::post('/clients', [UsersController::class, 'clients']);
 SimpleRouter::get('/prise-rdv', [UsersController::class, 'priseRDV']);
 SimpleRouter::post('/prise-rdv', [UsersController::class, 'priseRDV']);
 SimpleRouter::get('/tarification', [UsersController::class, 'tarification']);
+
+/* Facture file content */
+SimpleRouter::get('/facture', [UsersController::class, 'getFacture']);

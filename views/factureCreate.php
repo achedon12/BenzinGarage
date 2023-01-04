@@ -24,8 +24,6 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Facture--"){
 if(isset($_POST["create-facture"])){
     $factureManager->createFacturePDF($factureManager->getFacture($_SESSION["facture"]));
 }
-
-print_r($_SESSION);
 ?>
 <!doctype html>
 <html lang="en">

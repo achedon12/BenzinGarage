@@ -107,8 +107,13 @@ class OperationManager
     }
 
     public function getOperationInformations(int $numdde): array{
-        //TODO: to patch
-        $stmt = $this->pdo->prepare("select idop_ef,libelleop, codeop, numdde, dureeop, codetarif, couthoraireht, duree_prevue from sae_garage.operation_effectuer join sae_garage.operation using(codeop) join prevoir_ope using(codeop) where numdde = :numdde;");
+        $stmt = $this->pdo->prepare("select * from sae_garage.prevoir_ope where numdde = :numdde;");
+        $stmt->execute(["numdde" => $numdde]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getOperationAEffectuerToPDF(int $numdde): array{
+        $stmt = $this->pdo->prepare("select idop_ef,libelleop from sae_garage.operation_effectuer where numdde = :numdde;");
         $stmt->execute(["numdde" => $numdde]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

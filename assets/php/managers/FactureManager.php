@@ -3,7 +3,10 @@
 use Dompdf\Dompdf;
 
 require_once "assets/php/class/Facture.php";
+require_once "assets/php/class/FacturePDF.php";
 require_once "assets/php/managers/OperationManager.php";
+require_once "assets/php/managers/FacturePdfManager.php";
+require_once "assets/php/managers/InterventionManager.php";
 require_once "assets/php/managers/ClientManager.php";
 require_once "assets/php/database/DatabaseManager.php";
 
@@ -12,11 +15,13 @@ class FactureManager{
     private PDO $pdo;
     private OperationManager $operationManager;
     private ClientManager $clientManager;
+    private InterventionManager $interventionManager;
 
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
         $this->operationManager = new OperationManager(DatabaseManager::getInstance());
         $this->clientManager = new ClientManager(DatabaseManager::getInstance());
+        $this->interventionManager = new InterventionManager(DatabaseManager::getInstance());
     }
 
     /**
@@ -97,8 +102,9 @@ class FactureManager{
 
     public function createFacturePDF(Facture $facture): void
     {
-        $interventions = $this->operationManager->getOperationInformations($facture->getNumDde());
-        (new FacturePdfManager(new FacturePDF($facture,$interventions,$this->clientManager->getClientByID($interventions["codeop"]))))->toPdf();
+        $interventions = [];
+        $interventions[] = $this->operationManager->getOperationInformations($facture->getNumDde());
+        $interventions[] = $this->operationManager->getOperationListForIntervention($facture->getNumDde());
+        (new FacturePdfManager(new FacturePDF($facture,$interventions,$this->clientManager->getClientByID($this->interventionManager->getCodeClientFromDemandeIntervention($facture->getNumDde())))))->toPdf();
     }
-
 }

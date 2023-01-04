@@ -23,16 +23,18 @@ class FacturePdfManager{
     }
 
     private function toHtml(): string{
-        return str_replace(["{firstName}","{name}","{adresse}","{formeJuridique}","{numTVA}","{numFacture}","{date}"],
+        return str_replace(["{firstName}","{name}","{adresse}","{formeJuridique}","{numTVA}","{numFacture}","{date}","{priceHT}","{tauxTVA}","{priceTTC}"],
             [$this->facture->getClient()->getFirstName(),
                 $this->facture->getClient()->getName(),
                 $this->facture->getClient()->getAdresse(),
                 "SARL",
                 $this->facture->getFacture()->getTva(),
                 $this->facture->getFacture()->getFactureNumber(),
-                $this->facture->getFacture()->getFactureDate()
-
-                ],file_get_contents("facture.html"));
+                $this->facture->getFacture()->getFactureDate(),
+                $this->facture->getFacture()->getToPay() * (1 - $this->facture->getFacture()->getTva() / 100),
+                $this->facture->getFacture()->getTva(),
+                $this->facture->getFacture()->getToPay(),
+                ],file_get_contents("http://sae.test/facture"));
     }
 
     /**

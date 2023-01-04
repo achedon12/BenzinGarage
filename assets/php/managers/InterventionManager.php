@@ -196,6 +196,12 @@ class InterventionManager {
     }
 
 
-
+    public function getCodeClientFromDemandeIntervention(int $numdde): string{
+        $stmt = $this->pdo->prepare("select codeclient from sae_garage.dde_interv where numdde = :numdde;");
+        $stmt->execute([
+            "numdde" => $numdde
+        ]);
+        return $stmt->fetch(PDO::FETCH_ASSOC)["codeclient"];
+    }
 
 }
