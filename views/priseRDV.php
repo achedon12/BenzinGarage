@@ -60,6 +60,16 @@ if(isset($_POST["ValiderInscriptionClient"])){
     $clientsManager->createVehicule($_POST["noimma"],$_POST["noserie"],$_POST["dateService"] ,$_POST["numModel"],$client["codeclient"]);
 }
 
+if(isset($_POST["ValiderRDV"])){
+    echo "test";
+    echo $_COOKIE["operationForOneInervention"];
+
+
+//    $interventionManager->createIntervention();
+
+}
+
+
 //if(isset($_COOKIE['operationForOneInervention'])){
 //    echo $_COOKIE['operationForOneInervention'];
 //    $tabOperationForOneInervention = explode(",",$_COOKIE['operationForOneInervention']);
@@ -143,7 +153,7 @@ TemplateManager::getDefaultNavBar("rdv");
             </section>
 
             <section class="ValiderPrix">
-                <input type="button" onclick="submit()" value="Ajouter le rendez-vous" name="ValiderRDV">
+                <input type="submit" value="Ajouter le rendez-vous" name="ValiderRDV">
                 <section style="display: flex"><h2 id="prixIntervention">0</h2><h2>€</h2></section>
             </section>
         </section>
@@ -158,7 +168,7 @@ TemplateManager::getDefaultNavBar("rdv");
         <section class="choixOperation">
             <label for="operations">Choisir une opération</label>
             <select name="" id="operations" onchange="rafraichir(this.value)">
-                <option value="-1">Choisissez une operation...</option>
+                <option value="-1" selected disabled>Choisissez une operation...</option>
             </select>
         </section>
 
