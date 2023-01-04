@@ -32,11 +32,12 @@ if(!Auth::isConnected()){
     return;
 }
 
+
 if(isset($_POST["selectClient"])){
     $Client = $clientsManager->getClientByID($_POST["selectClient"]);
     $prenomClient=$Client->getFirstName();
     $nomClient= $Client->getName();
-    $id=$Client->getId();
+    $_SESSION["id"]=$Client->getId();
     $voiture= $clientsManager->getClientVehicle($Client->getId());
 
 }else{
@@ -61,22 +62,14 @@ if(isset($_POST["ValiderInscriptionClient"])){
 }
 
 if(isset($_POST["ValiderRDV"])){
-    echo "test";
-    echo $_COOKIE["operationForOneInervention"];
 
+    $date = explode("T",$_POST["dateRDV"]);
+    $interventionManager->createIntervention($date[0],$date[1],$_COOKIE["operationForOneInervention"],$_POST["km_actuel"],$_POST["radio"],"Planifiee",$_POST["selectEmploye"],$_POST["noimmatriculation"],$_SESSION["id"]);
 
 //    $interventionManager->createIntervention();
 
 }
 
-
-//if(isset($_COOKIE['operationForOneInervention'])){
-//    echo $_COOKIE['operationForOneInervention'];
-//    $tabOperationForOneInervention = explode(",",$_COOKIE['operationForOneInervention']);
-//}
-//if(isset($_COOKIE['prixTotal'])){
-//    echo $_COOKIE['prixTotal'];
-//}
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +105,7 @@ TemplateManager::getDefaultNavBar("rdv");
                 <h2>Nom de famille :<?php if(isset($nomClient)) echo " ".$nomClient."</h2>" ;
                     else echo '';
                 ?>
-                <h2>Code Client :<?php if(isset($nomClient)) echo " ".$id."</h2>" ;
+                <h2>Code Client :<?php if(isset($nomClient)) echo " ".$_SESSION["id"]."</h2>" ;
                     else echo '';
                 ?></h2>
             </section>
@@ -121,12 +114,12 @@ TemplateManager::getDefaultNavBar("rdv");
             </section>
             <section class="infoSupp">
                 <section class="infoVehicule" style="display: flex; flex-direction: column">
-                    <h4>No d'immatriculation : </h4> <input type="text" name="noimatriculation" value="<?php if(isset($_POST['selectClient'])){echo $voiture->getNumberPlate();}?>" required placeholder="XX-000-XX" pattern="[A-Z]{2}-[0-9]{3}-[A-Z]{2}" >
+                    <h4>No d'immatriculation : </h4> <input type="text" name="noimmatriculation" value="<?php if(isset($_POST['selectClient'])){echo $voiture->getNumberPlate();}?>" required placeholder="XX-000-XX" pattern="[A-Z]{2}-[0-9]{3}-[A-Z]{2}" >
                     <h4>Kilométrage du vehicule : </h4> <input type="text" name="km_actuel" required>
                 </section>
                 <section class="Employe" id="employe">
                     <h4>Employé chargée de l'intervention</h4>
-                    <select id="employe-select" name="select">
+                    <select id="employe-select" name="selectEmploye">
                     <?php
                     if ($_SESSION["managerId"] === 0) {
                         echo '<option value="false" disabled selected>--Employé--</option>';

@@ -72,7 +72,7 @@ if(!Auth::isConnected()){
                                     <p class="product-name">' . $piece->getLibelleArticle() . '</p></br>
                                     <p class="product-ref">Référence : ' . $piece->getCodeArticle() . '</p>
                                     <p class="piece-available">' . $piece->getStockQuantite() . ' pièce(s) restante(s)</p>
-                                    <button class="buttonPasserCommande" id="'.$piece->getCodeArticle().'">coucou</button>
+                                    <input class="validerCommande" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit">
                                     
                                 </section>
                             </article>';
