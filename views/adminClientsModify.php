@@ -7,9 +7,11 @@ require_once "assets/php/managers/UserManager.php";
 require_once "assets/php/managers/ClientManager.php";
 require_once "assets/php/class/Client.php";
 require_once "assets/php/managers/GarageManager.php";
-$garaManager = new GarageManager(DatabaseManager::getInstance());
+require_once "assets/php/managers/TemplateManager.php";
+
 $userManager = new UserManager(DatabaseManager::getInstance());
 $clientManager = new ClientManager(DatabaseManager::getInstance());
+$garaManager = new GarageManager(DatabaseManager::getInstance());
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
@@ -65,18 +67,9 @@ if(isset($_POST["delete"])){
     <link rel="shortcut icon" href="../../assets/img/logo.png">
 </head>
 <body>
-<nav>
-    <img src="../../assets/img/logo.png" alt="logo">
-    <ul>
-        <li><a href="/accueil/admin">Accueil</a></li>
-        <li class="hover"><a href="/admin/clients">Clients</a></li>
-        <li><a href="/admin/employes">Employés</a></li>
-        <li><a href="/admin/tarification">Tarification</a></li>
-        <li><a href="/admin/stock">Stock</a></li>
-        <li ><a href="/admin/interventionPlanning">Intervention</a></li>
-        <li><a href="/disconnect">Deconnexion</a></li>
-    </ul>
-</nav>
+<?php
+TemplateManager::getAdminNavBar("clientsFar");
+?>
 <main>
     <form method="post" class="selecteur" onchange="submit()">
         <section>

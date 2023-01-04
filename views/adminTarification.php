@@ -7,6 +7,7 @@ require_once "assets/php/managers/UserManager.php";
 require_once "assets/php/managers/ClientManager.php";
 require_once "assets/php/managers/GarageManager.php ";
 require_once "assets/php/class/Piece.php ";
+require_once "assets/php/managers/TemplateManager.php";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
 $clientManager = new ClientManager(DatabaseManager::getInstance());
@@ -38,7 +39,6 @@ if(isset($_POST["submitProduitChangement"])){
     }
 }
 ?>
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -54,19 +54,9 @@ if(isset($_POST["submitProduitChangement"])){
     <title>Admin : Tarification</title>
 </head>
 <body>
-<nav>
-    <img src="../assets/img/logo.png" alt="logo">
-    <ul>
-        <li ><a href="/accueil/admin">Accueil</a></li>
-        <li><a href="/admin/clients">Clients</a></li>
-        <li><a href="/admin/employes">Employés</a></li>
-        <li class="hover"><a href="/admin/tarification">Tarification</a></li>
-        <li><a href="/admin/stock">Stock</a></li>
-        <li ><a href="/admin/interventionPlanning">Intervention</a></li>
-        <li><a href="/disconnect">Deconnexion</a></li>
-    </ul>
-</nav>
-
+<?php
+TemplateManager::getAdminNavBar("tarifs");
+?>
 <form method="post" class="selecteur" onchange="submit()">
     <section>
         <label for="client-select">Choisir un produit</label>
@@ -99,7 +89,6 @@ if(isset($_POST["submitProduitChangement"])){
             echo $garageManager->getPieceById($_SESSION["productId"])[3];
 
         }
-
         ?>
     </h1>
     <h2>Réference : <?php
@@ -110,7 +99,6 @@ if(isset($_POST["submitProduitChangement"])){
         }
         ?>   </h2>
     <form action="" method="post">
-
         <section class="containerPrices">
             <input type="text" name="originPrice" value=" <?php
             if(isset($_SESSION["productId"])) {
@@ -126,7 +114,6 @@ if(isset($_POST["submitProduitChangement"])){
             <input class="submitEditPrice" type="reset" value="Réinitialiser informations">
         </section>
     </form>
-
 </section>
 </body>
 </html>

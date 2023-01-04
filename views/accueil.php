@@ -4,7 +4,7 @@ use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/UserManager.php";
-require_once("./assets/php/managers/TemplateManager.php");
+require_once "assets/php/managers/TemplateManager.php";
 
 $userManager = new UserManager(DatabaseManager::getInstance());
 
@@ -34,25 +34,25 @@ if(!Auth::isConnected()){
             TemplateManager::getDefaultNavBar("accueil");
         ?>
         <main>
-            <a href="#">
+            <a href="/planning">
                 <h1>Planning</h1>
                 <img src="../assets/img/planning.png" alt="planning">
             </a>
-            <a href="#">
+            <a href="/prise-rdv">
                 <h1>Prise de rendez-vous</h1>
-                <img src="../assets/img/add-clients.png" alt="planning">
+                <img src="../assets/img/add-clients.png" alt="prise-rdv">
             </a>
-            <a href="#">
+            <a href="/clients">
                 <h1>Clients</h1>
-                <img src="../assets/img/add-clients.png" alt="planning">
+                <img src="../assets/img/add-clients.png" alt="clients">
             </a>
-            <a href="#">
+            <a href="/stock">
                 <h1>Stock</h1>
-                <img src="../assets/img/cartons.png" alt="planning">
+                <img src="../assets/img/cartons.png" alt="stock">
             </a>
-            <a href="#">
+            <a href="/tarification">
                 <h1>Tarifs</h1>
-                <img src="../assets/img/caisse.png" alt="planning">
+                <img src="../assets/img/caisse.png" alt="tarifs">
             </a>
         </main>
     </body>

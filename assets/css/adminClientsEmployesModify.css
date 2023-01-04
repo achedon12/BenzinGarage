@@ -5,7 +5,7 @@ main
     align-items: center;
 }
 
-form.selecteur, form.selecteur
+form.selecteur
 {
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@ form.selecteur, form.selecteur
     width: 100%;
 }
 
-form.selecteur>section, form.selecteur>section
+form.selecteur>section
 {
     display: flex;
     align-items: center;

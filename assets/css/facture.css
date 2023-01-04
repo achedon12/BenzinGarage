@@ -1,0 +1,115 @@
+main
+{
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+main.custom{
+    flex-direction: column;
+    align-items: center;
+}
+
+main.create
+{
+    flex-basis: 80%;
+    background-color: var(--grey-color);
+    border-radius: 25px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section.main
+{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--grey-color);
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-basis: 80%;
+}
+
+form.selecteur-custom
+{
+    display: flex;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+}
+
+form.selecteur-custom
+{
+    flex-basis: 20%;
+}
+
+form.selecteur-custom>section, form.selecteur
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1%;
+    text-align: center;
+    width: 20%;
+    background-color: var(--green-color);
+    border-radius: 25px;
+    border: 1px solid var(--white-color);
+    margin-left: auto;
+    margin-right: 0;
+}
+
+h1.no-facture
+{
+    color: var(--white-color);
+    text-align: center;
+}
+
+.facture
+{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.create-facture
+{
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.create-facture>button
+{
+    height: 10%;
+    width: 20%;
+    background-color: var(--green-color);
+    border-radius: 25px;
+    border: 1px solid var(--green-color);
+    color: var(--white-color);
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.create-facture>button:hover
+{
+    border: 1px solid var(--white-color);
+}
+
+.head
+{
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}

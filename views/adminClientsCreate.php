@@ -4,6 +4,7 @@ use app\users\Auth;
 
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/ClientManager.php";
+require_once "assets/php/managers/TemplateManager.php";
 
 $clientManager = new ClientManager(DatabaseManager::getInstance());
 
@@ -42,18 +43,9 @@ if(isset($_POST["create"])){
     <link rel="shortcut icon" href="../../assets/img/logo.png">
 </head>
 <body>
-<nav>
-    <img src="../../assets/img/logo.png" alt="logo">
-    <ul>
-        <li><a href="/accueil/admin">Accueil</a></li>
-        <li class="hover"><a href="/admin/clients">Clients</a></li>
-        <li><a href="/admin/employes">Employés</a></li>
-        <li><a href="/admin/tarification">Tarification</a></li>
-        <li><a href="/admin/stock">Stock</a></li>
-        <li ><a href="/admin/interventionPlanning">Intervention</a></li>
-        <li><a href="/disconnect">Deconnexion</a></li>
-    </ul>
-</nav>
+<?php
+TemplateManager::getAdminNavBar("clientsFar");
+?>
 <main class="create">
     <form method="post">
         <?php  if($_SESSION["errorClient"] === "none"){ echo '<h1 class="errorCreate">Les informations n\'ont pas été correctement remplies</h1>'; }elseif($_SESSION["errorClient"] === "confirmCreate"){ echo '<h1 class="errorCreate">Le client a bien été créé</h1>'; } ?>

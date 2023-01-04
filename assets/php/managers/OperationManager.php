@@ -102,4 +102,20 @@ class OperationManager
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getTauxTVA(): float{
+        return self::TAUX_TVA;
+    }
+
+    public function getOperationInformations(int $numdde): array{
+        $stmt = $this->pdo->prepare("select * from sae_garage.prevoir_ope where numdde = :numdde;");
+        $stmt->execute(["numdde" => $numdde]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getOperationAEffectuerToPDF(int $numdde): array{
+        $stmt = $this->pdo->prepare("select idop_ef,libelleop from sae_garage.operation_effectuer where numdde = :numdde;");
+        $stmt->execute(["numdde" => $numdde]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

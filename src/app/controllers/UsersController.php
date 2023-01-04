@@ -24,10 +24,6 @@ class UsersController{
         render('accueilAdmin.php');
     }
 
-    public function utilisateurAdministrateur():void{
-        render('UtilisateurAdministrateur.php');
-    }
-
     public function adminAddClientPage():void{
         render('adminAddClient.php');
     }
@@ -42,18 +38,6 @@ class UsersController{
 
     public function editClientPage(){
         render('adminModifyClient.php');
-    }
-
-    public function adminRemoveClient(){
-        render('adminRemoveClient.php');
-    }
-
-    public function adminModifyEmploye(){
-        render('adminModifyEmploye.php');
-    }
-
-    public function adminRemoveEmploye(){
-        render('adminRemoveEmploye.php');
     }
 
     public function adminClients(){
@@ -105,5 +89,21 @@ class UsersController{
     }
     public function tarification(){
         render("tarification.php");
+    }
+
+    public function facture(){
+        render('facture.php');
+    }
+
+    public function createFacture(){
+        render('factureCreate.php');
+    }
+
+    public function listFacture(){
+        render('factureList.php');
+    }
+
+    public function getFacture(){
+        render('facture.html');
     }
 }
