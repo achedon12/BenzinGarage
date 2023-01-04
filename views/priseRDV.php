@@ -32,44 +32,49 @@ if(!Auth::isConnected()){
     return;
 }
 
-
 if(isset($_POST["selectClient"])){
-    $Client = $clientsManager->getClientByID($_POST["selectClient"]);
-    $prenomClient=$Client->getFirstName();
-    $nomClient= $Client->getName();
-    $_SESSION["id"]=$Client->getId();
-    $voiture= $clientsManager->getClientVehicle($Client->getId());
-
-}else{
-    $prenomClient=False ;
+    $_SESSION["rdv"]["enable"] = true;
+    $_SESSION["rdv"]["idClient"] = $_POST["selectClient"];
 }
 if(!isset($operationPourUneOperation)){
-    $operationPourUneOperation =[];;
+    $operationPourUneOperation = [];
 }
 
 if (isset($_POST["typeIntervention"])){
+    $_SESSION["rdv"]["typeIntervention"] = $_POST["typeIntervention"];
     $operationPourUneOperation[]=$operationManager->getOperationById($_POST["typeIntervention"]);
-//    print_r($operationManager->getOperationById($_POST['typeIntervention']));
-
 }
 if(isset($_POST["ValiderInscriptionClient"])){
-
     $clientsManager->createClient($_POST["NomClient"],$_POST["PrenomClient"],$_POST["adresseClient"],$_POST["codePostalClient"],$_POST["villeClient"],$_POST["telClient"],$_POST["mailClient"]);
     $client = $clientsManager->getClientByFirstnameAndName($_POST["PrenomClient"],$_POST["NomClient"])[0];
-
-
     $clientsManager->createVehicule($_POST["noimma"],$_POST["noserie"],$_POST["dateService"] ,$_POST["numModel"],$client["codeclient"]);
 }
 
-if(isset($_POST["ValiderRDV"])){
-
-    $date = explode("T",$_POST["dateRDV"]);
-    $interventionManager->createIntervention($date[0],$date[1],$_COOKIE["operationForOneInervention"],$_POST["km_actuel"],$_POST["radio"],"Planifiee",$_POST["selectEmploye"],$_POST["noimmatriculation"],$_SESSION["id"]);
-
-//    $interventionManager->createIntervention();
-
+if(isset($_POST["selectEmploye"])){
+    $_SESSION["rdv"]["employe"] = $_POST["selectEmploye"];
 }
 
+if(isset($_POST["radio1"])){
+    $_SESSION["rdv"]["radio"] = $_POST["radio1"];
+}
+if(isset($_POST["radio2"])){
+    $_SESSION["rdv"]["radio"] = $_POST["radio2"];
+}
+
+if(isset($_POST["ValiderRDV"])){
+    $date = explode("T",$_POST["dateRDV"]);
+    $interventionManager->createIntervention($date[0],$date[1],$_COOKIE["operationForOneInervention"],$_POST["km_actuel"],$_SESSION["rdv"]["radio"],"Planifiee",$_POST["selectEmploye"],$_POST["noimmatriculation"],$_SESSION["id"]);
+}
+
+if(isset($_POST["km_actuel"])){
+    $_SESSION["rdv"]["kms"] = $_POST["km_actuel"];
+}
+
+if(isset($_POST["dateRDV"])){
+    $_SESSION["rdv"]["date"] = $_POST["dateRDV"];
+}
+
+print_r($_SESSION["rdv"]);
 ?>
 
 <!DOCTYPE html>
@@ -90,61 +95,87 @@ if(isset($_POST["ValiderRDV"])){
 TemplateManager::getDefaultNavBar("rdv");
 ?>
 <main>
-    <form method="post" class="formRDV">
+    <form method="post" class="formRDV" onchange="submit()">
         <section class="InfoClient">
             <section class="CompteClient">
                 <h2>Possède un compte client :</h2>
                 <a href="#popInscription">Non</a>
                 <a href="#popChoixClient">Oui</a>
-
             </section>
             <section class="NomPrenom">
-                <h2>Prenom :<?php if(isset($prenomClient)) echo " ". $prenomClient."</h2>";
-                else echo '';
-                ?>
-                <h2>Nom de famille :<?php if(isset($nomClient)) echo " ".$nomClient."</h2>" ;
-                    else echo '';
-                ?>
-                <h2>Code Client :<?php if(isset($nomClient)) echo " ".$_SESSION["id"]."</h2>" ;
-                    else echo '';
-                ?></h2>
+                <h2>Prenom : <?php if(isset($_SESSION["rdv"]["idClient"])){ echo $clientsManager->getClientByID($_SESSION["rdv"]["idClient"])->getFirstName();} echo " ";?></h2>
+
+                <h2>Nom de famille : <?php if(isset($_SESSION["rdv"]["idClient"])){ echo $clientsManager->getClientByID($_SESSION["rdv"]["idClient"])->getName();} echo " ";?></h2>
+
+                <h2>Code Client : <?php if(isset($_SESSION["rdv"]["idClient"])){ echo $clientsManager->getClientByID($_SESSION["rdv"]["idClient"])->getId();} echo " ";?></h2>
             </section>
             <section class="Date" style="display: flex">
-                <h2>Date : </h2> <input type="datetime-local" name="dateRDV" required>
+                <h2>Date : </h2> <input type="datetime-local" name="dateRDV" required value="<?php if(isset($_SESSION["rdv"]["date"])){ echo $_SESSION["rdv"]["date"];} ?>">
             </section>
             <section class="infoSupp">
                 <section class="infoVehicule" style="display: flex; flex-direction: column">
-                    <h4>No d'immatriculation : </h4> <input type="text" name="noimmatriculation" value="<?php if(isset($_POST['selectClient'])){echo $voiture->getNumberPlate();}?>" required placeholder="XX-000-XX" pattern="[A-Z]{2}-[0-9]{3}-[A-Z]{2}" >
-                    <h4>Kilométrage du vehicule : </h4> <input type="text" name="km_actuel" required>
+                    <h4>No d'immatriculation : </h4> <input type="text" name="noimmatriculation" value="<?php if(isset($_SESSION['rdv']["idClient"])){echo $clientsManager->getClientVehicle($_SESSION["rdv"]["idClient"])->getNumberPlate();}?>" required placeholder="XX-000-XX" pattern="[A-Z]{2}-[0-9]{3}-[A-Z]{2}" >
+                    <h4>Kilométrage du vehicule :</h4> <input type="text" name="km_actuel" required value="<?php if(isset($_SESSION["rdv"]["kms"])){ echo $_SESSION["rdv"]["kms"];}else echo ""  ?>">
                 </section>
                 <section class="Employe" id="employe">
                     <h4>Employé chargée de l'intervention</h4>
-                    <select id="employe-select" name="selectEmploye">
+
                     <?php
-                    if ($_SESSION["managerId"] === 0) {
-                        echo '<option value="false" disabled selected>--Employé--</option>';
+                    if(isset($_SESSION["rdv"]["date"]) && $_SESSION["rdv"]["date"] == 0){
+                        echo '<select id="employe-select" name="selectEmploye" disabled>';
+                    }else{
+                        echo '<select id="employe-select" name="selectEmploye" >';
                     }
-                    foreach($userManager->getAllEmployees() as $people){
-                        $name  = $people->getName()." ".$people->getFirstName();
-                        $code = $people->getId();
-                        if($code == $_SESSION["managerId"]){
-                            ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
-                        }else{
-                            ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                    if($_SESSION["rdv"]["date"] === 0){
+                        if ($_SESSION["rdv"]["employe"] === 0) {
+                            echo '<option value="false" disabled selected>--Employé--</option>';
+                        }
+                        foreach($userManager->getAllEmployees() as $people){
+                            $name  = $people->getName()." ".$people->getFirstName();
+                            $code = $people->getId();
+                            if($code == $_SESSION["rdv"]["employe"]){
+                                ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
+                            }else{
+                                ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                            }
+                        }
+                    }else{
+                        if($_SESSION["rdv"]["employe"] === 0){
+                            echo '<option value="false" disabled selected>--Employé--</option>';
+                        }
+                        //TODO: a patch
+                        if(isset($_SESSION["rdv"]["date"]) && $_SESSION["rdv"]["date"] != 0){
+                            foreach($userManager->getAvailableEmployes(explode("T",$_SESSION["rdv"]["date"])[1]) as $people){
+                                $name  = $people->getName()." ".$people->getFirstName();
+                                $code = $people->getId();
+                                if($code == $_SESSION["rdv"]["employe"]){
+                                    ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
+                                }else{
+                                    ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                                }
+                            }
                         }
                     }
                     ?>
                     </select>
                     <section class="devis">
                         <h4>Devis fait :</h4>
-                        <input type="radio" id="DevisNon" name="radio" value="false" checked><label for="DevisNon">Non</label>
-                        <input type="radio" id="DevisOui" name="radio" value="true"><label for="DevisOui">Oui</label>
-
+                        <?php
+                        if($_SESSION["rdv"]["radio"] == "oui"){
+                            ?>
+                            <input type="radio" id="DevisNon" name="radio1" value="non"><label for="DevisNon">Non</label>
+                            <input type="radio" id="DevisOui" name="radio2" value="oui" checked><label for="DevisOui">Oui</label>
+                            <?php
+                        }else{
+                            ?>
+                            <input type="radio" id="DevisNon" name="radio1" value="non" checked><label for="DevisNon">Non</label>
+                            <input type="radio" id="DevisOui" name="radio2" value="oui"><label for="DevisOui">Oui</label>
+                            <?php
+                        }
+                        ?>
                     </section>
                 </section>
-
             </section>
-
             <section class="ValiderPrix">
                 <input type="submit" value="Ajouter le rendez-vous" name="ValiderRDV">
                 <section style="display: flex"><h2 id="prixIntervention">0</h2><h2>€</h2></section>
@@ -155,9 +186,6 @@ TemplateManager::getDefaultNavBar("rdv");
 
         </section>
 
-
-
-
         <section class="choixOperation">
             <label for="operations">Choisir une opération</label>
             <select name="" id="operations" onchange="rafraichir(this.value)">
@@ -165,17 +193,14 @@ TemplateManager::getDefaultNavBar("rdv");
             </select>
         </section>
 
-
         <section id="popChoixClient">
             <section id="intoPopUpRDV">
                 <h2>Choix du client</h2>
                 <form method="post" id="formInscriptionClient" >
                     <select id="client-select" name="selectClient" onchange="submit()">
                         <?php
-
                         echo '<option value="false" disabled selected>--Client--</option>';
                         foreach($clientsManager->getAllClients() as $people){
-
                             $name = $people->getName()." ".$people->getFirstName();
                             $code = $people->getId();
                             if($code == $_SESSION["userId"]){
@@ -192,7 +217,6 @@ TemplateManager::getDefaultNavBar("rdv");
             </section>
 
         </section>
-
 
         <section id="popInscription">
             <section id="intoPopUpRDV">
