@@ -79,7 +79,7 @@ class Facture{
     /**
      * @return int
      */
-    public function getEtat(): int
+    public function getEtat(): string
     {
         return $this->etat;
     }
