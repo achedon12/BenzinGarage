@@ -21,7 +21,7 @@ document.querySelectorAll(".reservation").forEach(function (element) {
             bigElement.classList.add("aIntervention");
 
             let libelleElement = document.createElement("p");
-            libelleElement.textContent = getLibelle(element.codeop.trim());
+            libelleElement.textContent = element.codeop;
             bigElement.appendChild(libelleElement);
             parent.appendChild(bigElement);
         });
@@ -40,18 +40,3 @@ document.querySelector("#typeIntervention").addEventListener("change", function 
         document.querySelector(".addIntervention").style.display = "none";
     }
 });
-
-function getLibelle(libelle){
-    switch (libelle.trim()) {
-        case "ChangPneuAVG":
-            return "changement pneu avant gauche";
-        case "Vidange":
-            return "vidange";
-        case "Nettoyage":
-            return "nettoyage";
-        case "DemontBoitVitesse":
-            return "démontage boite de vitesse";
-        case "ChangPneuAVD":
-            return "changement pneu avant droit";
-    }
-}

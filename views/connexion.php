@@ -60,7 +60,6 @@ if(isset($_POST["id-connexion"]) && isset($_POST["password-connexion"])){
                     </article>
                     <input type="submit" value="Login" class="input-login">
                 </form>
-                <a href="#" class="password-forgot">Mot de passe oublié</a>
             </article>
         </section>
     </body>

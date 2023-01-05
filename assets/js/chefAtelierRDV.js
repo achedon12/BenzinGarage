@@ -1,5 +1,5 @@
 Operations=[
-    { "id":"ChangPneuAVG",
+/*    { "id":"ChangPneuAVG",
     "libelleop":"chPnAVG",
     "dureeop":0.3,
     "codetarif":5 }
@@ -24,8 +24,9 @@ Operations=[
     { "id":"DemontBoitVitesse" ,
         "libelleop":"DmtBVits",
         "dureeop":2,
-        "codetarif":7}
-]
+        "codetarif":7}*/
+];
+
 let prixOperation = [];
 
 let prixTotalIntervention = 0.0;
@@ -36,46 +37,47 @@ function operationSelect(Operations) {
     for (let i = 0; i < Operations.length; i++) {
         let operation = Operations[i];
         let option = document.createElement("option");
-        option.value = operation.id;
-        option.text = operation.id ;
+        option.value = operation.codeop;
+        option.text = operation.libelleop;
         document.getElementById("operations").appendChild(option);
     }
 }
 
-function init() {
+async function init() {
     idContactCourant = -2;
+
+    let ops = await (await fetch(`http://sae.test/assets/php/request/getOperations.php`)).json();
+    setOperation(ops);
+
     operationSelect(Operations);
 
-    let positionidOpe=0;
-    for (let i = 0; i < Operations.length; i++) {
-        if (Operations[i].id===idOpe){
-            positionidOpe=i;
-
-
-        }
-    }
-    let newOperation = document.createElement("section");
-    let newH2 = document.createElement("h2")
-    let newContent = document.createTextNode(Operations[positionidOpe].id);
-    let supprsection = document.createElement("section");
-    supprsection.classList.add("buttonSupprOpe");
-    supprsection.id =Operations[positionidOpe].id;
-
-    let textSuppre = document.createTextNode("-");
-    supprsection.appendChild(textSuppre);
-    supprsection.addEventListener('click', supprOperations);
-
-    newH2.appendChild(newContent)
-    newOperation.id = Operations[positionidOpe].id
-    newOperation.classList.add("interventionRDV")
-    newOperation.appendChild(newH2);
-    newOperation.appendChild(supprsection);
-    let sectionOperationRDV = document.getElementById("interventionRDV");
-    sectionOperationRDV.appendChild(newOperation);
-    operationForOneInervention.push(Operations[positionidOpe].id);
-    prixOperation.push(Operations[positionidOpe].codetarif);
+    // let positionidOpe = 0;
+    // for (let i = 0; i < Operations.length; i++) {
+    //     if (Operations[i].codeop === idOpe) {
+    //         positionidOpe = i;
+    //     }
+    // }
+    // let newOperation = document.createElement("section");
+    // let newH2 = document.createElement("h2")
+    // let newContent = document.createTextNode(Operations[positionidOpe].codeop);
+    // let supprsection = document.createElement("section");
+    // supprsection.classList.add("buttonSupprOpe");
+    // supprsection.id = Operations[positionidOpe].codeop;
+    //
+    // let textSuppre = document.createTextNode("-");
+    // supprsection.appendChild(textSuppre);
+    // supprsection.addEventListener('click', supprOperations);
+    //
+    // newH2.appendChild(newContent)
+    // newOperation.id = Operations[positionidOpe].codeop
+    // newOperation.classList.add("interventionRDV")
+    // newOperation.appendChild(newH2);
+    // newOperation.appendChild(supprsection);
+    // let sectionOperationRDV = document.getElementById("interventionRDV");
+    // sectionOperationRDV.appendChild(newOperation);
+    // operationForOneInervention.push(Operations[positionidOpe].codeop);
+    // prixOperation.push(Operations[positionidOpe].codetarif);
 }
-
 
 function supprOperations(){
     let idrequest = this.getAttribute('id');
@@ -84,8 +86,6 @@ function supprOperations(){
         operationForOneInervention.splice(positionI, 1);
         prixOperation.splice(positionI,1);
     }
-    console.log("operationForOneIntervention",operationForOneInervention);
-    console.log("prixOperation",prixOperation);
     document.getElementById(idrequest).classList.add("hidden");
     changerPrix();
 }
@@ -93,42 +93,41 @@ function supprOperations(){
 function rafraichir(idOpe) {
     let positionidOpe=0;
     for (let i = 0; i < Operations.length; i++) {
-        if (Operations[i].id===idOpe){
+        if (Operations[i].codeop===idOpe){
             positionidOpe=i;
         }
     }
     let newOperation = document.createElement("section");
     let newH2 = document.createElement("h2")
-    let newContent = document.createTextNode(Operations[positionidOpe].id);
+    let newContent = document.createTextNode(Operations[positionidOpe].codeop);
     let supprsection = document.createElement("section");
     supprsection.classList.add("buttonSupprOpe");
-    supprsection.id =Operations[positionidOpe].id;
+    supprsection.id =Operations[positionidOpe].codeop;
 
     let textSuppre = document.createTextNode("-");
     supprsection.appendChild(textSuppre);
     supprsection.addEventListener('click', supprOperations);
 
     newH2.appendChild(newContent)
-    newOperation.id = Operations[positionidOpe].id
+    newOperation.id = Operations[positionidOpe].codeop
     newOperation.classList.add("interventionRDV")
     newOperation.appendChild(newH2);
     newOperation.appendChild(supprsection);
     let sectionOperationRDV = document.getElementById("interventionRDV");
     sectionOperationRDV.appendChild(newOperation);
-    operationForOneInervention.push(Operations[positionidOpe].id);
+    operationForOneInervention.push(Operations[positionidOpe].codeop);
     prixOperation.push(Operations[positionidOpe].codetarif);
-
     document.cookie = "operationForOneInervention=" + operationForOneInervention;
     document.cookie = "prixTotal=" + prixIntervention;
-    console.log(operationForOneInervention);
     changerPrix()
 }
 
+
 async function changerPrix(){
     prixTotalIntervention=0.0;
-    let data =await (await fetch(`http://benzingarage.test/assets/php/request/getCountHorraire.php`)).json();
+    let data =await (await fetch(`http://sae.test/assets/php/request/getCountHorraire.php`)).json();
     if(prixOperation.length===0){
-        prixOperation=0.0;
+        prixOperation=0;
     }
     else{
         for (let codePrix of prixOperation) {
@@ -137,11 +136,21 @@ async function changerPrix(){
                 codePrix += ' ';
             }
             for (let info of data) {
-
-                if (info['codetarif'] === codePrix) {
-
-                    prixTotalIntervention += parseFloat(info['couthoraireactuelht']);
+                if(info.codetarif.trim()===codePrix.trim()){
+                    console.log(info.couthoraireactuelht);
+                    console.log(typeof info.couthoraireactuelht);
+                    prixTotalIntervention+=parseInt(info.couthoraireactuelht);
                 }
+
+                /*for (let i of info) {
+                    if (i.codetarif === codePrix) {
+                        prixTotalIntervention += parseFloat(info[i].couthoraireactuelht);
+                    }
+                }*/
+                /*if (info.codetarif === codePrix) {
+                    prixTotalIntervention += parseFloat(info.codetarif);
+                    console.log(info.codetarif)
+                }*/
             }
         }
     }
@@ -149,8 +158,8 @@ async function changerPrix(){
 }
 
 
-
-
-
-
-
+function setOperation(data){
+    for(let element in data){
+        Operations.push(data[element]);
+    }
+}

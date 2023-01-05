@@ -130,4 +130,23 @@ class FactureManager{
         $stmt->execute(["value" => $res, "id" => $id]);
     }
 
+    public function createFacture(string $date, int $tva, int $netAPayer,int $numdde, string $etatFacture = "Emise"): void{
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.facture (datefacture,tauxtva,netapayer,etatfacture,numdde) VALUES (:datefacture,:tauxtva,:netapayer,:etatfacture,:numdde)");
+        $stmt->execute(["datefacture" => $date, "tauxtva" => $tva, "netapayer" => $netAPayer, "etatfacture" => $etatFacture, "numdde" => $numdde]);
+    }
+
+    public function getLastFacture(): int
+    {
+        $stmt = $this->pdo->prepare("SELECT nofacture FROM sae_garage.facture ORDER BY nofacture DESC LIMIT 1");
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row["nofacture"];
+    }
+
+    public function updateFactureNetAPayer(int $id, float $amount): void
+    {
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.facture SET netapayer = :amount WHERE nofacture = :id");
+        $stmt->execute(["amount" => $amount, "id" => $id]);
+    }
+
 }

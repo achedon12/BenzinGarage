@@ -13,7 +13,7 @@ require_once "assets/php/managers/OperationManager.php";
 require_once "assets/php/managers/CalendarManager.php";
 require_once "assets/php/class/Modele.php";
 require_once "assets/php/managers/ModeleManager.php";
-
+require_once "assets/php/managers/FactureManager.php";
 
 $modeleManager = new ModeleManager(DatabaseManager::getInstance());
 $calendarManager = new CalendarManager();
@@ -22,6 +22,7 @@ $userManager = new UserManager(DatabaseManager::getInstance());
 $garageManager = new GarageManager(DatabaseManager::getInstance());
 $clientsManager = new ClientManager(DatabaseManager::getInstance());
 $operationManager = new OperationManager(DatabaseManager::getInstance());
+$factureManager = new FactureManager(DatabaseManager::getInstance());
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
@@ -30,6 +31,10 @@ if(session_status() == PHP_SESSION_NONE){
 if(!Auth::isConnected()){
     render("connexion.php");
     return;
+}
+
+foreach($_SESSION["rdv"] as $key =>$rdv){
+    if($key == "idClient") unset($_SESSION["rdv"][$key]); else $_SESSION["rdv"][$key] = 0;
 }
 
 if(isset($_POST["selectClient"])){
@@ -61,6 +66,13 @@ if(isset($_POST["radio2"])){
 if(isset($_POST["ValiderRDV"])){
     $date = explode("T",$_POST["dateRDV"]);
     $interventionManager->createIntervention($date[0],$date[1],$_COOKIE["operationForOneInervention"],$_POST["km_actuel"],$_SESSION["rdv"]["radio"],"Planifiee",$_POST["selectEmploye"],$_POST["noimmatriculation"],$_SESSION["id"]);
+    $amount = 0;
+    $explode = explode(",",$_COOKIE["operationForOneInervention"]);
+    foreach ($explode as $operation){
+        $amount += $operationManager->getOperationById($operation)[0]["dureeop"] * $operationManager->getPriceForOperation($operationManager->getOperationById($operation)[0]["codetarif"]);
+    }
+
+    $factureManager->updateFactureNetAPayer($factureManager->getLastFacture(),$amount);
 }
 
 if(isset($_POST["km_actuel"])){
@@ -74,11 +86,6 @@ if(isset($_POST["dateRDV"])){
 if(isset($_COOKIE["operationForOneInervention"])){
     $_SESSION["rdv"]["listeOpe"] = $_COOKIE["operationForOneInervention"];
 }
-
-//if(isset($_POST["ValiderRDV"])){
-//
-//}
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -129,11 +136,10 @@ TemplateManager::getDefaultNavBar("rdv");
                     }else{
                         echo '<select id="employe-select" name="selectEmploye" >';
                     }
+                    if ($_SESSION["rdv"]["employe"] === 0) {
+                        echo '<option value="false" disabled selected>--Employé--</option>';
+                    }
                     if($_SESSION["rdv"]["date"] === 0){
-                        print_r("ll");
-                        if ($_SESSION["rdv"]["employe"] === 0) {
-                            echo '<option value="false" disabled selected>--Employé--</option>';
-                        }
                         foreach($userManager->getAllEmployees() as $people){
                             $name  = $people->getName()." ".$people->getFirstName();
                             $code = $people->getId();
@@ -144,12 +150,8 @@ TemplateManager::getDefaultNavBar("rdv");
                             }
                         }
                     }else{
-                        if($_SESSION["rdv"]["employe"] === 0){
-                            echo '<option value="false" disabled selected>--Employé--</option>';
-                        }
 
                         $explode = explode("T",$_SESSION["rdv"]["date"])[1] ?? "00:00:00";
-                        print_r($explode);
                         foreach($userManager->getAvailableEmployes($explode) as $people){
                             $name  = $people->getName()." ".$people->getFirstName();
                             $code = $people->getId();

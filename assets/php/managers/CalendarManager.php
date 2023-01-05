@@ -91,8 +91,8 @@ class CalendarManager{
         foreach($interventions as $intervention){
             $client = $this->clientManager->getClientByID($intervention->getCodeClient());
             if(in_array($intervention->getDateRdv(), $week)){
-            $rdv[$this->getDayFromDate($intervention->getDateRdv())][$this->getHours($intervention->getHeureRdv())] = $client->getName()." ".$client->getFirstName();
-            $ids[] = $intervention->getId();
+                $rdv[$this->getDayFromDate($intervention->getDateRdv())][$this->getHours($intervention->getHeureRdv())] = $client->getName()." ".$client->getFirstName();
+                $ids[] = $intervention->getId();
             }
         }
 
@@ -111,7 +111,7 @@ class CalendarManager{
                 }
                 echo '<td>';
                 if(isset($rdv[$jour[$i+1]][$j])) {
-                    echo '<div class="timeDate" hidden>'.array_values($interventions)[$theId+1]->getHeureRdv().'</div>';
+                    echo '<div class="timeDate" hidden>'.array_values($interventions)[$theId]->getHeureRdv().'</div>';
                     echo '<a class="reservation" href="#popUpRDV" id="'.$ids[$theId].'">'.$rdv[$jour[$i+1]][$j].'</a>';
                     $theId++;
                 }
@@ -137,7 +137,7 @@ class CalendarManager{
 
     private function getDayFromDate(string $date): string{
         $explode = explode("-", $date);
-        $timstamp = mktime(0, 0, 0, (int)$explode[2], (int)$explode[1], (int)$explode[0]);
+        $timstamp = mktime(0, 0, 0, (int)$explode[1], (int)$explode[2], (int)$explode[0]);
         return $this->translateNumberIntoDay(date("w", $timstamp));
     }
 
@@ -191,36 +191,14 @@ class CalendarManager{
 
     private function displayAllOperations(): string
     {
-        $operations = $this->operationManager->getOperationList();
+        $operations = $this->operationManager->getOperations();
         $select = "<label for=\"typeIntervention\">Type d'intervention</label>";
         $select .= "<select name='typeIntervention' id='typeIntervention' class='typeIntervention'>";
         $select .= "<option disabled selected value='0'>-- Choisir une intervention --</option>";
         foreach($operations as $operation => $value){
-            $select .= '<option id="' . $operation . '">' . $this->getLibelleOperation($operation) . '</option>';
+            $select .= '<option id="' . $operation . '">' . $value["codeop"] . '</option>';
         }
         $select .= "</select>";
         return $select;
-    }
-
-    private function getLibelleOperation(string $id): string
-    {
-        switch ($id) {
-            case "ChangPneuAVG":
-                $libelle = "changement pneu avant gauche";
-                break;
-            case "Vidange":
-                $libelle = "vidange";
-                break;
-            case "Nettoyage":
-                $libelle = "nettoyage";
-                break;
-            case "DemontBoitVitesse":
-                $libelle = "dÃ©montage boite de vitesse";
-                break;
-            case "ChangPneuAVD":
-                $libelle = "changement pneu avant droit";
-                break;
-        }
-        return $libelle;
     }
 }

@@ -19,12 +19,12 @@ class InterventionManager {
      * @param int $kmActuel
      * @param bool $devisOn
      * @param string $etat
-     * @param string $idOpérateur
+     * @param string $idOperateur
      * @param string $noimmatriculation
      * @param string $codeClient
      * @return bool
      */
-    public function createIntervention(string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, string $etat, string $idOpérateur, string $noimmatriculation, string $codeClient): bool{
+    public function createIntervention(string $dateRdv, string $heureRdv, string $descriptifDemande, int $kmActuel, bool $devisOn, string $etat, string $idOperateur, string $noimmatriculation, string $codeClient): bool{
         $sql = $this->pdo->query("SELECT max(numdde) FROM sae_garage.dde_interv");
         $newID = $sql->fetch(PDO::FETCH_ASSOC)['max'] + 1;
         $stmt = $this->pdo->prepare("INSERT INTO sae_garage.dde_interv VALUES (:id, :date_rdv, :heure_rdv, :descriptif_demande, :km_actuel, :devis_on,:id_operateur, :id_vehicule, :codeclient,:etat_demande)");
@@ -35,7 +35,7 @@ class InterventionManager {
             "descriptif_demande" => $descriptifDemande,
             "km_actuel" => $kmActuel,
             "devis_on" => $devisOn,
-            "id_operateur" => $idOpérateur,
+            "id_operateur" => $idOperateur,
             "id_vehicule" => $noimmatriculation,
             "codeclient" => $codeClient,
             "etat_demande" => $etat
@@ -201,7 +201,13 @@ class InterventionManager {
         $stmt->execute([
             "numdde" => $numdde
         ]);
-        return $stmt->fetch(PDO::FETCH_ASSOC)["codeclient"];
+        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0]["codeclient"];
+    }
+
+    public function getLastInterventionInserted(): int{
+        $stmt = $this->pdo->prepare("select max(numdde) as numdde from sae_garage.dde_interv;");
+        $stmt->execute();
+        return (int)$stmt->fetch(PDO::FETCH_ASSOC)["numdde"];
     }
 
 }

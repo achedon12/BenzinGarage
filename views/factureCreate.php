@@ -34,6 +34,7 @@ if(isset($_POST["setPayed"])){
     render("factureList.php");
     return;
 }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -65,7 +66,8 @@ TemplateManager::getAdminNavBar("factureFar");
                 }
                 foreach($factureManager->getAllFacture() as $facture){
                     $code = $facture->getFactureNumber();
-                    $name =  $clientManager->getClientByID($interventionManager->getCodeClientFromDemandeIntervention($facture->getFactureNumber()))->getName()." ".$clientManager->getClientByID($interventionManager->getCodeClientFromDemandeIntervention($facture->getFactureNumber()))->getFirstName()." ".$facture->getFactureDate();
+                    $client = $clientManager->getClientByID($interventionManager->getCodeClientFromDemandeIntervention($facture->getNumDde()));
+                    $name = $client->getName()." ".$client->getFirstName()." ".$facture->getFactureDate();
                     if($code == $_SESSION["facture"]){
                         ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
                     }else{
