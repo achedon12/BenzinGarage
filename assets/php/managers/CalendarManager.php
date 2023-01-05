@@ -44,7 +44,7 @@ class CalendarManager{
      */
     public function nextWeek(): array
     {
-        date_add($this->date, date_interval_create_from_date_string('7 days'));
+        $this->date->modify('+0 week');
         $this->week = [];
         return $this->getWeek();
     }
@@ -90,11 +90,10 @@ class CalendarManager{
         echo "<div hidden id='idOphidden'>$id</div>";
         foreach($interventions as $intervention){
             $client = $this->clientManager->getClientByID($intervention->getCodeClient());
-            //TODO: a mettre pour que ca fonctionne avec nimporte quelle date (tests)
-            //if(in_array($intervention->getDateRdv(), $week)){
+            if(in_array($intervention->getDateRdv(), $week)){
             $rdv[$this->getDayFromDate($intervention->getDateRdv())][$this->getHours($intervention->getHeureRdv())] = $client->getName()." ".$client->getFirstName();
             $ids[] = $intervention->getId();
-            //}
+            }
         }
 
         $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche");
@@ -112,7 +111,7 @@ class CalendarManager{
                 }
                 echo '<td>';
                 if(isset($rdv[$jour[$i+1]][$j])) {
-                    echo '<div class="timeDate" hidden>'.array_values($interventions)[$theId]->getHeureRdv().'</div>';
+                    echo '<div class="timeDate" hidden>'.array_values($interventions)[$theId+1]->getHeureRdv().'</div>';
                     echo '<a class="reservation" href="#popUpRDV" id="'.$ids[$theId].'">'.$rdv[$jour[$i+1]][$j].'</a>';
                     $theId++;
                 }

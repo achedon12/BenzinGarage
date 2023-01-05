@@ -80,7 +80,7 @@ TemplateManager::getAdminNavBar("planning");
         ?>
         <form class="dateChoose" method="post">
             <input type="submit" name="beforeWeek" value="<">
-            <h1 class="choosenDate"><?php echo 'Semaine du '.$calendarManager->convertDate($_SESSION["weekPlanning"][0]).' au '.$calendarManager->convertDate($_SESSION["weekPlanning"][4]);?></h1>
+            <h1 class="choosenDate"><?php echo 'Semaine du '.$calendarManager->convertDate($_SESSION["weekPlanning"][0]).' au '.$calendarManager->convertDate($_SESSION["weekPlanning"][6]);?></h1>
             <input type="submit" name="nextWeek" value=">">
         </form>
         <section class="planing">
