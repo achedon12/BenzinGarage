@@ -33,73 +33,73 @@ if(isset($_POST["nextWeek"])){
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <link rel="stylesheet" href="../assets/css/style.css">
-        <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
-        <link rel="stylesheet" href="../assets/css/adminInterventionPlanning.css">
-        <link rel="shortcut icon" href="../assets/img/logo.png">
-        <title>Planning</title>
-    </head>
-    <body>
-    <?php
-    TemplateManager::getAdminNavBar("planning");
-    ?>
-    <main>
-        <section class="interventionWindow">
-            <form method="post" class="selecteur" onchange="submit()">
-                <section class="choixPlanning">
-                    <label for="employe-select">Choisir un employé</label>
-                    <select id="employe-select" name="select">
-                        <?php
-                        if ($_SESSION["employePlanning"] === 0) {
-                            echo '<option value="false" disabled selected>--Employé--</option>';
-                        }
-                        foreach($userManager->getAllUser() as $people){
-                            $name  = $people->getName()." ".$people->getFirstName();
-                            $code = $people->getId();
-                            if($code == $_SESSION["employePlanning"]){
-                                ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
-                            }else{
-                                ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
-                            }
-                        }
-                        ?>
-                    </select>
-                </section>
-            </form>
-            <?php
-                if($_SESSION["employePlanning"] !== 0) {
-                    $user = $userManager->getUser($_SESSION["employePlanning"]);
-                    if($user !== null) {
-                        echo '<section class="choose"><h1>Emploi du temps de ' . $user->getFirstName() . ' ' . $user->getName() . '</h1></section>';
-                    }
-                }
-            ?>
-            <form class="dateChoose" method="post">
-                <input type="submit" name="beforeWeek" value="<">
-                <h1 class="choosenDate"><?php echo 'Semaine du '.$calendarManager->convertDate($_SESSION["weekPlanning"][0]).' au '.$calendarManager->convertDate($_SESSION["weekPlanning"][4]);?></h1>
-                <input type="submit" name="nextWeek" value=">">
-            </form>
-            <section class="planing">
-                <?php
-                    if($_SESSION["employePlanning"] === 0){
-                        ?>
-                        <section class="choose">
-                            <h1>Veuillez séléctionner un client pour commencer l'opération</h1>
-                        </section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/accueilAdmin.css">
+    <link rel="stylesheet" href="../assets/css/adminInterventionPlanning.css">
+    <link rel="shortcut icon" href="../assets/img/logo.png">
+    <title>Planning</title>
+</head>
+<body>
+<?php
+TemplateManager::getAdminNavBar("planning");
+?>
+<main>
+    <section class="interventionWindow">
+        <form method="post" class="selecteur" onchange="submit()">
+            <section class="choixPlanning">
+                <label for="employe-select">Choisir un employé</label>
+                <select id="employe-select" name="select">
                     <?php
-                    }else{
-                       $calendarManager->displayTable($_SESSION["employePlanning"],$_SESSION["weekPlanning"]);
+                    if ($_SESSION["employePlanning"] === 0) {
+                        echo '<option value="false" disabled selected>--Employé--</option>';
                     }
-                ?>
-
+                    foreach($userManager->getAllUser() as $people){
+                        $name  = $people->getName()." ".$people->getFirstName();
+                        $code = $people->getId();
+                        if($code == $_SESSION["employePlanning"]){
+                            ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
+                        }else{
+                            ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                        }
+                    }
+                    ?>
+                </select>
             </section>
-            <?php $calendarManager->displayPopup(); ?>
+        </form>
+        <?php
+        if($_SESSION["employePlanning"] !== 0) {
+            $user = $userManager->getUser($_SESSION["employePlanning"]);
+            if($user !== null) {
+                echo '<section class="choose"><h1>Emploi du temps de ' . $user->getFirstName() . ' ' . $user->getName() . '</h1></section>';
+            }
+        }
+        ?>
+        <form class="dateChoose" method="post">
+            <input type="submit" name="beforeWeek" value="<">
+            <h1 class="choosenDate"><?php echo 'Semaine du '.$calendarManager->convertDate($_SESSION["weekPlanning"][0]).' au '.$calendarManager->convertDate($_SESSION["weekPlanning"][4]);?></h1>
+            <input type="submit" name="nextWeek" value=">">
+        </form>
+        <section class="planing">
+            <?php
+            if($_SESSION["employePlanning"] === 0){
+                ?>
+                <section class="choose">
+                    <h1>Veuillez séléctionner un client pour commencer l'opération</h1>
+                </section>
+                <?php
+            }else{
+                $calendarManager->displayTable($_SESSION["employePlanning"],$_SESSION["weekPlanning"]);
+            }
+            ?>
+
         </section>
-    </main>
-    </body>
-    <script src="../assets/js/intervention.js"></script>
+        <?php $calendarManager->displayPopup(); ?>
+    </section>
+</main>
+</body>
+<script src="../assets/js/intervention.js"></script>
 </html>

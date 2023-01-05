@@ -92,8 +92,8 @@ class CalendarManager{
             $client = $this->clientManager->getClientByID($intervention->getCodeClient());
             //TODO: a mettre pour que ca fonctionne avec nimporte quelle date (tests)
             //if(in_array($intervention->getDateRdv(), $week)){
-                $rdv[$this->getDayFromDate($intervention->getDateRdv())][$this->getHours($intervention->getHeureRdv())] = $client->getName()." ".$client->getFirstName();
-                $ids[] = $intervention->getId();
+            $rdv[$this->getDayFromDate($intervention->getDateRdv())][$this->getHours($intervention->getHeureRdv())] = $client->getName()." ".$client->getFirstName();
+            $ids[] = $intervention->getId();
             //}
         }
 
@@ -216,7 +216,7 @@ class CalendarManager{
                 $libelle = "nettoyage";
                 break;
             case "DemontBoitVitesse":
-                $libelle = "démontage boite de vitesse";
+                $libelle = "dÃ©montage boite de vitesse";
                 break;
             case "ChangPneuAVD":
                 $libelle = "changement pneu avant droit";
