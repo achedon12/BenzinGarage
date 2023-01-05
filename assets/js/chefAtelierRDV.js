@@ -45,6 +45,35 @@ function operationSelect(Operations) {
 function init() {
     idContactCourant = -2;
     operationSelect(Operations);
+
+    let positionidOpe=0;
+    for (let i = 0; i < Operations.length; i++) {
+        if (Operations[i].id===idOpe){
+            positionidOpe=i;
+
+
+        }
+    }
+    let newOperation = document.createElement("section");
+    let newH2 = document.createElement("h2")
+    let newContent = document.createTextNode(Operations[positionidOpe].id);
+    let supprsection = document.createElement("section");
+    supprsection.classList.add("buttonSupprOpe");
+    supprsection.id =Operations[positionidOpe].id;
+
+    let textSuppre = document.createTextNode("-");
+    supprsection.appendChild(textSuppre);
+    supprsection.addEventListener('click', supprOperations);
+
+    newH2.appendChild(newContent)
+    newOperation.id = Operations[positionidOpe].id
+    newOperation.classList.add("interventionRDV")
+    newOperation.appendChild(newH2);
+    newOperation.appendChild(supprsection);
+    let sectionOperationRDV = document.getElementById("interventionRDV");
+    sectionOperationRDV.appendChild(newOperation);
+    operationForOneInervention.push(Operations[positionidOpe].id);
+    prixOperation.push(Operations[positionidOpe].codetarif);
 }
 
 
@@ -91,7 +120,7 @@ function rafraichir(idOpe) {
 
     document.cookie = "operationForOneInervention=" + operationForOneInervention;
     document.cookie = "prixTotal=" + prixIntervention;
-
+    console.log(operationForOneInervention);
     changerPrix()
 }
 

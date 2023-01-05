@@ -30,7 +30,7 @@ class ConnexionController
                 $_SESSION["employePlanning"] = 0;
                 $_SESSION["id"] = $id;
                 $_SESSION["facture"] = 0;
-                $_SESSION["rdv"] = ["enable" => false, "employe" => 0, "radio" => "non", "date" => 0];
+                $_SESSION["rdv"] = ["enable" => false, "employe" => 0, "radio" => "non", "date" => 0,"operationId"=>0,"listeOpe"=>[],"listeOpeHasBeenAdded" => []];
                 if($result[0]["role"] == UserManager::ADMINISTRATEUR){
                     $_SESSION["role"] = UserManager::ADMINISTRATEUR;
                     render("AccueilAdmin.php");

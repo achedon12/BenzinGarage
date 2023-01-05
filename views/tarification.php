@@ -120,6 +120,10 @@ TemplateManager::getDefaultNavBar("tarifs");
 
         ?>
         </section>
+        <section class="validatePrix">
+            <input class="submitEditPrice" type="submit" name="submitProduitChangement" value="Valider des informations">
+            <input class="submitEditPrice" type="reset" value="Réinitialiser informations">
+        </section>
 
     </form>
 
