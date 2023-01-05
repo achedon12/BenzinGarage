@@ -51,24 +51,27 @@ TemplateManager::getAdminNavBar("planning");
     <section class="interventionWindow">
         <form method="post" class="selecteur" onchange="submit()">
             <section class="choixPlanning">
-                <label for="employe-select">Choisir un employé</label>
-                <select id="employe-select" name="select">
+                <form method="post" onchange="submit()">
+                    <input list="Employe" id="myClient" name="select" placeholder="Nom employé"/>
+                </form>
+                <datalist id="Employe">
                     <?php
-                    if ($_SESSION["employePlanning"] === 0) {
-                        echo '<option value="false" disabled selected>--Employé--</option>';
-                    }
-                    foreach($userManager->getAllUser() as $people){
-                        $name  = $people->getName()." ".$people->getFirstName();
-                        $code = $people->getId();
-                        if($code == $_SESSION["employePlanning"]){
-                            ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
+                    foreach ($userManager->getAllEmployees() as $employee){
+                        $nameEmploye = $employee->getName();
+                        $codeEmploye = $employee->getId();
+                        $FirstNameEmplo = $employee->getFirstName();
+                        $nom=$nameEmploye.' '.$FirstNameEmplo;
+                        if ($codeEmploye == $_SESSION["codeEmploye"]) {
+                            echo '<option value="' . $codeEmploye . '" selected>' . $nom . '</option>';
                         }else{
-                            ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                            echo '<option value="' . $codeEmploye . '">' . $nom . '</option>';
                         }
                     }
+
                     ?>
-                </select>
+                </datalist>
             </section>
+
         </form>
         <?php
         if($_SESSION["employePlanning"] !== 0) {
