@@ -24,14 +24,6 @@ class UsersController{
         render('accueilAdmin.php');
     }
 
-    public function adminAddClientPage():void{
-        render('adminAddClient.php');
-    }
-
-    public function adminAddEmployePage():void{
-        render('adminAddEmploye.php');
-    }
-
     public function adminInterventionPlanning():void{
         render('adminInterventionPlanning.php');
     }

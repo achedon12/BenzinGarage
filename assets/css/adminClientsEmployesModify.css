@@ -127,11 +127,12 @@ form.informations>section:nth-child(4)
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 50%;
 }
 
 form.informations>section:nth-child(4)>input
 {
-    width: 18%;
+    width: auto;
     background-color: var(--green-color);
     border-radius: 25px;
     border: 1px solid var(--green-color);

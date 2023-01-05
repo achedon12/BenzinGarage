@@ -22,12 +22,6 @@ if(!Auth::isConnected()){
     return;
 }
 
-
-
-
-
-
-
 if(isset($_POST["create"])){
     if(empty($_POST["firstname"]) || empty($_POST["name"]) || empty($_POST["adresse"]) || empty($_POST["codepostal"]) || empty($_POST["city"]) || empty($_POST["mail"]) || empty($_POST["telephone"])){
         $_SESSION["errorClient"] = "none";
@@ -72,17 +66,21 @@ TemplateManager::getAdminNavBar("clientsFar");
                 <input type="tel" placeholder="numéro de téléphone" id="telephone" name="telephone">
             </section>
             <h1> Information véhicule</h1>
-            <section class="inputs"style="display: flex;flex-wrap: inherit;flex-direction: column; text-align: center">
-                <label for="noimma"> Numéro d'immatriculation
+            <section class="inputs2">
+                <article>
+                    <label for="noimma"> Numéro d'immatriculation</label>
                     <input type="text" name="noimma" placeholder="Plaque d'immatriculation" required>
-                </label>
-                <label for="noserie"> Numéro de série
+                </article>
+                <article>
+                    <label for="noserie"> Numéro de série</label>
                     <input type="text" name="noserie" placeholder="No de série" required>
-                </label>
-                <label for="dateService"> date de mise en service
+                </article>
+                <article>
+                    <label for="dateService"> date de mise en service</label>
                     <input type="date" name="dateService"  required>
-                </label>
-                <label for="numModel"> Numéro de modele
+                </article>
+                <article>
+                    <label for="numModel"> Numéro de modele</label>
                     <input list="Modeles" id="myClient" name="numModel" required/>
                     <datalist id="Modeles">
                         <?php
@@ -91,10 +89,8 @@ TemplateManager::getAdminNavBar("clientsFar");
                             echo '<option value="'.$modele->getNummodele().'" class="listeClientHorizontal">'.$modele->getModele().'</option>';
                         }
                         ?>
-
-
                     </datalist>
-                </label>
+                </article>
             </section>
 
         <section>
