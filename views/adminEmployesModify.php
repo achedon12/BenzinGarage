@@ -13,6 +13,7 @@ if(session_status() == PHP_SESSION_NONE){
     $_SESSION["errorEmploye"] = 0;
     $_SESSION["managerId"] = 0;
     $_SESSION["modifyEmploye"] = 0;
+    $_SESSION["userId"] = 0;
 }
 
 if(!Auth::isConnected()){
