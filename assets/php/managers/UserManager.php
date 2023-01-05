@@ -166,8 +166,8 @@ class UserManager{
     }
 
     /**
-     * Get vehicles by ID user.
-     * @return ?Vehicle
+     * @param string $id
+     * @return Vehicle|null
      */
     public function getVehiculeByUserId(string $id): ?Vehicle{
 
