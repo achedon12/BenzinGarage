@@ -5,8 +5,12 @@ use app\users\Auth;
 require_once "assets/php/database/DatabaseManager.php";
 require_once "assets/php/managers/TemplateManager.php";
 require_once "assets/php/managers/FactureManager.php";
+require_once "assets/php/managers/InterventionManager.php";
+require_once "assets/php/managers/ClientManager.php";
 
+$interventionManager = new InterventionManager(DatabaseManager::getInstance());
 $factureManager = new FactureManager(DatabaseManager::getInstance());
+$clientManager = new ClientManager(DatabaseManager::getInstance());
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
@@ -39,18 +43,21 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Facture--"){
 <?php
 TemplateManager::getAdminNavBar("factureFar");
 ?>
-<main class="custom">
-    <form method="post" class="selecteur-custom" onchange="submit()">
+<main>
+    <form method="post" class="selecteur" onchange="submit()">
         <section>
             <label for="facture-select">Choisir un devis</label>
-            <select id="facture-select" name="select">
+            <form method="post" onchange="submit()" >
+                <input list="facture-select" id="myClient" name="select" placeholder="Devis" style="margin-top: 25px"/>
+            </form>
+            <datalist id="facture-select">
                 <?php
                 if($_SESSION["facture"] === 0){
                     echo '<option value="false" disabled selected>--Devis--</option>';
                 }
                 foreach($factureManager->getAllFacture() as $facture){
                     $code = $facture->getFactureNumber();
-                    $name = $facture->getFactureDate();
+                    $name =  $clientManager->getClientByID($interventionManager->getCodeClientFromDemandeIntervention($facture->getFactureNumber()))->getName()." ".$clientManager->getClientByID($interventionManager->getCodeClientFromDemandeIntervention($facture->getFactureNumber()))->getFirstName()." ".$facture->getFactureDate();
                     if($code == $_SESSION["facture"]){
                         ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
                     }else{
@@ -58,10 +65,10 @@ TemplateManager::getAdminNavBar("factureFar");
                     }
                 }
                 ?>
-            </select>
+            </datalist>
         </section>
     </form>
-    <section class="main">
+    <section class="create">
         <?php
         if($_SESSION["facture"] == 0){
             echo '<section class="head"><h1 class="no-facture">Aucun devis sélectionné</h1></section>';
