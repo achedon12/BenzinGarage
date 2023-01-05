@@ -63,15 +63,6 @@ if(isset($_POST["radio2"])){
 if(isset($_POST["ValiderRDV"])){
     $date = explode("T",$_POST["dateRDV"]);
     $interventionManager->createIntervention($date[0],$date[1],$_COOKIE["operationForOneInervention"],$_POST["km_actuel"],$_SESSION["rdv"]["radio"],"Planifiee",$_POST["selectEmploye"],$_POST["noimmatriculation"],$clientsManager->getClientByID($_SESSION["rdv"]["theIdClient"])->id);
-    $amount = 0;
-    $explode = explode(",",$_COOKIE["operationForOneInervention"]);
-    foreach ($explode as $operation){
-        $amount += $operationManager->getOperationById($operation)[0]["dureeop"] * $operationManager->getPriceForOperation($operationManager->getOperationById($operation)[0]["codetarif"]);
-    }
-    $factureManager->updateFactureNetAPayer($factureManager->getLastFacture(),$amount);
-    foreach($_SESSION["rdv"] as $key =>$rdv){
-        if($key == "idClient") unset($_SESSION["rdv"][$key]); else $_SESSION["rdv"][$key] = 0;
-    }
 }
 
 

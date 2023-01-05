@@ -217,8 +217,8 @@ class FacturePdfManager{
             <tr style="border-color: rgb(18, 14, 44);">
                 <td style="border-color: rgb(18, 14, 44);">'.$operation["codeop"].'</td>
                 <td>1</td>
-                <td>'.(float)$operation["couthoraireht"] * (float)$operation["duree_prevue"].'</td>
-                <td>'.(float)$operation["couthoraireht"] * (float)$operation["duree_prevue"].'</td>
+                <td>'.(float)$operation["couthoraireht"].'</td>
+                <td>'.(float)$operation["couthoraireht"].'</td>
             </tr>
             ';
         }
@@ -228,7 +228,7 @@ class FacturePdfManager{
     private function getSumOperationPrice(): float{
         $sum = 0;
         foreach ($this->facture->getOperations() as $operation){
-            $sum += (float)$operation["couthoraireht"] * (float)$operation["duree_prevue"];
+            $sum += (float)$operation["couthoraireht"];
         }
         return $sum;
     }
