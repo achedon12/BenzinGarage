@@ -1,20 +1,11 @@
 <?php
 
 class Facture{
-
-    const FACTURE_PAYED = 0;
-    const FACTURE_NOT_PAYED = 1;
-
     private int $factureNumber;
-
     private string $factureDate;
-
     private float $tva;
-
     private float $toPay;
-
     private string $etat;
-
     private int $numDde;
 
     /**
@@ -77,7 +68,7 @@ class Facture{
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getEtat(): string
     {

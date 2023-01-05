@@ -60,7 +60,7 @@ if(isset($_POST["filtreNom"])){
         <link rel="stylesheet" href="../../assets/css/style.css">
         <link rel="stylesheet" href="../../assets/css/accueilAdmin.css">
         <link rel="stylesheet" href="../../assets/css/adminClientsEmployesModify.css">
-        <title>Administrateur | Clients - modifier</title>
+        <title>Administrateur | Employés - modifier</title>
         <link rel="shortcut icon" href="../../assets/img/logo.png">
     </head>
     <body>
@@ -70,7 +70,7 @@ if(isset($_POST["filtreNom"])){
     <main>
         <form method="post" class="selecteur" onchange="submit()">
             <section>
-                <h1>Choisir un client</h1>
+                <h1>Choisir un employé</h1>
                 <form method="post" onchange="submit()">
                     <label for="filtreNom"> Trier par ordre alphabétique
                         <?php
@@ -134,9 +134,9 @@ if(isset($_POST["filtreNom"])){
                         }elseif($_SESSION["errorEmploye"] === "confirmDelete"){
                             echo '<h1 class="errorCreate">Vous avez bien supprimé l\'employé</h1>';
                         }elseif ($_SESSION["modifyEmploye"] === "none"){
-                            echo '<h1>Une erreur s\'est produite lors de la modification d\'un client</h1>';
+                            echo '<h1>Une erreur s\'est produite lors de la modification d\'un employé</h1>';
                         }elseif($_SESSION["modifyEmploye"] === "confirmModify"){
-                            echo '<h1 class="errorCreate">Vous avez bien modifié le client</h1>';
+                            echo '<h1 class="errorCreate">Vous avez bien modifié l\'employé</h1>';
                         }
                         ?>
                         <h1>Veuillez séléctionner un employé pour commencer l'opération</h1>

@@ -53,15 +53,18 @@ class OperationManager
        ];
     }
 
+    public function getOperations(): array{
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.operation");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     public function getOperationListForIntervention(int $numdde): array{
         $stmt = $this->pdo->prepare("select * from sae_garage.prevoir_ope join sae_garage.operation using(codeop) where numdde = :numdde;");
         $stmt->execute(["numdde" => $numdde]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-
-
 
     public function getOperationById(string $idOpe){
         $stmt = $this->pdo->prepare("select * from sae_garage.operation where codeop=:id");

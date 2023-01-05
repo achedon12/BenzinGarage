@@ -90,7 +90,7 @@ class FactureManager{
                 </article>
                 <article>
                     <label for="netapayer">Net à payer :</label>
-                    <input type="text" name="netapayer" value="'.$facture->getToPay().'" readonly>
+                    <input type="text" name="netapayer" value="'.$this->getToPay($facture).'" readonly>
                 </article>
                 <article>
                     <label for="etatfacture">Etat facture :</label>
@@ -128,6 +128,36 @@ class FactureManager{
         else $res = "Emise";
         $stmt = $this->pdo->prepare("UPDATE sae_garage.facture SET etatfacture = :value WHERE nofacture = :id");
         $stmt->execute(["value" => $res, "id" => $id]);
+    }
+
+    public function createFacture(string $date, int $tva, int $netAPayer,int $numdde, string $etatFacture = "Emise"): void{
+        $stmt = $this->pdo->prepare("INSERT INTO sae_garage.facture (datefacture,tauxtva,netapayer,etatfacture,numdde) VALUES (:datefacture,:tauxtva,:netapayer,:etatfacture,:numdde)");
+        $stmt->execute(["datefacture" => $date, "tauxtva" => $tva, "netapayer" => $netAPayer, "etatfacture" => $etatFacture, "numdde" => $numdde]);
+    }
+
+    public function getLastFacture(): int
+    {
+        $stmt = $this->pdo->prepare("SELECT nofacture FROM sae_garage.facture ORDER BY nofacture DESC LIMIT 1");
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row["nofacture"];
+    }
+
+    public function updateFactureNetAPayer(int $id, float $amount): void
+    {
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.facture SET netapayer = :amount WHERE nofacture = :id");
+        $stmt->execute(["amount" => $amount, "id" => $id]);
+    }
+
+    private function getToPay(Facture $facture): string
+    {
+        $operations = $this->operationManager->getOperationInformations($facture->getNumDde());
+        $total = 0;
+        foreach ($operations as $operation){
+            $total += $operation["couthoraireht"] * $operation["duree_prevue"];
+        }
+        return (string)$total;
+
     }
 
 }

@@ -36,7 +36,7 @@ if(!Auth::isConnected()){
     ?>
     <main>
         <a href="/admin/facture/create">
-            <h1>Créer un Facture</h1>
+            <h1>Créer une Facture</h1>
             <img src="../assets/img/facture.png" alt="facture">
         </a>
         <a href="/admin/facture/liste">

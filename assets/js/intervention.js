@@ -9,7 +9,7 @@ document.querySelectorAll(".reservation").forEach(function (element) {
         document.querySelector("#popUpRDV").style.display = "inherit";
         id = element.id;
 
-        let data = await (await fetch(`http://benzingarage.test/assets/php/request/getOperationListForIntervention.php?id=${element.id}`)).json()
+        let data = await (await fetch(`http://sae.test/assets/php/request/getOperationListForIntervention.php?id=${element.id}`)).json()
 
         document.querySelectorAll(".aIntervention").forEach(function (element) {
 
@@ -58,10 +58,10 @@ document.querySelector("#typeIntervention").addEventListener("change", function 
 
 document.querySelector(".validerIntervention").addEventListener("click", async function () {
     for (const element of interventions) {
-        await (await fetch(`http://benzingarage.test/assets/php/request/addIntervention.php?id=${id}&codeop=${getIdLibelle(element)}`)).json();
+        await (await fetch(`http://sae.test/assets/php/request/addIntervention.php?id=${id}&codeop=${getIdLibelle(element)}`)).json();
     }
     for(const element of deletedInterventions){
-        await (await fetch(`http://benzingarage.test/assets/php/request/deleteIntervention.php?id=${id}&codeop=${element}`)).json();
+        await (await fetch(`http://sae.test/assets/php/request/deleteIntervention.php?id=${id}&codeop=${element}`)).json();
     }
     interventions = [];
     deletedInterventions = [];

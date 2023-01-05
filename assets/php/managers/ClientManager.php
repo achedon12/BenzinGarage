@@ -67,20 +67,21 @@ class ClientManager{
         $res = [];
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.client order by nom");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"],$row["mail"],$row["datecreation"] );
+            if($row["codeclient"] !== "1"){
+                $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"], $row["mail"], $row["datecreation"]);
+            }
         return $res;
     }
 
 
 
-    public function getClientByFirstnameAndName(string $prenom,String $name){
+    public function getClientByFirstnameAndName(string $prenom,String $name): array{
         $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.client WHERE nom=:nom and prenom=:prenom");
         $stmt->execute([
             "prenom"=>$prenom,
             "nom"=>$name
         ]);
-        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $res;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -174,6 +175,9 @@ class ClientManager{
         $prepare->execute();
         if ($prepare->rowCount() > 0) {
             $result = $prepare->fetchAll();
+            if($result[0]["codeclient"] == "1"){
+                return null;
+            }
             return new Client($result[0]["codeclient"],$result[0]["nom"],$result[0]["prenom"],$result[0]["adresse"],$result[0]["codepostal"],$result[0]["ville"],$result[0]["tel"],$result[0]["mail"],$result[0]["datecreation"]);
         }
         return null;
@@ -205,7 +209,7 @@ class ClientManager{
         $res = [];
         $stmt = $this->pdo->query("SELECT * FROM sae_garage.client order by codeclient");
         foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)
-            if($row["codeclient"] !== null)
+            if($row["codeclient"] !== "1")
                 $res[] = new Client($row["codeclient"], $row["nom"], $row["prenom"], $row["adresse"], $row["codepostal"], $row["ville"], $row["tel"],$row["mail"],$row["datecreation"] );
         return $res;
     }
