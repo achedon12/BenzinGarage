@@ -24,6 +24,9 @@ class FacturePdfManager{
         $dompdf->loadHtml($this->toHtml());
         $dompdf->setPaper('A4','portrait');
         $dompdf->render();
+        $output = $dompdf->output();
+        file_put_contents("C:\laragon\www\sae\\facture/facture_{$this->facture->getFacture()->getFactureNumber()}.pdf", $output);
+
         $dompdf->stream("facture.pdf", [
             "Attachment" => true,
             "isPhpEnabled" => true

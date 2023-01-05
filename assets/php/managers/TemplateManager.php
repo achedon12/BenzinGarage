@@ -107,7 +107,7 @@ class TemplateManager{
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
                                 <li><a href="/admin/interventionPlanning">Plannings</a></li>
-                                <li><a href="/admin/facture">Devis</a></li>
+                                <li><a href="/admin/facture">Facture</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>
                         </nav>';
@@ -122,7 +122,7 @@ class TemplateManager{
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
                                 <li><a href="/admin/interventionPlanning">Plannings</a></li>
-                                <li><a href="/admin/facture">Devis</a></li>
+                                <li><a href="/admin/facture">Facture</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>
                         </nav>';
@@ -137,7 +137,7 @@ class TemplateManager{
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
                                 <li><a href="/admin/interventionPlanning">Plannings</a></li>
-                                <li><a href="/admin/facture">Devis</a></li>
+                                <li><a href="/admin/facture">Facture</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>
                         </nav>';
@@ -152,7 +152,7 @@ class TemplateManager{
                                 <li class="hover"><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
                                 <li><a href="/admin/interventionPlanning">Plannings</a></li>
-                                <li><a href="/admin/facture">Devis</a></li>
+                                <li><a href="/admin/facture">Facture</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>
                         </nav>';
@@ -167,7 +167,7 @@ class TemplateManager{
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li class="hover"><a href="/admin/stock">Stock</a></li>
                                 <li><a href="/admin/interventionPlanning">Plannings</a></li>
-                                <li><a href="/admin/facture">Devis</a></li>
+                                <li><a href="/admin/facture">Facture</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>
                         </nav>';
@@ -182,7 +182,7 @@ class TemplateManager{
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
                                 <li class="hover"><a href="/admin/interventionPlanning">Plannings</a></li>
-                                <li><a href="/admin/facture">Devis</a></li>
+                                <li><a href="/admin/facture">Facture</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>
                         </nav>';
@@ -197,7 +197,7 @@ class TemplateManager{
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
                                 <li><a href="/admin/interventionPlanning">Plannings</a></li>
-                                <li class="hover"><a href="/admin/facture">Devis</a></li>
+                                <li class="hover"><a href="/admin/facture">Facture</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>
                         </nav>';
@@ -212,7 +212,7 @@ class TemplateManager{
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
                                 <li><a href="/admin/interventionPlanning">Plannings</a></li>
-                                <li class="hover"><a href="/admin/facture">Devis</a></li>
+                                <li class="hover"><a href="/admin/facture">Facture</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>
                         </nav>';
@@ -227,7 +227,7 @@ class TemplateManager{
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
                                 <li><a href="/admin/interventionPlanning">Plannings</a></li>
-                                <li><a href="/admin/facture">Devis</a></li>
+                                <li><a href="/admin/facture">Facture</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>
                         </nav>';
@@ -242,7 +242,7 @@ class TemplateManager{
                                 <li><a href="/admin/tarification">Tarification</a></li>
                                 <li><a href="/admin/stock">Stock</a></li>
                                 <li><a href="/admin/interventionPlanning">Plannings</a></li>
-                                <li><a href="/admin/facture">Devis</a></li>
+                                <li><a href="/admin/facture">Facture</a></li>
                                 <li><a href="/disconnect">Deconnexion</a></li>
                             </ul>
                         </nav>';
