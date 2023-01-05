@@ -6,7 +6,7 @@ document.querySelectorAll(".reservation").forEach(function (element) {
         document.querySelector("#popUpRDV").style.display = "inherit";
         id = element.id;
 
-        let data = await (await fetch(`http://sae.test/assets/php/request/getOperationListForIntervention.php?id=${element.id}`)).json()
+        let data = await (await fetch(`http://benzingarage.test/assets/php/request/getOperationListForIntervention.php?id=${element.id}`)).json()
 
         document.querySelectorAll(".aIntervention").forEach(function (element) {
 

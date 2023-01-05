@@ -120,11 +120,9 @@ TemplateManager::getAdminNavBar("stock");
             }elseif (isset($_POST['select']) && $_POST['select']==$test2){
             $pieces = $garageManager->getAllPiecesNotAvailable();
             foreach ($pieces as $piece) {
-                echo '<section class="productContainer"><h2 class="ProductName">' . $piece->getLibelleArticle() . '</h2> <h2 class="RefProduct">' . $piece->getCodeArticle() . '</h2> <h2 class="PriceProduct">' . $piece->getPrice() . ' €</h2> <h2 class="QteProduct">' . $piece->getStockQuantite() . '</h2> <input class="inputrefillStock" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit"></section>';
+                echo '<section class="productContainer"><h2 class="ProductName">' . $piece->getLibelleArticle() . '</h2> <h2 class="RefProduct">' . $piece->getCodeArticle() . '</h2> <h2 class="PriceProduct">' . $piece->getPrice() . ' €</h2> <h2 class="QteProduct">' . $piece->getStockQuantite() . '</h2></h2> <h2 class="QteProductMinimum">'.$piece->getMinimalQuantite().' </h2> <input class="inputrefillStock" value="'.$piece->getCodeArticle().'" name="refillStockUn" type="submit"></section>';
             }
-            if($pieces !=null ) {
-                echo '<input  value="refillstock" class="refillStock" type="submit">';
-            }
+
             }
 
 

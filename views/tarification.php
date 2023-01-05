@@ -120,11 +120,15 @@ TemplateManager::getDefaultNavBar("tarifs");
 
         ?>
         </section>
+        <?php
+        if($_SESSION["role"] === UserManager::MANAGER){
+        echo '
         <section class="validatePrix">
             <input class="submitEditPrice" type="submit" name="submitProduitChangement" value="Valider des informations">
             <input class="submitEditPrice" type="reset" value="Réinitialiser informations">
-        </section>
-
+        </section>';
+        }
+        ?>
     </form>
 
 
