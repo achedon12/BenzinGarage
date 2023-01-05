@@ -5,7 +5,7 @@ require_once "assets/php/class/AbstractUser.php";
 
 class Client{
 
-    private string $id;
+    public string $id;
 
     private string $name;
 
