@@ -13,7 +13,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-
+    align-items: center;
 }
 .produit>h1{
     margin-top: 10px;
@@ -50,14 +50,26 @@
 
 .validatePrix{
     margin-top: 50px;
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .submitEditPrice{
     background-color: var(--green-color);
-    width: 25%;
-    height: 20px;
-    border-radius: 8px;
-    border: none;
+    width: auto;
+    height: auto;
+    padding: 1%;
+    border-radius: 25px;
+    color: var(--white-color);
+    border: 1px solid var(--green-color);
+}
+
+.submitEditPrice:hover
+{
+    background-color: var(--white-color);
+    color: var(--green-color);
+    border: 1px solid var(--green-color);
 }
 
 form.selecteur>section{

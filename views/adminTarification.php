@@ -76,7 +76,6 @@ TemplateManager::getAdminNavBar("tarifs");
                     echo '<option value="' . $codeProduct . '">' . $nameProduct . '</option>';
                 }
             }
-
             ?>
         </datalist>
     </section>
@@ -88,7 +87,6 @@ TemplateManager::getAdminNavBar("tarifs");
             echo 'pas de produit selectionné';
         }else{
             echo $garageManager->getPieceById($_SESSION["productId"])[3];
-
         }
         ?>
     </h1>
