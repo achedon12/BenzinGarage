@@ -69,6 +69,10 @@ class FactureManager{
         return null;
     }
 
+    /**
+     * @param Facture $facture
+     * @return void
+     */
     public function toForm(Facture $facture): void{
         echo '
             <form class="facture">
@@ -100,10 +104,30 @@ class FactureManager{
         ';
     }
 
+    /**
+     * @param Facture $facture
+     * @return void
+     */
     public function createFacturePDF(Facture $facture): void
     {
         $operations = $this->operationManager->getOperationInformations($facture->getNumDde());
         $facturePdf = new FacturePDF($facture,$operations,$this->clientManager->getClientByID($this->interventionManager->getCodeClientFromDemandeIntervention($facture->getNumDde())));
         (new FacturePdfManager($facturePdf))->toPdf();
     }
+
+
+    public function factureIsPayed(int $id): string{
+        $stmt = $this->pdo->prepare("SELECT * FROM sae_garage.facture WHERE nofacture = :id");
+        $stmt->execute(["id" => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row["etatfacture"];
+    }
+
+    public function setFacturePayed(int $id,bool $value): void{
+        if($value) $res = "Réglée";
+        else $res = "Emise";
+        $stmt = $this->pdo->prepare("UPDATE sae_garage.facture SET etatfacture = :value WHERE nofacture = :id");
+        $stmt->execute(["value" => $res, "id" => $id]);
+    }
+
 }

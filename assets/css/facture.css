@@ -88,20 +88,21 @@ h1.no-facture
     justify-content: space-around;
 }
 
-.create-facture>button
+.create-facture>button, .payed
 {
-    height: 20%;
-    width: 50%;
+    height: auto;
+    width: auto;
     background-color: var(--green-color);
     border-radius: 25px;
     border: 1px solid var(--green-color);
     color: var(--white-color);
     font-size: 1.5em;
     font-weight: bold;
+    padding: 1%;
     cursor: pointer;
 }
 
-.create-facture>button:hover
+.create-facture>button:hover, .payed:hover
 {
     border: 1px solid var(--white-color);
 }
