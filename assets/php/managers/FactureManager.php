@@ -90,7 +90,7 @@ class FactureManager{
                 </article>
                 <article>
                     <label for="netapayer">Net à payer :</label>
-                    <input type="text" name="netapayer" value="'.$facture->getToPay().'" readonly>
+                    <input type="text" name="netapayer" value="'.$this->getToPay($facture).'" readonly>
                 </article>
                 <article>
                     <label for="etatfacture">Etat facture :</label>
@@ -147,6 +147,17 @@ class FactureManager{
     {
         $stmt = $this->pdo->prepare("UPDATE sae_garage.facture SET netapayer = :amount WHERE nofacture = :id");
         $stmt->execute(["amount" => $amount, "id" => $id]);
+    }
+
+    private function getToPay(Facture $facture): string
+    {
+        $operations = $this->operationManager->getOperationInformations($facture->getNumDde());
+        $total = 0;
+        foreach ($operations as $operation){
+            $total += $operation["couthoraireht"] * $operation["duree_prevue"];
+        }
+        return (string)$total;
+
     }
 
 }
