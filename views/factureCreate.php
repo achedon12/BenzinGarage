@@ -28,6 +28,12 @@ if(isset($_POST["select"]) && $_POST["select"] !== "--Facture--"){
 if(isset($_POST["create-facture"])){
     $factureManager->createFacturePDF($factureManager->getFacture($_SESSION["facture"]));
 }
+
+if(isset($_POST["setPayed"])){
+    $factureManager->setFacturePayed($factureManager->getFacture($_SESSION["facture"])->getFactureNumber(),true);
+    render("factureList.php");
+    return;
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -48,14 +54,14 @@ TemplateManager::getAdminNavBar("factureFar");
 <main>
     <form method="post" class="selecteur" onchange="submit()">
         <section>
-            <label for="facture-select">Choisir un devis</label>
+            <label for="facture-select">Choisir une Facture</label>
             <form method="post" onchange="submit()" >
-                <input list="facture-select" id="myClient" name="select" placeholder="Devis" style="margin-top: 25px"/>
+                <input list="facture-select" id="myClient" name="select" placeholder="Facture" style="margin-top: 25px"/>
             </form>
             <datalist id="facture-select">
                 <?php
                 if($_SESSION["facture"] === 0){
-                    echo '<option value="false" disabled selected>--Devis--</option>';
+                    echo '<option value="false" disabled selected>--Facture--</option>';
                 }
                 foreach($factureManager->getAllFacture() as $facture){
                     $code = $facture->getFactureNumber();
@@ -71,16 +77,18 @@ TemplateManager::getAdminNavBar("factureFar");
         </section>
     </form>
     <section class="create">
-
         <?php
-
-
         if($_SESSION["facture"] == 0){
-            echo '<section class="head"><h1 class="no-facture">Aucun devis sélectionné</h1></section>';
+            echo '<section class="head"><h1 class="no-facture">Aucune Facture sélectionnée</h1></section>';
         }else{
             $facture = $factureManager->getFacture($_SESSION["facture"]);
             $factureManager->toForm($facture);
-            echo '<form method="post" class="create-facture"><button name="create-facture">Créer un devis</button></form>';
+            if($factureManager->factureIsPayed($facture->getFactureNumber()) == "Réglée"){
+                $input = 'Facture déjà payée';
+            }else{
+                $input = '<button class="payed" name="setPayed">Définir que la facture a été payée</button>';
+            }
+            echo '<form method="post" class="create-facture"><button name="create-facture">Créer une Facture</button><article>'.$input.'</article></form>';
         }
         ?>
     </section>

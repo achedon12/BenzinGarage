@@ -36,11 +36,11 @@ if(!Auth::isConnected()){
     ?>
     <main>
         <a href="/admin/facture/create">
-            <h1>Créer un devis</h1>
+            <h1>Créer un Facture</h1>
             <img src="../assets/img/facture.png" alt="facture">
         </a>
         <a href="/admin/facture/liste">
-            <h1>Liste des devis</h1>
+            <h1>Liste des Facture</h1>
             <img src="../assets/img/facture.png" alt="factures-liste">
         </a>
     </main>

@@ -24,7 +24,6 @@ if(Auth::isConnected()){
     }
 }
 
-
 if(isset($_POST["id-connexion"]) && isset($_POST["password-connexion"])){
     ConnexionController::loginIn($_POST["id-connexion"],$_POST["password-connexion"]);
 }
@@ -50,13 +49,14 @@ if(isset($_POST["id-connexion"]) && isset($_POST["password-connexion"])){
             <article>
                 <h1>Connexion Utilisateur</h1>
                 <form method="post" action="/login">
+                    <?php if(isset($_SESSION["error"])){ echo '<h2>'.$_SESSION["error"].'</h2>';}?>
                     <article>
                         <img src="../assets/img/mail.png" alt="mail">
-                        <input type="text" name="id-connexion" placeholder="ID">
+                        <input type="text" name="id-connexion" placeholder="ID" required pattern="[0-9]+">
                     </article>
                     <article>
                         <img src="../assets/img/password.png" alt="">
-                        <input type="password" name="password-connexion" placeholder="PASSWORD">
+                        <input type="password" name="password-connexion" placeholder="PASSWORD" required>
                     </article>
                     <input type="submit" value="Login" class="input-login">
                 </form>
