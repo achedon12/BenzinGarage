@@ -41,9 +41,9 @@ class FacturePdfManager{
                 $this->facture->getFacture()->getTva(),
                 $this->facture->getFacture()->getFactureNumber(),
                 $this->facture->getFacture()->getFactureDate(),
-                $this->facture->getFacture()->getToPay() * (1 - $this->facture->getFacture()->getTva() / 100),
+                $this->getSumOperationPrice(),
                 $this->facture->getFacture()->getTva(),
-                $this->facture->getFacture()->getToPay(),
+                $this->getSumOperationPrice() * (1 + $this->facture->getFacture()->getTva() / 100),
                 ],$this->getHtml());
     }
 
@@ -220,6 +220,14 @@ class FacturePdfManager{
             ';
         }
         return $operations;
+    }
+
+    private function getSumOperationPrice(): float{
+        $sum = 0;
+        foreach ($this->facture->getOperations() as $operation){
+            $sum += (int)$operation["couthoraireht"] * (int)$operation["duree_prevue"];
+        }
+        return $sum;
     }
 
 }
