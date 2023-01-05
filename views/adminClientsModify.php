@@ -136,16 +136,16 @@ TemplateManager::getAdminNavBar("clientsFar");
         </section>
     </form>
     <?php
-    if($_SESSION["managerId"] === 0){
+    if($_SESSION["userId"] === 0){
         ?>
         <section class="choose">
-            <?php if($_SESSION["errorEmploye"] === "none"){
+            <?php if($_SESSION["errorClient"] === "none"){
                 echo '<h1 class="errorCreate">Une erreur s\'est produite</h1>';
-            }elseif($_SESSION["errorEmploye"] === "confirmDelete"){
+            }elseif($_SESSION["errorClient"] === "confirmDelete"){
                 echo '<h1 class="errorCreate">Vous avez bien supprimé l\'employé</h1>';
-            }elseif ($_SESSION["modifyEmploye"] === "none"){
+            }elseif ($_SESSION["errorClient"] === "none"){
                 echo '<h1>Une erreur s\'est produite lors de la modification d\'un client</h1>';
-            }elseif($_SESSION["modifyEmploye"] === "confirmModify"){
+            }elseif($_SESSION["modifyClient"] === "confirmModify"){
                 echo '<h1 class="errorCreate">Vous avez bien modifié le client</h1>';
             }
             ?>
@@ -168,9 +168,13 @@ TemplateManager::getAdminNavBar("clientsFar");
                     <input type="text" name="city" id="city" value='<?php echo $user->getCity()?>'>
                     <input type="tel" name="telephone" id="telephone" value='<?php echo $user->getTelephoneNumber()?>'>
                 </section>
-
                 <section class="vehicule">
                     <?php $vehicul = $userManager->getVehiculeByUserId($user->getId());
+                    if($vehicul === null){
+                        ?>
+                        <h2 style ="width: 100%; text-align: center">Aucun véhicule pour ce client</h2>
+                        <?php
+                    }else{
                     ?>
                     <label> Plaque d'immatricualtion
                         <input type="text" name="NoIm" value="<?php echo $vehicul->getNumberPlate()?>">
@@ -184,10 +188,11 @@ TemplateManager::getAdminNavBar("clientsFar");
                     <label> Num de modèle
                         <input type="text" name="NumDe" value="<?php echo $vehicul->getNumerModele()?>">
                     </label><br>
+                        <?php
+                    }
+                        ?>
 
                 </section>
-
-
                 <section class="validateButtonClient">
                     <input type="submit" value="Modifier le client" id="modify" class="tier" name="modify">
                     <input type="submit" value="Supprimer le client" id="del" class="tier" name="delete">
