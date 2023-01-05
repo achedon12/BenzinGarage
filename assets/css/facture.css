@@ -1,16 +1,15 @@
 main
 {
+    display: flex;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
-
+    gap: 10px;
 }
 
-main.custom{
-    flex-direction: column;
-    align-items: center;
-}
 
-main.create
+
+.create
 {
     flex-basis: 80%;
     background-color: var(--grey-color);
@@ -19,6 +18,7 @@ main.create
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 80%;
 }
 
 section.main
@@ -49,7 +49,7 @@ form.selecteur-custom
 form.selecteur-custom>section, form.selecteur
 {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-around;
     padding: 1%;
     text-align: center;
@@ -59,6 +59,7 @@ form.selecteur-custom>section, form.selecteur
     border: 1px solid var(--white-color);
     margin-left: auto;
     margin-right: 0;
+    height: 80%;
 }
 
 h1.no-facture
@@ -89,8 +90,8 @@ h1.no-facture
 
 .create-facture>button
 {
-    height: 10%;
-    width: 20%;
+    height: 20%;
+    width: 50%;
     background-color: var(--green-color);
     border-radius: 25px;
     border: 1px solid var(--green-color);
@@ -112,4 +113,17 @@ h1.no-facture
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+.selecteur{
+    flex-basis: 10%;
+    display: flex ;
+    align-items: flex-start;
+    height: 80%
+}
+
+.facture>article{
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
 }
