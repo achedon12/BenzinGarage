@@ -70,6 +70,15 @@ if(isset($_POST["km_actuel"])){
 if(isset($_POST["dateRDV"])){
     $_SESSION["rdv"]["date"] = $_POST["dateRDV"];
 }
+
+if(isset($_COOKIE["operationForOneInervention"])){
+    $_SESSION["rdv"]["listeOpe"] = $_COOKIE["operationForOneInervention"];
+}
+
+//if(isset($_POST["ValiderRDV"])){
+//
+//}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -89,7 +98,7 @@ if(isset($_POST["dateRDV"])){
 TemplateManager::getDefaultNavBar("rdv");
 ?>
 <main>
-    <form method="post" class="formRDV" onchange="submit()">
+    <form method="post" class="formRDV" onchange="return false">
         <section class="InfoClient">
             <section class="CompteClient">
                 <h2>Possède un compte client :</h2>
@@ -179,13 +188,13 @@ TemplateManager::getDefaultNavBar("rdv");
         </section>
 
         <section class="infoIntervetion" id="interventionRDV">
-
         </section>
 
         <section class="choixOperation">
             <label for="operations">Choisir une opération</label>
-            <select name="" id="operations" onchange="rafraichir(this.value)">
+            <select name="operationSelect" id="operations" onchange="rafraichir(this.value)" >
                 <option value="-1" selected disabled>Choisissez une operation...</option>
+
             </select>
         </section>
 

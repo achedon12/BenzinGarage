@@ -23,27 +23,32 @@ class OperationManager
            "ChangPneuAVG" => [
                 "libelleop" => "chPnAVG",
                 "dureeop" => 0.3,
-                "codetarif" => 5
+                "codetarif" => 5,
+                "articleUtilise"=>"5"
            ],
            "Vidange" => [
                 "libelleop" => "VidFiltHuil",
                 "dureeop" => 1.3,
-                "codetarif" => 4
+                "codetarif" => 4,
+                "articleUtilise"=>"1"
            ],
            "ChangPneuAVD" => [
                 "libelleop" => "ChPnAVD",
                 "dureeop" => 0.3,
-                "codetarif" => 5
+                "codetarif" => 5,
+                "articleUtilise"=>"5"
            ],
            "Nettoyage" => [
                 "libelleop" => "Nettoy",
                 "dureeop" => 0.1,
-                "codetarif" => 2
+                "codetarif" => 2,
+                "articleUtilise"=>"7"
            ],
             "DemontBoitVitesse" => [
                 "libelleop" => "DmtBVits",
                 "dureeop" => 2,
-                "codetarif" => 7
+                "codetarif" => 7,
+                "articleUtilise"=>"6"
             ]
        ];
     }
