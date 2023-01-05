@@ -103,7 +103,4 @@ class UsersController{
         render('factureList.php');
     }
 
-    public function getFacture(){
-        render('facture.html');
-    }
 }

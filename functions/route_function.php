@@ -1,5 +1,6 @@
 <?php
 
+use Pecee\Http\Input\InputHandler;
 use Pecee\SimpleRouter\SimpleRouter as Router;
 use Pecee\Http\Url;
 use Pecee\Http\Response;
@@ -49,7 +50,7 @@ function request(): Request
  * @param string|null $index Parameter index name
  * @param string|mixed|null $defaultValue Default return value
  * @param array ...$methods Default methods
- * @return \Pecee\Http\Input\InputHandler|array|string|null
+ * @return InputHandler|array|string|null
  */
 function input($index = null, $defaultValue = null, ...$methods)
 {
@@ -61,8 +62,7 @@ function input($index = null, $defaultValue = null, ...$methods)
 }
 
 
-function render(string $page, ?string $errorMsg = null): void {
-    $error = $errorMsg;
+function render(string $page): void {
     include "./views/" . $page;
 }
 

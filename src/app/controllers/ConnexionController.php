@@ -13,16 +13,18 @@ use UserManager;
 
 class ConnexionController
 {
-    public static function loginIn(int $id, string $password){
+    public static function loginIn(int $id, string $password): void{
         $db = DatabaseManager::getInstance();
         $sql = "SELECT * FROM sae_garage.user WHERE id = :id;";
         $prepare = $db->prepare($sql);
-        $prepare->bindParam(':id', $id, PDO::PARAM_INT);
+        $prepare->bindParam(':id', $id);
         $prepare->execute();
         if ($prepare->rowCount() > 0) {
             $result = $prepare->fetchAll();
             if ($password !== $result[0]['password']) {
-                render('connexion.php');
+                $_SESSION['error'] = "Mot de passe ou Identifiant incorrect";
+                render('/');
+                return;
             }else{
                 $_SESSION["isConnected"] = true;
                 $_SESSION["employePlanning"] = 0;
@@ -38,17 +40,19 @@ class ConnexionController
                     }elseif ($result[0]["role"] == UserManager::EMPLOYE){
                         $_SESSION["role"] = UserManager::EMPLOYE;
                     }
-                    render("connexion.php");
+                    render("accueil.php");
                 }
             }
         }else{
-            render("connexion.php");
-
+            $_SESSION['error'] = "Mot de passe ou Identifiant incorrect";
+            render('/');
+            return;
         }
         exit(0);
     }
 
-    public function disconnect(){
+    public function disconnect(): void
+    {
         session_start();
         Auth::disconnect();
         render("connexion.php");
