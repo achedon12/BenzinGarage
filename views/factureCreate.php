@@ -34,7 +34,6 @@ if(isset($_POST["setPayed"])){
     render("factureList.php");
     return;
 }
-
 ?>
 <!doctype html>
 <html lang="en">

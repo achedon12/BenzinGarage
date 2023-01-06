@@ -15,56 +15,12 @@ class OperationManager
         $this->pdo = $pdo;
     }
 
-    /**
-     * @return array[]
-     */
-    public function getOperationList(): array{
-       return [
-           "ChangPneuAVG" => [
-                "libelleop" => "chPnAVG",
-                "dureeop" => 0.3,
-                "codetarif" => 5,
-                "articleUtilise"=>"5"
-           ],
-           "Vidange" => [
-                "libelleop" => "VidFiltHuil",
-                "dureeop" => 1.3,
-                "codetarif" => 4,
-                "articleUtilise"=>"1"
-           ],
-           "ChangPneuAVD" => [
-                "libelleop" => "ChPnAVD",
-                "dureeop" => 0.3,
-                "codetarif" => 5,
-                "articleUtilise"=>"5"
-           ],
-           "Nettoyage" => [
-                "libelleop" => "Nettoy",
-                "dureeop" => 0.1,
-                "codetarif" => 2,
-                "articleUtilise"=>"7"
-           ],
-            "DemontBoitVitesse" => [
-                "libelleop" => "DmtBVits",
-                "dureeop" => 2,
-                "codetarif" => 7,
-                "articleUtilise"=>"6"
-            ]
-       ];
-    }
-
-    public function getOperations(): array{
-        $query = $this->pdo->prepare("SELECT * FROM sae_garage.operation");
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-
     public function getOperationListForIntervention(int $numdde): array{
         $stmt = $this->pdo->prepare("select * from sae_garage.prevoir_ope join sae_garage.operation using(codeop) where numdde = :numdde;");
         $stmt->execute(["numdde" => $numdde]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     public function getOperationById(string $idOpe){
         $stmt = $this->pdo->prepare("select * from sae_garage.operation where codeop=:id");
@@ -119,6 +75,12 @@ class OperationManager
         $stmt = $this->pdo->prepare("select * from sae_garage.prevoir_ope where numdde = :numdde and codeop = :codeop;");
         $stmt->execute(["numdde" => $param, "codeop" => $codeop]);
         return count($stmt->fetchAll(PDO::FETCH_ASSOC)) > 0;
+    }
+
+    public function getOperations(): array{
+        $query = $this->pdo->prepare("SELECT * FROM sae_garage.operation");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

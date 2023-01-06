@@ -13,7 +13,7 @@ require_once "assets/php/managers/OperationManager.php";
 require_once "assets/php/managers/CalendarManager.php";
 require_once "assets/php/class/Modele.php";
 require_once "assets/php/managers/ModeleManager.php";
-require_once "assets/php/managers/FactureManager.php";
+
 
 $modeleManager = new ModeleManager(DatabaseManager::getInstance());
 $calendarManager = new CalendarManager();
@@ -22,7 +22,6 @@ $userManager = new UserManager(DatabaseManager::getInstance());
 $garageManager = new GarageManager(DatabaseManager::getInstance());
 $clientsManager = new ClientManager(DatabaseManager::getInstance());
 $operationManager = new OperationManager(DatabaseManager::getInstance());
-$factureManager = new FactureManager(DatabaseManager::getInstance());
 
 if(session_status() == PHP_SESSION_NONE){
     session_start();
@@ -77,6 +76,8 @@ if(isset($_POST["dateRDV"])){
 if(isset($_COOKIE["operationForOneInervention"])){
     $_SESSION["rdv"]["listeOpe"] = $_COOKIE["operationForOneInervention"];
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

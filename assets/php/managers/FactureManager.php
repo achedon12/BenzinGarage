@@ -159,5 +159,4 @@ class FactureManager{
         return (string)$total;
 
     }
-
 }

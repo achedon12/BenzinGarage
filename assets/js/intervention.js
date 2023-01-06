@@ -12,7 +12,6 @@ document.querySelectorAll(".reservation").forEach(function (element) {
         let data = await (await fetch(`http://sae.test/assets/php/request/getOperationListForIntervention.php?id=${element.id}`)).json()
 
         document.querySelectorAll(".aIntervention").forEach(function (element) {
-
             element.remove();
         });
 
@@ -24,14 +23,14 @@ document.querySelectorAll(".reservation").forEach(function (element) {
             bigElement.classList.add("aIntervention");
 
             let libelleElement = document.createElement("p");
-            libelleElement.textContent = getLibelle(element.codeop.trim());
+            libelleElement.textContent = element.codeop;
             bigElement.appendChild(libelleElement);
 
             let img = document.createElement("img");
             img.classList.add("removeItem");
             img.src = "../assets/img/not%20done.png";
             img.addEventListener("click", function () {
-                let libelle = getIdLibelle(this.parentElement.firstElementChild.textContent);
+                let libelle = this.parentElement.firstElementChild.textContent;
                 deletedInterventions.push(libelle);
                 this.parentElement.remove();
             });
@@ -58,7 +57,8 @@ document.querySelector("#typeIntervention").addEventListener("change", function 
 
 document.querySelector(".validerIntervention").addEventListener("click", async function () {
     for (const element of interventions) {
-        await (await fetch(`http://sae.test/assets/php/request/addIntervention.php?id=${id}&codeop=${getIdLibelle(element)}`)).json();
+        console.log(element);
+        await (await fetch(`http://sae.test/assets/php/request/addIntervention.php?id=${id}&codeop=${element}`)).json();
     }
     for(const element of deletedInterventions){
         await (await fetch(`http://sae.test/assets/php/request/deleteIntervention.php?id=${id}&codeop=${element}`)).json();
@@ -91,7 +91,7 @@ document.querySelector(".addIntervention").addEventListener("click", async funct
         img.src = "../assets/img/not%20done.png";
         img.alt = "reminterventionLeftove";
         img.addEventListener("click", function () {
-            let libelle = getIdLibelle(this.parentElement.firstElementChild.textContent);
+            let libelle = this.parentElement.firstElementChild.textContent;
             deletedInterventions.push(libelle);
             this.parentElement.remove();
         });
