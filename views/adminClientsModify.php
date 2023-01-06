@@ -142,7 +142,7 @@ TemplateManager::getAdminNavBar("clientsFar");
             <?php if($_SESSION["errorClient"] === "none"){
                 echo '<h1 class="errorCreate">Une erreur s\'est produite</h1>';
             }elseif($_SESSION["errorClient"] === "confirmDelete"){
-                echo '<h1 class="errorCreate">Vous avez bien supprimé l\'employé</h1>';
+                echo '<h1 class="errorCreate">Vous avez bien supprimé le client</h1>';
             }elseif ($_SESSION["errorClient"] === "none"){
                 echo '<h1>Une erreur s\'est produite lors de la modification d\'un client</h1>';
             }elseif($_SESSION["modifyClient"] === "confirmModify"){

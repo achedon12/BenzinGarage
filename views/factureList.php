@@ -58,11 +58,13 @@ TemplateManager::getAdminNavBar("factureFar");
                 foreach($factureManager->getAllFacture() as $facture){
                     $code = $facture->getFactureNumber();
                     $client = $clientManager->getClientByID($interventionManager->getCodeClientFromDemandeIntervention($facture->getNumDde()));
-                    $name = $client->getName()." ".$client->getFirstName()." ".$facture->getFactureDate();
-                    if($code == $_SESSION["facture"]){
-                        ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
-                    }else{
-                        ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                    if($client !== null){
+                        $name = $client->getName()." ".$client->getFirstName()." ".$facture->getFactureDate();
+                        if($code == $_SESSION["facture"]){
+                            ?><option value='<?php echo $code ?>' selected><?php echo $name ?></option><?php
+                        }else{
+                            ?><option value='<?php echo $code ?>'><?php echo $name ?></option><?php
+                        }
                     }
                 }
                 ?>

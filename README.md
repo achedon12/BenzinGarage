@@ -45,5 +45,20 @@ class DatabaseManager{
 }
 ```
 
+## Files
+
+To get the project to work, you must have the following files:
+
+- [x] [GameTest](script/jeu_de_test.sql)
+- [x] [Table](script/table.sql)
+
+
+## Documentation
+
+To get the documentation, you must have the following files:
+
+- [x] [Documentation](documentation/utilisationManuel.pdf)
+- [x] [Diagram](documentation/soutenance_SAE.pdf)
+
 
 Do not hesitate to give your opinion on the project and on what can be improved so that it can be refined as much as possible
